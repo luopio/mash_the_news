@@ -1,8 +1,11 @@
 #include "Letter.h"
 
-Letter::Letter()
+Letter::Letter(char let, ofTrueTypeFont &f)
 {
-    //ctor
+    letter = let;
+    font = &f;
+    x = ofRandom(0, ofGetWidth());
+    y = ofRandom(0, ofGetHeight());
 }
 
 Letter::~Letter()
@@ -11,12 +14,19 @@ Letter::~Letter()
 }
 
 
-void Letter::setup() {
+void Letter::setup()
+{
 
+}
+
+void Letter::update()
+{
+    x = ofRandom(0, ofGetWidth());
+    y = ofRandom(0, ofGetHeight());
 }
 
 void Letter::draw()
 {
-
+    font->drawString("a", x, y);
 }
 
