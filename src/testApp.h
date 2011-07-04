@@ -3,6 +3,9 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
+#include "ofxOpenCv.h"
+
+#define __USE_KINECT
 
 class testApp : public ofBaseApp{
 
@@ -20,6 +23,20 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 
         ofxBox2d    box2d;
+
+        #ifdef _USE_KINECT
+
+		#else
+            ofVideoGrabber          vidGrabber;
+            ofxCvGrayscaleImage 	grayDiff;
+            ofxCvGrayscaleImage 	grayBg;
+            ofxCvColorImage         colorImg;
+            ofxCvGrayscaleImage 	grayImage;
+
+            int 				threshold;
+            bool				bLearnBakground;
+
+		#endif
 
 };
 
