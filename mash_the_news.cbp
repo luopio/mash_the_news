@@ -437,8 +437,12 @@
 		<Unit filename="../../../addons/ofxOpenCv/src/ofxOpenCv.h">
 			<Option virtualFolder="addons/ofxOpenCv/src" />
 		</Unit>
+		<Unit filename="src/Box2dMashEngine.cpp" />
+		<Unit filename="src/Box2dMashEngine.h" />
 		<Unit filename="src/Letter.cpp" />
 		<Unit filename="src/Letter.h" />
+		<Unit filename="src/MashEngine.cpp" />
+		<Unit filename="src/MashEngine.h" />
 		<Unit filename="src/MashScreen.cpp" />
 		<Unit filename="src/MashScreen.h" />
 		<Unit filename="src/Message.cpp" />

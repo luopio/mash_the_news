@@ -2,6 +2,8 @@
 #define MashScreen_H
 
 #include "Letter.h"
+#include "MashEngine.h"
+#include "Box2dMashEngine.h"
 
 class MashScreen
 {
@@ -10,8 +12,8 @@ class MashScreen
         virtual ~MashScreen();
 
         vector<Letter *> letters;
-
         ofTrueTypeFont font;
+        MashEngine *currentEngine;
 
         unsigned int rows, cols;
 
