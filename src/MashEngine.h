@@ -1,6 +1,7 @@
 #ifndef MASHENGINE_H
 #define MASHENGINE_H
 
+#include "Letter.h"
 
 class MashEngine
 {
@@ -8,7 +9,7 @@ class MashEngine
         MashEngine();
         virtual ~MashEngine();
 
-        void setup();
+        void setup(vector<Letter *> &v);
         void update();
         void draw();
 

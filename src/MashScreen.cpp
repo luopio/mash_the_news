@@ -18,6 +18,7 @@ void MashScreen::setup()
 
     Box2dMashEngine *box2dME = new Box2dMashEngine();
     currentEngine = box2dME;
+    currentEngine->setup(letters);
 
     for(int i = 0; i < 100; i++) {
         Letter *l = new Letter('a', font);
@@ -29,6 +30,8 @@ void MashScreen::setup()
 
 void MashScreen::update()
 {
+    currentEngine->update();
+
     for(vector<Letter *>::iterator i = letters.begin();
         i != letters.end(); ++i)
     {
