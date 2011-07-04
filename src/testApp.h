@@ -2,6 +2,7 @@
 #define _TEST_APP
 
 #include "ofMain.h"
+#include "ofxBox2d.h"
 
 class testApp : public ofBaseApp{
 

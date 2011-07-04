@@ -10,7 +10,6 @@ void testApp::setup(){
     box2d.checkBounds(true);
     box2d.setFPS(30.0);
 
-
 }
 
 //--------------------------------------------------------------
