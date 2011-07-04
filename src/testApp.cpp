@@ -6,26 +6,38 @@ void testApp::setup(){
     box2d.init();
     box2d.setGravity(0, 1);
     // box2d.createFloor();
+
     box2d.createBounds();
     box2d.checkBounds(true);
     box2d.setFPS(30.0);
 
+    int our_width = 320;
+    int our_height = 240;
+
     screen.setup();
     #ifdef _USE_KINECT
-
+        kinect.init();
+        kinect.setVerbose(true);
+        kinect.open();
+        cout << "kinect opened with resolution " << kinect.width << "," << kinect.height << endl;
+        our_height = kinect.height;
+        our_width = kinect.width;
     #else
         vidGrabber.setVerbose(true);
         vidGrabber.initGrabber(320,240);
-
-        grayDiff.allocate(320,240);
-        grayBg.allocate(320,240);
-        colorImg.allocate(320,240);
-        grayImage.allocate(320,240);
+        cout << "webcam opened with resolution " << endl;
 
         bLearnBakground = true;
         threshold = 13;
 
     #endif
+
+    grayDiff.allocate(our_width,our_height);
+    grayBg.allocate(our_width,our_height);
+    colorImg.allocate(our_width,our_height);
+    grayImage.allocate(our_width,our_height);
+    grayThresh.allocate(our_width, our_height);
+    grayThreshFar.allocate(our_width, our_height);
 
 }
 
@@ -36,6 +48,22 @@ void testApp::update(){
     bool bNewFrame = false;
 
     #ifdef _USE_KINECT
+        kinect.update();
+        if(kinect.isFrameNew())
+        {
+
+            grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
+
+            //we do two thresholds - one for the far plane and one for the near plane
+            //we then do a cvAnd to get the pixels which are a union of the two thresholds.
+            grayThreshFar = grayImage;
+            grayThresh = grayImage;
+            grayThresh.threshold(threshold, true);
+            grayThreshFar.threshold(farThreshold);
+            cvAnd(grayThresh.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
+
+            //grayImage.flagImageChanged();
+        }
 
     #else
         vidGrabber.grabFrame();
@@ -54,6 +82,8 @@ void testApp::update(){
             // take the abs value of the difference between background and incoming and then threshold:
             grayDiff.absDiff(grayBg, grayImage);
             grayDiff.threshold(threshold);
+
+            grayThresh = grayDiff;
 
             // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
             // also, find holes is set to true so we will get interior contours as well....
@@ -76,8 +106,10 @@ void testApp::draw(){
 	#ifdef _USE_KINECT
 
 	#else
-        grayDiff.draw(20,20);
+
     #endif
+
+    grayThresh.draw(20,20);
 
 }
 

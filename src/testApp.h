@@ -5,6 +5,8 @@
 #include "ofxBox2d.h"
 #include "MashScreen.h"
 #include "ofxOpenCv.h"
+#include "ofxKinect.h"
+
 #define __USE_KINECT
 
 class testApp : public ofBaseApp{
@@ -25,18 +27,24 @@ class testApp : public ofBaseApp{
         ofxBox2d    box2d;
         MashScreen      screen;
 
-        #ifdef _USE_KINECT
+        ofxCvGrayscaleImage 	grayDiff;
+        ofxCvGrayscaleImage 	grayBg;
+        ofxCvColorImage         colorImg;
+        ofxCvGrayscaleImage 	grayImage;
+        ofxCvGrayscaleImage 	grayThresh;
+        ofxCvGrayscaleImage 	grayThreshFar;
 
+         int 				threshold;
+
+        #ifdef _USE_KINECT
+            ofxKinect kinect;
+            int nearThreshold;
+            int farThreshold;
 		#else
             ofVideoGrabber          vidGrabber;
-            ofxCvGrayscaleImage 	grayDiff;
-            ofxCvGrayscaleImage 	grayBg;
-            ofxCvColorImage         colorImg;
-            ofxCvGrayscaleImage 	grayImage;
 
-            int 				threshold;
+
             bool				bLearnBakground;
-
 		#endif
 
 };
