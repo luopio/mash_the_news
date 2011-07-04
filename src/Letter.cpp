@@ -1,11 +1,21 @@
 #include "Letter.h"
 
-Letter::Letter(char let, ofTrueTypeFont &f)
+Letter::Letter(const char let, ofTrueTypeFont &f)
 {
-    letter = let;
+    letter = string(&let);
     font = &f;
-    x = ofRandom(0, ofGetWidth());
-    y = ofRandom(0, ofGetHeight());
+    row = ofRandom(0, 10);
+    col = ofRandom(0, 10);
+    tex = new ofxFBOTexture();
+    tex->allocate(FONT_SIZE + 3, FONT_SIZE + 3, false);
+    tex->begin();
+    ofFill();
+    ofSetColor(255, 0, 0);
+    ofRect(0, 0, 100, 100);
+    ofSetColor(0, 0, 255);
+    font->drawString(letter, 0, FONT_SIZE);
+    cout << letter << endl;
+    tex->end();
 }
 
 Letter::~Letter()
@@ -13,20 +23,7 @@ Letter::~Letter()
     //dtor
 }
 
-
-void Letter::setup()
-{
-
-}
-
-void Letter::update()
-{
-    x = ofRandom(0, ofGetWidth());
-    y = ofRandom(0, ofGetHeight());
-}
-
 void Letter::draw()
 {
-    font->drawString("a", x, y);
+    tex->draw(col * FONT_SIZE, row * FONT_SIZE);
 }
-

@@ -1,21 +1,23 @@
 #ifndef LETTER_H
 #define LETTER_H
 
+#define FONT_SIZE 14
+
 #include "ofMain.h"
+#include "ofxFBOTexture.h"
 
 class Letter
 {
     public:
-        Letter(char letter, ofTrueTypeFont &of);
+        Letter(const char letter, ofTrueTypeFont &of);
         virtual ~Letter();
 
-        char letter;
-        ofTrueTypeFont *font;
-        float x, y;
-
-        void update();
-        void setup();
         void draw();
+
+        string letter;
+        ofxFBOTexture *tex;
+        ofTrueTypeFont *font;
+        int row, col;
 
     protected:
     private:
