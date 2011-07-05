@@ -78,8 +78,8 @@
 			<Add directory="../../../addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Joints" />
 			<Add directory="../../../addons/ofxOpenCv/src" />
 			<Add directory="../../../addons/ofxOpenCv/libs/opencv/include" />
-			<Add directory="src/ofxKinect/src" />
-			<Add directory="src/ofxKinect/libs/libfreenect" />
+			<Add directory="../../../addons/ofxKinect/src" />
+			<Add directory="../../../addons/ofxKinect/libs/libfreenect" />
 			<Add directory="../../../addons/ofxThread/src" />
 			<Add directory="../../../addons/ofxVectorMath/src" />
 		</Compiler>
@@ -486,10 +486,22 @@
 		<Unit filename="../../../addons/ofxVectorMath/src/ofxVectorMath.h">
 			<Option virtualFolder="addons/ofxVectorMath/" />
 		</Unit>
+		<Unit filename="src/Box2dMashEngine.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/Box2dMashEngine.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/Letter.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/Letter.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/MashEngine.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/MashEngine.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/MashScreen.cpp">
