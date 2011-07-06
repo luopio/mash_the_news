@@ -3,6 +3,7 @@
 
 #include "MashEngine.h"
 #include "ofxBox2d.h"
+#include "ofxOpenCv.h"
 
 class Box2dMashEngine: public MashEngine
 {
@@ -15,9 +16,11 @@ class Box2dMashEngine: public MashEngine
         void draw();
 
         DataHub* dataHub;
+        ofxCvGrayscaleImage tempImg;
 
         ofxBox2d box2d;
         vector<ofxBox2dCircle> circles;
+        vector<ofxBox2dJoint *> joints;
 
         bool bDebug;
         bool bMouseForce;

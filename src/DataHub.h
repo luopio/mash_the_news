@@ -2,6 +2,7 @@
 #define DATAHUB_H
 
 #include "ofxOpenCv.h"
+#include "Letter.h"
 
 struct DataHub
 {
@@ -9,7 +10,7 @@ struct DataHub
         int* mouseY;
 
         ofxCvGrayscaleImage* grayDiff;
-
+        vector<Message *> * messages;
 };
 
 #endif // DATAHUB_H

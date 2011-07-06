@@ -6,9 +6,6 @@ void testApp::setup(){
     int our_width = 320;
     int our_height = 240;
 
-    screen = new MashScreen(dataHub);
-    screen->setup();
-
     #ifdef _USE_KINECT
         kinect.init();
         kinect.setVerbose(true);
@@ -41,6 +38,8 @@ void testApp::setup(){
     //oscTunnel = new OscTunnel("127.0.0.1");
     oscTunnel = new OscTunnel(OSC_OUT_IP);
 
+    screen = new MashScreen(dataHub);
+    screen->setup();
 }
 
 //--------------------------------------------------------------
