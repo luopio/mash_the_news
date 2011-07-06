@@ -6,9 +6,6 @@ void testApp::setup(){
     int our_width = 320;
     int our_height = 240;
 
-    screen = new MashScreen(dataHub);
-    screen->setup();
-
     #ifdef _USE_KINECT
         kinect.init();
         kinect.setVerbose(true);
@@ -36,6 +33,10 @@ void testApp::setup(){
     dataHub.grayDiff = &grayDiff;
     dataHub.mouseX = &mouseX;
     dataHub.mouseY = &mouseY;
+
+    screen = new MashScreen(dataHub);
+    screen->setup();
+
 }
 
 //--------------------------------------------------------------
