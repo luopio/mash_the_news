@@ -6,12 +6,12 @@ OscTunnel::OscTunnel()
     sendStartMessage();
 }
 
-OscTunnel::OscTunnel(char * ip) {
-    sender.setup(ip, DEFAULT_PORT);
+OscTunnel::OscTunnel(char * ip, int port) {
+    sender.setup(ip, port);
     cout << "sending osc messages to port " << DEFAULT_PORT << " at " << ip << endl;
 
     // listen on the given port
-	receiver.setup( DEFAULT_PORT );
+	receiver.setup( port );
 	cout << "listening for osc messages on port " << DEFAULT_PORT << "\n";
 
     sendStartMessage();

@@ -36,7 +36,7 @@ void testApp::setup(){
 
     // OSC stuff
     //oscTunnel = new OscTunnel("127.0.0.1");
-    oscTunnel = new OscTunnel(OSC_OUT_IP);
+    oscTunnel = new OscTunnel(OSC_OUT_IP, OSC_PORT);
 
     screen = new MashScreen(dataHub);
     screen->setup();

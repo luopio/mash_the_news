@@ -19,7 +19,7 @@ class OscTunnel
 {
     public:
         OscTunnel();
-        OscTunnel(char * ip);
+        OscTunnel(char * ip, int port);
         virtual ~OscTunnel();
 
         //void sendCoordinates(vector<Coordinate> &coords);
