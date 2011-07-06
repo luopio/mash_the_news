@@ -12,7 +12,7 @@ void Letter::prerender(ofTrueTypeFont &f)
 {
     font = &f;
     tex = new ofxFBOTexture();
-    tex->allocate(FONT_SIZE + 3, FONT_SIZE + 3, false);
+    tex->allocate(font->stringWidth(letter), font->stringHeight(letter), false);
     tex->begin();
         // ofFill();
         // ofSetColor(255, 0, 0);
@@ -37,6 +37,9 @@ Word::Word(string word)
     string::iterator i;
     for(i = word.begin(); i != word.end(); i++) {
         Letter *l = new Letter((*i));
+        ofColor c;
+        c.r = 255; c.g = 255; c.b = 255;
+        l->color = c;
         letters.push_back(l);
     }
 }
