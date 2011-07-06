@@ -4,7 +4,7 @@ Box2dMashEngine::Box2dMashEngine(DataHub &h)
 {
     dataHub = &h;
     box2d.init();
-    box2d.setGravity(0, 1);
+    box2d.setGravity(0, 0.01);
     // box2d.createFloor();
     box2d.createBounds();
     box2d.checkBounds(true);
@@ -41,7 +41,7 @@ void Box2dMashEngine::setup()
                     j->setWorld(box2d.getWorld());
                     j->addJoint(circles[circle_index - 1].body,
                                 circles[circle_index].body,
-                                3.0, 0.5);
+                                2.0, 0.7);
                     joints.push_back(j);
                 }
                 circle_index++;
@@ -81,7 +81,7 @@ void Box2dMashEngine::update()
     /* apply physics to the physics objects based on the kinect image */
     tempImg.scaleIntoMe(*(dataHub->grayDiff));
 
-    float strength = 1.0f;
+    float strength = 0.1f;
     float damping  = 0.7f;
     float minDis   = 100;
 
@@ -96,8 +96,10 @@ void Box2dMashEngine::update()
                                                      strength, minDis);
             circles[circle_index].addDamping(damping, damping);
             circle_index++;
-            if(circle_index == circles.size())
+            if(circle_index == circles.size()) {
                 circle_index = 0;
+                break;
+            }
         }
     }
 

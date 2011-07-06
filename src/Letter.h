@@ -1,7 +1,7 @@
 #ifndef LETTER_H
 #define LETTER_H
 
-#define FONT_SIZE 14
+#define FONT_SIZE 24
 
 #include "ofMain.h"
 #include "ofxFBOTexture.h"
@@ -21,6 +21,7 @@ class Letter
         string letter;
         ofxFBOTexture *tex;
         ofTrueTypeFont *font;
+        ofColor color;
         int row, col;
 
     protected:

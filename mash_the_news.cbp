@@ -544,8 +544,9 @@
 		<Unit filename="src/Box2dMashEngine.h">
 			<Option virtualFolder="src/" />
 		</Unit>
-		<Unit filename="src/DataHub.cpp" />
-		<Unit filename="src/DataHub.h" />
+		<Unit filename="src/DataHub.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/Letter.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -562,18 +563,6 @@
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/MashScreen.h">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Message.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Message.h">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Word.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Word.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/main.cpp">

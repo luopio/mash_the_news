@@ -107,7 +107,7 @@ void testApp::draw(){
 
     #endif
 
-    grayThresh.draw(20,20);
+    // grayThresh.draw(20,20);
 
 }
 
@@ -116,7 +116,6 @@ void testApp::keyPressed(int key){
     #ifdef _USE_KINECT
 
     #else
-
         switch (key)
         {
             case ' ':
@@ -130,6 +129,15 @@ void testApp::keyPressed(int key){
                 threshold --;
                 if (threshold < 0) threshold = 0;
                 break;
+
+            case '1':
+                screen->hilightMessage(0); break;
+            case '2':
+                screen->hilightMessage(1); break;
+            case '3':
+                screen->hilightMessage(2); break;
+            case '0':
+                screen->hilightMessage(-10); break;
         }
     #endif
 }

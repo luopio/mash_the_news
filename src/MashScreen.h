@@ -16,6 +16,7 @@ class MashScreen
         vector<Message *>   messages;
         ofTrueTypeFont font;
         MashEngine *currentEngine;
+        int hilightedMessageIndex;
 
         DataHub *dataHub;
         unsigned int rows, cols;
@@ -23,6 +24,7 @@ class MashScreen
         void setup();
         void update();
         void draw();
+        void hilightMessage(int messageIndex);
 
     protected:
 
