@@ -4,17 +4,19 @@
 #include "Letter.h"
 #include "MashEngine.h"
 #include "Box2dMashEngine.h"
+#include "DataHub.h"
 
 class MashScreen
 {
     public:
-        MashScreen();
+        MashScreen(DataHub &h);
         virtual ~MashScreen();
 
         vector<Letter *> letters;
         ofTrueTypeFont font;
         MashEngine *currentEngine;
 
+        DataHub *dataHub;
         unsigned int rows, cols;
 
         void setup();

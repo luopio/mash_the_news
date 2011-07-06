@@ -7,16 +7,20 @@
 class Box2dMashEngine: public MashEngine
 {
     public:
-        Box2dMashEngine();
+        Box2dMashEngine(DataHub &h);
         virtual ~Box2dMashEngine();
 
-        void setup(vector<Letter *> &v);
+        void setup();
         void update();
+        void draw();
 
-        vector<Letter> *letters;
+        DataHub* dataHub;
 
         ofxBox2d box2d;
         vector<ofxBox2dCircle> circles;
+
+        bool bDebug;
+        bool bMouseForce;
 
     protected:
     private:

@@ -3,18 +3,12 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 
-    box2d.init();
-    box2d.setGravity(0, 1);
-    // box2d.createFloor();
-
-    box2d.createBounds();
-    box2d.checkBounds(true);
-    box2d.setFPS(30.0);
-
     int our_width = 320;
     int our_height = 240;
 
-    screen.setup();
+    screen = new MashScreen(dataHub);
+    screen->setup();
+
     #ifdef _USE_KINECT
         kinect.init();
         kinect.setVerbose(true);
@@ -39,11 +33,14 @@ void testApp::setup(){
     grayThresh.allocate(our_width, our_height);
     grayThreshFar.allocate(our_width, our_height);
 
+    dataHub.grayDiff = &grayDiff;
+    dataHub.mouseX = &mouseX;
+    dataHub.mouseY = &mouseY;
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    screen.update();
+    screen->update();
 
     bool bNewFrame = false;
 
@@ -96,7 +93,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    screen.draw();
+    screen->draw();
 
     // draw the incoming, the grayscale, the bg and the thresholded difference
 	ofSetColor(0xffffff);
@@ -143,7 +140,6 @@ void testApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
-
 }
 
 //--------------------------------------------------------------

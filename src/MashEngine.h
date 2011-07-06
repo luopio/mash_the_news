@@ -1,7 +1,7 @@
 #ifndef MASHENGINE_H
 #define MASHENGINE_H
 
-#include "Letter.h"
+#include "DataHub.h"
 
 class MashEngine
 {
@@ -9,9 +9,9 @@ class MashEngine
         MashEngine();
         virtual ~MashEngine();
 
-        void setup(vector<Letter *> &v);
-        void update();
-        void draw();
+        virtual void setup();
+        virtual void update();
+        virtual void draw();
 
     protected:
     private:

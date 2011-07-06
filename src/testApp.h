@@ -2,10 +2,10 @@
 #define _TEST_APP
 
 #include "ofMain.h"
-#include "ofxBox2d.h"
 #include "MashScreen.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
+#include "DataHub.h"
 
 #define __USE_KINECT
 
@@ -24,8 +24,8 @@ class testApp : public ofBaseApp{
 		void mouseReleased(int x, int y, int button);
 		void windowResized(int w, int h);
 
-        ofxBox2d    box2d;
-        MashScreen      screen;
+        MashScreen *screen;
+        DataHub dataHub;
 
         ofxCvGrayscaleImage 	grayDiff;
         ofxCvGrayscaleImage 	grayBg;

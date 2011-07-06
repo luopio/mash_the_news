@@ -1,8 +1,8 @@
 #include "MashScreen.h"
 
-MashScreen::MashScreen()
+MashScreen::MashScreen(DataHub &h)
 {
-    //ctor
+    dataHub = &h;
 }
 
 MashScreen::~MashScreen()
@@ -16,9 +16,9 @@ void MashScreen::setup()
     cols = ofGetWidth()  / FONT_SIZE;
     rows = ofGetHeight() / FONT_SIZE;
 
-    Box2dMashEngine *box2dME = new Box2dMashEngine();
+    Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
     currentEngine = box2dME;
-    currentEngine->setup(letters);
+    currentEngine->setup();
 
     for(int i = 0; i < 100; i++) {
         Letter *l = new Letter('a', font);
@@ -48,5 +48,8 @@ void MashScreen::draw()
     {
         (*i)->draw();
     }
+
+    currentEngine->draw();
+
 }
 

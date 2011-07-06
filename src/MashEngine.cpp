@@ -2,7 +2,6 @@
 
 MashEngine::MashEngine()
 {
-    //ctor
 }
 
 MashEngine::~MashEngine()
@@ -15,7 +14,7 @@ void MashEngine::update()
 
 }
 
-void MashEngine::setup(vector<Letter *> &v)
+void MashEngine::setup()
 {
 
 }
