@@ -36,11 +36,18 @@ void testApp::setup(){
     dataHub.grayDiff = &grayDiff;
     dataHub.mouseX = &mouseX;
     dataHub.mouseY = &mouseY;
+
+    // OSC stuff
+    //oscTunnel = new OscTunnel("127.0.0.1");
+    oscTunnel = new OscTunnel(OSC_OUT_IP);
+
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     screen->update();
+
+    oscTunnel->update();
 
     bool bNewFrame = false;
 
