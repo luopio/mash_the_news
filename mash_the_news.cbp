@@ -5,7 +5,7 @@
 		<Option title="mash_the_news" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;addons/ofxKinect/;addons/ofxKinect/libfreenect/;src/;addons/ofxBox2d/src/lib/Box2D/Include/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/Shapes/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/;addons/ofxBox2d/src/lib/Box2D/Source/Common/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Contacts/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Controllers/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Joints/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/;addons/ofxBox2d/src/;addons/ofxOpenCv/src/;addons/ofxThread/;addons/ofxVectorMath/;" />
+		<Option virtualFolders="addons/;addons/ofxKinect/;addons/ofxKinect/libfreenect/;src/;addons/ofxBox2d/src/lib/Box2D/Include/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/Shapes/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/;addons/ofxBox2d/src/lib/Box2D/Source/Common/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Contacts/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Controllers/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Joints/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/;addons/ofxBox2d/src/;addons/ofxOpenCv/src/;addons/ofxThread/;addons/ofxVectorMath/;addons/ofxOsc/src/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />
@@ -82,6 +82,9 @@
 			<Add directory="../../../addons/ofxKinect/libs/libfreenect" />
 			<Add directory="../../../addons/ofxThread/src" />
 			<Add directory="../../../addons/ofxVectorMath/src" />
+			<Add directory="../../../addons/ofxOsc/src" />
+			<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
+			<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />
@@ -98,6 +101,7 @@
 			<Add library="oFappsink" />
 			<Add library="../../../addons/ofxOpenCv/libs/opencv/lib/linux/libcv.a" />
 			<Add library="../../../addons/ofxOpenCv/libs/opencv/lib/linux/libcxcore.a" />
+			<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux/liboscpack.a" />
 			<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
 			<Add directory="../../../libs/freetype/lib/linux" />
 			<Add directory="../../../libs/FreeImage/lib/linux" />
@@ -493,6 +497,36 @@
 		<Unit filename="../../../addons/ofxOpenCv/src/ofxOpenCv.h">
 			<Option virtualFolder="addons/ofxOpenCv/src" />
 		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscArg.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
 		<Unit filename="../../../addons/ofxThread/src/ofxThread.cpp">
 			<Option virtualFolder="addons/ofxThread/" />
 		</Unit>
@@ -547,6 +581,12 @@
 		<Unit filename="src/DataHub.h">
 			<Option virtualFolder="src/" />
 		</Unit>
+		<Unit filename="src/FlowMashEngine.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/FlowMashEngine.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/Letter.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -563,6 +603,12 @@
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/MashScreen.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/OscTunnel.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/OscTunnel.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/main.cpp">

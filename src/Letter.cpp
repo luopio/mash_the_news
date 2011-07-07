@@ -3,9 +3,9 @@
 Letter::Letter(const char let)
 {
     letter = string(1, let);
-    cout << let << ",";
-    row = 10 + ofRandom(1, 100);
-    col = 10 + ofRandom(1, 100);
+    col = 0;
+    row = 0;
+    // cout << let << ",";
 }
 
 void Letter::prerender(ofTrueTypeFont &f)
@@ -66,5 +66,21 @@ void Message::prerender(ofTrueTypeFont &f)
             (*ii)->prerender(f);
 
         }
+    }
+}
+
+void Message::setPosition(int col, int row)
+{
+    int spacing = 0;
+    int letter_index = 0;
+    for(vector<Word *>::iterator i = words.begin();
+        i != words.end(); ++i) {
+        for(vector<Letter *>::iterator ii = (*i)->letters.begin();
+            ii != (*i)->letters.end(); ++ii) {
+            (*ii)->col = col + spacing + letter_index;
+            (*ii)->row = row;
+            letter_index++;
+        }
+        spacing++;
     }
 }

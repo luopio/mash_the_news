@@ -3,6 +3,7 @@
 
 #include "Letter.h"
 #include "MashEngine.h"
+#include "FlowMashEngine.h"
 #include "Box2dMashEngine.h"
 #include "DataHub.h"
 
