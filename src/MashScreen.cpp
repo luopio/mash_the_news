@@ -18,6 +18,8 @@ void MashScreen::setup()
     font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
     cols = ofGetWidth()  / FONT_SIZE;
     rows = ofGetHeight() / FONT_SIZE;
+    dataHub->rows = &rows;
+    dataHub->cols = &cols;
 
     messages.push_back( new Message(string("moro mitas jatka")));
     messages.push_back( new Message(string("no huh,huh")));
@@ -25,13 +27,17 @@ void MashScreen::setup()
     messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!")));
     messages.push_back( new Message(string("Nyt jos koskaan kannattaa mennä Ruisrockkiin!")));
 
+    int row_index = 0;
     for(vector<Message *>::iterator mi = messages.begin();
         mi != messages.end(); ++mi) {
         (*mi)->prerender(font);
+        (*mi)->setPosition(0, row_index);
+        row_index++;
     }
 
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
-    currentEngine = box2dME;
+    FlowMashEngine *flowME = new FlowMashEngine(*dataHub);
+    currentEngine = flowME;
     currentEngine->setup();
 
     ofBackground(0, 0, 0);

@@ -41,7 +41,7 @@ class Message
         Message(string message);
         vector<Word *> words;
         void prerender(ofTrueTypeFont &of);
-
+        void setPosition(int col, int row);
 };
 
 /*
