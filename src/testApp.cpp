@@ -34,12 +34,10 @@ void testApp::setup(){
     dataHub.mouseX = &mouseX;
     dataHub.mouseY = &mouseY;
 
-    // OSC stuff
-    //oscTunnel = new OscTunnel("127.0.0.1");
-    oscTunnel = new OscTunnel(OSC_OUT_IP, OSC_PORT);
-
     screen = new MashScreen(dataHub);
     screen->setup();
+
+    oscTunnel = new OscTunnel(OSC_OUT_IP, OSC_PORT, screen);
 }
 
 //--------------------------------------------------------------
@@ -64,6 +62,8 @@ void testApp::update(){
             grayThresh.threshold(threshold, true);
             grayThreshFar.threshold(farThreshold);
             cvAnd(grayThresh.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
+
+            grayDiff = grayThresh; // ????
 
             //grayImage.flagImageChanged();
         }
@@ -134,17 +134,22 @@ void testApp::keyPressed(int key){
                 threshold --;
                 if (threshold < 0) threshold = 0;
                 break;
-
-            case '1':
-                screen->hilightMessage(0); break;
-            case '2':
-                screen->hilightMessage(1); break;
-            case '3':
-                screen->hilightMessage(2); break;
-            case '0':
-                screen->hilightMessage(-10); break;
         }
     #endif
+    switch (key) {
+        case '1':
+            screen->hilightMessage(0); break;
+        case '2':
+            screen->hilightMessage(1); break;
+        case '3':
+            screen->hilightMessage(2); break;
+        case '0':
+            screen->hilightMessage(-10); break;
+        case 's':
+            screen->changeEngine(); break;
+        case 'o':
+            oscTunnel->sendTestMessage(); break;
+    }
 }
 
 //--------------------------------------------------------------

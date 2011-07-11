@@ -3,8 +3,9 @@
 
 #include <vector>
 #include "ofxOsc.h"
+#include "MashScreen.h"
 
-#define DEFAULT_HOST "192.168.1.101"
+#define DEFAULT_HOST "192.168.10.12"
 #define DEFAULT_PORT 7000
 
 using namespace std;
@@ -18,8 +19,10 @@ struct OscListener
 class OscTunnel
 {
     public:
+        MashScreen * screen;
+
         OscTunnel();
-        OscTunnel(char * ip, int port);
+        OscTunnel(char * ip, int port, MashScreen * ms);
         virtual ~OscTunnel();
 
         //void sendCoordinates(vector<Coordinate> &coords);

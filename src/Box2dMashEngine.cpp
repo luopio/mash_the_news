@@ -50,8 +50,12 @@ void Box2dMashEngine::setup()
         }
     }
 
-    bDebug = true;
+    debug = true;
     bMouseForce = true;
+
+    strength = 0.1f;
+    damping  = 0.7f;
+    minDis   = 100;
 
 }
 
@@ -81,9 +85,7 @@ void Box2dMashEngine::update()
     /* apply physics to the physics objects based on the kinect image */
     tempImg.scaleIntoMe(*(dataHub->grayDiff));
 
-    float strength = 0.1f;
-    float damping  = 0.7f;
-    float minDis   = 100;
+
 
     unsigned char *pixels = tempImg.getPixels();
     circle_index = 0;
@@ -92,8 +94,7 @@ void Box2dMashEngine::update()
             int screen_x = i % tempImg.width * ofGetWidth()  / tempImg.width;
             int screen_y = i / tempImg.width * ofGetHeight() / tempImg.height;
 
-            circles[circle_index].addAttractionPoint(ofPoint(screen_x, screen_y),
-                                                     strength, minDis);
+            circles[circle_index].addAttractionPoint(ofPoint(screen_x, screen_y), strength, minDis);
             circles[circle_index].addDamping(damping, damping);
             circle_index++;
             if(circle_index == circles.size()) {
@@ -124,10 +125,10 @@ void Box2dMashEngine::update()
         }
     }*/
 
-    if(bMouseForce && false) {
+    if(bMouseForce) { // && false) {
         for(int i=0; i<circles.size(); i++) {
             circles[i].addAttractionPoint(ofPoint(*(dataHub->mouseX), *(dataHub->mouseY)), strength, minDis);
-            circles[i].addDamping(damping, damping);
+            //circles[i].addDamping(damping, damping);
         }
     }
 }
@@ -135,13 +136,13 @@ void Box2dMashEngine::update()
 void Box2dMashEngine::draw()
 {
 
-    if(bDebug) {
-        /*for(int i=0; i<dataHub->messages->size(); i++) {
+    if(debug) {
+        for(int i=0; i<dataHub->messages->size(); i++) {
             circles[i].draw();
-        }*/
-        /*for(int i=0; i<circles.size(); i++) {
+        }
+        for(int i=0; i<circles.size(); i++) {
             circles[i].draw();
-        }*/
+        }
         // ofDrawBitmapString(10, ofGetHeight() - 100, "")
         // dataHub->grayDiff->scaleIntoMe(tempImg);
         // dataHub->grayDiff->draw(400, 10);

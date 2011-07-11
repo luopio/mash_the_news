@@ -8,9 +8,9 @@
 #include "DataHub.h"
 #include "OscTunnel.h"
 
-#define __USE_KINECT
+#define _USE_KINECT
 #define OSC_PORT 7000
-#define OSC_OUT_IP "192.168.1.101"
+#define OSC_OUT_IP "192.168.10.12"
 
 class testApp : public ofBaseApp{
 

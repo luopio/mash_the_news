@@ -26,6 +26,7 @@ class MashScreen
         void update();
         void draw();
         void hilightMessage(int messageIndex);
+        void changeEngine();
 
     protected:
 

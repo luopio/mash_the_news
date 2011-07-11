@@ -16,6 +16,7 @@ void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
     font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
+    //font.loadFont("VeraMono.ttf", FONT_SIZE, true, true, true);
     cols = ofGetWidth()  / FONT_SIZE;
     rows = ofGetHeight() / FONT_SIZE;
     dataHub->rows = &rows;
@@ -37,7 +38,7 @@ void MashScreen::setup()
 
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
     FlowMashEngine *flowME = new FlowMashEngine(*dataHub);
-    currentEngine = flowME;
+    currentEngine = box2dME; //flowME;
     currentEngine->setup();
 
     ofBackground(0, 0, 0);
@@ -107,4 +108,13 @@ void MashScreen::hilightMessage(int msgindex)
 {
     cout << "HILIGHT:" << msgindex << endl;
     hilightedMessageIndex = msgindex;
+}
+
+void MashScreen::changeEngine()
+{
+//    if (currentEngine == flowME) {
+//        currentEngine = box2dME;
+//    } else {
+//        currentEngine = flowME;
+//    }
 }

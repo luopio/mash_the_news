@@ -22,7 +22,6 @@ class Box2dMashEngine: public MashEngine
         vector<ofxBox2dCircle> circles;
         vector<ofxBox2dJoint *> joints;
 
-        bool bDebug;
         bool bMouseForce;
 
     protected:

@@ -13,6 +13,12 @@ class MashEngine
         virtual void update();
         virtual void draw();
 
+        bool debug;
+
+        float strength;
+        float damping;
+        float minDis;
+
     protected:
     private:
 };
