@@ -4,6 +4,7 @@
 #include <vector>
 #include "ofxOsc.h"
 #include "MashScreen.h"
+#include "ofxKinect.h"
 
 #define DEFAULT_HOST "192.168.10.12"
 #define DEFAULT_PORT 7000
@@ -20,6 +21,7 @@ class OscTunnel
 {
     public:
         MashScreen * screen;
+        ofxKinect * kinect;
 
         OscTunnel();
         OscTunnel(char * ip, int port, MashScreen * ms);
@@ -31,6 +33,13 @@ class OscTunnel
         void sendTestMessage();
         void update();
         void addOscListener(string address, void (*callback)(ofxOscMessage));
+
+        void addKinect(ofxKinect * k);
+
+        int kThreshold;
+        int kFarThreshold;
+
+        bool kDebug;
 
     protected:
     private:

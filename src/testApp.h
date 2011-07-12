@@ -36,6 +36,7 @@ class testApp : public ofBaseApp{
         ofxCvGrayscaleImage 	grayImage;
         ofxCvGrayscaleImage 	grayThresh;
         ofxCvGrayscaleImage 	grayThreshFar;
+        ofxCvGrayscaleImage     scaleImage;
 
          int 				threshold;
 

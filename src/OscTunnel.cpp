@@ -15,6 +15,11 @@ OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
 	receiver.setup( port );
 	cout << "listening for osc messages on port " << DEFAULT_PORT << "\n";
 
+    kThreshold = 0;
+    kFarThreshold = 0;
+    kinect = NULL;
+    kDebug = true;
+
     sendStartMessage();
 }
 
@@ -52,10 +57,16 @@ void OscTunnel::update() {
                 }
             } else if (m.getArgAsString(0)== "noteon") {
                 cout << "oscmidi noteon:  ch: " << m.getArgAsInt32(1) << " note: " << m.getArgAsInt32(2) << " velocity: " << m.getArgAsInt32(3) << endl;
-                if (m.getArgAsInt32(2)==40) {
-                    screen->hilightMessage(0);
-                } else if (m.getArgAsInt32(2)==39) {
-                    screen->currentEngine->debug = !screen->currentEngine->debug;
+                switch (m.getArgAsInt32(2)) {
+                    case 40:
+                        screen->hilightMessage(0);
+                        break;
+                    case 39:
+                        screen->currentEngine->debug = !screen->currentEngine->debug;
+                        break;
+                    case 38:
+                        kDebug = !kDebug;
+                        break;
                 }
             } else if (m.getArgAsString(0)== "cc") {
 
@@ -72,9 +83,19 @@ void OscTunnel::update() {
                         screen->currentEngine->minDis = m.getArgAsInt32(3) * 10.0;
                         cout << screen->currentEngine->minDis << " is new minimum distance!" << endl;
                         break;
+                    case 6:
+                        if (kinect != NULL) {
+                            kinect->setCameraTiltAngle((m.getArgAsInt32(3)/(127 / 60.0)) -30);
+                            cout << (m.getArgAsInt32(3)/(127 / 60.0)) -30 << " is new near threshold value" << endl;
+                        }
+                        break;
+                    case 7:
+                        kThreshold = 254 - (m.getArgAsInt32(3) * 2);
+                        cout << kThreshold << " is new near threshold value" << endl;
+                        break;
                     case 8:
-                        // = m.getArgAsInt32(3) * 10.0;
-                        cout << screen->currentEngine->minDis << " is new minimum distance!" << endl;
+                        kFarThreshold = 254 - (m.getArgAsInt32(3) * 2);
+                        cout << kFarThreshold << " is new far threshold value" << endl;
                         break;
                     default:
                         cout << "oscmidi cc:      ch: " << m.getArgAsInt32(1) << " param: " << m.getArgAsInt32(2) << " value: " << m.getArgAsInt32(3) << endl;
@@ -119,4 +140,8 @@ void OscTunnel::sendStopMessage() {
     m.setAddress( "/kinectisdead" );
 	m.addFloatArg( ofGetElapsedTimef() );
 	sender.sendMessage( m );
+}
+
+void OscTunnel::addKinect(ofxKinect * k) {
+    kinect = k;
 }

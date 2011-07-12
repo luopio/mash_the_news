@@ -13,6 +13,9 @@ void testApp::setup(){
         cout << "kinect opened with resolution " << kinect.width << "," << kinect.height << endl;
         our_height = kinect.height;
         our_width = kinect.width;
+        nearThreshold = 10;
+        farThreshold = 100;
+
     #else
         vidGrabber.setVerbose(true);
         vidGrabber.initGrabber(320,240);
@@ -23,12 +26,16 @@ void testApp::setup(){
 
     #endif
 
+    // These images are for webcam capture, resolution is webcams/kinects reso!
     grayDiff.allocate(our_width,our_height);
     grayBg.allocate(our_width,our_height);
     colorImg.allocate(our_width,our_height);
     grayImage.allocate(our_width,our_height);
     grayThresh.allocate(our_width, our_height);
     grayThreshFar.allocate(our_width, our_height);
+
+
+    scaleImage.allocate(our_width,our_height);
 
     dataHub.grayDiff = &grayDiff;
     dataHub.mouseX = &mouseX;
@@ -38,6 +45,9 @@ void testApp::setup(){
     screen->setup();
 
     oscTunnel = new OscTunnel(OSC_OUT_IP, OSC_PORT, screen);
+    #ifdef _USE_KINECT
+        oscTunnel->addKinect(&kinect);
+    #endif
 }
 
 //--------------------------------------------------------------
@@ -59,11 +69,12 @@ void testApp::update(){
             //we then do a cvAnd to get the pixels which are a union of the two thresholds.
             grayThreshFar = grayImage;
             grayThresh = grayImage;
-            grayThresh.threshold(threshold, true);
-            grayThreshFar.threshold(farThreshold);
+            grayThresh.threshold(oscTunnel->kThreshold, true);
+            grayThreshFar.threshold(oscTunnel->kFarThreshold);
             cvAnd(grayThresh.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
 
-            grayDiff = grayThresh; // ????
+            grayImage.flagImageChanged();
+            //grayDiff = grayThresh; // ????
 
             //grayImage.flagImageChanged();
         }
@@ -99,7 +110,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    screen->draw();
+
 
     // draw the incoming, the grayscale, the bg and the thresholded difference
 	ofSetColor(0xffffff);
@@ -107,13 +118,18 @@ void testApp::draw(){
 	//grayImage.draw(360,20);
 	//grayBg.draw(20,280);
 	#ifdef _USE_KINECT
-
+        if (oscTunnel->kDebug) {
+            scaleImage = grayImage;
+            //scaleImage.draw(ofGetWidth() / 2 - scaleImage.width / 2, ofGetHeight() / 2 - scaleImage.height / 2);
+            scaleImage.draw(0,0, ofGetWidth(), ofGetHeight());
+        }
+        //scaleImage.draw()
 	#else
 
     #endif
 
     // grayThresh.draw(20,20);
-
+    screen->draw();
 }
 
 //--------------------------------------------------------------
