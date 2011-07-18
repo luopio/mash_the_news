@@ -48,6 +48,11 @@ void testApp::setup(){
     #ifdef _USE_KINECT
         oscTunnel->addKinect(&kinect);
     #endif
+
+    bgFont.loadFont("VeraMono.ttf", 16);
+
+    bgString = "_|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n      |       |       |       |       |       |       |       |       |\n _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n  |       |       |       |       |       |       |       |       |\n     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n      |       |       |       |       |       |       |       |       |\n _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n    _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n     |       |       |       |       |       |       |       |       |\n_|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n    _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n     |       |       |       |       |       |       |       |       |\n_|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n    _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n     |       |       |       |       |       |       |       |       |\n_|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n";
+    bgString = "abcsdsedsasdas\nsadaslkdjaslkdjalsdkjas\nalskdjalsdkjalskdjalskdjaslkjda\nalskdjaslkjdalskjdalskjdslkj";
 }
 
 //--------------------------------------------------------------
@@ -63,8 +68,9 @@ void testApp::update(){
         if(kinect.isFrameNew())
         {
 
-            grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
 
+            grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
+            grayImage.mirror(false,true);
             //we do two thresholds - one for the far plane and one for the near plane
             //we then do a cvAnd to get the pixels which are a union of the two thresholds.
             grayThreshFar = grayImage;
@@ -74,7 +80,7 @@ void testApp::update(){
             cvAnd(grayThresh.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
 
             grayImage.flagImageChanged();
-            //grayDiff = grayThresh; // ????
+            grayDiff = grayImage; // ????
 
             //grayImage.flagImageChanged();
         }
@@ -98,6 +104,7 @@ void testApp::update(){
             grayDiff.threshold(threshold);
 
             grayThresh = grayDiff;
+
 
             // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
             // also, find holes is set to true so we will get interior contours as well....
@@ -130,6 +137,7 @@ void testApp::draw(){
 
     // grayThresh.draw(20,20);
     screen->draw();
+    asciiBackground();
 }
 
 //--------------------------------------------------------------
@@ -197,3 +205,7 @@ void testApp::windowResized(int w, int h){
 
 }
 
+void testApp::asciiBackground() {
+    ofSetColor(255,255,255);
+    bgFont.drawString(oscTunnel->bgString, 0, 0);
+}

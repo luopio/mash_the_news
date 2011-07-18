@@ -51,7 +51,7 @@ void Box2dMashEngine::setup()
     }
 
     debug = true;
-    bMouseForce = true;
+    //bMouseForce = true;
 
     strength = 0.1f;
     damping  = 0.7f;
@@ -84,6 +84,7 @@ void Box2dMashEngine::update()
 
     /* apply physics to the physics objects based on the kinect image */
     tempImg.scaleIntoMe(*(dataHub->grayDiff));
+    //tempImg.scaleIntoMe(*(dataHub->grayImage));
 
 
 

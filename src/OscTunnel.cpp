@@ -20,6 +20,8 @@ OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
     kinect = NULL;
     kDebug = true;
 
+    bgString = "";
+
     sendStartMessage();
 }
 
@@ -83,6 +85,10 @@ void OscTunnel::update() {
                         screen->currentEngine->minDis = m.getArgAsInt32(3) * 10.0;
                         cout << screen->currentEngine->minDis << " is new minimum distance!" << endl;
                         break;
+                    case 5:
+                        updateBgString(m.getArgAsInt32(3)+33);
+                        //cout << kFarThreshold << " is new far threshold value" << endl;
+                        break;
                     case 6:
                         if (kinect != NULL) {
                             kinect->setCameraTiltAngle((m.getArgAsInt32(3)/(127 / 60.0)) -30);
@@ -144,4 +150,26 @@ void OscTunnel::sendStopMessage() {
 
 void OscTunnel::addKinect(ofxKinect * k) {
     kinect = k;
+}
+
+void OscTunnel::updateBgString(char c) {
+    bgString = "";
+    /*for (int i = 0; i < 40; i++) {
+        string tmp = "";
+        for (int j = 0; j < 80; j++) {
+            tmp += c;
+        }
+        bgString += tmp;
+        bgString += "\n";
+    }*/
+    for (int i = 0; i < 40; i++) {
+        string tmp = "";
+        for (int j = 0; j < 90; j++) {
+            //rand
+            tmp += (rand()*1.0/RAND_MAX)*5+33;
+            //tmp += c;
+        }
+        bgString += tmp;
+        bgString += "\n";
+    }
 }

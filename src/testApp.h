@@ -10,7 +10,7 @@
 
 #define _USE_KINECT
 #define OSC_PORT 7000
-#define OSC_OUT_IP "192.168.10.12"
+#define OSC_OUT_IP "192.168.10.11"
 
 class testApp : public ofBaseApp{
 
@@ -26,6 +26,7 @@ class testApp : public ofBaseApp{
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
 		void windowResized(int w, int h);
+		void asciiBackground();
 
         MashScreen *screen;
         DataHub dataHub;
@@ -38,7 +39,8 @@ class testApp : public ofBaseApp{
         ofxCvGrayscaleImage 	grayThreshFar;
         ofxCvGrayscaleImage     scaleImage;
 
-         int 				threshold;
+        int 				    threshold;
+        ofTrueTypeFont          bgFont;
 
         #ifdef _USE_KINECT
             ofxKinect kinect;
@@ -51,6 +53,8 @@ class testApp : public ofBaseApp{
 		#endif
 
         OscTunnel               *oscTunnel;
+
+        string                  bgString;
 
 };
 

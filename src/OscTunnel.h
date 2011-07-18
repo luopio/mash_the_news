@@ -36,10 +36,14 @@ class OscTunnel
 
         void addKinect(ofxKinect * k);
 
+        void updateBgString(char c);
+
         int kThreshold;
         int kFarThreshold;
 
         bool kDebug;
+
+        string bgString;
 
     protected:
     private:
