@@ -15,10 +15,6 @@ class MashEngine
 
         bool debug;
 
-        float strength;
-        float damping;
-        float minDis;
-
     protected:
     private:
 };

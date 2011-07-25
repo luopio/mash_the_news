@@ -9,6 +9,7 @@ class LetterCircle: public ofxBox2dCircle
 {
     public:
         int letterInWordIndex;
+        Letter *letter;
 };
 
 class Box2dMashEngine: public MashEngine
@@ -27,6 +28,9 @@ class Box2dMashEngine: public MashEngine
         ofxBox2d box2d;
         vector<LetterCircle> circles;
         vector<ofxBox2dJoint *> joints;
+
+        float strength;
+        float damping;
 
         bool bMouseForce;
 

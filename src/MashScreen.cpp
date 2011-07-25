@@ -16,7 +16,7 @@ void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
     //font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
-    font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true, true);
+    font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true);
     //font.loadFont("VeraMono.ttf", FONT_SIZE, true, true, true);
     cols = ofGetWidth()  / FONT_SIZE;
     rows = ofGetHeight() / FONT_SIZE;

@@ -4,7 +4,7 @@ Box2dMashEngine::Box2dMashEngine(DataHub &h)
 {
     dataHub = &h;
     box2d.init();
-    box2d.setGravity(0.0, 0.0);
+    box2d.setGravity(0.0, 0.0f);
     // box2d.createFloor();
     box2d.createBounds();
     box2d.checkBounds(true);
@@ -32,12 +32,13 @@ void Box2dMashEngine::setup()
             {
                 LetterCircle circle;
                 // mass, bounce, friction
-                circle.setPhysics(1.5, 0.53, 0.1);
+                circle.setPhysics(0.2f, 0.63f, 0.02f);
                 circle.setup(box2d.getWorld(),
                              letter_index * FONT_SIZE + 100,
                              i * (FONT_SIZE + 10) + 300,
                              FONT_SIZE);
                 circle.letterInWordIndex = letter_index;
+                circle.letter = (*li);
                 circles.push_back(circle);
                 if(letter_index > 0) {
                     ofxBox2dJoint* j = new ofxBox2dJoint();
@@ -53,11 +54,7 @@ void Box2dMashEngine::setup()
         }
     }
 
-    //bMouseForce = true;
-
-    strength = 0.1f;
-    damping  = 0.7f;
-    minDis   = 100;
+    bMouseForce = false;
 
 }
 
@@ -106,9 +103,9 @@ void Box2dMashEngine::update()
         }
     }*/
 
-    if(bMouseForce) { // && false) {
+    if(bMouseForce) {
         for(int i=0; i<circles.size(); i++) {
-            circles[i].addAttractionPoint(ofPoint(*(dataHub->mouseX), *(dataHub->mouseY)), strength, minDis);
+            circles[i].addAttractionPoint(ofPoint(*(dataHub->mouseX), *(dataHub->mouseY)), strength);
             //circles[i].addDamping(damping, damping);
         }
     }
@@ -121,28 +118,47 @@ void Box2dMashEngine::draw()
     tempImg.scaleIntoMe(*(dataHub->grayDiff));
     //tempImg.scaleIntoMe(*(dataHub->grayImage));
 
+    strength = 0.33f;
+    damping  = 0.17f;
+    float distance = 0;
+
     unsigned char *pixels = tempImg.getPixels();
     int circle_index = 0;
     for(int i = 0; i < tempImg.width * tempImg.height; i++) {
 
         if(pixels[i] > 50) {
-            int screen_x = i % tempImg.width / (float)tempImg.width  * ofGetWidth() ;
-            int screen_y = i / tempImg.width / (float)tempImg.height * ofGetHeight() ;
-
-            if(screen_x == 0 && screen_y == 0)
-                continue;
+            int screen_x = i % tempImg.width / (float)tempImg.width  * ofGetWidth();
+            int screen_y = i / tempImg.width / (float)tempImg.height * ofGetHeight();
 
             // find the next circle representing the first letter of a word
             // and apply physics force to it
+            int totalCirclesMoved = 0;
             while(circle_index < circles.size()) {
                 if(circles[circle_index].letterInWordIndex == 0) {
-                    circles[circle_index].addAttractionPoint(ofPoint(screen_x, screen_y),
-                                                             strength, minDis);
-                    circles[circle_index].addDamping(damping, damping);
-                    ofCircle(screen_x, screen_y, 10);
-                    break;
+
+                    distance = sqrt(  pow(screen_x - circles[circle_index].letter->col * FONT_SIZE, 2)
+                                    + pow(screen_y - circles[circle_index].letter->row * FONT_SIZE, 2));
+
+                    if(distance < 300) {
+                        circles[circle_index].addAttractionPoint(ofPoint(screen_x, screen_y),
+                                                                 5.0f / distance);
+                        circles[circle_index].addDamping(damping, damping);
+
+                        if(dataHub->bDebug) {
+                            ofPushStyle();
+                                ofSetColor(0, 255, 0);
+                                ofCircle(screen_x, screen_y, 10);
+                            ofPopStyle();
+                        }
+                        totalCirclesMoved++;
+                    }
                 }
                 circle_index++;
+
+                if(totalCirclesMoved > 10) {
+                    totalCirclesMoved = 0;
+                    break;
+                }
             }
 
             if(circle_index == circles.size()) {
@@ -152,9 +168,9 @@ void Box2dMashEngine::draw()
     }
 
     if(dataHub->bDebug) {
-        for(int i=0; i<dataHub->messages->size(); i++) {
-            circles[i].draw();
-        }
+//        for(int i=0; i<dataHub->messages->size(); i++) {
+//            circles[i].draw();
+//        }
 
         for(int i=0; i<circles.size(); i++) {
             circles[i].draw();

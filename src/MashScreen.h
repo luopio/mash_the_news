@@ -13,7 +13,6 @@ class MashScreen
         MashScreen(DataHub &h);
         virtual ~MashScreen();
 
-        vector<Letter *>    letters;
         vector<Message *>   messages;
         ofTrueTypeFont font;
 
