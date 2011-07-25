@@ -6,6 +6,7 @@
 #include "FlowMashEngine.h"
 #include "Box2dMashEngine.h"
 #include "DataHub.h"
+#include "AsciiBackground.h"
 
 class MashScreen
 {
@@ -31,6 +32,8 @@ class MashScreen
         void draw();
         void hilightMessage(int messageIndex);
         void changeEngine();
+
+        AsciiBackground asciiBG;
 
     protected:
 

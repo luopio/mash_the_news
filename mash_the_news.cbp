@@ -640,6 +640,12 @@
 		<Unit filename="src/testApp.h">
 			<Option virtualFolder="src/" />
 		</Unit>
+<Unit filename="src/AsciiBackground.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+<Unit filename="src/AsciiBackground.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Extensions>
 			<lib_finder>
 				<lib name="gstreamer-0.10" />

@@ -6,6 +6,7 @@ MashScreen::MashScreen(DataHub &h)
     dataHub->messages = &messages;
     dataHub->currentEngine = &currentEngineIndex;
     hilightedMessageIndex = -5;
+
 }
 
 MashScreen::~MashScreen()
@@ -17,7 +18,7 @@ void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
     //font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
-    font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true);
+    font.loadFont("DroidSansMono.ttf", FONT_SIZE, false, true);
     //font.loadFont("VeraMono.ttf", FONT_SIZE, true, true, true);
     cols = ofGetWidth()  / FONT_SIZE;
     rows = ofGetHeight() / FONT_SIZE;
@@ -47,6 +48,24 @@ void MashScreen::setup()
     bJustChangedEngine = true;
 
     ofBackground(0, 0, 0);
+
+    asciiBG.addDatahub(dataHub);
+
+    string tmps = "";
+
+     for (int i = 0; i < 40; i++) {
+        string tmp = "";
+        for (int j = 0; j < 120; j++) {
+            //rand
+            tmp += (rand()*1.0/RAND_MAX)*5+33;
+            //tmp += c;
+        }
+        tmps += tmp;
+        tmps += "\n";
+    }
+
+    asciiBG.setBackground(tmps, font);
+
 }
 
 
@@ -70,6 +89,9 @@ void MashScreen::update()
 
 void MashScreen::draw()
 {
+
+    asciiBG.draw();
+
     Message *m = NULL;
     Word *w = NULL;
     int tint = 255;

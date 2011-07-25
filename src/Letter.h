@@ -1,7 +1,7 @@
 #ifndef LETTER_H
 #define LETTER_H
 
-#define FONT_SIZE 24
+#define FONT_SIZE 16
 
 #include "ofMain.h"
 #include "ofxFBOTexture.h"
