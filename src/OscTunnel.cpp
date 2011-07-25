@@ -74,16 +74,16 @@ void OscTunnel::update() {
 
                 switch (m.getArgAsInt32(2)) {
                     case 1:
-                        screen->currentEngine->strength = m.getArgAsInt32(3) / 60.0;
-                        cout << screen->currentEngine->strength << " is new strength!" << endl;
+                        // screen->currentEngine->strength = m.getArgAsInt32(3) / 60.0;
+                        // cout << screen->currentEngine->strength << " is new strength!" << endl;
                         break;
                     case 2:
-                        screen->currentEngine->damping = m.getArgAsInt32(3) / 120.0;
-                        cout << screen->currentEngine->damping << " is new damping!" << endl;
+                        // screen->currentEngine->damping = m.getArgAsInt32(3) / 120.0;
+                        // cout << screen->currentEngine->damping << " is new damping!" << endl;
                         break;
                     case 3:
-                        screen->currentEngine->minDis = m.getArgAsInt32(3) * 10.0;
-                        cout << screen->currentEngine->minDis << " is new minimum distance!" << endl;
+                        // screen->currentEngine->minDis = m.getArgAsInt32(3) * 10.0;
+                        // cout << screen->currentEngine->minDis << " is new minimum distance!" << endl;
                         break;
                     case 5:
                         updateBgString(m.getArgAsInt32(3)+33);
