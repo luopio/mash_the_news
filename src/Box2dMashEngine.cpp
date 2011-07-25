@@ -4,7 +4,7 @@ Box2dMashEngine::Box2dMashEngine(DataHub &h)
 {
     dataHub = &h;
     box2d.init();
-    box2d.setGravity(0, 0.01);
+    box2d.setGravity(0.0, 0.0);
     // box2d.createFloor();
     box2d.createBounds();
     box2d.checkBounds(true);
@@ -30,11 +30,14 @@ void Box2dMashEngine::setup()
             int letter_index = 0;
             for(vector<Letter *>::iterator li = (*wi)->letters.begin(); li != (*wi)->letters.end(); ++li)
             {
-                ofxBox2dCircle circle;
+                LetterCircle circle;
+                // mass, bounce, friction
                 circle.setPhysics(1.5, 0.53, 0.1);
-                circle.setup(box2d.getWorld(), letter_index * FONT_SIZE + 20,
-                             i * (FONT_SIZE + 10) + 100,
+                circle.setup(box2d.getWorld(),
+                             letter_index * FONT_SIZE + 100,
+                             i * (FONT_SIZE + 10) + 300,
                              FONT_SIZE);
+                circle.letterInWordIndex = letter_index;
                 circles.push_back(circle);
                 if(letter_index > 0) {
                     ofxBox2dJoint* j = new ofxBox2dJoint();
@@ -81,26 +84,6 @@ void Box2dMashEngine::update()
         }
     }
 
-    /* apply physics to the physics objects based on the kinect image */
-    tempImg.scaleIntoMe(*(dataHub->grayDiff));
-    //tempImg.scaleIntoMe(*(dataHub->grayImage));
-
-    unsigned char *pixels = tempImg.getPixels();
-    circle_index = 0;
-    for(int i = 0; i < tempImg.width * tempImg.height; i++) {
-        if(pixels[i] > 50) {
-            int screen_x = i % tempImg.width * ofGetWidth()  / tempImg.width;
-            int screen_y = i / tempImg.width * ofGetHeight() / tempImg.height;
-
-            circles[circle_index].addAttractionPoint(ofPoint(screen_x, screen_y), strength, minDis);
-            circles[circle_index].addDamping(damping, damping);
-            circle_index++;
-            if(circle_index == circles.size()) {
-                circle_index = 0;
-                break;
-            }
-        }
-    }
 
     /*for(int i=0; i<circles.size(); i++) {
         if(i >= dataHub->messages->size()) {
@@ -134,6 +117,40 @@ void Box2dMashEngine::update()
 void Box2dMashEngine::draw()
 {
 
+    /* apply physics to the physics objects based on the kinect image */
+    tempImg.scaleIntoMe(*(dataHub->grayDiff));
+    //tempImg.scaleIntoMe(*(dataHub->grayImage));
+
+    unsigned char *pixels = tempImg.getPixels();
+    int circle_index = 0;
+    for(int i = 0; i < tempImg.width * tempImg.height; i++) {
+
+        if(pixels[i] > 50) {
+            int screen_x = i % tempImg.width / (float)tempImg.width  * ofGetWidth() ;
+            int screen_y = i / tempImg.width / (float)tempImg.height * ofGetHeight() ;
+
+            if(screen_x == 0 && screen_y == 0)
+                continue;
+
+            // find the next circle representing the first letter of a word
+            // and apply physics force to it
+            while(circle_index < circles.size()) {
+                if(circles[circle_index].letterInWordIndex == 0) {
+                    circles[circle_index].addAttractionPoint(ofPoint(screen_x, screen_y),
+                                                             strength, minDis);
+                    circles[circle_index].addDamping(damping, damping);
+                    ofCircle(screen_x, screen_y, 10);
+                    break;
+                }
+                circle_index++;
+            }
+
+            if(circle_index == circles.size()) {
+                circle_index = 0;
+            }
+        }
+    }
+
     if(dataHub->bDebug) {
         for(int i=0; i<dataHub->messages->size(); i++) {
             circles[i].draw();
@@ -147,7 +164,7 @@ void Box2dMashEngine::draw()
         // dataHub->grayDiff->draw(400, 10);
         // cout << "1:" << tempImg.width << endl;
 
-        tempImg.draw(400, 10);
+        tempImg.draw(ofGetWidth() - tempImg.width, 10);
 
         //cout << "2:" << tempImg.width << endl;
     }
