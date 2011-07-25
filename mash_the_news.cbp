@@ -586,6 +586,12 @@
 			<Option virtualFolder="addons/ofxVectorMath/" />
 		</Unit>
 		<Unit filename="src/AlsaMidiPort.h" />
+		<Unit filename="src/AsciiBackground.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/AsciiBackground.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/Box2dMashEngine.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -638,12 +644,6 @@
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/testApp.h">
-			<Option virtualFolder="src/" />
-		</Unit>
-<Unit filename="src/AsciiBackground.h">
-			<Option virtualFolder="src/" />
-		</Unit>
-<Unit filename="src/AsciiBackground.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Extensions>

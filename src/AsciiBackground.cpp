@@ -30,6 +30,8 @@ void AsciiBackground::setBackground(string s, ofTrueTypeFont &f) {
 }
 
 void AsciiBackground::draw() {
+    ofSetColor(40,40,40);
     tex->draw(0,0);
+    ofSetColor(255,255,255);
 }
 
