@@ -14,6 +14,12 @@ struct DataHub
 
         ofxCvGrayscaleImage* grayDiff;
         vector<Message *> * messages;
+
+        // box2d engine related
+        int* currentEngine;
+        float strength;
+        float damping;
+
 };
 
 #endif // DATAHUB_H

@@ -4,6 +4,7 @@ MashScreen::MashScreen(DataHub &h)
 {
     dataHub = &h;
     dataHub->messages = &messages;
+    dataHub->currentEngine = &currentEngineIndex;
     hilightedMessageIndex = -5;
 }
 

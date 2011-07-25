@@ -55,6 +55,8 @@ void Box2dMashEngine::setup()
     }
 
     bMouseForce = false;
+    dataHub->strength = 0.33f;
+    dataHub->damping  = 0.17f;
 
 }
 
@@ -105,7 +107,7 @@ void Box2dMashEngine::update()
 
     if(bMouseForce) {
         for(int i=0; i<circles.size(); i++) {
-            circles[i].addAttractionPoint(ofPoint(*(dataHub->mouseX), *(dataHub->mouseY)), strength);
+            circles[i].addAttractionPoint(ofPoint(*(dataHub->mouseX), *(dataHub->mouseY)), dataHub->strength);
             //circles[i].addDamping(damping, damping);
         }
     }
@@ -118,8 +120,6 @@ void Box2dMashEngine::draw()
     tempImg.scaleIntoMe(*(dataHub->grayDiff));
     //tempImg.scaleIntoMe(*(dataHub->grayImage));
 
-    strength = 0.33f;
-    damping  = 0.17f;
     float distance = 0;
 
     unsigned char *pixels = tempImg.getPixels();
@@ -141,8 +141,8 @@ void Box2dMashEngine::draw()
 
                     if(distance < 300) {
                         circles[circle_index].addAttractionPoint(ofPoint(screen_x, screen_y),
-                                                                 5.0f / distance);
-                        circles[circle_index].addDamping(damping, damping);
+                                                                 dataHub->strength / distance);
+                        circles[circle_index].addDamping(dataHub->damping, dataHub->damping);
 
                         if(dataHub->bDebug) {
                             ofPushStyle();
