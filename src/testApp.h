@@ -51,7 +51,6 @@ class testApp : public ofBaseApp{
         int nearThreshold;
         int farThreshold;
         bool bLearnBakground;
-        bool bDebug;
 
         OscTunnel               *oscTunnel;
 

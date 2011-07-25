@@ -26,7 +26,6 @@ void testApp::setup(){
     #endif
 
     bLearnBakground = true;
-    bDebug = true;
 
     // These images are for webcam capture, resolution is webcams/kinects reso!
     grayDiff.allocate(our_width,our_height);
@@ -41,6 +40,7 @@ void testApp::setup(){
     dataHub.grayDiff = &grayDiff;
     dataHub.mouseX = &mouseX;
     dataHub.mouseY = &mouseY;
+    dataHub.bDebug = true;
 
     screen = new MashScreen(dataHub);
     screen->setup();
@@ -136,7 +136,7 @@ void testApp::draw(){
 
     #endif
 
-    if(bDebug) {
+    if(dataHub.bDebug) {
         grayImage.draw(20,20);
     }
     screen->draw();
@@ -167,10 +167,10 @@ void testApp::keyPressed(int key){
             screen->hilightMessage(2); break;
         case '0':
             screen->hilightMessage(-10); break;
-        case 's':
+        case 'e':
             screen->changeEngine(); break;
         case 'd':
-            bDebug = !bDebug; break;
+            dataHub.bDebug = !dataHub.bDebug; break;
         case 'o':
             oscTunnel->sendTestMessage(); break;
     }

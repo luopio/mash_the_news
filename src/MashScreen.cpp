@@ -16,7 +16,7 @@ void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
     //font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
-    font.loadFont("ARCADE.TTF", FONT_SIZE, true, true, true);
+    font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true, true);
     //font.loadFont("VeraMono.ttf", FONT_SIZE, true, true, true);
     cols = ofGetWidth()  / FONT_SIZE;
     rows = ofGetHeight() / FONT_SIZE;
@@ -43,7 +43,7 @@ void MashScreen::setup()
     engines.push_back(flowME);
 
     currentEngineIndex = 0;
-    engines[currentEngineIndex]->setup();
+    bJustChangedEngine = true;
 
     ofBackground(0, 0, 0);
 }
@@ -51,6 +51,11 @@ void MashScreen::setup()
 
 void MashScreen::update()
 {
+    if(bJustChangedEngine) {
+        engines[currentEngineIndex]->setup();
+        bJustChangedEngine = false;
+    }
+
     engines[currentEngineIndex]->update();
 
     /*for(vector<Message *>::iterator i = messages.begin();
@@ -105,6 +110,10 @@ void MashScreen::draw()
         tint -= 30;
     }
 
+    if(dataHub->bDebug) {
+        ofDrawBitmapString("Current engine: "+ofToString(currentEngineIndex), 10, ofGetHeight() - 100);
+    }
+
     engines[currentEngineIndex]->draw();
 }
 
@@ -118,6 +127,7 @@ void MashScreen::changeEngine()
 {
     if(currentEngineIndex < engines.size()) {
         currentEngineIndex++;
+        bJustChangedEngine = true;
     } else {
         currentEngineIndex = 0;
     }

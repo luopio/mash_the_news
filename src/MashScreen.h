@@ -22,6 +22,7 @@ class MashScreen
 
         int hilightedMessageIndex;
         int currentEngineIndex;
+        bool bJustChangedEngine;
 
         DataHub *dataHub;
         unsigned int rows, cols;
