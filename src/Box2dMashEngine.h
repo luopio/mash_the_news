@@ -29,9 +29,6 @@ class Box2dMashEngine: public MashEngine
         vector<LetterCircle> circles;
         vector<ofxBox2dJoint *> joints;
 
-        float strength;
-        float damping;
-
         bool bMouseForce;
 
     protected:
