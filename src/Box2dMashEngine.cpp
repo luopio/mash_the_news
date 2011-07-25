@@ -50,7 +50,6 @@ void Box2dMashEngine::setup()
         }
     }
 
-    debug = true;
     //bMouseForce = true;
 
     strength = 0.1f;
@@ -85,8 +84,6 @@ void Box2dMashEngine::update()
     /* apply physics to the physics objects based on the kinect image */
     tempImg.scaleIntoMe(*(dataHub->grayDiff));
     //tempImg.scaleIntoMe(*(dataHub->grayImage));
-
-
 
     unsigned char *pixels = tempImg.getPixels();
     circle_index = 0;
@@ -137,10 +134,11 @@ void Box2dMashEngine::update()
 void Box2dMashEngine::draw()
 {
 
-    if(debug) {
+    if(dataHub->bDebug) {
         for(int i=0; i<dataHub->messages->size(); i++) {
             circles[i].draw();
         }
+
         for(int i=0; i<circles.size(); i++) {
             circles[i].draw();
         }

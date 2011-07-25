@@ -10,6 +10,7 @@ struct DataHub
         int* mouseY;
 
         unsigned int *rows, *cols;
+        bool bDebug;
 
         ofxCvGrayscaleImage* grayDiff;
         vector<Message *> * messages;
