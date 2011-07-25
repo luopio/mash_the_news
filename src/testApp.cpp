@@ -13,8 +13,8 @@ void testApp::setup(){
         cout << "kinect opened with resolution " << kinect.width << "," << kinect.height << endl;
         our_height = kinect.height;
         our_width = kinect.width;
-        nearThreshold = 10;
-        farThreshold = 100;
+        nearThreshold = 254;
+        farThreshold = 0;
 
     #else
         vidGrabber.setVerbose(true);
@@ -50,10 +50,10 @@ void testApp::setup(){
         oscTunnel->addKinect(&kinect);
     #endif
 
+    oscTunnel->addDataHub(&dataHub);
+
     bgFont.loadFont("VeraMono.ttf", 16);
 
-    bgString = "_|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n      |       |       |       |       |       |       |       |       |\n _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n  |       |       |       |       |       |       |       |       |\n     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n      |       |       |       |       |       |       |       |       |\n _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n    _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n     |       |       |       |       |       |       |       |       |\n_|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n    _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n     |       |       |       |       |       |       |       |       |\n_|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n    _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|\n     |       |       |       |       |       |       |       |       |\n_|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_     _|_\n |       |       |       |       |       |       |       |       |\n";
-    bgString = "abcsdsedsasdas\nsadaslkdjaslkdjalsdkjas\nalskdjalsdkjalskdjalskdjaslkjda\nalskdjaslkjdalskjdalskjdslkj";
 }
 
 //--------------------------------------------------------------
@@ -126,18 +126,19 @@ void testApp::draw(){
 
 	//grayBg.draw(20,280);
 	#ifdef _USE_KINECT
-        if (oscTunnel->kDebug) {
-            scaleImage = grayImage;
+        //if (oscTunnel->kDebug) {
+         //   scaleImage = grayImage;
             //scaleImage.draw(ofGetWidth() / 2 - scaleImage.width / 2, ofGetHeight() / 2 - scaleImage.height / 2);
-            scaleImage.draw(0,0, ofGetWidth(), ofGetHeight());
-        }
+         //   scaleImage.draw(0,0, ofGetWidth(), ofGetHeight());
+        //}
         //scaleImage.draw()
 	#else
 
     #endif
 
     if(dataHub.bDebug) {
-        grayImage.draw(20,20);
+        //grayImage.draw(20,20);
+        grayImage.draw(0,0, ofGetWidth(), ofGetHeight());
     }
     screen->draw();
     asciiBackground();

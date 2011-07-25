@@ -5,6 +5,7 @@
 #include "ofxOsc.h"
 #include "MashScreen.h"
 #include "ofxKinect.h"
+#include "DataHub.h"
 
 #define DEFAULT_HOST "192.168.10.12"
 #define DEFAULT_PORT 7000
@@ -34,6 +35,8 @@ class OscTunnel
         void update();
         void addOscListener(string address, void (*callback)(ofxOscMessage));
 
+        void addDataHub(DataHub * d);
+
         void addKinect(ofxKinect * k);
 
         void updateBgString(char c);
@@ -44,6 +47,7 @@ class OscTunnel
         bool kDebug;
 
         string bgString;
+        DataHub * dataHub;
 
     protected:
     private:
