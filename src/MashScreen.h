@@ -16,8 +16,12 @@ class MashScreen
         vector<Letter *>    letters;
         vector<Message *>   messages;
         ofTrueTypeFont font;
+
+        vector<MashEngine *> engines;
         MashEngine *currentEngine;
+
         int hilightedMessageIndex;
+        int currentEngineIndex;
 
         DataHub *dataHub;
         unsigned int rows, cols;

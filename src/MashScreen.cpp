@@ -15,7 +15,8 @@ MashScreen::~MashScreen()
 void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
-    font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
+    //font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
+    font.loadFont("ARCADE.TTF", FONT_SIZE, true, true, true);
     //font.loadFont("VeraMono.ttf", FONT_SIZE, true, true, true);
     cols = ofGetWidth()  / FONT_SIZE;
     rows = ofGetHeight() / FONT_SIZE;
@@ -38,8 +39,11 @@ void MashScreen::setup()
 
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
     FlowMashEngine *flowME = new FlowMashEngine(*dataHub);
-    currentEngine = box2dME; //flowME;
-    currentEngine->setup();
+    engines.push_back(box2dME);
+    engines.push_back(flowME);
+
+    currentEngineIndex = 0;
+    engines[currentEngineIndex]->setup();
 
     ofBackground(0, 0, 0);
 }
@@ -47,7 +51,7 @@ void MashScreen::setup()
 
 void MashScreen::update()
 {
-    currentEngine->update();
+    engines[currentEngineIndex]->update();
 
     /*for(vector<Message *>::iterator i = messages.begin();
         i != messages.end(); ++i)
@@ -101,7 +105,7 @@ void MashScreen::draw()
         tint -= 30;
     }
 
-    currentEngine->draw();
+    engines[currentEngineIndex]->draw();
 }
 
 void MashScreen::hilightMessage(int msgindex)
@@ -112,9 +116,9 @@ void MashScreen::hilightMessage(int msgindex)
 
 void MashScreen::changeEngine()
 {
-//    if (currentEngine == flowME) {
-//        currentEngine = box2dME;
-//    } else {
-//        currentEngine = flowME;
-//    }
+    if(currentEngineIndex < engines.size()) {
+        currentEngineIndex++;
+    } else {
+        currentEngineIndex = 0;
+    }
 }

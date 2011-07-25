@@ -21,10 +21,12 @@ void testApp::setup(){
         vidGrabber.initGrabber(320,240);
         cout << "webcam opened with resolution " << endl;
 
-        bLearnBakground = true;
         threshold = 13;
 
     #endif
+
+    bLearnBakground = true;
+    bDebug = true;
 
     // These images are for webcam capture, resolution is webcams/kinects reso!
     grayDiff.allocate(our_width,our_height);
@@ -33,7 +35,6 @@ void testApp::setup(){
     grayImage.allocate(our_width,our_height);
     grayThresh.allocate(our_width, our_height);
     grayThreshFar.allocate(our_width, our_height);
-
 
     scaleImage.allocate(our_width,our_height);
 
@@ -122,7 +123,7 @@ void testApp::draw(){
     // draw the incoming, the grayscale, the bg and the thresholded difference
 	ofSetColor(0xffffff);
 	//colorImg.draw(20,20);
-	//grayImage.draw(360,20);
+
 	//grayBg.draw(20,280);
 	#ifdef _USE_KINECT
         if (oscTunnel->kDebug) {
@@ -135,32 +136,29 @@ void testApp::draw(){
 
     #endif
 
-    // grayThresh.draw(20,20);
+    if(bDebug) {
+        grayImage.draw(20,20);
+    }
     screen->draw();
     asciiBackground();
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    #ifdef _USE_KINECT
 
-    #else
-        switch (key)
-        {
-            case ' ':
-                bLearnBakground = true;
-                break;
-            case '+':
-                threshold ++;
-                if (threshold > 255) threshold = 255;
-                break;
-            case '-':
-                threshold --;
-                if (threshold < 0) threshold = 0;
-                break;
-        }
-    #endif
-    switch (key) {
+    switch (key)
+    {
+        case ' ':
+            bLearnBakground = true;
+            break;
+        case '+':
+            threshold ++;
+            if (threshold > 255) threshold = 255;
+            break;
+        case '-':
+            threshold --;
+            if (threshold < 0) threshold = 0;
+            break;
         case '1':
             screen->hilightMessage(0); break;
         case '2':
@@ -171,6 +169,8 @@ void testApp::keyPressed(int key){
             screen->hilightMessage(-10); break;
         case 's':
             screen->changeEngine(); break;
+        case 'd':
+            bDebug = !bDebug; break;
         case 'o':
             oscTunnel->sendTestMessage(); break;
     }

@@ -8,7 +8,7 @@
 #include "DataHub.h"
 #include "OscTunnel.h"
 
-#define _USE_KINECT
+#define _NOTUSE_KINECT
 #define OSC_PORT 7000
 #define OSC_OUT_IP "192.168.10.11"
 
@@ -44,13 +44,14 @@ class testApp : public ofBaseApp{
 
         #ifdef _USE_KINECT
             ofxKinect kinect;
-            int nearThreshold;
-            int farThreshold;
 		#else
             ofVideoGrabber          vidGrabber;
+        #endif
 
-            bool				bLearnBakground;
-		#endif
+        int nearThreshold;
+        int farThreshold;
+        bool bLearnBakground;
+        bool bDebug;
 
         OscTunnel               *oscTunnel;
 
