@@ -126,7 +126,7 @@ void Box2dMashEngine::draw()
     int circle_index = 0;
     for(int i = 0; i < tempImg.width * tempImg.height; i++) {
 
-        if(pixels[i] > 50) {
+
             int screen_x = i % tempImg.width / (float)tempImg.width  * ofGetWidth();
             int screen_y = i / tempImg.width / (float)tempImg.height * ofGetHeight();
 
@@ -164,7 +164,7 @@ void Box2dMashEngine::draw()
             if(circle_index == circles.size()) {
                 circle_index = 0;
             }
-        }
+
     }
 
     if(dataHub->bDebug) {

@@ -103,13 +103,14 @@ void OscTunnel::update() {
                         case 0:
                             switch (m.getArgAsInt32(2)) {
                                 case 1:
-                                    dataHub->damping = m.getArgAsInt32(3) / 25;
+                                    dataHub->damping = m.getArgAsInt32(3) / 25.0;
         //                            screen->currentEngine->strength = m.getArgAsInt32(3) / 60.0;
                                     cout << dataHub->damping << " is new damping!" << endl;
                                     break;
                                 case 2:
-            //                        screen->currentEngine->damping = m.getArgAsInt32(3) / 120.0;
-              //                      cout << screen->currentEngine->damping << " is new damping!" << endl;
+                                    dataHub->strength = m.getArgAsInt32(3) / 25.0;
+        //                            screen->currentEngine->strength = m.getArgAsInt32(3) / 60.0;
+                                    cout << dataHub->damping << " is new strength!" << endl;
                                     break;
                                 case 3:
                 //                    screen->currentEngine->minDis = m.getArgAsInt32(3) * 10.0;
