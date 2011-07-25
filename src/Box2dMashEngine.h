@@ -5,6 +5,12 @@
 #include "ofxBox2d.h"
 #include "ofxOpenCv.h"
 
+class LetterCircle: public ofxBox2dCircle
+{
+    public:
+        int letterInWordIndex;
+};
+
 class Box2dMashEngine: public MashEngine
 {
     public:
@@ -19,7 +25,7 @@ class Box2dMashEngine: public MashEngine
         ofxCvGrayscaleImage tempImg;
 
         ofxBox2d box2d;
-        vector<ofxBox2dCircle> circles;
+        vector<LetterCircle> circles;
         vector<ofxBox2dJoint *> joints;
 
         bool bMouseForce;
