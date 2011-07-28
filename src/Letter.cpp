@@ -12,11 +12,11 @@ void Letter::prerender(ofTrueTypeFont &f)
 {
     font = &f;
     tex = new ofxFBOTexture();
-    tex->allocate(font->stringWidth(letter), font->stringHeight(letter) * 2, false);
+    tex->allocate(font->stringWidth(letter), font->getLineHeight(), false);
     tex->begin();
-        // ofFill();
-        // ofSetColor(255, 0, 0);
-        // ofRect(0, 0, 100, 100);
+        ofFill();
+        ofSetColor(0, 0, 0);
+        ofRect(0, 0, tex->getWidth(), tex->getHeight());
         ofSetColor(255, 255, 255);
         font->drawString(letter, 0, FONT_SIZE);
     tex->end();

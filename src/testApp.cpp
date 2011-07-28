@@ -13,8 +13,6 @@ void testApp::setup(){
         cout << "kinect opened with resolution " << kinect.width << "," << kinect.height << endl;
         our_height = kinect.height;
         our_width = kinect.width;
-        nearThreshold = 254;
-        farThreshold = 0;
 
     #else
         vidGrabber.setVerbose(true);
@@ -22,7 +20,6 @@ void testApp::setup(){
         cout << "webcam opened with resolution " << endl;
 
         threshold = 13;
-
     #endif
 
     bLearnBakground = true;
@@ -68,8 +65,6 @@ void testApp::update(){
         kinect.update();
         if(kinect.isFrameNew())
         {
-
-
             grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
             grayImage.mirror(false,true);
             //we do two thresholds - one for the far plane and one for the near plane
@@ -142,6 +137,12 @@ void testApp::draw(){
     }
     screen->draw();
     asciiBackground();
+
+    ofDrawBitmapString("strength: "+ofToString(dataHub.strength), 10, ofGetHeight() - 90);
+    ofDrawBitmapString("damping:  "+ofToString(dataHub.damping), 10, ofGetHeight() - 80);
+    ofDrawBitmapString("kFarThreshold:  "+ofToString(oscTunnel->kFarThreshold), 10, ofGetHeight() - 70);
+    ofDrawBitmapString("kThreshold:  "+ofToString(oscTunnel->kThreshold), 10, ofGetHeight() - 60);
+
 }
 
 //--------------------------------------------------------------
@@ -152,14 +153,20 @@ void testApp::keyPressed(int key){
         case ' ':
             bLearnBakground = true;
             break;
-        case '+':
-            threshold ++;
-            if (threshold > 255) threshold = 255;
+
+        case OF_KEY_RIGHT:
+            oscTunnel->kFarThreshold = MIN(oscTunnel->kFarThreshold + 1, 254);
             break;
-        case '-':
-            threshold --;
-            if (threshold < 0) threshold = 0;
+        case OF_KEY_LEFT:
+            oscTunnel->kFarThreshold = MAX(oscTunnel->kFarThreshold - 1, 0);
             break;
+        case OF_KEY_UP:
+            oscTunnel->kThreshold = MIN(oscTunnel->kThreshold + 1, 254);
+            break;
+        case OF_KEY_DOWN:
+            oscTunnel->kThreshold = MAX(oscTunnel->kThreshold - 1, 0);
+            break;
+
         case '1':
             screen->hilightMessage(0); break;
         case '2':

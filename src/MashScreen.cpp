@@ -79,10 +79,10 @@ void MashScreen::draw()
         for(vector<Word *>::iterator wi = m->words.begin();
             wi != m->words.end(); ++wi)
         {
-            for(vector<Letter *>::iterator li = (*wi)->letters.begin();
-                li != (*wi)->letters.end(); ++li)
+            Word * word = *wi;
+            for(int lindex = 0; lindex < word->letters.size(); lindex++)
             {
-                Letter * c = (*li);
+                Letter * c = word->letters[lindex];
                 if(hilightedMessageIndex >= 0) {
                     //cout << "+" << hilightedMessageIndex << endl;
                     if(i == hilightedMessageIndex) {
@@ -103,7 +103,14 @@ void MashScreen::draw()
                         hilightedMessageIndex = -1;
                 }
                 ofSetColor(c->color.r, c->color.g, c->color.b);
-                (*li)->draw();
+                c->draw();
+//                if(lindex != 0) {
+//                    Letter * prevLetter = word->letters[lindex - 1];
+//                    ofLine(prevLetter->col * FONT_SIZE - FONT_SIZE / 2,
+//                           prevLetter->row * FONT_SIZE - FONT_SIZE / 2,
+//                           c->col * FONT_SIZE - FONT_SIZE / 2,
+//                           c->row * FONT_SIZE - FONT_SIZE / 2);
+//                }
             }
         }
         word_index++;

@@ -4,7 +4,7 @@ Box2dMashEngine::Box2dMashEngine(DataHub &h)
 {
     dataHub = &h;
     box2d.init();
-    box2d.setGravity(0.0, 0.0f);
+    box2d.setGravity(0.0, 0.1f);
     // box2d.createFloor();
     box2d.createBounds();
     box2d.checkBounds(true);
@@ -32,11 +32,11 @@ void Box2dMashEngine::setup()
             {
                 LetterCircle circle;
                 // mass, bounce, friction
-                circle.setPhysics(0.2f, 0.63f, 0.02f);
+                circle.setPhysics(.9f, 0.03f, 0.2f);
                 circle.setup(box2d.getWorld(),
                              letter_index * FONT_SIZE + 100,
-                             i * (FONT_SIZE + 10) + 300,
-                             FONT_SIZE);
+                             i * FONT_SIZE * 2 + 100,
+                             FONT_SIZE, FONT_SIZE);
                 circle.letterInWordIndex = letter_index;
                 circle.letter = (*li);
                 circles.push_back(circle);
@@ -56,7 +56,7 @@ void Box2dMashEngine::setup()
 
     bMouseForce = false;
     dataHub->strength = 0.33f;
-    dataHub->damping  = 0.17f;
+    dataHub->damping  = 0.30f;
 
 }
 
@@ -125,8 +125,7 @@ void Box2dMashEngine::draw()
     unsigned char *pixels = tempImg.getPixels();
     int circle_index = 0;
     for(int i = 0; i < tempImg.width * tempImg.height; i++) {
-
-
+        if(pixels[i] > 0) {
             int screen_x = i % tempImg.width / (float)tempImg.width  * ofGetWidth();
             int screen_y = i / tempImg.width / (float)tempImg.height * ofGetHeight();
 
@@ -150,6 +149,7 @@ void Box2dMashEngine::draw()
                                 ofCircle(screen_x, screen_y, 10);
                             ofPopStyle();
                         }
+
                         totalCirclesMoved++;
                     }
                 }
@@ -164,7 +164,7 @@ void Box2dMashEngine::draw()
             if(circle_index == circles.size()) {
                 circle_index = 0;
             }
-
+        }
     }
 
     if(dataHub->bDebug) {

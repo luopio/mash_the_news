@@ -48,8 +48,6 @@ class testApp : public ofBaseApp{
             ofVideoGrabber          vidGrabber;
         #endif
 
-        int nearThreshold;
-        int farThreshold;
         bool bLearnBakground;
 
         OscTunnel               *oscTunnel;

@@ -5,7 +5,7 @@
 #include "ofxBox2d.h"
 #include "ofxOpenCv.h"
 
-class LetterCircle: public ofxBox2dCircle
+class LetterCircle: public ofxBox2dRect
 {
     public:
         int letterInWordIndex;

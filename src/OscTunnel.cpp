@@ -16,7 +16,7 @@ OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
 	cout << "listening for osc messages on port " << DEFAULT_PORT << "\n";
 
     kThreshold = 254;
-    kFarThreshold = 0;
+    kFarThreshold = 230;
     kinect = NULL;
     kDebug = true;
 
