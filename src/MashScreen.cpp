@@ -29,20 +29,19 @@ void MashScreen::setup()
 
     messages.push_back( new Message(string("moro mitas jatka")));
     messages.push_back( new Message(string("no huh,huh")));
-    messages.push_back( new Message(string("meno on joskus vahan villia! mutta ei semittan!")));
     messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!")));
-    messages.push_back( new Message(string("Nyt jos koskaan kannattaa mennä Ruisrockkiin!")));
 
     int row_index = 0;
     for(vector<Message *>::iterator mi = messages.begin();
         mi != messages.end(); ++mi) {
-        (*mi)->prerender(font);
+        (*mi)->prerender(&font);
         (*mi)->setPosition(0, row_index);
         row_index++;
     }
 
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
     FlowMashEngine *flowME = new FlowMashEngine(*dataHub);
+
     engines.push_back(box2dME);
     engines.push_back(flowME);
 
@@ -92,7 +91,13 @@ void MashScreen::update()
 void MashScreen::draw()
 {
 
-    /*Message *m = NULL;
+    asciiBG.draw();
+
+    // note that the engine should not normally draw anything but debug
+    // stuff
+    engines[currentEngineIndex]->draw();
+
+    Message *m = NULL;
     Word *w = NULL;
     int tint = 255;
     int word_index = 0;
@@ -136,16 +141,13 @@ void MashScreen::draw()
             }
         }
         word_index++;
-        // ofSetColor(255, tint, word_index % 3 * 100);
+        ofSetColor(255, tint, word_index % 3 * 100);
         tint -= 30;
     }
-    */
+
     if(dataHub->bDebug) {
         ofDrawBitmapString("Current engine: "+ofToString(currentEngineIndex), 10, ofGetHeight() - 100);
     }
-
-    asciiBG.draw();
-    engines[currentEngineIndex]->draw();
 }
 
 void MashScreen::hilightMessage(int msgindex)

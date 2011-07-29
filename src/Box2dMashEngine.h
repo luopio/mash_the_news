@@ -21,6 +21,8 @@ class Box2dMashEngine: public MashEngine
         void setup();
         void update();
         void draw();
+        void keyPressed(ofKeyEventArgs& args);
+		void keyReleased(ofKeyEventArgs& args);
 
         DataHub* dataHub;
         ofxCvGrayscaleImage tempImg;
@@ -30,6 +32,7 @@ class Box2dMashEngine: public MashEngine
         vector<ofxBox2dJoint *> joints;
 
         bool bMouseForce;
+        bool bJediForce;
 
     protected:
     private:

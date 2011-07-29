@@ -3,15 +3,21 @@
 Box2dMashEngine::Box2dMashEngine(DataHub &h)
 {
     dataHub = &h;
+    ofRegisterKeyEvents(this);
+
     box2d.init();
-    box2d.setGravity(0.0, 0.1f);
-    // box2d.createFloor();
-    box2d.createBounds();
-    box2d.checkBounds(true);
+    box2d.setGravity(0.0, 0.4);
+    dataHub->strength = 2.0f;
+    dataHub->damping  = 0.50f;
+    box2d.createGround();
+    //box2d.createBounds();
+    //box2d.checkBounds(true);
     box2d.setFPS(30.0);
     cout << "scale to " << dataHub->grayDiff->width << " and " << dataHub->grayDiff->height << endl;
     tempImg.allocate(dataHub->grayDiff->width / 10,
                      dataHub->grayDiff->height / 10);
+    bMouseForce = false;
+    bJediForce = true;
 }
 
 Box2dMashEngine::~Box2dMashEngine()
@@ -24,6 +30,7 @@ void Box2dMashEngine::setup()
 
     Message *m = NULL;
     int circle_index = 0;
+
     for(int i = 0; i < dataHub->messages->size(); i++) {
         m = (*dataHub->messages)[i];
         for(vector<Word *>::iterator wi = m->words.begin(); wi != m->words.end(); ++wi) {
@@ -53,11 +60,6 @@ void Box2dMashEngine::setup()
             }
         }
     }
-
-    bMouseForce = false;
-    dataHub->strength = 0.33f;
-    dataHub->damping  = 0.30f;
-
 }
 
 void Box2dMashEngine::update()
@@ -118,11 +120,38 @@ void Box2dMashEngine::draw()
 
     /* apply physics to the physics objects based on the kinect image */
     tempImg.scaleIntoMe(*(dataHub->grayDiff));
-    //tempImg.scaleIntoMe(*(dataHub->grayImage));
 
     float distance = 0;
 
     unsigned char *pixels = tempImg.getPixels();
+
+    if(bJediForce) {
+        int circleIndex = 0;
+        /* find the highest points of all y coords */
+        for(int xi = 0; xi < tempImg.width; ++xi) {
+            int highestPoint = tempImg.height;
+            for(int yi = 0; yi < tempImg.height; ++yi) {
+                if(pixels[xi + yi * tempImg.width]) {
+                    highestPoint = yi;
+                    break;
+                }
+            }
+            int screenX = xi / (float)tempImg.width * ofGetWidth();
+            int screenY = highestPoint / (float)tempImg.height * ofGetHeight();
+
+            circles[circleIndex].addAttractionPoint(ofPoint(screenX, screenY),
+                                                     dataHub->strength);
+            circles[circleIndex].setDamping(dataHub->damping, dataHub->damping);
+            circleIndex++;
+
+            if(circleIndex >= circles.size())
+                break; // circleIndex = 0;
+
+            ofCircle(screenX, screenY, 4);
+        }
+    }
+
+    /*
     int circle_index = 0;
     for(int i = 0; i < tempImg.width * tempImg.height; i++) {
         if(pixels[i] > 0) {
@@ -165,16 +194,16 @@ void Box2dMashEngine::draw()
                 circle_index = 0;
             }
         }
-    }
+    }*/
 
     if(dataHub->bDebug) {
 //        for(int i=0; i<dataHub->messages->size(); i++) {
 //            circles[i].draw();
 //        }
-
+        /* potential sig_abort here?
         for(int i=0; i<circles.size(); i++) {
             circles[i].draw();
-        }
+        }*/
         // ofDrawBitmapString(10, ofGetHeight() - 100, "")
         // dataHub->grayDiff->scaleIntoMe(tempImg);
         // dataHub->grayDiff->draw(400, 10);
@@ -187,3 +216,15 @@ void Box2dMashEngine::draw()
 }
 
 
+
+void Box2dMashEngine::keyReleased(ofKeyEventArgs& args){}
+
+void Box2dMashEngine::keyPressed(ofKeyEventArgs& args){
+    switch (args.key)
+    {
+        case 'j':
+            bJediForce = !bJediForce;
+            cout << "JEDI FORCE" << endl;
+            break;
+    }
+}

@@ -49,8 +49,6 @@ void testApp::setup(){
 
     oscTunnel->addDataHub(&dataHub);
 
-    bgFont.loadFont("VeraMono.ttf", 16);
-
 }
 
 //--------------------------------------------------------------
@@ -114,13 +112,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
 
-
-    // draw the incoming, the grayscale, the bg and the thresholded difference
-	ofSetColor(0xffffff);
-	//colorImg.draw(20,20);
-
-	//grayBg.draw(20,280);
-	#ifdef _USE_KINECT
+    #ifdef _USE_KINECT
         //if (oscTunnel->kDebug) {
          //   scaleImage = grayImage;
             //scaleImage.draw(ofGetWidth() / 2 - scaleImage.width / 2, ofGetHeight() / 2 - scaleImage.height / 2);
@@ -136,15 +128,14 @@ void testApp::draw(){
         grayImage.draw(0,0, ofGetWidth(), ofGetHeight());
         grayDiff.draw(0,0, ofGetWidth(), ofGetHeight());
     }
-    asciiBackground();
     screen->draw();
 
-    ofDrawBitmapString("strength: "+ofToString(dataHub.strength), 10, ofGetHeight() - 90);
-    ofDrawBitmapString("damping:  "+ofToString(dataHub.damping), 10, ofGetHeight() - 75);
-    ofDrawBitmapString("kFarThreshold:  "+ofToString(oscTunnel->kFarThreshold), 10, ofGetHeight() - 60);
-    ofDrawBitmapString("kThreshold:  "+ofToString(oscTunnel->kThreshold), 10, ofGetHeight() - 45);
-    ofDrawBitmapString("FPS:  "+ofToString(ofGetFrameRate()), 10, ofGetHeight() - 30);
-
+    string debug = "";
+    debug += "strength: "+ofToString(dataHub.strength) + "\n";
+    debug += "damping:  "+ofToString(dataHub.damping) + "\n";
+    debug += "kFarThreshold/kThreshold:  "+ofToString(oscTunnel->kFarThreshold) + " / " + ofToString(oscTunnel->kThreshold) + "\n";
+    debug += "FPS:  "+ofToString(ofGetFrameRate());
+    ofDrawBitmapString(debug, 10, ofGetHeight() - 90);
 }
 
 //--------------------------------------------------------------
@@ -181,6 +172,17 @@ void testApp::keyPressed(int key){
             screen->changeEngine(); break;
         case 'd':
             dataHub.bDebug = !dataHub.bDebug; break;
+
+        case '+':
+            dataHub.strength += 0.1; break;
+        case '-':
+            dataHub.strength -= 0.1; break;
+        case '.':
+            dataHub.damping += 0.1; break;
+        case ',':
+            dataHub.damping -= 0.1; break;
+
+
         case 'o':
             oscTunnel->sendTestMessage(); break;
     }
@@ -215,7 +217,3 @@ void testApp::windowResized(int w, int h){
 
 }
 
-void testApp::asciiBackground() {
-    ofSetColor(255,255,255);
-    bgFont.drawString(oscTunnel->bgString, 0, 0);
-}

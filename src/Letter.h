@@ -14,7 +14,7 @@ class Letter
         Letter(const char letter);
         virtual ~Letter();
 
-        void prerender(ofTrueTypeFont &of);
+        void prerender(ofTrueTypeFont *of);
         void draw();
 
         string letter;
@@ -39,7 +39,7 @@ class Message
     public:
         Message(string message);
         vector<Word *> words;
-        void prerender(ofTrueTypeFont &of);
+        void prerender(ofTrueTypeFont *of);
         void setPosition(int col, int row);
 };
 

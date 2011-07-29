@@ -8,11 +8,12 @@ Letter::Letter(const char let)
     // cout << let << ",";
 }
 
-void Letter::prerender(ofTrueTypeFont &f)
+void Letter::prerender(ofTrueTypeFont *f)
 {
-    font = &f;
+    font = f;
     tex = new ofFbo();
-    tex->allocate(font->stringWidth(letter), font->getLineHeight(), false);
+    //tex->allocate(font->stringWidth(letter), font->getLineHeight());
+    tex->allocate(FONT_SIZE, FONT_SIZE);
     tex->begin();
         ofFill();
         ofSetColor(0, 0, 0);
@@ -55,7 +56,7 @@ Message::Message(string message)
     }
 }
 
-void Message::prerender(ofTrueTypeFont &f)
+void Message::prerender(ofTrueTypeFont *f)
 {
     for(vector<Word *>::iterator i = words.begin();
         i != words.end(); ++i) {
