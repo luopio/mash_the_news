@@ -134,14 +134,16 @@ void testApp::draw(){
     if(dataHub.bDebug) {
         //grayImage.draw(20,20);
         grayImage.draw(0,0, ofGetWidth(), ofGetHeight());
+        grayDiff.draw(0,0, ofGetWidth(), ofGetHeight());
     }
-    screen->draw();
     asciiBackground();
+    screen->draw();
 
     ofDrawBitmapString("strength: "+ofToString(dataHub.strength), 10, ofGetHeight() - 90);
-    ofDrawBitmapString("damping:  "+ofToString(dataHub.damping), 10, ofGetHeight() - 80);
-    ofDrawBitmapString("kFarThreshold:  "+ofToString(oscTunnel->kFarThreshold), 10, ofGetHeight() - 70);
-    ofDrawBitmapString("kThreshold:  "+ofToString(oscTunnel->kThreshold), 10, ofGetHeight() - 60);
+    ofDrawBitmapString("damping:  "+ofToString(dataHub.damping), 10, ofGetHeight() - 75);
+    ofDrawBitmapString("kFarThreshold:  "+ofToString(oscTunnel->kFarThreshold), 10, ofGetHeight() - 60);
+    ofDrawBitmapString("kThreshold:  "+ofToString(oscTunnel->kThreshold), 10, ofGetHeight() - 45);
+    ofDrawBitmapString("FPS:  "+ofToString(ofGetFrameRate()), 10, ofGetHeight() - 30);
 
 }
 

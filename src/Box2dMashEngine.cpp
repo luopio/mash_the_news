@@ -42,10 +42,10 @@ void Box2dMashEngine::setup()
                 circles.push_back(circle);
                 if(letter_index > 0) {
                     ofxBox2dJoint* j = new ofxBox2dJoint();
-                    j->setWorld(box2d.getWorld());
-                    j->addJoint(circles[circle_index - 1].body,
-                                circles[circle_index].body,
-                                2.0, 0.7);
+                    j->setup(box2d.getWorld(),
+                             circles[circle_index - 1].body,
+                             circles[circle_index].body,
+                             2.0, 0.7);
                     joints.push_back(j);
                 }
                 circle_index++;
@@ -141,7 +141,7 @@ void Box2dMashEngine::draw()
                     if(distance < 300) {
                         circles[circle_index].addAttractionPoint(ofPoint(screen_x, screen_y),
                                                                  dataHub->strength / distance);
-                        circles[circle_index].addDamping(dataHub->damping, dataHub->damping);
+                        circles[circle_index].setDamping(dataHub->damping, dataHub->damping);
 
                         if(dataHub->bDebug) {
                             ofPushStyle();

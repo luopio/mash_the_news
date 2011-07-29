@@ -4,7 +4,6 @@
 #define FONT_SIZE 16
 
 #include "ofMain.h"
-#include "ofxFBOTexture.h"
 #include "Poco/StringTokenizer.h"
 
 using Poco::StringTokenizer;
@@ -19,7 +18,7 @@ class Letter
         void draw();
 
         string letter;
-        ofxFBOTexture *tex;
+        ofFbo *tex;
         ofTrueTypeFont *font;
         ofColor color;
         int row, col;

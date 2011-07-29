@@ -18,12 +18,14 @@ void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
     //font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
-    font.loadFont("DroidSansMono.ttf", FONT_SIZE, false, true);
+    font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true);
     //font.loadFont("VeraMono.ttf", FONT_SIZE, true, true, true);
     cols = ofGetWidth()  / FONT_SIZE;
     rows = ofGetHeight() / FONT_SIZE;
     dataHub->rows = &rows;
     dataHub->cols = &cols;
+
+    cout << "cols&rows" << cols << "," << rows << endl;
 
     messages.push_back( new Message(string("moro mitas jatka")));
     messages.push_back( new Message(string("no huh,huh")));
@@ -90,9 +92,7 @@ void MashScreen::update()
 void MashScreen::draw()
 {
 
-    asciiBG.draw();
-
-    Message *m = NULL;
+    /*Message *m = NULL;
     Word *w = NULL;
     int tint = 255;
     int word_index = 0;
@@ -139,11 +139,12 @@ void MashScreen::draw()
         // ofSetColor(255, tint, word_index % 3 * 100);
         tint -= 30;
     }
-
+    */
     if(dataHub->bDebug) {
         ofDrawBitmapString("Current engine: "+ofToString(currentEngineIndex), 10, ofGetHeight() - 100);
     }
 
+    asciiBG.draw();
     engines[currentEngineIndex]->draw();
 }
 

@@ -11,7 +11,7 @@ Letter::Letter(const char let)
 void Letter::prerender(ofTrueTypeFont &f)
 {
     font = &f;
-    tex = new ofxFBOTexture();
+    tex = new ofFbo();
     tex->allocate(font->stringWidth(letter), font->getLineHeight(), false);
     tex->begin();
         ofFill();

@@ -18,20 +18,19 @@ void AsciiBackground::addDatahub(DataHub * d) {
 void AsciiBackground::setBackground(string s, ofTrueTypeFont &f) {
     background = s;
     tex = new ofxFBOTexture();
-    tex->allocate(ofGetWidth()+300, ofGetHeight()+300, false);
+    tex->allocate(ofGetWidth(), ofGetHeight(), false);
     tex->begin();
-        // ofFill();
-        // ofSetColor(255, 0, 0);
-        // ofRect(0, 0, 100, 100);
-        ofSetColor(255, 255, 255);
+        ofFill();
+        ofSetColor(25, 0, 0);
+        ofRect(0, 0, tex->getWidth(), tex->getHeight());
+        ofSetColor(255, 255, 255, 128);
         f.drawString(s, 0, FONT_SIZE);
-        //ofRect(0,0,ofGetWidth(), ofGetHeight());
     tex->end();
 }
 
 void AsciiBackground::draw() {
-    ofSetColor(40,40,40);
+    // ofSetColor(40,40,40);
     tex->draw(0,0);
-    ofSetColor(255,255,255);
+    // ofSetColor(255,255,255);
 }
 
