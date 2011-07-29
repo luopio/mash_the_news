@@ -38,10 +38,11 @@ class Word
 class Message
 {
     public:
-        Message(string message);
+        Message(string message, ofTrueTypeFont &font);
         vector<Word *> words;
         void prerender(ofTrueTypeFont &of);
         void setPosition(int col, int row);
+        string msg;
 };
 
 /*

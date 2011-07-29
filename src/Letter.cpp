@@ -11,6 +11,10 @@ Letter::Letter(const char let)
 void Letter::prerender(ofTrueTypeFont &f)
 {
     font = &f;
+
+
+    cout << letter << " " << (int)letter[0] << " ! " << endl;
+
     tex = new ofxFBOTexture();
     tex->allocate(font->stringWidth(letter), font->stringHeight(letter) * 2, false);
     tex->begin();
@@ -44,7 +48,7 @@ Word::Word(string word)
     }
 }
 
-Message::Message(string message)
+Message::Message(string message, ofTrueTypeFont &font)
 {
     // vector<string> swords = split(message, ' ');
     StringTokenizer t(message, ", ", StringTokenizer::TOK_TRIM);
@@ -53,6 +57,12 @@ Message::Message(string message)
         Word *w = new Word((string)(*ti));
         words.push_back(w);
     }
+
+    prerender(font);
+    setPosition(30, 30);
+
+    msg = message;
+
 }
 
 void Message::prerender(ofTrueTypeFont &f)

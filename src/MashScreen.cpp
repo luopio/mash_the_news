@@ -25,19 +25,19 @@ void MashScreen::setup()
     dataHub->rows = &rows;
     dataHub->cols = &cols;
 
-    messages.push_back( new Message(string("moro mitas jatka")));
-    messages.push_back( new Message(string("no huh,huh")));
-    messages.push_back( new Message(string("meno on joskus vahan villia! mutta ei semittan!")));
-    messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!")));
-    messages.push_back( new Message(string("Nyt jos koskaan kannattaa mennä Ruisrockkiin!")));
+    messages.push_back( new Message(string("moro mitas jatka ää"),font));
+    messages.push_back( new Message(string("no huh,huh öö"),font));
+    //messages.push_back( new Message(string("meno on joskus vahan villia! mutta ei semittan!"),font));
+    //messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"),font));
+    //messages.push_back( new Message(string("Nyt jos koskaan kannattaa mennä Ruisrockkiin!"),font));
 
-    int row_index = 0;
+   /* int row_index = 0;
     for(vector<Message *>::iterator mi = messages.begin();
         mi != messages.end(); ++mi) {
         (*mi)->prerender(font);
         (*mi)->setPosition(0, row_index);
         row_index++;
-    }
+    }*/
 
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
     FlowMashEngine *flowME = new FlowMashEngine(*dataHub);
@@ -98,6 +98,7 @@ void MashScreen::draw()
     int word_index = 0;
     for(int i = 0; i < messages.size(); i++) {
         m = messages[i];
+        font.drawString(m->msg, 100, 500+i*20);
         for(vector<Word *>::iterator wi = m->words.begin();
             wi != m->words.end(); ++wi)
         {

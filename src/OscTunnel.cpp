@@ -47,9 +47,9 @@ void OscTunnel::update() {
             }
             else if ( m.getAddress() == "/sms" )
             {
-                //cout << "SMS: " << m.getArgAsString( 0 ) << endl;
-                //screen->messages.push_back( new Message(m.getArgAsString(0)));
-
+                cout << "SMS: " << m.getArgAsString( 0 ) << endl;
+                screen->messages.push_back( new Message(m.getArgAsString(0),screen->font));
+                //cout << m.getArgAsString(0) << endl;
             }  else if ( m.getAddress() == "/ascii" )  {
                 cout << "ascii: " << m.getArgAsString( 1 ) << endl;
                 if (m.getArgAsInt32(0)) {
