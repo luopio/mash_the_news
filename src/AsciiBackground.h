@@ -20,7 +20,7 @@ class AsciiBackground
 
         string background;
 
-        ofxFBOTexture *tex;
+        ofFbo *tex;
 
     protected:
     private:

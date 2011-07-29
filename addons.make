@@ -1,0 +1,6 @@
+ofxOpenCv
+ofxKinect
+ofxBox2d
+ofxThread
+ofxVectorMath
+ofxOsc

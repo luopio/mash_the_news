@@ -17,7 +17,7 @@ void AsciiBackground::addDatahub(DataHub * d) {
 
 void AsciiBackground::setBackground(string s, ofTrueTypeFont &f) {
     background = s;
-    tex = new ofxFBOTexture();
+    tex = new ofFbo();
     tex->allocate(ofGetWidth(), ofGetHeight(), false);
     tex->begin();
         ofFill();
