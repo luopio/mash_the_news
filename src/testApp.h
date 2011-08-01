@@ -3,6 +3,7 @@
 
 #include "ofMain.h"
 #include "settings.h"
+#include "Letter.h"
 #include "MashScreen.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
