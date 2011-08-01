@@ -5,12 +5,18 @@
 
 #include "ofMain.h"
 #include "Poco/StringTokenizer.h"
-#include "ofxFBOTexture.h"
+
+#include "settings.h"
+#ifndef _USE_OFFBO
+    #include "ofxFBOTexture.h"
+#endif
+
 #include "ofxPango.h"
 
 #include "settings.h"
+
 #ifdef _USE_OFFBO
-#define ofxFBOTexture ofFbo
+    #define ofxFBOTexture ofFbo
 #endif
 
 using Poco::StringTokenizer;

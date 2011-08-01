@@ -2,7 +2,11 @@
 #define ASCIIBACKGROUND_H
 
 #include "DataHub.h"
-#include "ofxFBOTexture.h"
+
+#ifndef _USE_OFFBO
+    #include "ofxFBOTexture.h"
+#endif
+
 #include "ofFbo.h"
 #include "ofxPango.h"
 
