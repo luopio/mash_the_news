@@ -4,3 +4,5 @@ ofxBox2d
 ofxThread
 ofxVectorMath
 ofxOsc
+ofxFBOTexture
+ofxPango

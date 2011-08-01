@@ -1,4 +1,5 @@
 #include "testApp.h"
+#include "settings.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -61,13 +62,15 @@ void testApp::update(){
         if(kinect.isFrameNew())
         {
             grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
-            grayImage.mirror(false,true);
+            #ifdef _MIRROR_VIDEO_IMAGE
+                grayImage.mirror(false,true);
+            #endif
             //we do two thresholds - one for the far plane and one for the near plane
             //we then do a cvAnd to get the pixels which are a union of the two thresholds.
             grayThreshFar = grayImage;
             grayThresh = grayImage;
-            grayThresh.threshold(oscTunnel->kThreshold, true);
-            grayThreshFar.threshold(oscTunnel->kFarThreshold);
+            grayThresh.threshold(dataHub.kThreshold, true);
+            grayThreshFar.threshold(dataHub.kFarThreshold);
             cvAnd(grayThresh.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
 
             grayImage.flagImageChanged();
@@ -126,12 +129,15 @@ void testApp::draw(){
 
     screen->draw();
 
-    string debug = "";
-    debug += "strength: "+ofToString(dataHub.strength) + "\n";
-    debug += "damping:  "+ofToString(dataHub.damping) + "\n";
-    debug += "kFarThreshold/kThreshold:  "+ofToString(oscTunnel->kFarThreshold) + " / " + ofToString(oscTunnel->kThreshold) + "\n";
-    debug += "FPS:  "+ofToString(ofGetFrameRate());
-    ofDrawBitmapString(debug, 10, ofGetHeight() - 90);
+
+    if(dataHub.bDebug) {
+        string debug = "";
+        debug += "strength: "+ofToString(dataHub.strength) + "\n";
+        debug += "damping:  "+ofToString(dataHub.damping) + "\n";
+        debug += "kFarThreshold/kThreshold:  "+ofToString(dataHub.kFarThreshold) + " / " + ofToString(dataHub.kThreshold) + "\n";
+        debug += "FPS:  "+ofToString(ofGetFrameRate());
+        ofDrawBitmapString(debug, 10, ofGetHeight() - 90);
+    }
 }
 
 //--------------------------------------------------------------
@@ -144,16 +150,16 @@ void testApp::keyPressed(int key){
             break;
 
         case OF_KEY_RIGHT:
-            oscTunnel->kFarThreshold = MIN(oscTunnel->kFarThreshold + 1, 254);
+            dataHub.kFarThreshold = MIN(dataHub.kFarThreshold + 1, 254);
             break;
         case OF_KEY_LEFT:
-            oscTunnel->kFarThreshold = MAX(oscTunnel->kFarThreshold - 1, 0);
+            dataHub.kFarThreshold = MAX(dataHub.kFarThreshold - 1, 0);
             break;
         case OF_KEY_UP:
-            oscTunnel->kThreshold = MIN(oscTunnel->kThreshold + 1, 254);
+            dataHub.kThreshold = MIN(dataHub.kThreshold + 1, 254);
             break;
         case OF_KEY_DOWN:
-            oscTunnel->kThreshold = MAX(oscTunnel->kThreshold - 1, 0);
+            dataHub.kThreshold = MAX(dataHub.kThreshold - 1, 0);
             break;
 
         case '1':
@@ -181,6 +187,8 @@ void testApp::keyPressed(int key){
 
         case 'o':
             oscTunnel->sendTestMessage(); break;
+        case 'b':
+            screen->randomBG(); break;
     }
 }
 

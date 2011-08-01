@@ -45,6 +45,7 @@ class testApp : public ofBaseApp{
 
         bool bLearnBakground;
 
+
         OscTunnel               *oscTunnel;
 
         string                  bgString;

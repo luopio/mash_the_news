@@ -8,15 +8,21 @@ OscTunnel::OscTunnel()
 
 OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
     screen = ms;
-    sender.setup(ip, port);
-    cout << "sending osc messages to port " << DEFAULT_PORT << " at " << ip << endl;
+    try {
+        sender.setup(ip, port);
+        cout << "sending osc messages to port " << DEFAULT_PORT << " at " << ip << endl;
+    } catch ( ... ) {
+        cout << "can't send osc!";
+    }
+
 
     // listen on the given port
-	receiver.setup( port );
-	cout << "listening for osc messages on port " << DEFAULT_PORT << "\n";
-
-    kThreshold = 254;
-    kFarThreshold = 230;
+    try {
+        receiver.setup( port );
+        cout << "listening for osc messages on port " << DEFAULT_PORT << "\n";
+    } catch ( ... ) {
+        cout << "can't receive osc!";
+    }
     kinect = NULL;
     kDebug = true;
 
@@ -140,14 +146,14 @@ void OscTunnel::update() {
 
                                 case 7:
                                     if (kinect != NULL) {
-                                        kThreshold = 254 - (m.getArgAsInt32(3) * 2);
-                                        cout << kThreshold << " is new near threshold value" << endl;
+                                        dataHub->kThreshold = 254 - (m.getArgAsInt32(3) * 2);
+                                        cout << dataHub->kThreshold << " is new near threshold value" << endl;
                                     }
                                     break;
                                 case 8:
                                     if (kinect != NULL) {
-                                        kFarThreshold = 254 - (m.getArgAsInt32(3) * 2);
-                                        cout << kFarThreshold << " is new far threshold value" << endl;
+                                        dataHub->kFarThreshold = 254 - (m.getArgAsInt32(3) * 2);
+                                        cout << dataHub->kFarThreshold << " is new far threshold value" << endl;
                                     }
                                 break;
 
@@ -209,15 +215,10 @@ void OscTunnel::updateBgString(char c) {
         bgString += tmp;
         bgString += "\n";
     }*/
-    for (int i = 0; i < 40; i++) {
-        string tmp = "";
-        for (int j = 0; j < 90; j++) {
-            //rand
-            tmp += (rand()*1.0/RAND_MAX)*5+33;
-            //tmp += c;
-        }
-        bgString += tmp;
-        bgString += "\n";
+    for (int i = 0; i < 1000; i++) {
+
+        bgString += (rand()*1.0/RAND_MAX)*300+33;
+
     }
 }
 

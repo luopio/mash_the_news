@@ -1,10 +1,17 @@
 #ifndef LETTER_H
 #define LETTER_H
 
-#define FONT_SIZE 16
+#define FONT_SIZE 9
 
 #include "ofMain.h"
 #include "Poco/StringTokenizer.h"
+#include "ofxFBOTexture.h"
+#include "ofxPango.h"
+
+#include "settings.h"
+#ifdef _USE_OFFBO
+#define ofxFBOTexture ofFbo
+#endif
 
 using Poco::StringTokenizer;
 
@@ -14,11 +21,13 @@ class Letter
         Letter(const char letter);
         virtual ~Letter();
 
-        void prerender(ofTrueTypeFont *of);
+        void prerender(ofTrueTypeFont *of); // DEPRECATED
+        void prerender(ofxPango * p, ofxPCPangoFontDescription* font);
         void draw();
 
         string letter;
-        ofFbo *tex;
+        //ofFbo *tex;
+        ofxFBOTexture *tex;
         ofTrueTypeFont *font;
         ofColor color;
         int row, col;
@@ -37,9 +46,10 @@ class Word
 class Message
 {
     public:
-        Message(string message);
+        Message(string message, ofxPango * p, ofxPCPangoFontDescription* font);
         vector<Word *> words;
-        void prerender(ofTrueTypeFont *of);
+        void prerender(ofTrueTypeFont *of); // DEPRECATED
+        void prerender(ofxPango * p, ofxPCPangoFontDescription* font);
         void setPosition(int col, int row);
 };
 

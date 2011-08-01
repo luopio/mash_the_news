@@ -41,9 +41,6 @@ class OscTunnel
 
         void updateBgString(char c);
 
-        int kThreshold;
-        int kFarThreshold;
-
         bool kDebug;
 
         string bgString;

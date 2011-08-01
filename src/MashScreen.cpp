@@ -17,26 +17,31 @@ MashScreen::~MashScreen()
 void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
-    //font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
     font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true);
-    cols = ofGetWidth()  / FONT_SIZE;
-    rows = ofGetHeight() / FONT_SIZE;
+
+    cols = ofGetWidth()  / 9; //FONT_SIZE;
+    rows = ofGetHeight() / 18; //FONT_SIZE;
     dataHub->rows = &rows;
     dataHub->cols = &cols;
+    cout << "cols&rows" << cols << "," << rows << "w&h " << ofGetWidth() << "," << ofGetHeight() << endl;
 
-    cout << "cols & rows" << cols << "," << rows << endl;
-
-    messages.push_back( new Message(string("moro mitas jatka")));
-    messages.push_back( new Message(string("no huh,huh")));
-    messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!")));
-
-    int row_index = 0;
-    for(vector<Message *>::iterator mi = messages.begin();
-        mi != messages.end(); ++mi) {
+   /* int row_index = 0;
+    for(vector<Message *>::iterator mi = messages.begin(); mi != messages.end(); ++mi) {
         (*mi)->prerender(&font);
         (*mi)->setPosition(0, row_index);
         row_index++;
-    }
+    }*/
+
+      /* Pango stuff */
+
+    pango = new ofxPango();
+    dataHub->font = new ofxPCPangoFontDescription();
+    //fd->createFromString("Arial Unicode MS 11");
+    dataHub->font->createFromString("Courier 11");
+
+    messages.push_back( new Message(string("moro mitas jatkä"), pango, dataHub->font));
+    messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
+    messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
 
 
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
@@ -52,8 +57,10 @@ void MashScreen::setup()
 
     asciiBG.addDatahub(dataHub);
 
-    string tmps = "";
+    cmv = new CameraMaskViewer(dataHub, pango);
+    cmv->setSign("@");
 
+<<<<<<< HEAD
     for (int i = 0; i < 40; i++) {
         string tmp = "";
         for (int j = 0; j < 120; j++) {
@@ -66,6 +73,12 @@ void MashScreen::setup()
     }
 
     asciiBG.setBackground(tmps, font);
+=======
+    asciiBG.setOfxPango(pango);
+    //asciiBG.setupFBO(context, layout);
+    randomBG();
+   //    asciiBG.setBackground(q);
+>>>>>>> 035599c1f30c1bdf1b265a18b02fd8da506d492f
 
     // shader.load("shaders/noise.vert", "shaders/noise.frag");
     // cout << "binding tex0 to " << asciiBG.tex->getTextureReference().texData.textureID << endl;
@@ -89,6 +102,10 @@ void MashScreen::update()
 void MashScreen::draw()
 {
     asciiBG.draw();
+
+    cmv->draw();
+
+    //text_image.draw(0,0);
 
     // note that the engine should not normally draw anything but debug
     // stuff
@@ -175,4 +192,23 @@ void MashScreen::changeEngine()
     } else {
         currentEngineIndex = 0;
     }
+}
+
+void MashScreen::randomBG() {
+    string tmps = "";
+
+    for (int i = 0; i < rows -1; i++) {
+        string tmp = "";
+        for (int j = 0; j < cols; j++) {
+            tmp += (rand()*1.0/RAND_MAX)*60+33;
+            //tmp += "*";
+        }
+        tmp += "\n";
+        tmps += tmp;
+    }
+
+    tmps += "ÖÄöÖÄÖÄÄÄÖ***************";
+
+    asciiBG.setBackground(tmps);
+
 }

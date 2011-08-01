@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;build config/;" />
+		<Option virtualFolders="addons/;src/;addons/ofxBox2d/src/;addons/ofxFBOTexture/src/;addons/ofxKinect/src/;addons/ofxOpenCv/src/;addons/ofxOsc/src/;addons/ofxPango/src/includes/cairo/;addons/ofxPango/src/includes/gettext/;addons/ofxPango/src/includes/glib/gio/;addons/ofxPango/src/includes/glib/;addons/ofxPango/src/includes/glib/glib/;addons/ofxPango/src/includes/glib/gobject/;addons/ofxPango/src/includes/libiconv/;addons/ofxPango/src/includes/pango/;addons/ofxPango/src/includes/pixman/;addons/ofxPango/src/libs/mac/static/;addons/ofxPango/src/libs/win/;addons/ofxPango/src/libs/win/static/;addons/ofxPango/src/;addons/ofxThread/src/;addons/ofxVectorMath/src/;build config/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />
@@ -27,55 +27,1019 @@
 				<Option projectLinkerOptionsRelation="2" />
 			</Target>
 		</Build>
+<<<<<<< HEAD
 		<Unit filename="bin/data/shaders/noise.frag" />
 		<Unit filename="bin/data/shaders/noise.vert" />
+=======
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2d.cpp">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2d.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dBaseShape.cpp">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dBaseShape.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dCircle.cpp">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dCircle.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dContactListener.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dJoint.cpp">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dJoint.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dPolygon.cpp">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dPolygon.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dPolygonUtils.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dRect.cpp">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dRect.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dRender.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dUtils.h">
+			<Option virtualFolder="addons/ofxBox2d/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxFBOTexture/src/ofxFBOTexture.cpp">
+			<Option virtualFolder="addons/ofxFBOTexture/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxFBOTexture/src/ofxFBOTexture.h">
+			<Option virtualFolder="addons/ofxFBOTexture/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxKinect/src/ofxBase3DVideo.h">
+			<Option virtualFolder="addons/ofxKinect/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxKinect/src/ofxKinect.cpp">
+			<Option virtualFolder="addons/ofxKinect/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxKinect/src/ofxKinect.h">
+			<Option virtualFolder="addons/ofxKinect/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxKinect/src/ofxKinectCalibration.cpp">
+			<Option virtualFolder="addons/ofxKinect/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxKinect/src/ofxKinectCalibration.h">
+			<Option virtualFolder="addons/ofxKinect/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxKinect/src/ofxKinectPlayer.cpp">
+			<Option virtualFolder="addons/ofxKinect/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxKinect/src/ofxKinectPlayer.h">
+			<Option virtualFolder="addons/ofxKinect/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxKinect/src/ofxKinectRecorder.cpp">
+			<Option virtualFolder="addons/ofxKinect/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxKinect/src/ofxKinectRecorder.h">
+			<Option virtualFolder="addons/ofxKinect/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvBlob.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvColorImage.cpp">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvColorImage.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvConstants.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvContourFinder.cpp">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvContourFinder.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvFloatImage.cpp">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvFloatImage.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvGrayscaleImage.cpp">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvGrayscaleImage.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvHaarFinder.cpp">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvImage.cpp">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvImage.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvMain.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvShortImage.cpp">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvShortImage.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOpenCv/src/ofxOpenCv.h">
+			<Option virtualFolder="addons/ofxOpenCv/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscArg.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/cairo/cairo-deprecated.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/cairo" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/cairo/cairo-features.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/cairo" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/cairo/cairo-ps.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/cairo" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/cairo/cairo-quartz.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/cairo" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/cairo/cairo-version.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/cairo" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/cairo/cairo.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/cairo" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/gettext/gettext-po.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/gettext" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gappinfo.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gapplication.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gasyncinitable.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gasyncresult.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gbufferedinputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gbufferedoutputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gcancellable.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gcharsetconverter.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gcontenttype.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gconverter.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gconverterinputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gconverteroutputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gcredentials.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdatainputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdataoutputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusaddress.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusauthobserver.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusconnection.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbuserror.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusintrospection.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusmessage.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusmethodinvocation.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusnameowning.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusnamewatching.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusproxy.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusserver.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdbusutils.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gdrive.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gemblem.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gemblemedicon.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfile.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfileattribute.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfileenumerator.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfileicon.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfileinfo.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfileinputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfileiostream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfilemonitor.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfilenamecompleter.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfileoutputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfilterinputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gfilteroutputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gicon.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/ginetaddress.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/ginetsocketaddress.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/ginitable.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/ginputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gio.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gioenums.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gioenumtypes.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gioerror.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/giomodule.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gioscheduler.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/giostream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/giotypes.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gloadableicon.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gmemoryinputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gmemoryoutputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gmount.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gmountoperation.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gnativevolumemonitor.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gnetworkaddress.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gnetworkservice.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/goutputstream.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gpermission.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gresolver.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gseekable.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsettings.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsettingsbackend.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsimpleasyncresult.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsimplepermission.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsocket.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsocketaddress.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsocketaddressenumerator.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsocketclient.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsocketconnectable.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsocketconnection.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsocketcontrolmessage.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsocketlistener.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsocketservice.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gsrvtarget.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gtcpconnection.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gthemedicon.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gthreadedsocketservice.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gvfs.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gvolume.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gvolumemonitor.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gzlibcompressor.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gio/gzlibdecompressor.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gio" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib-object.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/galloca.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/garray.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gasyncqueue.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gatomic.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gbacktrace.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gbase64.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gbitlock.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gbookmarkfile.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gcache.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gchecksum.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gcompletion.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gconvert.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gdataset.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gdate.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gdir.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gerror.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gfileutils.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/ghash.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/ghook.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/ghostutils.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gi18n-lib.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gi18n.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/giochannel.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gkeyfile.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/glist.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gmacros.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gmain.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gmappedfile.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gmarkup.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gmem.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gmessages.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gnode.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/goption.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gpattern.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gpoll.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gprimes.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gprintf.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gqsort.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gquark.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gqueue.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/grand.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gregex.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/grel.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gscanner.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gsequence.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gshell.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gslice.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gslist.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gspawn.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gstdio.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gstrfuncs.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gstring.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gtestutils.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gthread.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gthreadpool.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gtimer.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gtree.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gtypes.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gunicode.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gurifuncs.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gutils.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gvariant.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gvarianttype.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glib/gwin32.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/glibconfig.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gmodule.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gbinding.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gboxed.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gclosure.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/genums.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gmarshal.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gobject.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gobjectnotifyqueue.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gparam.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gparamspecs.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gsignal.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gsourceclosure.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gtype.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gtypemodule.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gtypeplugin.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gvalue.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gvaluearray.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gvaluecollector.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/glib/gobject/gvaluetypes.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/glib/gobject" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/libiconv/iconv.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/libiconv" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/libiconv/libcharset.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/libiconv" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/libiconv/localcharset.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/libiconv" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-attributes.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-bidi-type.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-break.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-context.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-coverage.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-engine.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-enum-types.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-features.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-font.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-fontmap.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-fontset.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-glyph-item.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-glyph.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-gravity.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-item.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-language.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-layout.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-matrix.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-modules.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-renderer.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-script.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-tabs.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-types.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango-utils.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pango.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pangoatsui.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pangocairo.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pango/pangox.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pango" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pixman/pixman-version.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pixman" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/includes/pixman/pixman.h">
+			<Option virtualFolder="addons/ofxPango/src/includes/pixman" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libcairo.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libcharset.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libgettextpo.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libgio-2.0.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libglib-2.0.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libgmodule-2.0.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libgobject-2.0.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libgthread-2.0.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libiconv.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libintl.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libpango-1.0.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libpangocairo-1.0.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/mac/static/libpixman-1.a">
+			<Option virtualFolder="addons/ofxPango/src/libs/mac/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/freetype6.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libexpat-1.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libfontconfig-1.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libgio-2.0-0.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libglib-2.0-0.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libgmodule-2.0-0.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libgobject-2.0-0.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libgthread-2.0-0.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libpangoft2-1.0-0.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libpangowin32-1.0-0.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/libpng14-14.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/static/libcairo-2.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/static/libpango-1.0-0.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/libs/win/static/libpangocairo-1.0-0.dll">
+			<Option virtualFolder="addons/ofxPango/src/libs/win/static" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPCContext.cpp">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPCContext.h">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPCPangoFontDescription.cpp">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPCPangoFontDescription.h">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPCPangoLayout.cpp">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPCPangoLayout.h">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPCSurface.cpp">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPCSurface.h">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPango.cpp">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxPango/src/ofxPango.h">
+			<Option virtualFolder="addons/ofxPango/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxThread/src/ofxThread.h">
+			<Option virtualFolder="addons/ofxThread/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxMatrix3x3.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxMatrix4x4.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxPoint2f.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxPoint3f.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxPoint4f.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxQuaternion.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxVec2f.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxVec3f.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxVec4f.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxVectorMath.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+>>>>>>> 035599c1f30c1bdf1b265a18b02fd8da506d492f
 		<Unit filename="config.make">
 			<Option virtualFolder="build config" />
 		</Unit>
 		<Unit filename="src/AsciiBackground.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/AsciiBackground.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/Box2dMashEngine.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/Box2dMashEngine.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/DataHub.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/FlowMashEngine.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/FlowMashEngine.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/Letter.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/Letter.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/MashEngine.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/MashEngine.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/MashScreen.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/MashScreen.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/OscTunnel.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/OscTunnel.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/TextTextureFactory.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/TextTextureFactory.h">
+			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
@@ -87,6 +1051,12 @@
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/testApp.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/CameraMaskViewer.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/CameraMaskViewer.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Extensions>
