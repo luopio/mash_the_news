@@ -3,6 +3,7 @@
 
 #include "ofxOpenCv.h"
 #include "Letter.h"
+#include "ofxPango.h"
 
 struct DataHub
 {
@@ -19,6 +20,11 @@ struct DataHub
         int* currentEngine;
         float strength;
         float damping;
+
+        int kThreshold;
+        int kFarThreshold;
+
+        ofxPCPangoFontDescription* font;
 
 };
 

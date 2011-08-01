@@ -42,7 +42,7 @@ void Box2dMashEngine::setup()
                 circle.setPhysics(.9f, 0.03f, 0.2f);
                 circle.setup(box2d.getWorld(),
                              letter_index * FONT_SIZE + 100,
-                             i * FONT_SIZE * 2 + 100,
+                             i * FONT_SIZE * 2 +100,
                              FONT_SIZE, FONT_SIZE);
                 circle.letterInWordIndex = letter_index;
                 circle.letter = (*li);
@@ -147,7 +147,7 @@ void Box2dMashEngine::draw()
             if(circleIndex >= circles.size())
                 break; // circleIndex = 0;
 
-            ofCircle(screenX, screenY, 4);
+            //ofCircle(screenX, screenY, 4);
         }
     }
 

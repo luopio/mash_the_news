@@ -8,9 +8,12 @@
 #include "DataHub.h"
 #include "OscTunnel.h"
 
-#define _DOUSE_KINECT
+#define _USE_KINECT
+#define _USE_OFFBO
+
 #define OSC_PORT 7000
 #define OSC_OUT_IP "192.168.10.11"
+
 
 class testApp : public ofBaseApp{
 
@@ -47,6 +50,7 @@ class testApp : public ofBaseApp{
         #endif
 
         bool bLearnBakground;
+
 
         OscTunnel               *oscTunnel;
 

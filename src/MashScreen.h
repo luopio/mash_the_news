@@ -7,6 +7,8 @@
 #include "Box2dMashEngine.h"
 #include "DataHub.h"
 #include "AsciiBackground.h"
+#include "ofxPango.h"
+#include "CameraMaskViewer.h"
 
 class MashScreen
 {
@@ -33,7 +35,16 @@ class MashScreen
         void hilightMessage(int messageIndex);
         void changeEngine();
 
+        void randomBG();
+
         AsciiBackground asciiBG;
+        CameraMaskViewer * cmv;
+
+        ofImage text_image;
+
+        ofxPango* pango;
+        ofxPCContext* context;
+        ofxPCPangoLayout* layout;
 
     protected:
 
