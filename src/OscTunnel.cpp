@@ -82,6 +82,9 @@ void OscTunnel::update() {
                             break;
                         case 3:
                             switch (m.getArgAsInt32(2)) {
+                                case 36:
+                                    screen->messages.push_back( new Message(string("no huh,huh"), screen->pango, dataHub->font));
+                                    break;
                                 case 40:
                                     screen->hilightMessage(0);
                                     break;
@@ -110,16 +113,14 @@ void OscTunnel::update() {
                             switch (m.getArgAsInt32(2)) {
                                 case 1:
                                     dataHub->damping = m.getArgAsInt32(3) / 25.0;
-        //                            screen->currentEngine->strength = m.getArgAsInt32(3) / 60.0;
                                     cout << dataHub->damping << " is new damping!" << endl;
                                     break;
                                 case 2:
                                     dataHub->strength = m.getArgAsInt32(3) / 25.0;
-        //                            screen->currentEngine->strength = m.getArgAsInt32(3) / 60.0;
-                                    cout << dataHub->damping << " is new strength!" << endl;
+                                    cout << dataHub->strength << " is new strength!" << endl;
                                     break;
                                 case 3:
-                //                    screen->currentEngine->minDis = m.getArgAsInt32(3) * 10.0;
+                                   // dataHub->   screen->currentEngine->minDis = m.getArgAsInt32(3) * 10.0;
                   //                  cout << screen->currentEngine->minDis << " is new minimum distance!" << endl;
                                     break;
                                 case 5:
@@ -137,6 +138,9 @@ void OscTunnel::update() {
                         /* Channel 3 is for calibrating stuff */
                         case 3:
                             switch (m.getArgAsInt32(2)) {
+                                case 5:
+                                    screen->messages.push_back( new Message(string("no huh,huh"), screen->pango, dataHub->font));
+                                    break;
                                 case 6:
                                     if (kinect != NULL) {
                                         kinect->setCameraTiltAngle((m.getArgAsInt32(3)/(127 / 60.0)) -30);

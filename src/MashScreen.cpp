@@ -46,6 +46,9 @@ void MashScreen::setup()
     messages.push_back( new Message(string("moro mitas jatkä"), pango, dataHub->font));
     messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
     messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
+    messages.push_back( new Message(string("moro mitas jatkä"), pango, dataHub->font));
+    messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
+    messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
 
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
     FlowMashEngine *flowME = new FlowMashEngine(*dataHub);
