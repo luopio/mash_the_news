@@ -35,6 +35,8 @@ class MashScreen
 
         AsciiBackground asciiBG;
 
+        ofShader shader;
+
     protected:
 
     private:

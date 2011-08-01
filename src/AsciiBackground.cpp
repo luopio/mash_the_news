@@ -6,10 +6,7 @@ AsciiBackground::AsciiBackground()
     background = "";
 }
 
-AsciiBackground::~AsciiBackground()
-{
-    //dtor
-}
+AsciiBackground::~AsciiBackground() { }
 
 void AsciiBackground::addDatahub(DataHub * d) {
     dataHub = d;
@@ -21,16 +18,15 @@ void AsciiBackground::setBackground(string s, ofTrueTypeFont &f) {
     tex->allocate(ofGetWidth(), ofGetHeight());
     tex->begin();
         ofFill();
-        ofSetColor(25, 0, 0);
-        ofRect(0, 0, tex->getWidth(), tex->getHeight());
-        ofSetColor(255, 255, 255, 128);
+        // ofSetColor(25, 0, 0);
+        // ofRect(0, 0, tex->getWidth(), tex->getHeight());
+        ofSetColor(255, 255, 255, 255);
         f.drawString(s, 0, FONT_SIZE);
+        // ofCircle(ofGetWidth() / 2, ofGetHeight() / 2, ofGetHeight());
     tex->end();
 }
 
 void AsciiBackground::draw() {
-    // ofSetColor(40,40,40);
     tex->draw(0,0);
-    // ofSetColor(255,255,255);
 }
 

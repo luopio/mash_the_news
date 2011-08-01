@@ -125,7 +125,7 @@ void Box2dMashEngine::draw()
 
     unsigned char *pixels = tempImg.getPixels();
 
-    if(bJediForce) {
+    if(bJediForce && circles.size()) {
         int circleIndex = 0;
         /* find the highest points of all y coords */
         for(int xi = 0; xi < tempImg.width; ++xi) {

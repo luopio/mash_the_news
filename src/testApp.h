@@ -2,15 +2,12 @@
 #define _TEST_APP
 
 #include "ofMain.h"
+#include "settings.h"
 #include "MashScreen.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
 #include "DataHub.h"
 #include "OscTunnel.h"
-
-#define _DOUSE_KINECT
-#define OSC_PORT 7000
-#define OSC_OUT_IP "192.168.10.11"
 
 class testApp : public ofBaseApp{
 
@@ -41,9 +38,9 @@ class testApp : public ofBaseApp{
         int 				    threshold;
 
         #ifdef _USE_KINECT
-            ofxKinect kinect;
+            ofxKinect           kinect;
 		#else
-            ofVideoGrabber          vidGrabber;
+            ofVideoGrabber      vidGrabber;
         #endif
 
         bool bLearnBakground;

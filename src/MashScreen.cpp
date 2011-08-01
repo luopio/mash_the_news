@@ -11,7 +11,7 @@ MashScreen::MashScreen(DataHub &h)
 
 MashScreen::~MashScreen()
 {
-    //dtor
+    cout << "mashscreen being destroyed" << endl;
 }
 
 void MashScreen::setup()
@@ -19,13 +19,12 @@ void MashScreen::setup()
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
     //font.loadFont("Irma-Light.otf", FONT_SIZE - 4, true, true, true);
     font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true);
-    //font.loadFont("VeraMono.ttf", FONT_SIZE, true, true, true);
     cols = ofGetWidth()  / FONT_SIZE;
     rows = ofGetHeight() / FONT_SIZE;
     dataHub->rows = &rows;
     dataHub->cols = &cols;
 
-    cout << "cols&rows" << cols << "," << rows << endl;
+    cout << "cols & rows" << cols << "," << rows << endl;
 
     messages.push_back( new Message(string("moro mitas jatka")));
     messages.push_back( new Message(string("no huh,huh")));
@@ -38,6 +37,7 @@ void MashScreen::setup()
         (*mi)->setPosition(0, row_index);
         row_index++;
     }
+
 
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
     FlowMashEngine *flowME = new FlowMashEngine(*dataHub);
@@ -54,7 +54,7 @@ void MashScreen::setup()
 
     string tmps = "";
 
-     for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < 40; i++) {
         string tmp = "";
         for (int j = 0; j < 120; j++) {
             //rand
@@ -67,6 +67,11 @@ void MashScreen::setup()
 
     asciiBG.setBackground(tmps, font);
 
+    // shader.load("shaders/noise.vert", "shaders/noise.frag");
+    // cout << "binding tex0 to " << asciiBG.tex->getTextureReference().texData.textureID << endl;
+    // shader.setUniform1i("tex0", fbo.getTextureReference().texData.textureID); //send which texture to the shader
+    // shader.setUniformTexture("tex0", fbo, fbo.getTextureReference().texData.textureID); //send which texture to the shader
+
 }
 
 
@@ -78,24 +83,28 @@ void MashScreen::update()
     }
 
     engines[currentEngineIndex]->update();
-
-    /*for(vector<Message *>::iterator i = messages.begin();
-        i != messages.end(); ++i)
-    {
-        (*i)->row = ofRandom(0, rows);
-        (*i)->col = ofRandom(0, cols);
-    }*/
 }
 
 
 void MashScreen::draw()
 {
-
     asciiBG.draw();
 
     // note that the engine should not normally draw anything but debug
     // stuff
     engines[currentEngineIndex]->draw();
+
+    /*
+    shader.begin();
+
+    ofSetColor(255, 0, 0);
+    ofFill();
+    ofRect(ofGetElapsedTimef() * 10, 0, ofGetWidth() / 3, ofGetHeight());
+    ofNoFill();
+    ofSetColor(255);
+
+    shader.end();
+    */
 
     Message *m = NULL;
     Word *w = NULL;
@@ -140,10 +149,12 @@ void MashScreen::draw()
 //                }
             }
         }
+
         word_index++;
         ofSetColor(255, tint, word_index % 3 * 100);
         tint -= 30;
     }
+
 
     if(dataHub->bDebug) {
         ofDrawBitmapString("Current engine: "+ofToString(currentEngineIndex), 10, ofGetHeight() - 100);
