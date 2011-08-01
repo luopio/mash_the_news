@@ -46,6 +46,8 @@ class MashScreen
         ofxPCContext* context;
         ofxPCPangoLayout* layout;
 
+        ofShader shader;
+
     protected:
 
     private:

@@ -4,6 +4,8 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 
+    ofSetLogLevel(OF_LOG_VERBOSE);
+
     int our_width = 320;
     int our_height = 240;
 
@@ -22,7 +24,6 @@ void testApp::setup(){
 
         threshold = 13;
     #endif
-
     bLearnBakground = true;
 
     // These images are for webcam capture, resolution is webcams/kinects reso!
@@ -47,9 +48,7 @@ void testApp::setup(){
     #ifdef _USE_KINECT
         oscTunnel->addKinect(&kinect);
     #endif
-
     oscTunnel->addDataHub(&dataHub);
-
 }
 
 //--------------------------------------------------------------
@@ -57,8 +56,6 @@ void testApp::update(){
     screen->update();
 
     oscTunnel->update();
-
-    bool bNewFrame = false;
 
     #ifdef _USE_KINECT
         kinect.update();
@@ -84,10 +81,9 @@ void testApp::update(){
 
     #else
         vidGrabber.grabFrame();
-        bNewFrame = vidGrabber.isFrameNew();
-        if (bNewFrame)
+        if(vidGrabber.isFrameNew())
         {
-            colorImg.setFromPixels(vidGrabber.getPixels(), 320,240);
+            colorImg.setFromPixels(vidGrabber.getPixels(), 320, 240);
 
             grayImage = colorImg;
             if (bLearnBakground == true)
@@ -101,7 +97,6 @@ void testApp::update(){
             grayDiff.threshold(threshold);
 
             grayThresh = grayDiff;
-
 
             // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
             // also, find holes is set to true so we will get interior contours as well....

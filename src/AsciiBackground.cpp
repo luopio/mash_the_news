@@ -15,10 +15,7 @@ AsciiBackground::AsciiBackground()
     layout = NULL;
 }
 
-AsciiBackground::~AsciiBackground()
-{
-    //dtor
-}
+AsciiBackground::~AsciiBackground() { }
 
 void AsciiBackground::addDatahub(DataHub * d) {
     dataHub = d;
@@ -79,15 +76,7 @@ void AsciiBackground::setBackground(string s) {
     tex = new ofxFBOTexture();
     tex->allocate(ofGetWidth(), ofGetHeight());
     tex->begin();
-
-//s    tex->setFromPixels(context->getSurface()->getPixels(), text_image.width, text_image.height, OF_IMAGE_COLOR_ALPHA, true);
-        /*ofFill();
-        ofSetColor(25, 0, 0);
-        ofRect(0, 0, tex->getWidth(), tex->getHeight());
-        ofSetColor(255, 255, 255, 128);
-        f.drawString(s, 0, FONT_SIZE);*/
-    text_image.draw(0,0);
-   //text_image.draw(10*9,6*18);
+        text_image.draw(0,0);
     tex->end();
 }
 
@@ -95,6 +84,5 @@ void AsciiBackground::draw() {
     if (tex==NULL) return;
     // ofSetColor(40,40,40);
     tex->draw(0,0);
-    // ofSetColor(255,255,255);
 }
 

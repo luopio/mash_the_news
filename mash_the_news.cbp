@@ -27,6 +27,10 @@
 				<Option projectLinkerOptionsRelation="2" />
 			</Target>
 		</Build>
+<<<<<<< HEAD
+		<Unit filename="bin/data/shaders/noise.frag" />
+		<Unit filename="bin/data/shaders/noise.vert" />
+=======
 		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2d.cpp">
 			<Option virtualFolder="addons/ofxBox2d/src" />
 		</Unit>
@@ -982,6 +986,7 @@
 		<Unit filename="../../../addons/ofxVectorMath/src/ofxVectorMath.h">
 			<Option virtualFolder="addons/ofxVectorMath/src" />
 		</Unit>
+>>>>>>> 035599c1f30c1bdf1b265a18b02fd8da506d492f
 		<Unit filename="config.make">
 			<Option virtualFolder="build config" />
 		</Unit>
@@ -1037,6 +1042,9 @@
 			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/main.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/settings.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/testApp.cpp">
