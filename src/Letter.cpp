@@ -6,16 +6,20 @@
 #define ofxFBOTexture ofFbo
 #endif
 
+using namespace Poco;
 
-Letter::Letter(const char let)
+#include "Poco/UTF8Encoding.h"
+#include "Poco/TextIterator.h"
+
+Letter::Letter(string let)
 {
-    letter = string(1, let);
+    letter = let;
     col = 0;
     row = 0;
     cout << let << ",";
 }
 
-void Letter::prerender(ofTrueTypeFont *f)
+void Letter::prerender(ofTrueTypeFont *f) // DEPRECATED
 {
     font = f;
     //tex = new ofFbo();
@@ -42,6 +46,8 @@ void Letter::prerender(ofxPango *p, ofxPCPangoFontDescription* font)
     layout->setFontDescription(*font);
     layout->setText(letter);
     context->color4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+    cout << "prerender : " << letter << endl;
 
     layout->show();
 
@@ -76,14 +82,68 @@ void Letter::draw()
 
 Word::Word(string word)
 {
-    string::iterator i;
-    for(i = word.begin(); i != word.end(); i++) {
+   // cout << endl << "word: " << (int)word.char_at(0) << " " << word.substr(1,1) << " " << word.substr(2,1) << endl;
+
+   // string * tmp = &word;
+
+   // cout << "pointer: " << *tmp << endl;
+
+   // wstring * ws = reinterpret_cast<wstring*>(tmp);
+
+   // cout << "stringl: " << word.length() << "wstinrl " << ws->length() << endl;
+
+   // ws =  &word;
+
+   //cout << ws. << endl;
+
+    UTF8Encoding utf8Encoding;
+    //char buffer[] = word.c_str();
+    TextIterator it(word, utf8Encoding);
+    TextIterator end(it.end());
+    int n = 0;
+
+    while (it != end) {
+
+        Letter *l = NULL;
+
+       if ((*it) > 127) { // ascii
+            l = new Letter(word.substr(n,2));
+            n += 2;
+           // cout << "joo" << endl;
+
+        } else { // utf8
+           l = new Letter(word.substr(n,1));
+           n++;
+          //cout << "ei" << endl;
+        }
+
+        ofColor c;
+        c.r = 255; c.g = 255; c.b = 255;
+        l->color = c;
+        letters.push_back(l);
+
+
+      //  ofColor c;
+      //  c.r = 255; c.g = 255; c.b = 255;
+      //  l->color = c;
+      //  letters.push_back(l);
+
+        //cout << "Q " << *it << endl;
+
+        //++n;
+        ++it;
+        }
+
+ /*   string::iterator i;
+    for(i = tmp->begin(); i != tmp->end(); i++) {
+    //    cout << ":" << i ;
         Letter *l = new Letter((*i));
         ofColor c;
         c.r = 255; c.g = 255; c.b = 255;
         l->color = c;
         letters.push_back(l);
-    }
+    }*/
+   // cout << endl;
 }
 
 Message::Message(string message, ofxPango * p, ofxPCPangoFontDescription* f)
@@ -105,6 +165,8 @@ Message::Message(string message, ofxPango * p, ofxPCPangoFontDescription* f)
                 std::wcout << *tok_iter << '\n';
         }
 */
+    //StringTokenizer
+
 
     StringTokenizer t(message, ", ", StringTokenizer::TOK_TRIM);
     StringTokenizer::Iterator ti = t.begin();

@@ -6,4 +6,3 @@ ofxVectorMath
 ofxPango
 ofxOsc
 ofxFBOTexture
-ofxPango

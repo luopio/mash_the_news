@@ -2,26 +2,35 @@
 
 OscTunnel::OscTunnel()
 {
-    sender.setup( DEFAULT_HOST, DEFAULT_PORT );
+    sender = NULL;
+    receiver = NULL;
+   // sender = new ofxOscSender();
+    receiver = new ofxOscReceiver();
+    sender->setup( DEFAULT_HOST, DEFAULT_PORT );
     sendStartMessage();
 }
 
 OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
     screen = ms;
+    sender = new ofxOscSender();
+    receiver = new ofxOscReceiver();
     try {
-        sender.setup(ip, port);
+        if (sender!=NULL)
+            sender->setup(ip, port);
         cout << "sending osc messages to port " << DEFAULT_PORT << " at " << ip << endl;
     } catch ( ... ) {
         cout << "can't send osc!";
+        sender = NULL;
     }
 
 
     // listen on the given port
     try {
-        receiver.setup( port );
+        receiver->setup( port );
         cout << "listening for osc messages on port " << DEFAULT_PORT << "\n";
     } catch ( ... ) {
         cout << "can't receive osc!";
+        receiver = NULL;
     }
     kinect = NULL;
     kDebug = true;
@@ -37,12 +46,13 @@ OscTunnel::~OscTunnel()
 }
 
 void OscTunnel::update() {
-    while( receiver.hasWaitingMessages() ) {
+    if (receiver==NULL) return;
+    while( receiver->hasWaitingMessages() ) {
 	    try {
 
             // get the next message
             ofxOscMessage m;
-            receiver.getNextMessage( &m );
+            receiver->getNextMessage( &m );
 
             // check for mouse moved message
             if ( m.getAddress() == "/testmessage" )
@@ -182,27 +192,30 @@ void OscTunnel::addOscListener(string address, void (*callback) (ofxOscMessage))
 }
 
 void OscTunnel::sendTestMessage() {
+    if (sender==NULL) return;
     ofxOscMessage m;
     m.setAddress( "/testmessage" );
 	m.addIntArg( 1 );
 	m.addFloatArg( 3.5f );
 	m.addStringArg( "hello" );
 	m.addFloatArg( ofGetElapsedTimef() );
-	sender.sendMessage( m );
+	sender->sendMessage( m );
 }
 
 void OscTunnel::sendStartMessage() {
+    if (sender==NULL) return;
     ofxOscMessage m;
     m.setAddress( "/kinectisalive" );
 	m.addFloatArg( ofGetElapsedTimef() );
-	sender.sendMessage( m );
+	sender->sendMessage( m );
 }
 
 void OscTunnel::sendStopMessage() {
+    if (sender==NULL) return;
     ofxOscMessage m;
     m.setAddress( "/kinectisdead" );
 	m.addFloatArg( ofGetElapsedTimef() );
-	sender.sendMessage( m );
+	sender->sendMessage( m );
 }
 
 void OscTunnel::addKinect(ofxKinect * k) {

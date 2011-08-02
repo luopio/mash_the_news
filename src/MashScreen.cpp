@@ -39,12 +39,9 @@ void MashScreen::setup()
     //fd->createFromString("Arial Unicode MS 11");
     dataHub->font->createFromString("Courier 11");
 
-    messages.push_back( new Message(string("moro mitas jatkä"), pango, dataHub->font));
+    messages.push_back( new Message(string("ämoro mitas jatkä"), pango, dataHub->font));
     messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
-    messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
-    messages.push_back( new Message(string("moro mitas jatkä"), pango, dataHub->font));
-    messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
-    messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
+    messages.push_back( new Message(string("öTervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
 
 
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
@@ -63,25 +60,12 @@ void MashScreen::setup()
     cmv = new CameraMaskViewer(dataHub, pango);
     cmv->setSign("@");
 
-<<<<<<< HEAD
-    for (int i = 0; i < 40; i++) {
-        string tmp = "";
-        for (int j = 0; j < 120; j++) {
-            //rand
-            tmp += (rand()*1.0/RAND_MAX)*5+33;
-            //tmp += c;
-        }
-        tmps += tmp;
-        tmps += "\n";
-    }
 
-    asciiBG.setBackground(tmps, font);
-=======
     asciiBG.setOfxPango(pango);
     //asciiBG.setupFBO(context, layout);
     randomBG();
    //    asciiBG.setBackground(q);
->>>>>>> 035599c1f30c1bdf1b265a18b02fd8da506d492f
+
 
     // shader.load("shaders/noise.vert", "shaders/noise.frag");
     // cout << "binding tex0 to " << asciiBG.tex->getTextureReference().texData.textureID << endl;

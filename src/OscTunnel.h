@@ -48,10 +48,10 @@ class OscTunnel
 
     protected:
     private:
-        ofxOscSender sender;
+        ofxOscSender * sender;
         vector<OscListener*> oscListeners;
 
-        ofxOscReceiver receiver;
+        ofxOscReceiver * receiver;
         void sendStartMessage();
         void sendStopMessage();
 

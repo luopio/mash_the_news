@@ -24,7 +24,7 @@ using Poco::StringTokenizer;
 class Letter
 {
     public:
-        Letter(const char letter);
+        Letter(string letter);
         virtual ~Letter();
 
         void prerender(ofTrueTypeFont *of); // DEPRECATED
