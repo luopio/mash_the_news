@@ -16,6 +16,8 @@ void testApp::setup(){
         cout << "kinect opened with resolution " << kinect.width << "," << kinect.height << endl;
         our_height = kinect.height;
         our_width = kinect.width;
+        dataHub.kFarThreshold = 0;
+        dataHub.kThreshold = 255;
 
     #else
         vidGrabber.setVerbose(true);
@@ -124,11 +126,10 @@ void testApp::draw(){
     if(dataHub.bDebug) {
         //grayImage.draw(20,20);
         grayImage.draw(0,0, ofGetWidth(), ofGetHeight());
-        //grayDiff.draw(0,0, ofGetWidth(), ofGetHeight());
+        grayDiff.draw(0,0, ofGetWidth(), ofGetHeight());
     }
 
     screen->draw();
-
 
     if(dataHub.bDebug) {
         string debug = "";

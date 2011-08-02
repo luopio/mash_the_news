@@ -35,15 +35,7 @@ void FlowMashEngine::update()
     for(int i = 0; i < dataHub->messages->size(); i++)
     {
         m = (*dataHub->messages)[i];
-        for(int wi = 0; wi < m->words.size(); wi++)
-        {
-            w = m->words[wi];
-            for(int li = 0; li < w->letters.size(); li++)
-            {
-                // w->letters[li]->row = row;
-                w->letters[li]->col -= 1;
-            }
-        }
+        m->setPosition(m->getCol() - 1, m->getRow());
 
         /*  test from the last letter if the whole message has gone out,
             if so reset all the word locations to the other end */
@@ -68,9 +60,12 @@ void FlowMashEngine::update()
 void FlowMashEngine::draw()
 {
 
+    for(int i = 0; i < dataHub->messages->size(); i++) {
+        Message *m = (*dataHub->messages)[i];
+        m->draw();
+    }
+
     if(bDebug) {
         // tempImg.draw(400, 10);
     }
 }
-
-

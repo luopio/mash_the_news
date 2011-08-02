@@ -61,6 +61,8 @@ class Message
         void prerender(ofxPango * p, ofxPCPangoFontDescription* font);
         void setPosition(int col, int row);
         void draw();
+        int getCol();
+        int getRow();
 };
 
 /*

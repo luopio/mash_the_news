@@ -17,7 +17,7 @@ MashScreen::~MashScreen()
 void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
-    font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true);
+    // font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true);
 
     cols = ofGetWidth()  / 9; //FONT_SIZE;
     rows = ofGetHeight() / 18; //FONT_SIZE;
@@ -46,12 +46,11 @@ void MashScreen::setup()
     messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
     messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
 
-
     Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
     FlowMashEngine *flowME = new FlowMashEngine(*dataHub);
 
-    engines.push_back(box2dME);
     engines.push_back(flowME);
+    engines.push_back(box2dME);
 
     currentEngineIndex = 0;
     bJustChangedEngine = true;
@@ -63,6 +62,7 @@ void MashScreen::setup()
     cmv = new CameraMaskViewer(dataHub, pango);
     cmv->setSign("@");
 
+    string tmps;
     for (int i = 0; i < 40; i++) {
         string tmp = "";
         for (int j = 0; j < 120; j++) {
@@ -74,11 +74,11 @@ void MashScreen::setup()
         tmps += "\n";
     }
 
-    asciiBG.setBackground(tmps, font);
-    asciiBG.setOfxPango(pango);
+    //asciiBG.setBackground(tmps, font);
+    //asciiBG.setOfxPango(pango);
     //asciiBG.setupFBO(context, layout);
     randomBG();
-   //    asciiBG.setBackground(q);
+    //    asciiBG.setBackground(q);
     // shader.load("shaders/noise.vert", "shaders/noise.frag");
     // cout << "binding tex0 to " << asciiBG.tex->getTextureReference().texData.textureID << endl;
     // shader.setUniform1i("tex0", fbo.getTextureReference().texData.textureID); //send which texture to the shader
@@ -100,21 +100,11 @@ void MashScreen::update()
 
 void MashScreen::draw()
 {
-    asciiBG.draw();
+    //asciiBG.draw();
 
-    cmv->draw();
+    //cmv->draw();
 
-    // note that the engine should not normally draw anything but debug
-    // stuff
     engines[currentEngineIndex]->draw();
-
-    for(int i = 0; i < messages.size(); i++) {
-        messages[i].draw();
-    }
-
-    if(dataHub->bDebug) {
-        ofDrawBitmapString("Current engine: "+ofToString(currentEngineIndex), 10, ofGetHeight() - 100);
-    }
 }
 
 void MashScreen::hilightMessage(int msgindex)

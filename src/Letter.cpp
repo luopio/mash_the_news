@@ -179,3 +179,13 @@ void Message::draw()
         (*i)->draw();
     }
 }
+
+int Message::getCol()
+{
+    return words[0]->letters[0]->col;
+}
+
+int Message::getRow()
+{
+    return words[0]->letters[0]->row;
+}
