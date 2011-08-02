@@ -196,6 +196,11 @@ void Box2dMashEngine::draw()
         }
     }*/
 
+    for(int i = 0; i < dataHub->messages->size(); i++) {
+        Message *m = (*dataHub->messages)[i];
+        m->draw();
+    }
+
     if(dataHub->bDebug) {
 //        for(int i=0; i<dataHub->messages->size(); i++) {
 //            circles[i].draw();

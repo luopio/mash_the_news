@@ -16,7 +16,7 @@ class MashScreen
         MashScreen(DataHub &h);
         virtual ~MashScreen();
 
-        vector<Message *>   messages;
+        vector<Message *> messages;
         ofTrueTypeFont font;
 
         vector<MashEngine *> engines;
@@ -46,7 +46,7 @@ class MashScreen
         ofxPCContext* context;
         ofxPCPangoLayout* layout;
 
-        ofShader shader;
+        // ofShader shader;
 
     protected:
 
