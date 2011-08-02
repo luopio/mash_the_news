@@ -77,12 +77,24 @@ void Letter::draw()
 Word::Word(string word)
 {
     string::iterator i;
+    color = NULL;
     for(i = word.begin(); i != word.end(); i++) {
         Letter *l = new Letter((*i));
         ofColor c;
         c.r = 255; c.g = 255; c.b = 255;
         l->color = c;
         letters.push_back(l);
+    }
+}
+
+void Word::draw()
+{
+    if(color != NULL) {
+        ofSetColor(color);
+    }
+    for(vector<Letter *>::iterator ii = letters.begin();
+        ii != letters.end(); ++ii) {
+        (*ii)->draw();
     }
 }
 
@@ -157,5 +169,13 @@ void Message::setPosition(int col, int row)
             letter_index++;
         }
         spacing++;
+    }
+}
+
+void Message::draw()
+{
+    for(vector<Word *>::iterator i = words.begin();
+        i != words.end(); ++i) {
+        (*i)->draw();
     }
 }

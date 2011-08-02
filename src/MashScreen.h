@@ -46,7 +46,7 @@ class MashScreen
         ofxPCContext* context;
         ofxPCPangoLayout* layout;
 
-        ofShader shader;
+        // ofShader shader;
 
     protected:
 

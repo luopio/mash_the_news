@@ -32,8 +32,9 @@ class Letter
         void draw();
 
         string letter;
-        //ofFbo *tex;
+
         ofxFBOTexture *tex;
+
         ofTrueTypeFont *font;
         ofColor color;
         int row, col;
@@ -47,6 +48,8 @@ class Word
     public:
         Word(string word);
         vector<Letter *> letters;
+        ofColor color;
+        void draw();
 };
 
 class Message
@@ -57,6 +60,7 @@ class Message
         void prerender(ofTrueTypeFont *of); // DEPRECATED
         void prerender(ofxPango * p, ofxPCPangoFontDescription* font);
         void setPosition(int col, int row);
+        void draw();
 };
 
 /*
