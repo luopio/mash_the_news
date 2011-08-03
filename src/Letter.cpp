@@ -52,5 +52,10 @@ Letter::~Letter()
 
 void Letter::draw()
 {
-    tex->draw(col * FONT_W, row * FONT_H);
+    draw(col * FONT_W, row * FONT_H);
+}
+
+void Letter::draw(int x, int y)
+{
+    tex->draw(x, y);
 }

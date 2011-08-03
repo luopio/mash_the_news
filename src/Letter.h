@@ -34,6 +34,7 @@ class Letter
 
         void prerender(ofxPango * p, ofxPCPangoFontDescription* font);
         void draw();
+        void draw(int x, int y);
 
         string letter;
 
