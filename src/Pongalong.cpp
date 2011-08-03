@@ -123,9 +123,9 @@ void Pongalong::draw() {
 
 
     if (x < 0) x = 0;
-    if (x > ofGetWidth()) x = ofGetWidth()-1;
+    if (x > ofGetWidth()-FONT_SIZE*8) x = ofGetWidth()-1;
     if (y < 0) y = 0;
-    if (y > ofGetHeight()) y = ofGetHeight()-1;
+    if (y > ofGetHeight()-FONT_SIZE*8) y = ofGetHeight()-1;
 
 
 
