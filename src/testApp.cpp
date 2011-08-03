@@ -166,6 +166,8 @@ void testApp::keyPressed(int key){
             oscTunnel->sendTestMessage(); break;
         case 'b':
             screen->randomBG(); break;
+        case 'p':
+            screen->pong->reset(); break;
     }
 }
 

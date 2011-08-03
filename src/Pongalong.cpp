@@ -28,6 +28,10 @@ void Pongalong::addFrame(string s) {
 
     ofxPCPangoLayout* layout = context->createPangoLayout();
 
+    //layout->color4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+
+
     layout->setText(s);
     layout->setFontDescription(*(dataHub->font));
 
@@ -42,7 +46,8 @@ void Pongalong::addFrame(string s) {
     tex = new ofxFBOTexture();
     tex->allocate(text_image.width, text_image.height);
     tex->begin();
-        text_image.draw(0,0);
+
+    text_image.draw(0,0);
     tex->end();
     //tex->setupScreenForMe();
 }
@@ -131,4 +136,10 @@ void Pongalong::draw() {
 
 
 //tex->d
+}
+
+void Pongalong::reset() {
+    x = 100;
+    y = 100;
+
 }
