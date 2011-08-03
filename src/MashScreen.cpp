@@ -61,6 +61,11 @@ void MashScreen::setup()
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
+
+    flowFbo.allocate(ofGetWidth(), ofGetHeight());
+    box2dFbo.allocate(ofGetWidth(), ofGetHeight());
+    pongFbo.allocate(ofGetWidth(), ofGetHeight());
+    asciiBackgroundFbo.allocate(ofGetWidth(), ofGetHeight());
 }
 
 
@@ -83,25 +88,37 @@ void MashScreen::draw()
     ofSetColor(255);
 
     if(dataHub->asciiBackgroundColor.a) {
+        asciiBackgroundFbo.begin();
+            asciiBG.draw();
+        asciiBackgroundFbo.end();
         ofSetColor(dataHub->asciiBackgroundColor);
-        asciiBG.draw();
+        asciiBackgroundFbo.draw(0, 0);
     }
 
     //cmv->draw();
 
     if(dataHub->flowColor.a) {
+        flowFbo.begin();
+            flow->draw();
+        flowFbo.end();
         ofSetColor(dataHub->flowColor);
-        flow->draw();
+        flowFbo.draw(0, 0);
     }
 
     if(dataHub->box2dColor.a) {
+        box2dFbo.begin();
+            box2d->draw();
+        box2dFbo.end();
         ofSetColor(dataHub->box2dColor);
-        box2d->draw();
+        box2dFbo.draw(0, 0);
     }
 
     if(dataHub->pongColor.a) {
+        pongFbo.begin();
+            pong->draw();
+        pongFbo.end();
         ofSetColor(dataHub->pongColor);
-        pong->draw();
+        pongFbo.draw(0, 0);
     }
 }
 
