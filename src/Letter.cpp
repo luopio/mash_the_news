@@ -27,7 +27,7 @@ void Letter::prerender(ofxPango *p, ofxPCPangoFontDescription* font)
     layout->setText(letter);
     context->color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-    cout << "prerender : " << letter << endl;
+    //cout << "prerender : " << letter << endl;
 
     layout->show();
 

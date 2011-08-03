@@ -78,6 +78,8 @@ void testApp::update(){
             grayImage.flagImageChanged();
             grayDiff = grayImage; // ????
 
+            //roCoImg = grayImage.scale()
+
             //grayImage.flagImageChanged();
         }
 

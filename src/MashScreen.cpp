@@ -61,12 +61,19 @@ void MashScreen::setup()
     // cout << "binding tex0 to " << asciiBG.tex->getTextureReference().texData.textureID << endl;
     // shader.setUniform1i("tex0", fbo.getTextureReference().texData.textureID); //send which texture to the shader
     // shader.setUniformTexture("tex0", fbo, fbo.getTextureReference().texData.textureID); //send which texture to the shader
+    pong = new Pongalong(dataHub,pango);
 
+
+    dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
+    dataHub->roCoImg->allocate(*(dataHub->rows),*(dataHub->cols));
 }
 
 
 void MashScreen::update()
 {
+
+    dataHub->roCoImg->scaleIntoMe(*(dataHub->grayDiff));
+
     if(bFlowActive) {
         flow->update();
     }
@@ -90,6 +97,8 @@ void MashScreen::draw()
     if(bBox2dActive) {
         box2d->draw();
     }
+
+    pong->draw();
 }
 
 void MashScreen::randomBG() {

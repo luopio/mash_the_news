@@ -13,6 +13,8 @@ struct DataHub
     bool bDebug;
 
     ofxCvGrayscaleImage* grayDiff;
+    ofxCvGrayscaleImage* roCoImg;
+
     vector<Message *> * messages;
 
     // box2d engine related

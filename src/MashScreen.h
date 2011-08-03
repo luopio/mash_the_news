@@ -6,6 +6,7 @@
 #include "AsciiBackground.h"
 #include "ofxPango.h"
 #include "CameraMaskViewer.h"
+#include "Pongalong.h"
 
 class MashScreen
 {
@@ -32,6 +33,7 @@ class MashScreen
 
         AsciiBackground asciiBG;
         CameraMaskViewer * cmv;
+        Pongalong * pong;
 
         ofImage text_image;
 
