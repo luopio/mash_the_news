@@ -52,8 +52,8 @@ void CameraMaskViewer::setSign (string s) {
 void CameraMaskViewer::draw() {
     if (tex==NULL) return;
 
-    tempImg.scaleIntoMe(*(dataHub->grayDiff));
-    unsigned char *pixels = tempImg.getPixels();
+   // tempImg.scaleIntoMe(*(dataHub->grayDiff));
+    unsigned char *pixels = dataHub->roCoImg->getPixels();
 
     for (int x = 0; x < tempImg.width; ++x) {
         for(int y = 0; y < tempImg.height; ++y) {

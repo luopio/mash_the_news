@@ -5,11 +5,14 @@ Pongalong::Pongalong(DataHub * d, ofxPango * p) {
     pango = NULL;
     dataHub = d;
     pango = p;
-    addFrame("XXXXXX\nXXXXXX\nXXXXXX");
+    addFrame("XXXXXXXX\nXXXXXXXX\nXXXXXXXX\nXXXXXXXX");
     x = ofGetWidth() / 2;
     y = ofGetHeight() / 2;
-    dx = 1.5;
-    dy = 1.5;
+
+    dataHub->pongSpeed = 0.8;
+
+    dx = dataHub->pongSpeed;
+    dy = dataHub->pongSpeed;
 }
 
 Pongalong::~Pongalong()
@@ -20,7 +23,7 @@ Pongalong::~Pongalong()
 void Pongalong::addFrame(string s) {
      if (pango==NULL || dataHub==NULL) return;
 
-    ofxPCContext* context = pango->createContextWithSurface(FONT_SIZE*6, FONT_SIZE*6);
+    ofxPCContext* context = pango->createContextWithSurface(FONT_SIZE*8, FONT_SIZE*8);
     context->color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
     ofxPCPangoLayout* layout = context->createPangoLayout();
@@ -47,15 +50,38 @@ void Pongalong::addFrame(string s) {
 void Pongalong::draw() {
     if (tex==NULL) return;
    // tex->
+
+    if (dx < 0) {
+        dx = (dataHub->pongSpeed)*-1;
+    } else {
+        dx = (dataHub->pongSpeed);
+    }
+
+    if (dy < 0) {
+        dy = (dataHub->pongSpeed)*-1;
+    } else {
+        dy = (dataHub->pongSpeed);
+    }
+
    ofColor c;
         c.r = 255; c.g = 255; c.b = 0;
    ofSetColor(c);
     tex->draw((((int)x)/FONT_SIZE)*FONT_SIZE,(((int)y/(FONT_SIZE*2))*FONT_SIZE*2));
     x+=dx;
     y+=dy;
-    if (x>ofGetWidth()-FONT_SIZE*6 || x < 0)
+   // bool cd = false;
+
+    unsigned char *pixels = dataHub->roCoImg->getPixels();
+
+
+
+
+
+
+
+    if (x>ofGetWidth()-FONT_SIZE*8 || x < 0)
         dx *= -1;
-    if (y>ofGetHeight()-FONT_SIZE*6 || y < 0)
+    if (y>ofGetHeight()-FONT_SIZE*8 || y < 0)
         dy *= -1;
 
 //tex->d

@@ -145,6 +145,17 @@ void OscTunnel::update() {
                             break;
 
                         case 2:
+                            switch (m.getArgAsInt32(2)) {
+                                    case 1:
+                                        dataHub->pongSpeed = m.getArgAsInt32(3)/20;
+                                        cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
+                                    break;
+
+
+
+
+
+                            }
                             break;
 
                         /* Channel 3 is for calibrating stuff */

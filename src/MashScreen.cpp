@@ -68,7 +68,7 @@ void MashScreen::setup()
 
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
-    dataHub->roCoImg->allocate(*(dataHub->rows),*(dataHub->cols));
+    dataHub->roCoImg->allocate(*(dataHub->cols),*(dataHub->rows));
 }
 
 
@@ -91,10 +91,10 @@ void MashScreen::draw()
 {
     // asciiBG.draw();
 
-    //cmv->draw();
+    cmv->draw();
 
     if(bFlowActive) {
-        flow->draw();
+        //flow->draw();
     }
 
     if(bBox2dActive) {
