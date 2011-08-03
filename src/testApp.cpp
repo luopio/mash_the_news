@@ -163,16 +163,6 @@ void testApp::keyPressed(int key){
             dataHub.kThreshold = MAX(dataHub.kThreshold - 1, 0);
             break;
 
-        case '1':
-            screen->hilightMessage(0); break;
-        case '2':
-            screen->hilightMessage(1); break;
-        case '3':
-            screen->hilightMessage(2); break;
-        case '0':
-            screen->hilightMessage(-10); break;
-        case 'e':
-            screen->changeEngine(); break;
         case 'd':
             dataHub.bDebug = !dataHub.bDebug; break;
 

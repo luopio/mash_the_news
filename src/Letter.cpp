@@ -1,5 +1,4 @@
 #include "Letter.h"
-//#include <boost/algorithm/string.hpp>
 
 #include "settings.h"
 #ifdef _USE_OFFBO
@@ -7,9 +6,6 @@
 #endif
 
 using namespace Poco;
-
-#include "Poco/UTF8Encoding.h"
-#include "Poco/TextIterator.h"
 
 Letter::Letter(string let)
 {
@@ -22,7 +18,7 @@ Letter::Letter(string let)
 
 void Letter::prerender(ofxPango *p, ofxPCPangoFontDescription* font)
 {
-    ofxPCContext * context = p->createContextWithSurface(FONT_SIZE, FONT_SIZE*2);
+    ofxPCContext * context = p->createContextWithSurface(FONT_W, FONT_H);
     context->color4f(0.0f, 0.0f, 0.0f, 0.0f);
     context->paint();
     ofxPCPangoLayout * layout = context->createPangoLayout();
@@ -43,14 +39,9 @@ void Letter::prerender(ofxPango *p, ofxPCPangoFontDescription* font)
     //tex = new ofFbo();
     tex = new ofxFBOTexture();
     //tex->allocate(font->stringWidth(letter), font->getLineHeight());
-    tex->allocate(FONT_SIZE, FONT_SIZE*2);
+    tex->allocate(FONT_W, FONT_H);
     tex->begin();
-        //ofFill();
-        //ofSetColor(0, 0, 0);
-        //ofRect(0, 0, tex->getWidth(), tex->getHeight());
-        //ofSetColor(255, 255, 255);
         text_image.draw(0,0);
-//        font->drawString(letter, 0, FONT_SIZE);
     tex->end();
 }
 
@@ -61,106 +52,5 @@ Letter::~Letter()
 
 void Letter::draw()
 {
-    tex->draw(col * FONT_SIZE, row * FONT_SIZE);
-}
-
-Word::Word(string word)
-{
-    UTF8Encoding utf8Encoding;
-    TextIterator it(word, utf8Encoding);
-    TextIterator end(it.end());
-    int n = 0;
-
-    while (it != end) {
-
-        Letter *l = NULL;
-
-       if ((*it) > 127) { // ascii
-            l = new Letter(word.substr(n,2));
-            n += 2;
-           // cout << "joo" << endl;
-
-        } else { // utf8
-           l = new Letter(word.substr(n,1));
-           n++;
-          //cout << "ei" << endl;
-        }
-
-        ofColor c;
-        c.r = 255; c.g = 255; c.b = 255;
-        l->color = c;
-        letters.push_back(l);
-        ++it;
-    }
-}
-
-void Word::draw()
-{
-    if(color != NULL) {
-        ofSetColor(color);
-    }
-    for(vector<Letter *>::iterator ii = letters.begin();
-        ii != letters.end(); ++ii) {
-        (*ii)->draw();
-    }
-}
-
-Message::Message(string message, ofxPango * p, ofxPCPangoFontDescription* f)
-{
-    StringTokenizer t(message, ", ", StringTokenizer::TOK_TRIM);
-    StringTokenizer::Iterator ti = t.begin();
-    for(; ti != t.end(); ++ti) {
-        Word *w = new Word((string)(*ti));
-        words.push_back(w);
-    }
-    prerender(p, f);
-    setPosition(13, 13);
-}
-
-void Message::prerender(ofxPango * p, ofxPCPangoFontDescription* f) {
-  for(vector<Word *>::iterator i = words.begin();
-        i != words.end(); ++i) {
-
-        for(vector<Letter *>::iterator ii = (*i)->letters.begin();
-            ii != (*i)->letters.end(); ++ii) {
-
-            (*ii)->prerender(p, f);
-
-        }
-    }
-}
-
-
-void Message::setPosition(int col, int row)
-{
-    int spacing = 0;
-    int letter_index = 0;
-    for(vector<Word *>::iterator i = words.begin();
-        i != words.end(); ++i) {
-        for(vector<Letter *>::iterator ii = (*i)->letters.begin();
-            ii != (*i)->letters.end(); ++ii) {
-            (*ii)->col = col + spacing + letter_index;
-            (*ii)->row = row;
-            letter_index++;
-        }
-        spacing++;
-    }
-}
-
-void Message::draw()
-{
-    for(vector<Word *>::iterator i = words.begin();
-        i != words.end(); ++i) {
-        (*i)->draw();
-    }
-}
-
-int Message::getCol()
-{
-    return words[0]->letters[0]->col;
-}
-
-int Message::getRow()
-{
-    return words[0]->letters[0]->row;
+    tex->draw(col * FONT_W, row * FONT_H);
 }

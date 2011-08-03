@@ -1,15 +1,15 @@
-#ifndef FLOWMASHENGINE_H
-#define FLOWMASHENGINE_H
+#ifndef _FLOW_H
+#define _FLOW_H
 
-#include "MashEngine.h"
+#include "DataHub.h"
 #include "ofxBox2d.h"
 #include "ofxOpenCv.h"
 
-class FlowMashEngine: public MashEngine
+class Flow
 {
     public:
-        FlowMashEngine(DataHub &h);
-        virtual ~FlowMashEngine();
+        Flow(DataHub &h);
+        virtual ~Flow();
 
         void setup();
         void update();
@@ -25,4 +25,4 @@ class FlowMashEngine: public MashEngine
     private:
 };
 
-#endif // FLOWMASHENGINE_H
+#endif // Flow_H

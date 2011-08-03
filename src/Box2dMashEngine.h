@@ -1,7 +1,7 @@
 #ifndef BOX2DMASHENGINE_H
 #define BOX2DMASHENGINE_H
 
-#include "MashEngine.h"
+#include "DataHub.h"
 #include "ofxBox2d.h"
 #include "ofxOpenCv.h"
 
@@ -12,7 +12,7 @@ class LetterCircle: public ofxBox2dRect
         Letter *letter;
 };
 
-class Box2dMashEngine: public MashEngine
+class Box2dMashEngine
 {
     public:
         Box2dMashEngine(DataHub &h);
