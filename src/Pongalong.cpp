@@ -6,8 +6,8 @@ Pongalong::Pongalong(DataHub * d, ofxPango * p) {
     dataHub = d;
     pango = p;
     addFrame("XXXXXXXX\nX@@@@@@X\nX@@@@@@X\nXXXXXXXX");
-    x = ofGetWidth() / 2;
-    y = ofGetHeight() / 2;
+    x = ofGetWidth()-1; //ofGetWidth() / 2;
+    y = ofGetHeight()-1; //ofGetHeight() / 2;
 
     dataHub->pongSpeed = 1.8;
 
@@ -85,10 +85,10 @@ void Pongalong::draw() {
 
    // bool cd = false;
 
-    if (x>ofGetWidth()-FONT_SIZE*8 || x < 0)
-        dx *= -1;
-    if (y>ofGetHeight()-FONT_SIZE*8 || y < 0)
-        dy *= -1;
+    if (x>ofGetWidth()-FONT_SIZE*8) dx = abs(dx)*-1;
+    if (x < 0) dx = abs(dx);
+    if (y>ofGetWidth()-FONT_SIZE*8) dy = abs(dy)*-1;
+    if (y < 0) dy = abs(dy);
 
 
     unsigned char *pixels = dataHub->roCoImg->getPixels();
@@ -128,9 +128,9 @@ void Pongalong::draw() {
 
 
     if (x < 0) x = 0;
-    if (x > ofGetWidth()-FONT_SIZE*8) x = ofGetWidth()-1;
+    if (x > ofGetWidth()-FONT_SIZE*8) x = ofGetWidth()-FONT_SIZE*8;
     if (y < 0) y = 0;
-    if (y > ofGetHeight()-FONT_SIZE*8) y = ofGetHeight()-1;
+    if (y > ofGetHeight()-FONT_SIZE*8) y = ofGetHeight()-FONT_SIZE*8;
 
 
 

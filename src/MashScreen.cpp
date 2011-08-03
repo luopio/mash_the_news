@@ -63,7 +63,7 @@ void MashScreen::setup()
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
     dataHub->flowColor              = ofColor(255, 255, 255, 255);
     dataHub->pongColor              = ofColor(255, 255, 255, 0);
-    dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 0);
+    dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 255);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
 
@@ -98,14 +98,14 @@ void MashScreen::draw()
 
     ofSetColor(255);
 
- /*   if(dataHub->asciiBackgroundColor.a) {
+    if(dataHub->asciiBackgroundColor.a) {
         asciiBackgroundFbo.begin();
             asciiBG.draw();
         asciiBackgroundFbo.end();
         ofSetColor(dataHub->asciiBackgroundColor);
         asciiBackgroundFbo.draw(0, 0);
     }
-*/
+
     cmv->draw();
 
  /*   if(dataHub->flowColor.a) {

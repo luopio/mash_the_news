@@ -46,6 +46,8 @@ class AsciiBackground
         ofxPCPangoLayout* layout;
         void setOfxPango(ofxPango * p);
 
+        ofImage * test;
+
     protected:
     private:
 };
