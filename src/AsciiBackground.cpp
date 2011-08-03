@@ -44,7 +44,7 @@ void AsciiBackground::setBackground(string s) {
     if (pango==NULL || dataHub==NULL) return;
 
     context = pango->createContextWithSurface(ofGetWidth(), ofGetHeight());
-    context->color4f(1.0f, 1.0f, 1.0f, 0.5f);
+    context->color4f(1.0f, 1.0f, 2.0f, 1.0f);
     //context->paint();
 
     layout = context->createPangoLayout();
@@ -67,6 +67,7 @@ void AsciiBackground::setBackground(string s) {
 
     layout->show();
 
+    text_image.clear();
     text_image.allocate(context->getSurface()->getWidth(), context->getSurface()->getHeight(), OF_IMAGE_COLOR_ALPHA);
     text_image.setFromPixels(context->getSurface()->getPixels(), text_image.width, text_image.height, OF_IMAGE_COLOR_ALPHA, true);
 
@@ -80,11 +81,14 @@ void AsciiBackground::setBackground(string s) {
     tex->begin();
         text_image.draw(0,0);
     tex->end();
+
+    test = &text_image;
 }
 
 void AsciiBackground::draw() {
     if (tex==NULL) return;
     // ofSetColor(40,40,40);
-    tex->draw(0,0);
+    //tex->draw(0,0);
+    test->draw(0,0);
 }
 

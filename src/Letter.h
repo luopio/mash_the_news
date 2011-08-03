@@ -1,9 +1,9 @@
 #ifndef LETTER_H
 #define LETTER_H
 
-#define FONT_SIZE 9
-#define FONT_W 9
-#define FONT_H 18
+#define FONT_SIZE 11
+#define FONT_W 11
+#define FONT_H 22
 
 #include "ofMain.h"
 #include "Poco/StringTokenizer.h"
@@ -33,6 +33,7 @@ class Letter
         virtual ~Letter();
 
         void prerender(ofxPango * p, ofxPCPangoFontDescription* font);
+        void prerender(ofTrueTypeFont *font);
         void draw();
         void draw(int x, int y);
 

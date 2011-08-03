@@ -1,9 +1,5 @@
 #pragma once
 
-#define FONT_SIZE 9
-#define FONT_W 9
-#define FONT_H 18
-
 #include "ofMain.h"
 
 #include "settings.h"
@@ -17,8 +13,10 @@ class Message
 {
     public:
         Message(string message, ofxPango * p, ofxPCPangoFontDescription* font);
+        Message(string message, ofTrueTypeFont * font);
         vector<Word *> words;
         void prerender(ofxPango * p, ofxPCPangoFontDescription* font);
+        void prerender(ofTrueTypeFont *font);
         void setPosition(int col, int row);
         void draw();
         int getCol();

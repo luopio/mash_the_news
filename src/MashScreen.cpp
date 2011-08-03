@@ -20,7 +20,7 @@ MashScreen::~MashScreen()
 void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
-    // font.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true);
+    font.loadFont("Sans", FONT_SIZE, true, true);
 
     cols = ofGetWidth()  / 9; //FONT_SIZE;
     rows = ofGetHeight() / 18; //FONT_SIZE;
@@ -34,7 +34,9 @@ void MashScreen::setup()
     //fd->createFromString("Arial Unicode MS 11");
     dataHub->font->createFromString("Courier 11");
 
-    messages.push_back( new Message(string("100 DANCERS UNITED"), pango, dataHub->font));
+    //messages.push_back( new Message(string("100 DANCERS UNITED"), pango, dataHub->font));
+    messages.push_back( new Message(string("100 DANCERS"), &font));
+    messages.push_back( new Message(string("BE AWARE"), &font));
     //messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
     //messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
 
@@ -63,7 +65,7 @@ void MashScreen::setup()
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
     dataHub->flowColor              = ofColor(255, 255, 255, 255);
     dataHub->pongColor              = ofColor(255, 255, 255, 0);
-    dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 0);
+    dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 255);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
 
@@ -94,6 +96,7 @@ void MashScreen::update()
 
 void MashScreen::draw()
 {
+
     ofSetColor(255, 255, 255, 255);
     if(dataHub->asciiBackgroundColor.a) {
         asciiBackgroundFbo.begin();

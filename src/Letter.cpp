@@ -46,6 +46,15 @@ void Letter::prerender(ofxPango *p, ofxPCPangoFontDescription* font)
     tex->end();
 }
 
+void Letter::prerender(ofTrueTypeFont * font)
+{
+    tex = new ofxFBOTexture();
+    tex->allocate(FONT_W, FONT_H);
+    tex->begin();
+        font->drawString(letter, 0,0);
+    tex->end();
+}
+
 Letter::~Letter()
 {
     //dtor

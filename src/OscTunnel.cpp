@@ -91,6 +91,12 @@ void OscTunnel::update() {
                         case 0:
                             break;
                         case 1:
+                            switch (m.getArgAsInt32(2)) {
+                                case 37: // first button
+                                    screen->hilightWordAt(ofRandom(0, 3));
+                                    break;
+                            }
+
                             break;
                         case 2:
                             break;
