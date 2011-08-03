@@ -19,6 +19,8 @@ class Pongalong
 
         float x, y, dx, dy;
 
+        float lastUpdateTime;
+
     protected:
     private:
 };

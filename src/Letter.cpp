@@ -18,6 +18,7 @@ Letter::Letter(string let)
 
 void Letter::prerender(ofxPango *p, ofxPCPangoFontDescription* font)
 {
+    ofSetColor(255, 255, 255, 255);
     ofxPCContext * context = p->createContextWithSurface(FONT_W, FONT_H);
     context->color4f(0.0f, 0.0f, 0.0f, 0.0f);
     context->paint();

@@ -5,11 +5,11 @@ Pongalong::Pongalong(DataHub * d, ofxPango * p) {
     pango = NULL;
     dataHub = d;
     pango = p;
-    addFrame("XXXXXXXX\nXXXXXXXX\nXXXXXXXX\nXXXXXXXX");
+    addFrame("XXXXXXXX\nX@@@@@@X\nX@@@@@@X\nXXXXXXXX");
     x = ofGetWidth() / 2;
     y = ofGetHeight() / 2;
 
-    dataHub->pongSpeed = 0.8;
+    dataHub->pongSpeed = 1.8;
 
     dx = dataHub->pongSpeed;
     dy = dataHub->pongSpeed;
@@ -69,22 +69,66 @@ void Pongalong::draw() {
         c.r = 255; c.g = 255; c.b = 0;
    ofSetColor(c);
     tex->draw((((int)x)/FONT_SIZE)*FONT_SIZE,(((int)y/(FONT_SIZE*2))*FONT_SIZE*2));
-    x+=dx;
-    y+=dy;
+
+       // control refresh rate
+    float now = ofGetElapsedTimef();
+    if(now - lastUpdateTime > 0.01) {
+        lastUpdateTime = now;
+        x+=dx;
+        y+=dy;
+    }
+
    // bool cd = false;
-
-    unsigned char *pixels = dataHub->roCoImg->getPixels();
-
-
-
-
-
-
 
     if (x>ofGetWidth()-FONT_SIZE*8 || x < 0)
         dx *= -1;
     if (y>ofGetHeight()-FONT_SIZE*8 || y < 0)
         dy *= -1;
+
+
+    unsigned char *pixels = dataHub->roCoImg->getPixels();
+
+
+    for (int xx = 0; xx < 8 ; xx++) {
+        if (pixels[(xx+(int)x/FONT_SIZE) + ((int)y/(FONT_SIZE*2)) * (*(dataHub->cols))]) {
+            //cout << "high" << endl;
+            dy = abs(dy);
+        }
+
+    }
+
+    for (int xx = 0; xx < 8 ; xx++) {
+        if (pixels[(xx+(int)x/FONT_SIZE) + ((int)y/(FONT_SIZE*2)+4) * (*(dataHub->cols))]) {
+            //cout << "low" << endl;
+            dy = abs(dy)*-1;
+        }
+
+    }
+
+    for (int xx = 0; xx < 4 ; xx++) {
+        if (pixels[((int)x/FONT_SIZE) + ((int)y/(FONT_SIZE*2)+xx) * (*(dataHub->cols))]) {
+            //cout << "left" << endl;
+            dx = abs(dx);
+        }
+
+    }
+
+      for (int xx = 0; xx < 4 ; xx++) {
+        if (pixels[(8+(int)x/FONT_SIZE) + ((int)y/(FONT_SIZE*2)+xx) * (*(dataHub->cols))]) {
+           // cout << "right" << endl;
+            dx = abs(dx)*-1;
+        }
+
+    }
+
+
+    if (x < 0) x = 0;
+    if (x > ofGetWidth()) x = ofGetWidth()-1;
+    if (y < 0) y = 0;
+    if (y > ofGetHeight()) y = ofGetHeight()-1;
+
+
+
 
 //tex->d
 }

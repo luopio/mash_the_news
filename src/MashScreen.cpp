@@ -94,9 +94,8 @@ void MashScreen::update()
 
 void MashScreen::draw()
 {
-    ofSetColor(255);
 
-    if(dataHub->asciiBackgroundColor.a) {
+   if(dataHub->asciiBackgroundColor.a) {
         asciiBackgroundFbo.begin();
             ofClear(0, 0, 0, 255);
             asciiBG.draw();
@@ -110,14 +109,11 @@ void MashScreen::draw()
     if(dataHub->flowColor.a) {
         flowFbo.begin();
             ofClear(0, 0, 0, 255);
-            ofSetColor(255);
+            ofSetColor(255, 255, 255, 255);
             flow->draw();
         flowFbo.end();
         ofSetColor(dataHub->flowColor);
         flowFbo.draw(0, 0);
-        ofSetColor(255, 255, 255, 255);
-        // flow->draw();
-
     }
 
     if(dataHub->box2dColor.a) {
@@ -139,9 +135,8 @@ void MashScreen::draw()
         pongFbo.draw(0, 0);
     }
 
-    // ofSetColor(255, 255, 255, 255);
-    // flow->draw();
-    //font.drawString("100 DANCERS UNITED", 600, 500);
+
+    // pong->draw();
 }
 
 void MashScreen::randomBG() {

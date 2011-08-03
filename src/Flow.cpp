@@ -26,13 +26,12 @@ void Flow::setup()
             m = (*dataHub->messages)[i];
             float speed = ofRandom(-2, 2);
             while(filledCols < (*dataHub->cols)) {
-                for(vector<Word *>::iterator wi = m->words.begin();
-                    wi != m->words.end(); ++wi) {
+                for(vector<Word *>::iterator wi = m->words.begin(); wi != m->words.end(); ++wi) {
                     FlowingWord * fw = new FlowingWord();
                     fw->msg = m;
                     fw->word = *wi;
                     fw->col = filledCols;
-                    if(filledCols + fw->word->letters.size() > *(dataHub->cols)) {
+                    if(filledCols + fw->word->letters.size() + 4 > *(dataHub->cols)) {
                         filledCols = *(dataHub->cols);
                         break;
                     }
@@ -64,7 +63,7 @@ void Flow::addMessage(Message *m)
 
     int filledCols = 0;
 
-    float speed = ofRandom(-2, 2);
+    float speed = ofRandom(-1, 1);
 
     while(filledCols < (*dataHub->cols)) {
         for(vector<Word *>::iterator wi = m->words.begin();
@@ -73,7 +72,7 @@ void Flow::addMessage(Message *m)
             fw->msg = m;
             fw->word = *wi;
             fw->col = filledCols;
-            if(fw->col + fw->word->letters.size() > *(dataHub->cols)) {
+            if(fw->col + fw->word->letters.size() + 4 > *(dataHub->cols)) {
                 filledCols = *(dataHub->cols);
                 break;
             }
