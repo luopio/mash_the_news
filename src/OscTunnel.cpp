@@ -161,7 +161,7 @@ void OscTunnel::update() {
                                     break;
                                 case 3:
                                     dataHub->pongColor.a = newAlpha;
-                                    cout << dataHub->pongColor.a << " pong alpha" << endl;
+                                    cout << (int)(dataHub->pongColor.a) << " pong alpha" << endl;
                                     break;
                                 case 4:
                                     dataHub->asciiBackgroundColor.a = newAlpha;

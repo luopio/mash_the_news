@@ -8,6 +8,12 @@
 #include "CameraMaskViewer.h"
 #include "Pongalong.h"
 
+#include "settings.h"
+
+#ifdef _USE_OFFBO
+#define ofxFBOTexture ofFbo
+#endif
+
 class MashScreen
 {
     public:
@@ -41,10 +47,10 @@ class MashScreen
         ofxPCContext* context;
         ofxPCPangoLayout* layout;
 
-        ofFbo flowFbo;
-        ofFbo box2dFbo;
-        ofFbo pongFbo;
-        ofFbo asciiBackgroundFbo;
+        ofxFBOTexture flowFbo;
+        ofxFBOTexture box2dFbo;
+        ofxFBOTexture pongFbo;
+        ofxFBOTexture asciiBackgroundFbo;
 
 
         // ofShader shader;

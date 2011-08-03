@@ -51,6 +51,8 @@ void Pongalong::draw() {
     if (tex==NULL) return;
    // tex->
 
+    //tex->clear();
+
     if (dx < 0) {
         dx = (dataHub->pongSpeed)*-1;
     } else {
