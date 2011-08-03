@@ -122,7 +122,8 @@ void Flow::update()
             fw->col = *(dataHub->cols);
         }
 
-        if(fw->impulse > 0) fw->impulse -= 10;
+        if(fw->impulse > 0) fw->impulse -= 9;
+        else { fw->impulse = 0; }
 
     }
 }

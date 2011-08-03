@@ -94,47 +94,57 @@ void MashScreen::update()
 
 void MashScreen::draw()
 {
-
-   if(dataHub->asciiBackgroundColor.a) {
+    ofSetColor(255, 255, 255, 255);
+    if(dataHub->asciiBackgroundColor.a) {
         asciiBackgroundFbo.begin();
-            ofClear(0, 0, 0, 255);
+            ofClear(0, 0, 0, 0);
             asciiBG.draw();
         asciiBackgroundFbo.end();
         ofSetColor(dataHub->asciiBackgroundColor);
         asciiBackgroundFbo.draw(0, 0);
+    } else {
+        ofSetColor(255, 255, 255, 255);
     }
-
-    cmv->draw();
 
     if(dataHub->flowColor.a) {
         flowFbo.begin();
-            ofClear(0, 0, 0, 255);
+            ofClear(0, 0, 0, 0);
             ofSetColor(255, 255, 255, 255);
             flow->draw();
         flowFbo.end();
         ofSetColor(dataHub->flowColor);
         flowFbo.draw(0, 0);
+    } else {
+        ofSetColor(255, 255, 255, 255);
     }
 
     if(dataHub->box2dColor.a) {
         box2dFbo.begin();
-            ofClear(0, 0, 0, 255);
+            ofClear(0, 0, 0, 0);
             // box2d->draw();
         box2dFbo.end();
         ofSetColor(dataHub->box2dColor);
         box2dFbo.draw(0, 0);
+    } else {
+        ofSetColor(255, 255, 255, 255);
     }
 
     if(dataHub->pongColor.a) {
         pongFbo.clear();
         pongFbo.begin();
-            ofClear(0, 0, 0, 255);
+            ofClear(0, 0, 0, 0);
             pong->draw();
         pongFbo.end();
         ofSetColor(dataHub->pongColor);
         pongFbo.draw(0, 0);
+    } else {
+        ofSetColor(255, 255, 255, 255);
     }
 
+    if(dataHub->asciiBackgroundColor.a) {
+        ofSetColor(dataHub->asciiBackgroundColor);
+        cmv->draw();
+    }
 
     // pong->draw();
 }
