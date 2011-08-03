@@ -161,7 +161,7 @@ void OscTunnel::update() {
                                     break;
                                 case 3:
                                     dataHub->pongColor.a = newAlpha;
-                                    cout << dataHub->pongColor.a << " pong alpha" << endl;
+                                    cout << (int)(dataHub->pongColor.a) << " pong alpha" << endl;
                                     break;
                                 case 4:
                                     dataHub->asciiBackgroundColor.a = newAlpha;
@@ -171,6 +171,17 @@ void OscTunnel::update() {
                             break;
 
                         case 2:
+                            switch (m.getArgAsInt32(2)) {
+                                    case 1:
+                                        dataHub->pongSpeed = m.getArgAsInt32(3)/20;
+                                        cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
+                                    break;
+
+
+
+
+
+                            }
                             break;
 
                         /* Channel 3 is for calibrating stuff */

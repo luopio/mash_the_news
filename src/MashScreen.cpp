@@ -1,5 +1,11 @@
 #include "MashScreen.h"
 
+#include "settings.h"
+
+#ifdef _USE_OFFBO
+#define ofxFBOTexture ofFbo
+#endif
+
 MashScreen::MashScreen(DataHub &h)
 {
     dataHub = &h;
@@ -60,12 +66,15 @@ void MashScreen::setup()
     dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 0);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
+
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
 
     flowFbo.allocate(ofGetWidth(), ofGetHeight());
     box2dFbo.allocate(ofGetWidth(), ofGetHeight());
     pongFbo.allocate(ofGetWidth(), ofGetHeight());
     asciiBackgroundFbo.allocate(ofGetWidth(), ofGetHeight());
+
+    ofEnableAlphaBlending();
 }
 
 
@@ -85,6 +94,8 @@ void MashScreen::update()
 
 void MashScreen::draw()
 {
+
+
     ofSetColor(255);
 
     if(dataHub->asciiBackgroundColor.a) {
@@ -95,7 +106,7 @@ void MashScreen::draw()
         asciiBackgroundFbo.draw(0, 0);
     }
 
-    //cmv->draw();
+    cmv->draw();
 
     if(dataHub->flowColor.a) {
         flowFbo.begin();
@@ -114,6 +125,7 @@ void MashScreen::draw()
     }
 
     if(dataHub->pongColor.a) {
+        pongFbo.clear();
         pongFbo.begin();
             pong->draw();
         pongFbo.end();

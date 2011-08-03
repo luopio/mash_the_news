@@ -24,6 +24,8 @@ struct DataHub
     int kThreshold;
     int kFarThreshold;
 
+    float pongSpeed;
+
     ofxPCPangoFontDescription* font;
 
     ofColor box2dColor;
