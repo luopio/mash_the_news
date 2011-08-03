@@ -21,6 +21,8 @@ class Pongalong
 
         float lastUpdateTime;
 
+        void reset();
+
     protected:
     private:
 };
