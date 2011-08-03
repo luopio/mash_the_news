@@ -31,8 +31,11 @@ void MashScreen::setup()
     /* Pango stuff */
     pango = new ofxPango();
     dataHub->font = new ofxPCPangoFontDescription();
-    //fd->createFromString("Arial Unicode MS 11");
-    dataHub->font->createFromString("Courier 11");
+    //dataHub->font->createFromString("Arial Unicode MS 11");
+    //dataHub->font->createFromString("Courier 11");
+    dataHub->font->createFromString("Monospace 11");
+    dataHub->font->setWeight(PANGO_WEIGHT_ULTRAHEAVY);
+    //dataHub->font->setStyle(PANGO_STYLE_ITALIC);
 
     //messages.push_back( new Message(string("100 DANCERS UNITED"), pango, dataHub->font));
     messages.push_back( new Message(string("100 DANCERS"), &font));
