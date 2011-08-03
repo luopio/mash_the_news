@@ -16,6 +16,10 @@ void Flow::setup()
     words.clear();
     Message *m = NULL;
     int filledRows = 0;
+
+    if(!dataHub->messages->size())
+        return;
+
     while(filledRows < *(dataHub->rows)) {
         for(int i = 0; i < dataHub->messages->size(); i++) {
             int filledCols = 0;
@@ -28,7 +32,7 @@ void Flow::setup()
                     fw->msg = m;
                     fw->word = *wi;
                     fw->col = filledCols;
-                    if(fw->col + fw->word->letters.size() > *(dataHub->cols)) {
+                    if(filledCols + fw->word->letters.size() > *(dataHub->cols)) {
                         filledCols = *(dataHub->cols);
                         break;
                     }
@@ -119,7 +123,7 @@ void Flow::update()
             fw->col = *(dataHub->cols);
         }
 
-        if(fw->impulse > 0) fw->impulse -= 20;
+        if(fw->impulse > 0) fw->impulse -= 10;
 
     }
 }
@@ -132,7 +136,7 @@ void Flow::draw()
         //if(!(int)fw->impulse)
         //    continue;
         fw->word->draw(fw->col * FONT_W, fw->row * FONT_H,
-                       (int)fw->impulse + 40, (int)fw->impulse + 40, (int)fw->impulse + 10);
+                       (int)fw->impulse + 40, (int)fw->impulse + 40, (int)fw->impulse + 40);
     }
 
     if(dataHub->bDebug) {

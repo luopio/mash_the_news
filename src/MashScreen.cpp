@@ -34,9 +34,9 @@ void MashScreen::setup()
     //fd->createFromString("Arial Unicode MS 11");
     dataHub->font->createFromString("Courier 11");
 
-    messages.push_back( new Message(string("moro mitas jatkä"), pango, dataHub->font));
-    messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
-    messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
+    messages.push_back( new Message(string("100 DANCERS UNITED"), pango, dataHub->font));
+    //messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
+    //messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
 
     box2d = new Box2dMashEngine(*dataHub);
     flow = new Flow(*dataHub);
@@ -87,19 +87,18 @@ void MashScreen::update()
     }
 
     if(dataHub->box2dColor.a) {
-        box2d->update();
+        // box2d->update();
     }
 }
 
 
 void MashScreen::draw()
 {
-
-
     ofSetColor(255);
 
     if(dataHub->asciiBackgroundColor.a) {
         asciiBackgroundFbo.begin();
+            ofClear(0, 0, 0, 255);
             asciiBG.draw();
         asciiBackgroundFbo.end();
         ofSetColor(dataHub->asciiBackgroundColor);
@@ -110,15 +109,21 @@ void MashScreen::draw()
 
     if(dataHub->flowColor.a) {
         flowFbo.begin();
+            ofClear(0, 0, 0, 255);
+            ofSetColor(255);
             flow->draw();
         flowFbo.end();
         ofSetColor(dataHub->flowColor);
         flowFbo.draw(0, 0);
+        ofSetColor(255, 255, 255, 255);
+        // flow->draw();
+
     }
 
     if(dataHub->box2dColor.a) {
         box2dFbo.begin();
-            box2d->draw();
+            ofClear(0, 0, 0, 255);
+            // box2d->draw();
         box2dFbo.end();
         ofSetColor(dataHub->box2dColor);
         box2dFbo.draw(0, 0);
@@ -127,11 +132,16 @@ void MashScreen::draw()
     if(dataHub->pongColor.a) {
         pongFbo.clear();
         pongFbo.begin();
+            ofClear(0, 0, 0, 255);
             pong->draw();
         pongFbo.end();
         ofSetColor(dataHub->pongColor);
         pongFbo.draw(0, 0);
     }
+
+    // ofSetColor(255, 255, 255, 255);
+    // flow->draw();
+    //font.drawString("100 DANCERS UNITED", 600, 500);
 }
 
 void MashScreen::randomBG() {

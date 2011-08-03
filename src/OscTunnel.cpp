@@ -153,11 +153,11 @@ void OscTunnel::update() {
                             switch (m.getArgAsInt32(2)) {
                                 case 1:
                                     dataHub->box2dColor.a = newAlpha;
-                                    cout << dataHub->box2dColor.a << " box2d alpha" << endl;
+                                    cout << (int)dataHub->box2dColor.a << " box2d alpha" << endl;
                                     break;
                                 case 2:
                                     dataHub->flowColor.a = newAlpha;
-                                    cout << dataHub->flowColor.a << " flow alpha" << endl;
+                                    cout << (int)dataHub->flowColor.a << " flow alpha" << endl;
                                     break;
                                 case 3:
                                     dataHub->pongColor.a = newAlpha;
@@ -165,7 +165,7 @@ void OscTunnel::update() {
                                     break;
                                 case 4:
                                     dataHub->asciiBackgroundColor.a = newAlpha;
-                                    cout << dataHub->asciiBackgroundColor.a << " asciibg alpha" << endl;
+                                    cout << (int)dataHub->asciiBackgroundColor.a << " asciibg alpha" << endl;
                                     break;
                             }
                             break;

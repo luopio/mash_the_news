@@ -62,7 +62,7 @@ void Word::draw(int x, int y)
 
 void Word::draw(int x, int y, int r, int g, int b)
 {
-    ofSetColor(r, g, b);
+    ofSetColor(r, g, b, 255);
 
     int letterCounter = 0;
     for(vector<Letter *>::iterator ii = letters.begin();

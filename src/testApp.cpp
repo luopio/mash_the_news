@@ -118,6 +118,7 @@ void testApp::draw()
     screen->draw();
 
     if(dataHub.bDebug) {
+        ofSetColor(255);
         string debug = "";
         debug += "strength: "+ofToString(dataHub.strength) + "\n";
         debug += "damping:  "+ofToString(dataHub.damping) + "\n";
