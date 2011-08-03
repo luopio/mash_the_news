@@ -112,24 +112,8 @@ void testApp::update(){
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
-
-    #ifdef _USE_KINECT
-        //if (oscTunnel->kDebug) {
-         //   scaleImage = grayImage;
-            //scaleImage.draw(ofGetWidth() / 2 - scaleImage.width / 2, ofGetHeight() / 2 - scaleImage.height / 2);
-         //   scaleImage.draw(0,0, ofGetWidth(), ofGetHeight());
-        //}
-        //scaleImage.draw()
-	#else
-
-    #endif
-
-    if(dataHub.bDebug) {
-        //grayImage.draw(20,20);
-        grayImage.draw(0,0, ofGetWidth(), ofGetHeight());
-        grayDiff.draw(0,0, ofGetWidth(), ofGetHeight());
-    }
+void testApp::draw()
+{
 
     screen->draw();
 

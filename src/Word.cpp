@@ -33,7 +33,7 @@ Word::Word(string word)
 
 void Word::draw()
 {
-    if(color != NULL) {
+    if(color.r && color.g && color.b) {
         ofSetColor(color);
     }
 
@@ -41,4 +41,34 @@ void Word::draw()
         ii != letters.end(); ++ii) {
         (*ii)->draw();
     }
+    ofSetColor(255);
+}
+
+void Word::draw(int x, int y)
+{
+    if(color.r && color.g && color.b) {
+        ofSetColor(color);
+    }
+
+    int letterCounter = 0;
+    for(vector<Letter *>::iterator ii = letters.begin();
+        ii != letters.end(); ++ii) {
+        (*ii)->draw(x + letterCounter * FONT_W, y);
+        letterCounter++;
+    }
+    ofSetColor(255);
+}
+
+
+void Word::draw(int x, int y, int r, int g, int b)
+{
+    ofSetColor(r, g, b);
+
+    int letterCounter = 0;
+    for(vector<Letter *>::iterator ii = letters.begin();
+        ii != letters.end(); ++ii) {
+        (*ii)->draw(x + letterCounter * FONT_W, y);
+        letterCounter++;
+    }
+    ofSetColor(255);
 }

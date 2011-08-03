@@ -43,6 +43,9 @@ void MashScreen::setup()
 
     box2d = new Box2dMashEngine(*dataHub);
     flow = new Flow(*dataHub);
+    // box2d->setup();
+    flow->setup();
+
     bFlowActive = true;
     bBox2dActive = false;
 
@@ -86,9 +89,9 @@ void MashScreen::update()
 
 void MashScreen::draw()
 {
-    asciiBG.draw();
+    // asciiBG.draw();
 
-    cmv->draw();
+    //cmv->draw();
 
     if(bFlowActive) {
         flow->draw();

@@ -1,9 +1,22 @@
-#ifndef _FLOW_H
-#define _FLOW_H
+#pragma once
 
 #include "DataHub.h"
 #include "ofxBox2d.h"
 #include "ofxOpenCv.h"
+#include "Word.h"
+#include "Message.h"
+
+class FlowingWord
+{
+    public:
+        ofFbo fbo;
+        float col, row;
+        float speed;
+        Message * msg;
+        Word * word;
+        float impulse;
+        int pixelWidth;
+};
 
 class Flow
 {
@@ -17,6 +30,7 @@ class Flow
 
         DataHub* dataHub;
         ofxCvGrayscaleImage tempImg;
+        vector<FlowingWord *> words;
 
         float lastUpdateTime;
         bool bDebug;
@@ -24,5 +38,3 @@ class Flow
     protected:
     private:
 };
-
-#endif // Flow_H

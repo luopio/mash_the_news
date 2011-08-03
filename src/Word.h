@@ -16,4 +16,6 @@ class Word
         vector<Letter *> letters;
         ofColor color;
         void draw();
+        void draw(int x, int y);
+        void draw(int x, int y, int r, int g, int b);
 };
