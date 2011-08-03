@@ -6,7 +6,9 @@
 #include "settings.h"
 
 #ifdef _USE_OFFBO
-#define ofxFBOTexture ofFbo
+    #define FBO ofFbo
+#else
+    #define FBO ofxFBOTexture
 #endif
 
 class CameraMaskViewer
@@ -15,17 +17,17 @@ class CameraMaskViewer
         CameraMaskViewer(DataHub * h, ofxPango * p);
         virtual ~CameraMaskViewer();
 
-        void setSign(string s);
-
         void draw();
 
         DataHub * dataHub;
         ofxPango * pango;
-        ofxCvGrayscaleImage tempImg;
 
-        ofxFBOTexture *tex;
+        FBO *tex1;
+        FBO *tex2;
+        FBO *tex3;
 
     protected:
+        void setSign(string s, FBO * tex);
     private:
 };
 

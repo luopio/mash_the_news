@@ -1,22 +1,18 @@
 #include "CameraMaskViewer.h"
 
-#include "settings.h"
-
-#ifdef _USE_OFFBO
-#define ofxFBOTexture ofFbo
-#endif
-
 CameraMaskViewer::CameraMaskViewer(DataHub * h, ofxPango * p)
 {
-    tex = NULL;
-
     dataHub = h;
     pango = p;
-
-    tempImg.allocate(*(dataHub->cols), *(dataHub->rows));
+    tex1 = new FBO();
+    tex2 = new FBO();
+    tex3 = new FBO();
+    setSign("@", tex1);
+    setSign("*", tex2);
+    setSign(".", tex3);
 }
 
-void CameraMaskViewer::setSign (string s) {
+void CameraMaskViewer::setSign (string s, FBO * tex) {
 
     ofxPCContext * context = pango->createContextWithSurface(FONT_W, FONT_H);
     context->color4f(1.0f, 1.0f, 1.0f, 0.0f);
@@ -44,7 +40,7 @@ void CameraMaskViewer::setSign (string s) {
     text_image.setFromPixels(context->getSurface()->getPixels(), text_image.width, text_image.height, OF_IMAGE_COLOR_ALPHA, true);
 
     //tex = new ofFbo();
-    tex = new ofxFBOTexture();
+    // tex = new FBO();
     //tex->allocate(font->stringWidth(letter), font->getLineHeight());
     tex->allocate(FONT_W, FONT_H);
     tex->begin();
@@ -59,17 +55,21 @@ void CameraMaskViewer::setSign (string s) {
 }
 
 void CameraMaskViewer::draw() {
-    if (tex==NULL) return;
 
-   // tempImg.scaleIntoMe(*(dataHub->grayDiff));
     unsigned char *pixels = dataHub->roCoImg->getPixels();
+    ofSetColor(255, 255, 255, 255);
 
-    for (int x = 0; x < tempImg.width; ++x) {
-        for(int y = 0; y < tempImg.height; ++y) {
+    for (int x = 0; x < dataHub->roCoImg->width; ++x) {
+        for(int y = 0; y < dataHub->roCoImg->height; ++y) {
 //            if (y == 0)
 //                tex->draw(x * FONT_SIZE, y * FONT_SIZE * 2);
-            if(pixels[x + y * tempImg.width]) {
-                tex->draw(x * FONT_W, y * FONT_H);
+            unsigned int val = pixels[x + y * dataHub->roCoImg->width];
+            if(val > 220) {
+                tex3->draw(x * FONT_W, y * FONT_H);
+            } else if(val > 150) {
+                tex2->draw(x * FONT_W, y * FONT_H);
+            } else if(val){
+                tex1->draw(x * FONT_W, y * FONT_H);
             }
         }
 

@@ -11,7 +11,9 @@
 #include "settings.h"
 
 #ifdef _USE_OFFBO
-#define ofxFBOTexture ofFbo
+    #define FBO ofFbo
+#else
+    #define FBO ofxFBOTexture
 #endif
 
 class MashScreen
@@ -35,6 +37,7 @@ class MashScreen
 
         void hilightWordAt(int wordIndex);
         void addMessage(string msg);
+        void freezeFrame();
         void randomBG();
 
         AsciiBackground asciiBG;
@@ -47,12 +50,16 @@ class MashScreen
         ofxPCContext* context;
         ofxPCPangoLayout* layout;
 
-        ofxFBOTexture flowFbo;
-        ofxFBOTexture box2dFbo;
-        ofxFBOTexture pongFbo;
-        ofxFBOTexture asciiBackgroundFbo;
+        FBO flowFbo;
+        FBO box2dFbo;
+        FBO pongFbo;
+        FBO asciiBackgroundFbo;
 
+        vector<FBO *> freezes;
+        vector<int> freezeOpacities;
+        int curFreezeFrame;
         // ofShader shader;
+        float lastUpdateTime;
 
     protected:
 

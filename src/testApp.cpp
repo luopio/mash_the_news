@@ -67,20 +67,23 @@ void testApp::update(){
             #ifdef _MIRROR_VIDEO_IMAGE
                 grayImage.mirror(false,true);
             #endif
+
+            // thresholding off, does very little good and makes result image binary value
             //we do two thresholds - one for the far plane and one for the near plane
             //we then do a cvAnd to get the pixels which are a union of the two thresholds.
-            grayThreshFar = grayImage;
-            grayThresh = grayImage;
-            grayThresh.threshold(dataHub.kThreshold, true);
-            grayThreshFar.threshold(dataHub.kFarThreshold);
-            cvAnd(grayThresh.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
+            //grayThreshFar = grayImage;
+            //grayThresh = grayImage;
+            //grayThresh.threshold(dataHub.kThreshold, true);
+            //grayThreshFar.threshold(dataHub.kFarThreshold);
+            //cvAnd(grayThresh.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
+            //grayImage.flagImageChanged();
 
-            grayImage.flagImageChanged();
             grayDiff = grayImage; // ????
 
             //roCoImg = grayImage.scale()
 
             //grayImage.flagImageChanged();
+            dataHub.roCoImg->scaleIntoMe(grayDiff);
         }
 
     #else
@@ -105,6 +108,7 @@ void testApp::update(){
             // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
             // also, find holes is set to true so we will get interior contours as well....
             //contourFinder.findContours(grayDiff, 20, (340*240)/3, 10, true);	// find holes
+            dataHub->roCoImg->scaleIntoMe(grayDiff);
         }
 
     #endif
@@ -119,6 +123,7 @@ void testApp::draw()
 
     if(dataHub.bDebug) {
         ofSetColor(255);
+        grayDiff.draw(0, 0);
         string debug = "";
         debug += "strength: "+ofToString(dataHub.strength) + "\n";
         debug += "damping:  "+ofToString(dataHub.damping) + "\n";
@@ -135,6 +140,7 @@ void testApp::keyPressed(int key){
     {
         case ' ':
             bLearnBakground = true;
+            screen->freezeFrame();
             break;
 
         case OF_KEY_RIGHT:
