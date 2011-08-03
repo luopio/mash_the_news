@@ -103,7 +103,7 @@ void MashScreen::update()
 
     // control refresh rate for the rest
     float now = ofGetElapsedTimef();
-    if(now - lastUpdateTime < 0.20) {
+    if(now - lastUpdateTime < 0.15) {
         return;
     }
     lastUpdateTime = now;
