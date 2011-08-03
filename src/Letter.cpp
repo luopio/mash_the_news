@@ -20,16 +20,14 @@ void Letter::prerender(ofxPango *p, ofxPCPangoFontDescription* font)
 {
     ofSetColor(255, 255, 255, 255);
     ofxPCContext * context = p->createContextWithSurface(FONT_W, FONT_H);
-    context->color4f(0.0f, 0.0f, 0.0f, 0.0f);
-    context->paint();
-    ofxPCPangoLayout * layout = context->createPangoLayout();
 
+    context->color4f(1.0f, 0.0f, 0.0f, 1.0f);
+    ofxPCPangoLayout* layout = context->createPangoLayout();
+    layout = context->createPangoLayout();
+    layout->fill(0.0f,0.0f,0.0f,1.0f);
+    layout->setTextColor(1.0f,1.0,1.0f,1.0f);
     layout->setFontDescription(*font);
     layout->setText(letter);
-    context->color4f(1.0f, 1.0f, 1.0f, 1.0f);
-
-    //cout << "prerender : " << letter << endl;
-
     layout->show();
 
     /* Hopefully this will be useless step. It has to be!!! */

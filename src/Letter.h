@@ -1,7 +1,7 @@
 #ifndef LETTER_H
 #define LETTER_H
 
-#define FONT_SIZE 9
+#define FONT_SIZE 11
 #define FONT_W 9
 #define FONT_H 18
 

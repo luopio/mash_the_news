@@ -23,15 +23,18 @@ Pongalong::~Pongalong()
 void Pongalong::addFrame(string s) {
      if (pango==NULL || dataHub==NULL) return;
 
-    ofxPCContext* context = pango->createContextWithSurface(FONT_SIZE*8, FONT_SIZE*8);
+    ofxPCContext* context = pango->createContextWithSurface(FONT_W*8, FONT_W*8);
     context->color4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+    cout << "fontsize" << FONT_SIZE << endl;
 
     ofxPCPangoLayout* layout = context->createPangoLayout();
 
     //layout->color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
 
-
+    layout->fill(0.0f,0.0f,0.0f,1.0f);
+    layout->setTextColor(1.0f,0.0,0.0f,1.0f);
     layout->setText(s);
     layout->setFontDescription(*(dataHub->font));
 
@@ -73,7 +76,7 @@ void Pongalong::draw() {
    ofColor c;
         c.r = 255; c.g = 255; c.b = 0;
    ofSetColor(c);
-    tex->draw((((int)x)/FONT_SIZE)*FONT_SIZE,(((int)y/(FONT_SIZE*2))*FONT_SIZE*2));
+    tex->draw((((int)x)/FONT_W)*FONT_W,(((int)y/(FONT_H))*FONT_H));
 
        // control refresh rate
     float now = ofGetElapsedTimef();
@@ -95,7 +98,7 @@ void Pongalong::draw() {
 
 
     for (int xx = 0; xx < 8 ; xx++) {
-        if (pixels[(xx+(int)x/FONT_SIZE) + ((int)y/(FONT_SIZE*2)) * (*(dataHub->cols))]) {
+        if (pixels[(xx+(int)x/FONT_W) + ((int)y/(FONT_W*2)) * (*(dataHub->cols))]) {
             //cout << "high" << endl;
             dy = abs(dy);
         }
@@ -103,7 +106,7 @@ void Pongalong::draw() {
     }
 
     for (int xx = 0; xx < 8 ; xx++) {
-        if (pixels[(xx+(int)x/FONT_SIZE) + ((int)y/(FONT_SIZE*2)+4) * (*(dataHub->cols))]) {
+        if (pixels[(xx+(int)x/FONT_W) + ((int)y/(FONT_W*2)+4) * (*(dataHub->cols))]) {
             //cout << "low" << endl;
             dy = abs(dy)*-1;
         }
@@ -111,7 +114,7 @@ void Pongalong::draw() {
     }
 
     for (int xx = 0; xx < 4 ; xx++) {
-        if (pixels[((int)x/FONT_SIZE) + ((int)y/(FONT_SIZE*2)+xx) * (*(dataHub->cols))]) {
+        if (pixels[((int)x/FONT_W) + ((int)y/(FONT_W*2)+xx) * (*(dataHub->cols))]) {
             //cout << "left" << endl;
             dx = abs(dx);
         }
@@ -119,7 +122,7 @@ void Pongalong::draw() {
     }
 
       for (int xx = 0; xx < 4 ; xx++) {
-        if (pixels[(8+(int)x/FONT_SIZE) + ((int)y/(FONT_SIZE*2)+xx) * (*(dataHub->cols))]) {
+        if (pixels[(8+(int)x/FONT_W) + ((int)y/(FONT_W*2)+xx) * (*(dataHub->cols))]) {
            // cout << "right" << endl;
             dx = abs(dx)*-1;
         }
@@ -128,9 +131,9 @@ void Pongalong::draw() {
 
 
     if (x < 0) x = 0;
-    if (x > ofGetWidth()-FONT_SIZE*8) x = ofGetWidth()-FONT_SIZE*8;
+    if (x > ofGetWidth()-FONT_W*8) x = ofGetWidth()-FONT_W*8;
     if (y < 0) y = 0;
-    if (y > ofGetHeight()-FONT_SIZE*8) y = ofGetHeight()-FONT_SIZE*8;
+    if (y > ofGetHeight()-FONT_W*8) y = ofGetHeight()-FONT_W*8;
 
 
 
