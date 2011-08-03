@@ -18,26 +18,35 @@ CameraMaskViewer::CameraMaskViewer(DataHub * h, ofxPango * p)
 
 void CameraMaskViewer::setSign (string s) {
 
-    ofxPCContext * context = pango->createContextWithSurface(FONT_SIZE, FONT_SIZE*2);
-    context->color4f(0.0f, 0.0f, 0.0f, 0.0f);
-    context->paint();
+    ofxPCContext * context = pango->createContextWithSurface(FONT_W, FONT_H);
+    context->color4f(1.0f, 1.0f, 1.0f, 0.0f);
+    //context->paint();
     ofxPCPangoLayout * layout = context->createPangoLayout();
 
+    layout->fill(0.0f,0.0f,0.0f,1.0f);
+    layout->setTextColor(1.0f,1.0,1.0f,1.0f);
     layout->setFontDescription(*(dataHub->font));
     layout->setText(s);
-    context->color4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+    // layout->setWidth(ofGetWidth());
+
+    //layout->show
+
+    //layout->setJustify(true);
+    //context->color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
     layout->show();
 
-    /* Hopefully this will be useless step. It has to be!!! */
+    //ofFill();
     ofImage text_image;
+    //text_image.clear();
     text_image.allocate(context->getSurface()->getWidth(), context->getSurface()->getHeight(), OF_IMAGE_COLOR_ALPHA);
     text_image.setFromPixels(context->getSurface()->getPixels(), text_image.width, text_image.height, OF_IMAGE_COLOR_ALPHA, true);
 
     //tex = new ofFbo();
     tex = new ofxFBOTexture();
     //tex->allocate(font->stringWidth(letter), font->getLineHeight());
-    tex->allocate(FONT_SIZE, FONT_SIZE*2);
+    tex->allocate(FONT_W, FONT_H);
     tex->begin();
         //ofFill();
         //ofSetColor(0, 0, 0);
@@ -60,7 +69,7 @@ void CameraMaskViewer::draw() {
 //            if (y == 0)
 //                tex->draw(x * FONT_SIZE, y * FONT_SIZE * 2);
             if(pixels[x + y * tempImg.width]) {
-                tex->draw(x * FONT_SIZE, y * FONT_SIZE * 2);
+                tex->draw(x * FONT_W, y * FONT_H);
             }
         }
 

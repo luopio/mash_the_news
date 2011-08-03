@@ -32,9 +32,16 @@ void MashScreen::setup()
     pango = new ofxPango();
     dataHub->font = new ofxPCPangoFontDescription();
     //dataHub->font->createFromString("Arial Unicode MS 11");
-    //dataHub->font->createFromString("Courier 11");
-    dataHub->font->createFromString("Monospace 11");
+    dataHub->font->createFromString("Courier 11");
+    //dataHub->font->createFromString("Monospace 11");
     dataHub->font->setWeight(PANGO_WEIGHT_ULTRAHEAVY);
+
+    cairo_font_options_t * co = cairo_font_options_create ();
+
+    cairo_font_options_set_antialias(co,CAIRO_ANTIALIAS_NONE);
+
+
+
     //dataHub->font->setStyle(PANGO_STYLE_ITALIC);
 
     //messages.push_back( new Message(string("100 DANCERS UNITED"), pango, dataHub->font));
@@ -66,8 +73,8 @@ void MashScreen::setup()
     pong = new Pongalong(dataHub,pango);
 
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
-    dataHub->flowColor              = ofColor(255, 255, 255, 255);
-    dataHub->pongColor              = ofColor(255, 255, 255, 0);
+    dataHub->flowColor              = ofColor(255, 255, 255, 0);
+    dataHub->pongColor              = ofColor(255, 255, 255, 255);
     dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 255);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
