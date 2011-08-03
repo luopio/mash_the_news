@@ -41,6 +41,12 @@ class MashScreen
         ofxPCContext* context;
         ofxPCPangoLayout* layout;
 
+        ofFbo flowFbo;
+        ofFbo box2dFbo;
+        ofFbo pongFbo;
+        ofFbo asciiBackgroundFbo;
+
+
         // ofShader shader;
 
     protected:
