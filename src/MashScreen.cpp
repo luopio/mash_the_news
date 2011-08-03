@@ -98,17 +98,17 @@ void MashScreen::draw()
 
     ofSetColor(255);
 
-    if(dataHub->asciiBackgroundColor.a) {
+ /*   if(dataHub->asciiBackgroundColor.a) {
         asciiBackgroundFbo.begin();
             asciiBG.draw();
         asciiBackgroundFbo.end();
         ofSetColor(dataHub->asciiBackgroundColor);
         asciiBackgroundFbo.draw(0, 0);
     }
-
+*/
     cmv->draw();
 
-    if(dataHub->flowColor.a) {
+ /*   if(dataHub->flowColor.a) {
         flowFbo.begin();
             flow->draw();
         flowFbo.end();
@@ -131,7 +131,9 @@ void MashScreen::draw()
         pongFbo.end();
         ofSetColor(dataHub->pongColor);
         pongFbo.draw(0, 0);
-    }
+    }*/
+
+    pong->draw();
 }
 
 void MashScreen::randomBG() {
