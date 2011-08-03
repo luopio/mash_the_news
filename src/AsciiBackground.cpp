@@ -38,6 +38,8 @@ void AsciiBackground::setupFBO(ofxPCContext* c, ofxPCPangoLayout* l) {
     layout = l;
 }
 
+
+
 void AsciiBackground::setBackground(string s) {
     if (pango==NULL || dataHub==NULL) return;
 

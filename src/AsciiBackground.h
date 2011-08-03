@@ -24,6 +24,7 @@ class AsciiBackground
         virtual ~AsciiBackground();
 
         void setBackground(string s);
+        void addFrame(string s);
         void addDatahub(DataHub * h);
         void setupFBO(ofxPCContext* c, ofxPCPangoLayout* l);
 
@@ -37,7 +38,8 @@ class AsciiBackground
 
         ofxFBOTexture *tex;
         ofImage text_image;
-        //ofFbo *tex;
+
+        vector<ofxFBOTexture*> frames;
 
         ofxPango * pango;
         ofxPCContext* context;
