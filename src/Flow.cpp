@@ -4,7 +4,6 @@ Flow::Flow(DataHub &h)
 {
     dataHub = &h;
     bDebug = true;
-    tempImg.allocate(*(dataHub->cols), *(dataHub->rows));
 }
 
 Flow::~Flow()
@@ -14,6 +13,7 @@ Flow::~Flow()
 
 void Flow::setup()
 {
+    words.clear();
     Message *m = NULL;
     int filledRows = 0;
     while(filledRows < *(dataHub->rows)) {
@@ -46,20 +46,56 @@ void Flow::setup()
     }
 }
 
+void Flow::addMessage(Message *m)
+{
+    int desiredRandomRow = ofRandom(0, *(dataHub->rows));
+
+    for(vector<FlowingWord *>::iterator i = words.begin(); i != words.end(); ++i)
+    {
+        FlowingWord * fw = *(i);
+        if(fw->row == desiredRandomRow) {
+            words.erase(i);
+        }
+    }
+
+    int filledCols = 0;
+
+    float speed = ofRandom(-2, 2);
+
+    while(filledCols < (*dataHub->cols)) {
+        for(vector<Word *>::iterator wi = m->words.begin();
+                wi != m->words.end(); ++wi) {
+            FlowingWord * fw = new FlowingWord();
+            fw->msg = m;
+            fw->word = *wi;
+            fw->col = filledCols;
+            if(fw->col + fw->word->letters.size() > *(dataHub->cols)) {
+                filledCols = *(dataHub->cols);
+                break;
+            }
+            fw->row = desiredRandomRow;
+            filledCols += (*wi)->letters.size() + 1; // + space
+            fw->speed = speed;
+            fw->impulse = 255; // hilight on add
+            words.push_back(fw);
+        }
+        filledCols += 4;
+    }
+}
+
 void Flow::update()
 {
-    tempImg.scaleIntoMe(*(dataHub->grayDiff));
     for(int i = 0; i < words.size(); i++) {
         FlowingWord * fw = words[i];
         int centerPixelX = fw->col * FONT_W + fw->pixelWidth / 2;
         int centerPixelY = fw->row * FONT_H + FONT_H / 2;
 
-        int smallCenterX = centerPixelX / (ofGetWidth()  / (float)tempImg.width);
-        int smallCenterY = centerPixelY / (ofGetHeight() / (float)tempImg.height);
+        int smallCenterX = centerPixelX / (ofGetWidth()  / (float)dataHub->roCoImg->width);
+        int smallCenterY = centerPixelY / (ofGetHeight() / (float)dataHub->roCoImg->height);
 
-        int centerPixelIndex = smallCenterX + smallCenterY * tempImg.width;
+        int centerPixelIndex = smallCenterX + smallCenterY * dataHub->roCoImg->width;
 
-        if(tempImg.getPixels()[centerPixelIndex] > 0) {
+        if(dataHub->roCoImg->getPixels()[centerPixelIndex] > 0) {
             fw->impulse = 255;
         }
     }
@@ -100,7 +136,18 @@ void Flow::draw()
     }
 
     if(dataHub->bDebug) {
-        tempImg.draw(ofGetWidth() - 325, 5);
+        dataHub->roCoImg->draw(ofGetWidth() - 325, 5);
     }
 
+}
+
+void Flow::hilightFirstWord(Word *w)
+{
+    for(int i = 0; i < words.size(); i++) {
+        FlowingWord * fw = words[i];
+        if(fw->word == w) {
+            fw->impulse = 255;
+            return;
+        }
+    }
 }

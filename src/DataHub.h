@@ -27,4 +27,9 @@ struct DataHub
     float pongSpeed;
 
     ofxPCPangoFontDescription* font;
+
+    ofColor box2dColor;
+    ofColor flowColor;
+    ofColor pongColor;
+    ofColor asciiBackgroundColor;
 };

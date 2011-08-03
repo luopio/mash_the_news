@@ -19,8 +19,6 @@ class MashScreen
 
         Flow *flow;
         Box2dMashEngine *box2d;
-        bool bFlowActive;
-        bool bBox2dActive;
 
         DataHub *dataHub;
         unsigned int rows, cols;
@@ -29,6 +27,8 @@ class MashScreen
         void update();
         void draw();
 
+        void hilightWordAt(int wordIndex);
+        void addMessage(string msg);
         void randomBG();
 
         AsciiBackground asciiBG;
