@@ -4,7 +4,6 @@ MashScreen::MashScreen(DataHub &h)
 {
     dataHub = &h;
     dataHub->messages = &messages;
-
 }
 
 MashScreen::~MashScreen()
@@ -23,15 +22,7 @@ void MashScreen::setup()
     dataHub->cols = &cols;
     cout << "cols&rows" << cols << "," << rows << "w&h " << ofGetWidth() << "," << ofGetHeight() << endl;
 
-   /* int row_index = 0;
-    for(vector<Message *>::iterator mi = messages.begin(); mi != messages.end(); ++mi) {
-        (*mi)->prerender(&font);
-        (*mi)->setPosition(0, row_index);
-        row_index++;
-    }*/
-
-      /* Pango stuff */
-
+    /* Pango stuff */
     pango = new ofxPango();
     dataHub->font = new ofxPCPangoFontDescription();
     //fd->createFromString("Arial Unicode MS 11");
@@ -45,9 +36,6 @@ void MashScreen::setup()
     flow = new Flow(*dataHub);
     // box2d->setup();
     flow->setup();
-
-    bFlowActive = true;
-    bBox2dActive = false;
 
     ofBackground(0, 0, 0);
 
@@ -66,22 +54,25 @@ void MashScreen::setup()
     // shader.setUniformTexture("tex0", fbo, fbo.getTextureReference().texData.textureID); //send which texture to the shader
     pong = new Pongalong(dataHub,pango);
 
+    dataHub->box2dColor             = ofColor(255, 255, 255, 0);
+    dataHub->flowColor              = ofColor(255, 255, 255, 255);
+    dataHub->pongColor              = ofColor(255, 255, 255, 0);
+    dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 0);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
-    dataHub->roCoImg->allocate(*(dataHub->rows),*(dataHub->cols));
+    dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
 }
 
 
 void MashScreen::update()
 {
-
     dataHub->roCoImg->scaleIntoMe(*(dataHub->grayDiff));
 
-    if(bFlowActive) {
+    if(dataHub->flowColor.a) {
         flow->update();
     }
 
-    if(bBox2dActive) {
+    if(dataHub->box2dColor.a) {
         box2d->update();
     }
 }
@@ -89,19 +80,29 @@ void MashScreen::update()
 
 void MashScreen::draw()
 {
-    // asciiBG.draw();
+    ofSetColor(255);
+
+    if(dataHub->asciiBackgroundColor.a) {
+        ofSetColor(dataHub->asciiBackgroundColor);
+        asciiBG.draw();
+    }
 
     //cmv->draw();
 
-    if(bFlowActive) {
+    if(dataHub->flowColor.a) {
+        ofSetColor(dataHub->flowColor);
         flow->draw();
     }
 
-    if(bBox2dActive) {
+    if(dataHub->box2dColor.a) {
+        ofSetColor(dataHub->box2dColor);
         box2d->draw();
     }
 
-    pong->draw();
+    if(dataHub->pongColor.a) {
+        ofSetColor(dataHub->pongColor);
+        pong->draw();
+    }
 }
 
 void MashScreen::randomBG() {
@@ -121,4 +122,31 @@ void MashScreen::randomBG() {
 
     asciiBG.setBackground(tmps);
 
+}
+
+void MashScreen::hilightWordAt(int wordIndex)
+{
+    Message *m = NULL;
+    Word *w = NULL;
+    Word *wantedWord = NULL;
+    int curIndex = 0;
+    for(int i = 0; i < dataHub->messages->size(); i++) {
+        m = (*dataHub->messages)[i];
+        for(vector<Word *>::iterator wi = m->words.begin();
+            wi != m->words.end(); ++wi) {
+            if(curIndex == wordIndex) {
+                wantedWord = *wi;
+                flow->hilightFirstWord(wantedWord);
+                return;
+            }
+            curIndex++;
+        }
+    }
+}
+
+void MashScreen::addMessage(string msg)
+{
+    Message *m = new Message(msg, pango, dataHub->font);
+    messages.push_back(m);
+    flow->addMessage(m);
 }

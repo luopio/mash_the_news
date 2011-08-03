@@ -63,10 +63,11 @@ void OscTunnel::update() {
             }
             else if ( m.getAddress() == "/sms" )
             {
-                //cout << "SMS: " << m.getArgAsString( 0 ) << endl;
-                //screen->messages.push_back( new Message(m.getArgAsString(0)));
+                cout << "SMS: " << m.getArgAsString( 0 ) << endl;
+                screen->addMessage(m.getArgAsString(0));
 
-            }  else if ( m.getAddress() == "/ascii" )  {
+            }
+            else if ( m.getAddress() == "/ascii" )  {
                 cout << "ascii: " << m.getArgAsString( 1 ) << endl;
                 if (m.getArgAsInt32(0)) {
                     bgString = m.getArgAsString(1);
@@ -75,7 +76,8 @@ void OscTunnel::update() {
                 }
                 //screen->messages.push_back( new Message(m.getArgAsString(0)));
 
-            } else if ( m.getAddress() == "/oscmidi" ) {
+            }
+            else if ( m.getAddress() == "/oscmidi" ) {
                 if (m.getArgAsString(0)== "noteoff") {
                     cout << "oscmidi noteoff: ch: " << m.getArgAsInt32(1) << " note: " << m.getArgAsInt32(2) << " velocity: " << m.getArgAsInt32(3) << endl;
                     if (m.getArgAsInt32(2)==40) {
@@ -84,6 +86,7 @@ void OscTunnel::update() {
                     }
                 } else if (m.getArgAsString(0)== "noteon") {
                     //cout << "oscmidi noteon:  ch: " << m.getArgAsInt32(1) << " note: " << m.getArgAsInt32(2) << " velocity: " << m.getArgAsInt32(3) << endl;
+                    // corresponds to the midi channel (0-3)
                     switch (m.getArgAsInt32(1)) {
                         case 0:
                             break;
@@ -115,10 +118,11 @@ void OscTunnel::update() {
 
 
 
-                } else if (m.getArgAsString(0)== "cc") {
-
-
-                    switch (m.getArgAsInt32(1)) { /* Which channel from 0 - 3 */
+                }
+                else if (m.getArgAsString(0)== "cc") {
+                    int newAlpha = 0;
+                    /* Which channel from 0 - 3 */
+                    switch (m.getArgAsInt32(1)) {
 
                         /* Channel 0 is for spaghetti!  */
                         case 0:
@@ -141,7 +145,29 @@ void OscTunnel::update() {
                                     break;
 
                             }
+                            break;
+
+                        /* modify alpha values of the layers */
                         case 1:
+                            newAlpha = m.getArgAsInt32(3) * 2;
+                            switch (m.getArgAsInt32(2)) {
+                                case 1:
+                                    dataHub->box2dColor.a = newAlpha;
+                                    cout << dataHub->box2dColor.a << " box2d alpha" << endl;
+                                    break;
+                                case 2:
+                                    dataHub->flowColor.a = newAlpha;
+                                    cout << dataHub->flowColor.a << " flow alpha" << endl;
+                                    break;
+                                case 3:
+                                    dataHub->pongColor.a = newAlpha;
+                                    cout << dataHub->pongColor.a << " pong alpha" << endl;
+                                    break;
+                                case 4:
+                                    dataHub->asciiBackgroundColor.a = newAlpha;
+                                    cout << dataHub->asciiBackgroundColor.a << " asciibg alpha" << endl;
+                                    break;
+                            }
                             break;
 
                         case 2:
@@ -177,8 +203,16 @@ void OscTunnel::update() {
                         break;
                     }
                 }
-            } else {
-                cout << "unknown osc message received!!!" << endl;
+            }
+            else if ( m.getAddress() == "/hilite" )
+            {
+                int wordIndex = m.getArgAsInt32(0);
+                cout << "HILITE: " << m.getArgAsInt32(0) << endl;
+                screen->hilightWordAt(wordIndex);
+
+            }
+            else {
+                cout << "unknown osc message received: " << m.getAddress() << endl;
             }
         } catch ( ... ) {
             cout << "problematic osc message gone to dev/null!" << endl;

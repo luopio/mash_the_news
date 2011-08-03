@@ -27,9 +27,10 @@ class Flow
         void setup();
         void update();
         void draw();
+        void hilightFirstWord(Word *w);
+        void addMessage(Message *m);
 
         DataHub* dataHub;
-        ofxCvGrayscaleImage tempImg;
         vector<FlowingWord *> words;
 
         float lastUpdateTime;
