@@ -46,7 +46,6 @@ class MashScreen
         ofFbo pongFbo;
         ofFbo asciiBackgroundFbo;
 
-
         // ofShader shader;
 
     protected:
