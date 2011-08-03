@@ -4,8 +4,6 @@ MashScreen::MashScreen(DataHub &h)
 {
     dataHub = &h;
     dataHub->messages = &messages;
-    dataHub->currentEngine = &currentEngineIndex;
-    hilightedMessageIndex = -5;
 
 }
 
@@ -39,18 +37,14 @@ void MashScreen::setup()
     //fd->createFromString("Arial Unicode MS 11");
     dataHub->font->createFromString("Courier 11");
 
-    messages.push_back( new Message(string("ämoro mitas jatkä"), pango, dataHub->font));
+    messages.push_back( new Message(string("moro mitas jatkä"), pango, dataHub->font));
     messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
-    messages.push_back( new Message(string("öTervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
+    messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
 
-    Box2dMashEngine *box2dME = new Box2dMashEngine(*dataHub);
-    FlowMashEngine *flowME = new FlowMashEngine(*dataHub);
-
-    engines.push_back(flowME);
-    engines.push_back(box2dME);
-
-    currentEngineIndex = 0;
-    bJustChangedEngine = true;
+    box2d = new Box2dMashEngine(*dataHub);
+    flow = new Flow(*dataHub);
+    bFlowActive = true;
+    bBox2dActive = false;
 
     ofBackground(0, 0, 0);
 
@@ -73,12 +67,13 @@ void MashScreen::setup()
 
 void MashScreen::update()
 {
-    if(bJustChangedEngine) {
-        engines[currentEngineIndex]->setup();
-        bJustChangedEngine = false;
+    if(bFlowActive) {
+        flow->update();
     }
 
-    engines[currentEngineIndex]->update();
+    if(bBox2dActive) {
+        box2d->update();
+    }
 }
 
 
@@ -88,22 +83,12 @@ void MashScreen::draw()
 
     cmv->draw();
 
-    engines[currentEngineIndex]->draw();
-}
+    if(bFlowActive) {
+        flow->draw();
+    }
 
-void MashScreen::hilightMessage(int msgindex)
-{
-    cout << "HILIGHT:" << msgindex << endl;
-    hilightedMessageIndex = msgindex;
-}
-
-void MashScreen::changeEngine()
-{
-    if(currentEngineIndex < engines.size()) {
-        currentEngineIndex++;
-        bJustChangedEngine = true;
-    } else {
-        currentEngineIndex = 0;
+    if(bBox2dActive) {
+        box2d->draw();
     }
 }
 

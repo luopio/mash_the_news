@@ -1,17 +1,17 @@
-#include "FlowMashEngine.h"
+#include "Flow.h"
 
-FlowMashEngine::FlowMashEngine(DataHub &h)
+Flow::Flow(DataHub &h)
 {
     dataHub = &h;
     bDebug = true;
 }
 
-FlowMashEngine::~FlowMashEngine()
+Flow::~Flow()
 {
     //dtor
 }
 
-void FlowMashEngine::setup()
+void Flow::setup()
 {
     Message *m = NULL;
     for(int i = 0; i < dataHub->messages->size(); i++) {
@@ -20,7 +20,7 @@ void FlowMashEngine::setup()
     }
 }
 
-void FlowMashEngine::update()
+void Flow::update()
 {
     // control refresh rate
     float now = ofGetElapsedTimef();
@@ -57,7 +57,7 @@ void FlowMashEngine::update()
     }
 }
 
-void FlowMashEngine::draw()
+void Flow::draw()
 {
 
     for(int i = 0; i < dataHub->messages->size(); i++) {

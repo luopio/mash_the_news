@@ -2,12 +2,12 @@
 #define _TEST_APP
 
 #include "ofMain.h"
-#include "settings.h"
-#include "Letter.h"
-#include "MashScreen.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
+
+#include "settings.h"
 #include "DataHub.h"
+#include "MashScreen.h"
 #include "OscTunnel.h"
 
 class testApp : public ofBaseApp{

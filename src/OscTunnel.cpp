@@ -79,7 +79,8 @@ void OscTunnel::update() {
                 if (m.getArgAsString(0)== "noteoff") {
                     cout << "oscmidi noteoff: ch: " << m.getArgAsInt32(1) << " note: " << m.getArgAsInt32(2) << " velocity: " << m.getArgAsInt32(3) << endl;
                     if (m.getArgAsInt32(2)==40) {
-                        screen->hilightMessage(-10);
+                        // need to redo hilighting..
+                        // screen->hilightMessage(-10);
                     }
                 } else if (m.getArgAsString(0)== "noteon") {
                     //cout << "oscmidi noteon:  ch: " << m.getArgAsInt32(1) << " note: " << m.getArgAsInt32(2) << " velocity: " << m.getArgAsInt32(3) << endl;
@@ -96,10 +97,11 @@ void OscTunnel::update() {
                                     screen->messages.push_back( new Message(string("no huh,huh"), screen->pango, dataHub->font));
                                     break;
                                 case 40:
-                                    screen->hilightMessage(0);
+                                    // redoing...
+                                    //screen->hilightMessage(0);
                                     break;
                                 case 39:
-                                    screen->currentEngine->debug = !screen->currentEngine->debug;
+                                    // no more cur engine, removed debug
                                     break;
                                 case 41:
                                     dataHub->bDebug = !dataHub->bDebug;

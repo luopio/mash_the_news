@@ -1,11 +1,8 @@
-#ifndef MashScreen_H
-#define MashScreen_H
+#pragma once
 
-#include "Letter.h"
-#include "MashEngine.h"
-#include "FlowMashEngine.h"
-#include "Box2dMashEngine.h"
 #include "DataHub.h"
+#include "Flow.h"
+#include "Box2dMashEngine.h"
 #include "AsciiBackground.h"
 #include "ofxPango.h"
 #include "CameraMaskViewer.h"
@@ -19,12 +16,10 @@ class MashScreen
         vector<Message *> messages;
         ofTrueTypeFont font;
 
-        vector<MashEngine *> engines;
-        MashEngine *currentEngine;
-
-        int hilightedMessageIndex;
-        int currentEngineIndex;
-        bool bJustChangedEngine;
+        Flow *flow;
+        Box2dMashEngine *box2d;
+        bool bFlowActive;
+        bool bBox2dActive;
 
         DataHub *dataHub;
         unsigned int rows, cols;
@@ -32,8 +27,6 @@ class MashScreen
         void setup();
         void update();
         void draw();
-        void hilightMessage(int messageIndex);
-        void changeEngine();
 
         void randomBG();
 
@@ -52,5 +45,3 @@ class MashScreen
 
     private:
 };
-
-#endif // MashScreen_H
