@@ -32,4 +32,5 @@ struct DataHub
     ofColor flowColor;
     ofColor pongColor;
     ofColor asciiBackgroundColor;
+    ofColor CMVColor;
 };

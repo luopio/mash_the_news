@@ -1,11 +1,5 @@
 #include "MashScreen.h"
 
-#include "settings.h"
-
-#ifdef _USE_OFFBO
-#define ofxFBOTexture ofFbo
-#endif
-
 MashScreen::MashScreen(DataHub &h)
 {
     dataHub = &h;
@@ -22,8 +16,8 @@ void MashScreen::setup()
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
     font.loadFont("Sans", FONT_SIZE, true, true);
 
-    cols = ofGetWidth()  / 9; //FONT_SIZE;
-    rows = ofGetHeight() / 18; //FONT_SIZE;
+    cols = ofGetWidth()  / FONT_W;
+    rows = ofGetHeight() / FONT_H;
     dataHub->rows = &rows;
     dataHub->cols = &cols;
     cout << "cols&rows" << cols << "," << rows << "w&h " << ofGetWidth() << "," << ofGetHeight() << endl;
@@ -37,9 +31,9 @@ void MashScreen::setup()
     dataHub->font->setWeight(PANGO_WEIGHT_ULTRAHEAVY);
     //dataHub->font->setStyle(PANGO_STYLE_ITALIC);
 
-    //messages.push_back( new Message(string("100 DANCERS UNITED"), pango, dataHub->font));
-    messages.push_back( new Message(string("100 DANCERS"), &font));
-    messages.push_back( new Message(string("BE AWARE"), &font));
+    messages.push_back( new Message(string("100 DANCERS UNITED"), pango, dataHub->font));
+    //messages.push_back( new Message(string("100 DANCERS"), &font));
+    //messages.push_back( new Message(string("BE AWARE"), &font));
     //messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
     //messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
 
@@ -53,12 +47,11 @@ void MashScreen::setup()
     asciiBG.addDatahub(dataHub);
 
     cmv = new CameraMaskViewer(dataHub, pango);
-    cmv->setSign("@");
 
     asciiBG.setOfxPango(pango);
-    //asciiBG.setupFBO(context, layout);
+    // asciiBG.setupFBO(context, layout);
     randomBG();
-   //    asciiBG.setBackground(q);
+    // asciiBG.setBackground(q);
     // shader.load("shaders/noise.vert", "shaders/noise.frag");
     // cout << "binding tex0 to " << asciiBG.tex->getTextureReference().texData.textureID << endl;
     // shader.setUniform1i("tex0", fbo.getTextureReference().texData.textureID); //send which texture to the shader
@@ -79,20 +72,40 @@ void MashScreen::setup()
     pongFbo.allocate(ofGetWidth(), ofGetHeight());
     asciiBackgroundFbo.allocate(ofGetWidth(), ofGetHeight());
 
+    curFreezeFrame = 0;
+    for(int i = 0; i < 3; ++i) {
+        FBO *f = new FBO();
+        f->allocate(ofGetWidth(), ofGetHeight());
+        freezeOpacities.push_back(0);
+        freezes.push_back(f);
+    }
+
     ofEnableAlphaBlending();
 }
 
 
 void MashScreen::update()
 {
-    dataHub->roCoImg->scaleIntoMe(*(dataHub->grayDiff));
-
     if(dataHub->flowColor.a) {
         flow->update();
     }
 
     if(dataHub->box2dColor.a) {
         // box2d->update();
+    }
+
+    // control refresh rate for the rest
+    float now = ofGetElapsedTimef();
+    if(now - lastUpdateTime < 0.20) {
+        return;
+    }
+    lastUpdateTime = now;
+
+    for(int i = 0; i < freezeOpacities.size(); ++i) {
+        if(freezeOpacities[i] > 0)
+            freezeOpacities[i] -= 5;
+        else if(freezeOpacities[i] < 0)
+            freezeOpacities[i] = 0;
     }
 }
 
@@ -101,6 +114,7 @@ void MashScreen::draw()
 {
 
     ofSetColor(255, 255, 255, 255);
+
     if(dataHub->asciiBackgroundColor.a) {
         asciiBackgroundFbo.begin();
             ofClear(0, 0, 0, 0);
@@ -136,7 +150,7 @@ void MashScreen::draw()
     }
 
     if(dataHub->pongColor.a) {
-        pongFbo.clear();
+        // pongFbo.clear();
         pongFbo.begin();
             ofClear(0, 0, 0, 0);
             pong->draw();
@@ -147,8 +161,15 @@ void MashScreen::draw()
         ofSetColor(255, 255, 255, 255);
     }
 
-    if(dataHub->asciiBackgroundColor.a) {
-        ofSetColor(dataHub->asciiBackgroundColor);
+    for(int i = 0; i < freezeOpacities.size(); ++i) {
+        if(freezeOpacities[i]) {
+            ofSetColor(255, 255, 255, freezeOpacities[i]);
+            freezes[i]->draw(0, 0);
+        }
+    }
+
+    if(dataHub->CMVColor.a) {
+        ofSetColor(dataHub->CMVColor);
         cmv->draw();
     }
 
@@ -199,4 +220,17 @@ void MashScreen::addMessage(string msg)
     Message *m = new Message(msg, pango, dataHub->font);
     messages.push_back(m);
     flow->addMessage(m);
+}
+
+void MashScreen::freezeFrame()
+{
+    freezeOpacities[curFreezeFrame] = 320;
+    FBO *f = freezes[curFreezeFrame++];
+    f->begin();
+        ofClear(0, 0, 0, 0);
+        ofSetColor(255, 255, 255, 255);
+        cmv->draw();
+    f->end();
+    if(curFreezeFrame >= freezes.size())
+        curFreezeFrame = 0;
 }

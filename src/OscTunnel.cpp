@@ -173,6 +173,11 @@ void OscTunnel::update() {
                                     dataHub->asciiBackgroundColor.a = newAlpha;
                                     cout << (int)dataHub->asciiBackgroundColor.a << " asciibg alpha" << endl;
                                     break;
+
+                                case 5:
+                                    dataHub->CMVColor.a = newAlpha;
+                                    cout << (int)dataHub->CMVColor.a << " asciibg alpha" << endl;
+                                    break;
                             }
                             break;
 
