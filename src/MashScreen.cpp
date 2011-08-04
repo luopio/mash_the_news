@@ -45,6 +45,7 @@ void MashScreen::setup()
 
     box2d = new Box2dMashEngine(*dataHub);
     flow = new Flow(*dataHub);
+    bigLetters = new BigLetters(*dataHub, pango);
     // box2d->setup();
 
     ofBackground(0, 0, 0);
@@ -117,6 +118,9 @@ void MashScreen::update()
         else if(freezeOpacities[i] < 0)
             freezeOpacities[i] = 0;
     }
+
+    bigLetters->update();
+
 }
 
 
@@ -182,6 +186,8 @@ void MashScreen::draw()
         CMVFbo.draw(0, 0);
     }
 
+    bigLetters->draw();
+
 }
 
 void MashScreen::randomBG() {
@@ -242,3 +248,13 @@ void MashScreen::freezeFrame()
     if(curFreezeFrame >= freezes.size())
         curFreezeFrame = 0;
 }
+
+
+void MashScreen::bigLetter(char c)
+{
+    bigLetters->hilight(c);
+}
+
+
+
+

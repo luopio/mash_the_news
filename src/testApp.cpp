@@ -176,6 +176,9 @@ void testApp::keyPressed(int key){
             screen->randomBG(); break;
         case 'p':
             screen->pong->reset(); break;
+
+        case 'a':
+            screen->bigLetter('a'); break;
     }
 }
 
