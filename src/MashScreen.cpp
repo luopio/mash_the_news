@@ -68,11 +68,11 @@ void MashScreen::setup()
     pong = new Pongalong(dataHub,pango);
 
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
-    dataHub->flowColor              = ofColor(255, 255, 255, 255);
-    dataHub->pongColor              = ofColor(255, 255, 255, 0);
-    dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 0);
-    dataHub->CMVColor               = ofColor(255, 255, 255, 255);
-    dataHub->bigLetterColor         = ofColor(255, 0, 0, 255);
+    dataHub->flowColor              = ofColor(255, 255, 25,  255);
+    dataHub->pongColor              = ofColor(255, 0,   0,   0);
+    dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
+    dataHub->CMVColor               = ofColor(78,  25,  255, 255);
+    dataHub->bigLetterColor         = ofColor(255, 255, 0,   255);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
@@ -84,7 +84,7 @@ void MashScreen::setup()
     CMVFbo.allocate(ofGetWidth(), ofGetHeight());
 
     curFreezeFrame = 0;
-    for(int i = 0; i < 3; ++i) {
+    for(int i = 0; i < 4; ++i) {
         FBO *f = new FBO();
         f->allocate(ofGetWidth(), ofGetHeight());
         freezeOpacities.push_back(0);
@@ -116,9 +116,9 @@ void MashScreen::update()
 
     for(int i = 0; i < freezeOpacities.size(); ++i) {
         if(freezeOpacities[i] > 0)
-            freezeOpacities[i] -= 5;
-        else if(freezeOpacities[i] < 0)
-            freezeOpacities[i] = 0;
+            freezeOpacities[i] -= 15;
+        //else if(freezeOpacities[i] < 0)
+        //    freezeOpacities[i] = 0;
     }
 
     bigLetters->update();
@@ -242,7 +242,12 @@ void MashScreen::addMessage(string msg)
 
 void MashScreen::freezeFrame()
 {
-    freezeOpacities[curFreezeFrame] = 320;
+    for(int i = 0; i < freezeOpacities.size(); ++i) {
+        if(freezeOpacities[i]) {
+            freezeOpacities[i] -= 20;
+        }
+    }
+    freezeOpacities[curFreezeFrame] = 255;
     FBO *f = freezes[curFreezeFrame++];
     f->begin();
         ofClear(0, 0, 0, 0);
