@@ -4,7 +4,7 @@ OscTunnel::OscTunnel()
 {
     sender = NULL;
     receiver = NULL;
-   // sender = new ofxOscSender();
+    // sender = new ofxOscSender();
     receiver = new ofxOscReceiver();
     sender->setup( DEFAULT_HOST, DEFAULT_PORT );
     sendStartMessage();

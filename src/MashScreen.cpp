@@ -26,15 +26,15 @@ void MashScreen::setup()
     pango = new ofxPango();
     dataHub->font = new ofxPCPangoFontDescription();
     //dataHub->font->createFromString("Arial Unicode MS 11");
-    dataHub->font->createFromString("Courier 11");
-    //dataHub->font->createFromString("Monospace 11");
-    dataHub->font->setWeight(PANGO_WEIGHT_ULTRAHEAVY);
+    // dataHub->font->createFromString("Courier 11");
+    // dataHub->font->createFromString("Trebuchet MS 10");
+    // dataHub->font->createFromString("Bitstream Vera Sans Mono 11");
+    dataHub->font->createFromString("FixedsysTTF 11");
+    // dataHub->font->setWeight(PANGO_WEIGHT_ULTRAHEAVY);
 
     cairo_font_options_t * co = cairo_font_options_create ();
 
     cairo_font_options_set_antialias(co,CAIRO_ANTIALIAS_NONE);
-
-
 
     //dataHub->font->setStyle(PANGO_STYLE_ITALIC);
 
