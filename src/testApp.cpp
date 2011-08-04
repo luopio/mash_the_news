@@ -177,9 +177,9 @@ void testApp::keyPressed(int key){
         case 'p':
             screen->pong->reset(); break;
 
-        case 'a':
-            screen->bigLetter('a'); break;
     }
+
+    screen->bigLetter(key);
 }
 
 //--------------------------------------------------------------
