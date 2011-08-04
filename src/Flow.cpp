@@ -31,7 +31,7 @@ void Flow::setup()
                     fw->msg = m;
                     fw->word = *wi;
                     fw->col = filledCols;
-                    if(filledCols + fw->word->letters.size() + 4 > *(dataHub->cols)) {
+                    if(filledCols + fw->word->letters.size() > *(dataHub->cols)) {
                         filledCols = *(dataHub->cols);
                         break;
                     }

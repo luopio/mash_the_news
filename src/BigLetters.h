@@ -19,11 +19,21 @@ class BigLetters
 
         DataHub *dataHub;
         int impulse;
+        int fontSize;
         map<char, FBO *> letters;
         FBO * curFBO;
-        ofxPango pango;
-        ofxPCPangoFontDescription font;
+        FBO * maskFBO;
+        ofPixels pixels;
+        //ofxPango pango;
+        //ofxPCPangoFontDescription font;
+        ofTrueTypeFont tFont;
+        ofTrueTypeFont mFont;
+
+        ofImage image1;
+        ofImage image2;
+        ofImage image3;
 
         void hilight(char letter);
         void renderChar(string s, FBO * tex);
+        void renderImage(ofImage &i);
 };

@@ -353,7 +353,6 @@ void OscTunnel::update() {
                 int wordIndex = m.getArgAsInt32(0);
                 cout << "HILITE: " << m.getArgAsInt32(0) << endl;
                 screen->hilightWordAt(wordIndex);
-
             }
             else {
                 cout << "unknown osc message received: " << m.getAddress() << endl;

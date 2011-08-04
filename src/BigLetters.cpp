@@ -2,60 +2,100 @@
 
 BigLetters::BigLetters(DataHub &dh)
 {
-    string chars = "abcdefghijklmnopqrstuvwxyz";
-
-    // font.createFromString("FixedsysTTF 300");
-    // font.createFromString("Arial 300");
-
-    /*for(int i = 0; i < chars.size(); i++) {
-        FBO * f = new FBO();
-        renderChar(ofToString(chars[i]), f);
-        letters[chars[i]] = f;
-        cout << "created big letter " << chars[i] << endl;
-    }*/
-
     dataHub = &dh;
     curFBO = NULL;
+    fontSize = *(dataHub->rows) / 5 * 4;
+    tFont.loadFont("DroidSansMono.ttf", fontSize, true, true);
+    mFont.loadFont("Fixedsys500c.ttf", 11, true, true);
+
+    image1.loadImage("co.png");
+    image2.loadImage("arcane1.png");
+    image3.loadImage("hnml-113x42.png");
+
+    curFBO = new FBO();
+    curFBO->allocate(*(dataHub->cols), *(dataHub->rows));
+    maskFBO = new FBO();
+    maskFBO->allocate(ofGetWidth(), ofGetHeight());
+    pixels.allocate(*(dataHub->cols), *(dataHub->rows), OF_IMAGE_COLOR_ALPHA);
 }
 
 
 void BigLetters::hilight(char letter)
 {
-    impulse = 300;
-    // curFBO = letters[letter];
+    impulse = 255;
 
-    ofTrueTypeFont f;
-    f.loadFont("DroidSansMono.ttf", 24, true, true);
-    curFBO = new FBO();
-    curFBO->allocate(*(dataHub->cols), *(dataHub->rows));
-    curFBO->begin();
-        ofClear(0, 0, 0, 0);
-        ofFill();
-        ofSetColor(255, 0, 255, 255);
-        //text_image.draw(0,0);
-        f.drawString("A", *(dataHub->cols) / 2, 24); // ofToString(letters[letter]), 0, 0);
-    curFBO->end();
+    if(letter == '1') {
+        renderImage(image1);
+    } else if(letter == '2') {
+        renderImage(image2);
+    } else if(letter == '3') {
+        renderImage(image3);
+    } else {
+
+        curFBO->begin();
+            ofClear(0, 0, 0, 0);
+            ofFill();
+            ofSetColor(255, 255, 255, 255);
+            tFont.drawString(ofToString(letter),
+                             *(dataHub->cols) / 2 - fontSize / 2,
+                             *(dataHub->rows) / 2 + fontSize / 2);
+        curFBO->end();
+        curFBO->readToPixels(pixels);
+
+    }
+
+    maskFBO->begin();
+        ofClear(255, 255, 255, 10);
+        int w = curFBO->getWidth();
+        for(int y = 0; y < curFBO->getHeight(); y++) {
+            for(int x = 0; x < curFBO->getWidth(); x++) {
+                int index = (x + y * w) * 4;
+                if(pixels[index] > 0) {
+                    ofSetColor(0, 0, 0, 255);
+                    ofRect(x * FONT_W, y * FONT_H,
+                           FONT_W, FONT_H);
+                    ofSetColor(pixels[index],
+                               pixels[index + 1],
+                               pixels[index + 2],
+                               255);
+                    mFont.drawString("@", x * FONT_W, y * FONT_H - 4);
+                }
+            }
+        }
+    maskFBO->end();
 
 }
 
 void BigLetters::update()
 {
     if(impulse > 0)
-        impulse -= 10;
+        impulse -= 20;
 }
 
 void BigLetters::draw()
 {
-    if(curFBO != NULL && impulse > 0) {
-        cout << "draw big letter " << impulse << endl;
-        ofSetColor(255, 0, 255, impulse);
-        curFBO->draw(0, 0, ofGetWidth(), ofGetHeight());
+    if(maskFBO != NULL && impulse > 0) {
+        ofSetColor(dataHub->bigLetterColor.r,
+                   dataHub->bigLetterColor.g,
+                   dataHub->bigLetterColor.b,
+                   impulse);
+        maskFBO->draw(0, 0, ofGetWidth(), ofGetHeight());
     }
 }
 
 
-void BigLetters::renderChar(string s, FBO * tex) {
+void BigLetters::renderImage(ofImage &i)
+{
+    curFBO->begin();
+        ofClear(0, 0, 0, 0);
+        ofSetColor(255, 255, 255, 255);
+        i.draw(0, 0);
+    curFBO->end();
+    curFBO->readToPixels(pixels);
+}
 
+void BigLetters::renderChar(string s, FBO * tex) {
+/*
     ofxPCContext * context = pango.createContextWithSurface( *(dataHub->cols), *(dataHub->rows) );
     context->color4f(1.0f, 1.0f, 1.0f, 0.0f);
     //context->paint();
@@ -84,4 +124,5 @@ void BigLetters::renderChar(string s, FBO * tex) {
         //ofCircle(0, 0, *(dataHub->rows) );
         f.drawString(s, 0, 0);
     tex->end();
+*/
 }
