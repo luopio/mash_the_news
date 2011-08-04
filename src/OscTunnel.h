@@ -34,6 +34,7 @@ class OscTunnel
         void sendTestMessage();
         void update();
         void addOscListener(string address, void (*callback)(ofxOscMessage));
+        void toggleMute();
 
         void addDataHub(DataHub * d);
 
@@ -42,6 +43,8 @@ class OscTunnel
         void updateBgString(char c);
 
         bool kDebug;
+        bool muteOn;
+
 
         string bgString;
         DataHub * dataHub;

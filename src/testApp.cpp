@@ -170,7 +170,7 @@ void testApp::keyPressed(int key){
 
 
         case 'o':
-            oscTunnel->sendTestMessage(); break;
+            oscTunnel->toggleMute(); break;
         case 'b':
             screen->randomBG(); break;
         case 'p':
