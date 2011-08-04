@@ -1,9 +1,14 @@
 #ifndef LETTER_H
 #define LETTER_H
 
-#define FONT_SIZE 11
-#define FONT_W 9
-#define FONT_H 18
+//#define FONT_SIZE 11 // For courier
+//#define FONT_W 9
+//#define FONT_H 18
+
+#define FONT_SIZE 11 // For courier
+#define FONT_W 8
+#define FONT_H 17
+
 
 #include "ofMain.h"
 #include "Poco/StringTokenizer.h"

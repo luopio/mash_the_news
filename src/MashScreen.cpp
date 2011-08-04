@@ -18,6 +18,7 @@ void MashScreen::setup()
 
     cols = ofGetWidth()  / FONT_W;
     rows = ofGetHeight() / FONT_H;
+
     dataHub->rows = &rows;
     dataHub->cols = &cols;
     cout << "cols&rows" << cols << "," << rows << "w&h " << ofGetWidth() << "," << ofGetHeight() << endl;
