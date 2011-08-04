@@ -44,7 +44,6 @@ void MashScreen::setup()
 
     box2d = new Box2dMashEngine(*dataHub);
     flow = new Flow(*dataHub);
-    bigLetters = new BigLetters(*dataHub, pango);
     // box2d->setup();
 
     ofBackground(0, 0, 0);
@@ -56,6 +55,8 @@ void MashScreen::setup()
     asciiBG.setOfxPango(pango);
     // asciiBG.setupFBO(context, layout);
     messages.push_back( new Message(string("100 DANCERS"), pango, dataHub->font));
+
+    bigLetters = new BigLetters(*dataHub);
 
     flow->setup();
 
