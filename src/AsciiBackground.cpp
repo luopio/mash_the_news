@@ -93,6 +93,7 @@ void AsciiBackground::setBackground(string s) {
 
 //        franklin.drawString("Olá Mundo!", 10, 10);
         text_image.draw(0,0);
+        text_image.draw(10 * FONT_W, 10 * FONT_H);
     tex->end();
 
     test = &text_image;

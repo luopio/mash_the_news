@@ -318,7 +318,7 @@ void OscTunnel::update() {
                         case 3:
                             switch (m.getArgAsInt32(2)) {
                                 case 5:
-                                    screen->messages.push_back( new Message(string("no huh,huh"), screen->pango, dataHub->font));
+                                    //screen->messages.push_back( new Message(string("no huh,huh"), screen->pango, dataHub->font));
                                     break;
                                 case 6:
                                     if (kinect != NULL) {

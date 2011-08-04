@@ -68,7 +68,7 @@ void CameraMaskViewer::draw() {
                 tex1->draw(x * FONT_W, y * FONT_H);
             } else if(val > 150) {
                 tex3->draw(x * FONT_W, y * FONT_H);
-            } else if(val){
+            } else if(val > 10){
                 tex2->draw(x * FONT_W, y * FONT_H);
             }
         }

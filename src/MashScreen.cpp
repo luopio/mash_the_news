@@ -18,6 +18,7 @@ void MashScreen::setup()
 
     cols = ofGetWidth()  / FONT_W;
     rows = ofGetHeight() / FONT_H;
+
     dataHub->rows = &rows;
     dataHub->cols = &cols;
     cout << "cols&rows" << cols << "," << rows << "w&h " << ofGetWidth() << "," << ofGetHeight() << endl;
@@ -158,15 +159,7 @@ void MashScreen::draw()
         box2dFbo.draw(0, 0);
     }
 
-    if(dataHub->pongColor.a) {
-        pongFbo.begin();
-            ofSetColor(255, 255, 255, 255);
-            ofClear(0, 0, 0, 0);
-            pong->draw();
-        pongFbo.end();
-        ofSetColor(dataHub->pongColor);
-        pongFbo.draw(0, 0);
-    }
+
 
     for(int i = 0; i < freezeOpacities.size(); ++i) {
         if(freezeOpacities[i]) {
@@ -186,8 +179,18 @@ void MashScreen::draw()
         CMVFbo.draw(0, 0);
     }
 
-    bigLetters->draw();
 
+    if(dataHub->pongColor.a) {
+        pongFbo.begin();
+            ofSetColor(255, 255, 255, 255);
+            ofClear(0, 0, 0, 0);
+            pong->draw();
+        pongFbo.end();
+        ofSetColor(dataHub->pongColor);
+        pongFbo.draw(0, 0);
+    }
+
+    bigLetters->draw();
 }
 
 void MashScreen::randomBG() {
