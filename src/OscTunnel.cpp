@@ -83,6 +83,13 @@ void OscTunnel::update() {
                 //screen->messages.push_back( new Message(m.getArgAsString(0)));
 
             }
+            else if ( m.getAddress() == "/letter" )  {
+                cout << "letter: " << m.getArgAsString(1) << endl;
+                screen->bigLetter(m.getArgAsString(0)[0]);
+
+                //screen->messages.push_back( new Message(m.getArgAsString(0)));
+
+            }
             else if ( m.getAddress() == "/oscmidi" ) {
 
                 if (m.getArgAsString(0)== "noteoff") {
@@ -165,10 +172,11 @@ void OscTunnel::update() {
                             break;
                     }
 
-
-
-
                 }
+                // IDEA:
+                // FADE GOES UP NOW AND THEN
+                // MONITOR FOR DANCERS
+                // FADE SPEED
                 else if (m.getArgAsString(0)== "cc") {
                     int newAlpha = 0;
                     /* Which channel from 0 - 3 */
@@ -320,6 +328,10 @@ void OscTunnel::update() {
                                     }
 
                                     break;
+
+                                case 5:
+                                    dataHub->flowFadeSpeed = m.getArgAsInt32(3) / 1.4;
+
                             }
                             break;
 
@@ -332,7 +344,7 @@ void OscTunnel::update() {
                                 case 6:
                                     if (kinect != NULL) {
                                         kinect->setCameraTiltAngle((m.getArgAsInt32(3)/(127 / 60.0)) -30);
-                                        cout << (m.getArgAsInt32(3)/(127 / 60.0)) -30 << " is new near threshold value" << endl;
+                                        cout << (m.getArgAsInt32(3)/(127 / 60.0)) -30 << "new kinect coord" << endl;
                                     }
                                     break;
 

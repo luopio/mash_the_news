@@ -36,6 +36,7 @@ class Flow
 
         float lastUpdateTime;
         bool bDebug;
+        float fadeSpeed;
 
     protected:
     private:

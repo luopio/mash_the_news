@@ -4,6 +4,7 @@ Flow::Flow(DataHub &h)
 {
     dataHub = &h;
     bDebug = true;
+    dataHub->flowFadeSpeed = 23;
 }
 
 Flow::~Flow()
@@ -152,7 +153,7 @@ void Flow::update()
             fw->col += fw->rowTotalLength;
         }
 
-        if(fw->impulse > 0) fw->impulse -= 9;
+        if(fw->impulse > 0) fw->impulse -= dataHub->flowFadeSpeed;
         else { fw->impulse = 0; }
 
     }

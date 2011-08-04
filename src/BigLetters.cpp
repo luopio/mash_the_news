@@ -8,9 +8,17 @@ BigLetters::BigLetters(DataHub &dh)
     tFont.loadFont("DroidSansMono.ttf", fontSize, true, true);
     mFont.loadFont("Fixedsys500c.ttf", 11, true, true);
 
-    image1.loadImage("co.png");
-    image2.loadImage("arcane1.png");
-    image3.loadImage("hnml-113x42.png");
+    image1.loadImage("images/arcane1.png");
+    image2.loadImage("images/bee.png");
+    image3.loadImage("images/chinese_dance.png");
+    image4.loadImage("images/eyeOfHorus.png");
+    image5.loadImage("images/eye.png");
+    image6.loadImage("images/heart.png");
+    image7.loadImage("images/hnml-113x42.png");
+    image8.loadImage("images/notes.png");
+    image9.loadImage("images/om.png");
+    image10.loadImage("images/pixie.png");
+    image11.loadImage("images/radioactive.png");
 
     curFBO = new FBO();
     curFBO->allocate(*(dataHub->cols), *(dataHub->rows));
@@ -24,12 +32,28 @@ void BigLetters::hilight(char letter)
 {
     impulse = 255;
 
-    if(letter == '1') {
+    if(letter == 1) {
         renderImage(image1);
-    } else if(letter == '2') {
+    } else if(letter == 2) {
         renderImage(image2);
-    } else if(letter == '3') {
+    } else if(letter == 3) {
         renderImage(image3);
+    } else if(letter == 4) {
+        renderImage(image4);
+    } else if(letter == 5) {
+        renderImage(image5);
+    } else if(letter == 6) {
+        renderImage(image6);
+    } else if(letter == 7) {
+        renderImage(image7);
+    } else if(letter == 8) {
+        renderImage(image8);
+    } else if(letter == 9) {
+        renderImage(image9);
+    } else if(letter == 10) {
+        renderImage(image10);
+    } else if(letter == 11) {
+        renderImage(image11);
     } else {
 
         curFBO->begin();
@@ -37,7 +61,7 @@ void BigLetters::hilight(char letter)
             ofFill();
             ofSetColor(255, 255, 255, 255);
             tFont.drawString(ofToString(letter),
-                             *(dataHub->cols) / 2 - fontSize / 2,
+                             *(dataHub->cols) / 2 - (fontSize * 0.4),
                              *(dataHub->rows) / 2 + fontSize / 2);
         curFBO->end();
         curFBO->readToPixels(pixels);
@@ -52,8 +76,8 @@ void BigLetters::hilight(char letter)
                 int index = (x + y * w) * 4;
                 if(pixels[index] > 0) {
                     ofSetColor(0, 0, 0, 255);
-                    ofRect(x * FONT_W, y * FONT_H,
-                           FONT_W, FONT_H);
+                    //ofRect(x * FONT_W, y * FONT_H,
+                    //       FONT_W, FONT_H);
                     ofSetColor(pixels[index],
                                pixels[index + 1],
                                pixels[index + 2],
