@@ -8,6 +8,7 @@ OscTunnel::OscTunnel()
     receiver = new ofxOscReceiver();
     sender->setup( DEFAULT_HOST, DEFAULT_PORT );
     sendStartMessage();
+    bRGBTune1Pressed = bRGBTune2Pressed = bRGBTune3Pressed = bRGBTune4Pressed = bRGBTune5Pressed = false;
 }
 
 OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
@@ -78,13 +79,34 @@ void OscTunnel::update() {
 
             }
             else if ( m.getAddress() == "/oscmidi" ) {
+
                 if (m.getArgAsString(0)== "noteoff") {
                     cout << "oscmidi noteoff: ch: " << m.getArgAsInt32(1) << " note: " << m.getArgAsInt32(2) << " velocity: " << m.getArgAsInt32(3) << endl;
-                    if (m.getArgAsInt32(2)==40) {
-                        // need to redo hilighting..
-                        // screen->hilightMessage(-10);
+
+                    switch (m.getArgAsInt32(1)) {
+
+                        case 2:
+                            switch (m.getArgAsInt32(2)) {
+                                case 67:
+                                    bRGBTune1Pressed = false;
+                                    break;
+                                case 69:
+                                    bRGBTune2Pressed = false;
+                                    break;
+                                case 71:
+                                    bRGBTune3Pressed = false;
+                                    break;
+                                case 72:
+                                    bRGBTune4Pressed = false;
+                                    break;
+                                case 60:
+                                    bRGBTune5Pressed = false;
+                                    break;
+                            }
+                            break;
                     }
-                } else if (m.getArgAsString(0)== "noteon") {
+                }
+                else if (m.getArgAsString(0)== "noteon") {
                     //cout << "oscmidi noteon:  ch: " << m.getArgAsInt32(1) << " note: " << m.getArgAsInt32(2) << " velocity: " << m.getArgAsInt32(3) << endl;
                     // corresponds to the midi channel (0-3)
                     switch (m.getArgAsInt32(1)) {
@@ -99,6 +121,23 @@ void OscTunnel::update() {
 
                             break;
                         case 2:
+                            switch (m.getArgAsInt32(2)) {
+                                case 67:
+                                    bRGBTune1Pressed = true;
+                                    break;
+                                case 69:
+                                    bRGBTune2Pressed = true;
+                                    break;
+                                case 71:
+                                    bRGBTune3Pressed = true;
+                                    break;
+                                case 72:
+                                    bRGBTune4Pressed = true;
+                                    break;
+                                case 60:
+                                    bRGBTune5Pressed = true;
+                                    break;
+                            }
                             break;
                         case 3:
                             switch (m.getArgAsInt32(2)) {
@@ -183,15 +222,91 @@ void OscTunnel::update() {
 
                         case 2:
                             switch (m.getArgAsInt32(2)) {
-                                    case 1:
-                                        dataHub->pongSpeed = m.getArgAsInt32(3)/20;
-                                        cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
+                                /*  Tuning the colors of the layers, one nob per channel, button
+                                    state determines */
+                                case 1:
+                                    //dataHub->pongSpeed = m.getArgAsInt32(3)/20;
+                                    //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
+                                    if(bRGBTune1Pressed) {
+                                        dataHub->box2dColor.r = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune2Pressed) {
+                                        dataHub->flowColor.r = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune3Pressed) {
+                                        dataHub->pongColor.r = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune4Pressed) {
+                                        dataHub->asciiBackgroundColor.r = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune5Pressed) {
+                                        dataHub->CMVColor.r = m.getArgAsInt32(3) * 2;
+                                    }
+
                                     break;
 
+                                case 2:
+                                    //dataHub->pongSpeed = m.getArgAsInt32(3)/20;
+                                    //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
+                                    if(bRGBTune1Pressed) {
+                                        dataHub->box2dColor.g = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune2Pressed) {
+                                        dataHub->flowColor.g = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune3Pressed) {
+                                        dataHub->pongColor.g = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune4Pressed) {
+                                        dataHub->asciiBackgroundColor.g = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune5Pressed) {
+                                        dataHub->CMVColor.g = m.getArgAsInt32(3) * 2;
+                                    }
 
+                                    break;
 
+                                case 3:
+                                    //dataHub->pongSpeed = m.getArgAsInt32(3)/20;
+                                    //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
+                                    if(bRGBTune1Pressed) {
+                                        dataHub->box2dColor.b = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune2Pressed) {
+                                        dataHub->flowColor.b = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune3Pressed) {
+                                        dataHub->pongColor.b = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune4Pressed) {
+                                        dataHub->asciiBackgroundColor.b = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune5Pressed) {
+                                        dataHub->CMVColor.b = m.getArgAsInt32(3) * 2;
+                                    }
 
+                                    break;
 
+                                case 4:
+                                    //dataHub->pongSpeed = m.getArgAsInt32(3)/20;
+                                    //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
+                                    if(bRGBTune1Pressed) {
+                                        dataHub->box2dColor.a = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune2Pressed) {
+                                        dataHub->flowColor.a = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune3Pressed) {
+                                        dataHub->pongColor.a = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune4Pressed) {
+                                        dataHub->asciiBackgroundColor.a = m.getArgAsInt32(3) * 2;
+                                    }
+                                    if(bRGBTune5Pressed) {
+                                        dataHub->CMVColor.a = m.getArgAsInt32(3) * 2;
+                                    }
+
+                                    break;
                             }
                             break;
 
