@@ -192,7 +192,10 @@ void OscTunnel::update() {
                                     updateBgString(m.getArgAsInt32(3)+33);
                                     //cout << kFarThreshold << " is new far threshold value" << endl;
                                     break;
-
+                                case 8:
+                                    dataHub->pongSpeed = m.getArgAsInt32(3)/10;
+                                    cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
+                                    break;
                             }
                             break;
 
