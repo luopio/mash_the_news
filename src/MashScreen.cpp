@@ -56,8 +56,6 @@ void MashScreen::setup()
     // asciiBG.setupFBO(context, layout);
     messages.push_back( new Message(string("100 DANCERS"), pango, dataHub->font));
 
-    bigLetters = new BigLetters(*dataHub);
-
     flow->setup();
 
     randomBG();
@@ -92,6 +90,8 @@ void MashScreen::setup()
     }
 
     ofEnableAlphaBlending();
+    bigLetters = new BigLetters(*dataHub);
+
 }
 
 
