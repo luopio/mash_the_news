@@ -79,12 +79,24 @@ void testApp::update(){
             //grayImage.flagImageChanged();
 
             grayDiff = grayImage; // ????
-            grayDiff.convertToRange(dataHub.kThreshold, dataHub.kFarThreshold);
+            //grayDiff.convertToRange(dataHub.kThreshold, dataHub.kFarThreshold);
 
             //roCoImg = grayImage.scale()
 
             //grayImage.flagImageChanged();
             dataHub.roCoImg->scaleIntoMe(grayDiff);
+
+            unsigned char *pixels = dataHub.roCoImg->getPixels();
+            for (int i = 0; i < (dataHub.roCoImg->width)*(dataHub.roCoImg->height); i++) {
+                if (pixels[i] < dataHub.kFarThreshold || pixels[i] > dataHub.kThreshold) {
+                    pixels[i] = 0;
+                }
+                pixels[i] = max(0,pixels[i] - (dataHub.kFarThreshold));
+
+                pixels[i] = (int)(pixels[i] * (255.0 / (dataHub.kThreshold - dataHub.kFarThreshold)));
+
+               // pixels[i] = (unsigned char)(pixels[i] * (255.0/dataHub.kFarThreshold));
+            }
         }
 
     #else

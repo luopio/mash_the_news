@@ -153,15 +153,7 @@ void MashScreen::draw()
         box2dFbo.draw(0, 0);
     }
 
-    if(dataHub->pongColor.a) {
-        pongFbo.begin();
-            ofSetColor(255, 255, 255, 255);
-            ofClear(0, 0, 0, 0);
-            pong->draw();
-        pongFbo.end();
-        ofSetColor(dataHub->pongColor);
-        pongFbo.draw(0, 0);
-    }
+
 
     for(int i = 0; i < freezeOpacities.size(); ++i) {
         if(freezeOpacities[i]) {
@@ -180,6 +172,18 @@ void MashScreen::draw()
         ofSetColor(dataHub->CMVColor);
         CMVFbo.draw(0, 0);
     }
+
+      if(dataHub->pongColor.a) {
+        pongFbo.begin();
+            ofSetColor(255, 255, 255, 255);
+            ofClear(0, 0, 0, 0);
+            pong->draw();
+        pongFbo.end();
+        ofSetColor(dataHub->pongColor);
+        pongFbo.draw(0, 0);
+    }
+
+  //  dataHub->roCoImg->draw(0,0);
 
 }
 
