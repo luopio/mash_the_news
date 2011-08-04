@@ -3,6 +3,12 @@
 
 #include "DataHub.h"
 
+#include "settings.h"
+
+#ifdef _USE_OFFBO
+#define ofxFBOTexture ofFbo
+#endif
+
 class Pongalong
 {
     public:
@@ -16,6 +22,10 @@ class Pongalong
         ofxPango * pango;
 
         ofxFBOTexture *tex;
+        vector<ofxFBOTexture*> frames;
+
+        int animationCounter;
+        float lastAnimationUpdateTime;
 
         float x, y, dx, dy;
 

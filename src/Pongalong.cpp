@@ -5,14 +5,18 @@ Pongalong::Pongalong(DataHub * d, ofxPango * p) {
     pango = NULL;
     dataHub = d;
     pango = p;
-    addFrame("XXXXXXXX\nX@@@@@@X\nX@@@@@@X\nXXXXXXXX");
-    x = ofGetWidth()-1; //ofGetWidth() / 2;
-    y = ofGetHeight()-1; //ofGetHeight() / 2;
+    addFrame("XXXXXXXX\nX@@$$@@X\nX@@$$@@X\nXXXXXXXX");
+    addFrame("$$$$$$$$\n$XX@@XX$\n$XX@@XX$\n$$$$$$$$");
+    addFrame("@@@@@@@@\n@$$XX$$@\n@$$XX$$@\n@@@@@@@@");
+    x = ofGetWidth() / 2;
+    y = ofGetHeight() / 2;
 
     dataHub->pongSpeed = 1.8;
 
     dx = dataHub->pongSpeed;
     dy = dataHub->pongSpeed;
+
+    animationCounter = 0;
 }
 
 Pongalong::~Pongalong()
@@ -34,7 +38,7 @@ void Pongalong::addFrame(string s) {
 
 
     layout->fill(0.0f,0.0f,0.0f,1.0f);
-    layout->setTextColor(1.0f,0.0,0.0f,1.0f);
+    layout->setTextColor(1.0f,1.0,1.0f,1.0f);
     layout->setText(s);
     layout->setFontDescription(*(dataHub->font));
 
@@ -53,6 +57,8 @@ void Pongalong::addFrame(string s) {
     text_image.draw(0,0);
     tex->end();
     //tex->setupScreenForMe();
+
+    frames.push_back(tex);
 }
 
 void Pongalong::draw() {
@@ -76,7 +82,7 @@ void Pongalong::draw() {
    ofColor c;
         c.r = 255; c.g = 255; c.b = 0;
    ofSetColor(c);
-    tex->draw((((int)x)/FONT_W)*FONT_W,(((int)y/(FONT_H))*FONT_H));
+
 
        // control refresh rate
     float now = ofGetElapsedTimef();
@@ -86,16 +92,21 @@ void Pongalong::draw() {
         y+=dy;
     }
 
+     if(now - lastAnimationUpdateTime > 0.4) {
+         cout << ofGetWidth() << endl;
+        lastAnimationUpdateTime = now;
+        animationCounter++;
+        if (animationCounter > frames.size()-1) animationCounter = 0;
+    }
+
    // bool cd = false;
 
-    if (x>ofGetWidth()-FONT_SIZE*8) dx = abs(dx)*-1;
+    if (x>ofGetWidth()-FONT_W*8) dx = abs(dx)*-1;
     if (x < 0) dx = abs(dx);
-    if (y>ofGetWidth()-FONT_SIZE*8) dy = abs(dy)*-1;
+    if (y>ofGetHeight()-FONT_H*4) dy = abs(dy)*-1;
     if (y < 0) dy = abs(dy);
 
-
     unsigned char *pixels = dataHub->roCoImg->getPixels();
-
 
     for (int xx = 0; xx < 8 ; xx++) {
         if (pixels[(xx+(int)x/FONT_W) + ((int)y/(FONT_W*2)) * (*(dataHub->cols))]) {
@@ -129,14 +140,13 @@ void Pongalong::draw() {
 
     }
 
-
     if (x < 0) x = 0;
     if (x > ofGetWidth()-FONT_W*8) x = ofGetWidth()-FONT_W*8;
     if (y < 0) y = 0;
     if (y > ofGetHeight()-FONT_W*8) y = ofGetHeight()-FONT_W*8;
 
 
-
+    frames.at(animationCounter)->draw((((int)x)/FONT_W)*FONT_W,(((int)y/(FONT_H))*FONT_H));
 
 //tex->d
 }
