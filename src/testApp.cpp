@@ -79,6 +79,7 @@ void testApp::update(){
             //grayImage.flagImageChanged();
 
             grayDiff = grayImage; // ????
+            grayDiff.convertToRange(dataHub.kThreshold, dataHub.kFarThreshold);
 
             //roCoImg = grayImage.scale()
 
@@ -108,7 +109,7 @@ void testApp::update(){
             // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
             // also, find holes is set to true so we will get interior contours as well....
             //contourFinder.findContours(grayDiff, 20, (340*240)/3, 10, true);	// find holes
-            dataHub->roCoImg->scaleIntoMe(grayDiff);
+            dataHub.roCoImg->scaleIntoMe(grayDiff);
         }
 
     #endif
@@ -123,7 +124,7 @@ void testApp::draw()
 
     if(dataHub.bDebug) {
         ofSetColor(255);
-        grayDiff.draw(0, 0);
+        // grayDiff.draw(0, 0);
         string debug = "";
         debug += "strength: "+ofToString(dataHub.strength) + "\n";
         debug += "damping:  "+ofToString(dataHub.damping) + "\n";

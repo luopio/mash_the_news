@@ -65,11 +65,11 @@ void CameraMaskViewer::draw() {
 //                tex->draw(x * FONT_SIZE, y * FONT_SIZE * 2);
             unsigned int val = pixels[x + y * dataHub->roCoImg->width];
             if(val > 220) {
-                tex3->draw(x * FONT_W, y * FONT_H);
-            } else if(val > 150) {
-                tex2->draw(x * FONT_W, y * FONT_H);
-            } else if(val){
                 tex1->draw(x * FONT_W, y * FONT_H);
+            } else if(val > 150) {
+                tex3->draw(x * FONT_W, y * FONT_H);
+            } else if(val){
+                tex2->draw(x * FONT_W, y * FONT_H);
             }
         }
 

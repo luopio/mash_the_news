@@ -14,7 +14,7 @@ MashScreen::~MashScreen()
 void MashScreen::setup()
 {
     // load the font slightly smaller to fit it completely on the FBO (adjust for font change!)
-    font.loadFont("Sans", FONT_SIZE, true, true);
+    //font.loadFont("Sans", FONT_SIZE, true, true);
 
     cols = ofGetWidth()  / FONT_W;
     rows = ofGetHeight() / FONT_H;
@@ -38,7 +38,6 @@ void MashScreen::setup()
 
     //dataHub->font->setStyle(PANGO_STYLE_ITALIC);
 
-    messages.push_back( new Message(string("100 DANCERS UNITED"), pango, dataHub->font));
     //messages.push_back( new Message(string("100 DANCERS"), &font));
     //messages.push_back( new Message(string("BE AWARE"), &font));
     //messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
@@ -47,7 +46,6 @@ void MashScreen::setup()
     box2d = new Box2dMashEngine(*dataHub);
     flow = new Flow(*dataHub);
     // box2d->setup();
-    flow->setup();
 
     ofBackground(0, 0, 0);
 
@@ -57,6 +55,10 @@ void MashScreen::setup()
 
     asciiBG.setOfxPango(pango);
     // asciiBG.setupFBO(context, layout);
+    messages.push_back( new Message(string("100 DANCERS"), pango, dataHub->font));
+
+    flow->setup();
+
     randomBG();
     // asciiBG.setBackground(q);
     // shader.load("shaders/noise.vert", "shaders/noise.frag");
@@ -66,18 +68,19 @@ void MashScreen::setup()
     pong = new Pongalong(dataHub,pango);
 
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
-    dataHub->flowColor              = ofColor(255, 255, 255, 0);
-    dataHub->pongColor              = ofColor(255, 255, 255, 255);
-    dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 255);
+    dataHub->flowColor              = ofColor(255, 255, 255, 255);
+    dataHub->pongColor              = ofColor(255, 255, 255, 0);
+    dataHub->asciiBackgroundColor   = ofColor(255, 255, 255, 0);
+    dataHub->CMVColor               = ofColor(255, 255, 255, 255);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
-
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
 
     flowFbo.allocate(ofGetWidth(), ofGetHeight());
     box2dFbo.allocate(ofGetWidth(), ofGetHeight());
     pongFbo.allocate(ofGetWidth(), ofGetHeight());
     asciiBackgroundFbo.allocate(ofGetWidth(), ofGetHeight());
+    CMVFbo.allocate(ofGetWidth(), ofGetHeight());
 
     curFreezeFrame = 0;
     for(int i = 0; i < 3; ++i) {
@@ -129,43 +132,36 @@ void MashScreen::draw()
         asciiBackgroundFbo.end();
         ofSetColor(dataHub->asciiBackgroundColor);
         asciiBackgroundFbo.draw(0, 0);
-    } else {
-        ofSetColor(255, 255, 255, 255);
     }
 
     if(dataHub->flowColor.a) {
         flowFbo.begin();
-            ofClear(0, 0, 0, 0);
             ofSetColor(255, 255, 255, 255);
+            ofClear(0, 0, 0, 0);
             flow->draw();
         flowFbo.end();
         ofSetColor(dataHub->flowColor);
         flowFbo.draw(0, 0);
-    } else {
-        ofSetColor(255, 255, 255, 255);
     }
 
     if(dataHub->box2dColor.a) {
         box2dFbo.begin();
+            ofSetColor(255, 255, 255, 255);
             ofClear(0, 0, 0, 0);
-            // box2d->draw();
+            box2d->draw();
         box2dFbo.end();
         ofSetColor(dataHub->box2dColor);
         box2dFbo.draw(0, 0);
-    } else {
-        ofSetColor(255, 255, 255, 255);
     }
 
     if(dataHub->pongColor.a) {
-        // pongFbo.clear();
         pongFbo.begin();
+            ofSetColor(255, 255, 255, 255);
             ofClear(0, 0, 0, 0);
             pong->draw();
         pongFbo.end();
         ofSetColor(dataHub->pongColor);
         pongFbo.draw(0, 0);
-    } else {
-        ofSetColor(255, 255, 255, 255);
     }
 
     for(int i = 0; i < freezeOpacities.size(); ++i) {
@@ -175,12 +171,17 @@ void MashScreen::draw()
         }
     }
 
+
     if(dataHub->CMVColor.a) {
+        CMVFbo.begin();
+            ofSetColor(255, 255, 255, 255);
+            ofClear(0, 0, 0, 0);
+            cmv->draw();
+        CMVFbo.end();
         ofSetColor(dataHub->CMVColor);
-        cmv->draw();
+        CMVFbo.draw(0, 0);
     }
 
-    // pong->draw();
 }
 
 void MashScreen::randomBG() {
