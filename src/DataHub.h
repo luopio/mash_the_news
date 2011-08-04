@@ -33,4 +33,5 @@ struct DataHub
     ofColor pongColor;
     ofColor asciiBackgroundColor;
     ofColor CMVColor;
+    ofColor bigLetterColor;
 };

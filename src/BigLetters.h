@@ -29,6 +29,11 @@ class BigLetters
         ofTrueTypeFont tFont;
         ofTrueTypeFont mFont;
 
+        ofImage image1;
+        ofImage image2;
+        ofImage image3;
+
         void hilight(char letter);
         void renderChar(string s, FBO * tex);
+        void renderImage(ofImage &i);
 };

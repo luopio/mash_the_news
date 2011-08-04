@@ -4,9 +4,13 @@ BigLetters::BigLetters(DataHub &dh)
 {
     dataHub = &dh;
     curFBO = NULL;
-    fontSize = *(dataHub->rows) / 4 * 3;
+    fontSize = *(dataHub->rows) / 5 * 4;
     tFont.loadFont("DroidSansMono.ttf", fontSize, true, true);
-    mFont.loadFont("DroidSansMono.ttf", FONT_SIZE, true, true);
+    mFont.loadFont("Fixedsys500c.ttf", 11, true, true);
+
+    image1.loadImage("co.png");
+    image2.loadImage("arcane1.png");
+    image3.loadImage("hnml-113x42.png");
 
     curFBO = new FBO();
     curFBO->allocate(*(dataHub->cols), *(dataHub->rows));
@@ -19,28 +23,42 @@ BigLetters::BigLetters(DataHub &dh)
 void BigLetters::hilight(char letter)
 {
     impulse = 255;
-    // curFBO = letters[letter];
 
-    curFBO->begin();
-        ofClear(0, 0, 0, 0);
-        ofFill();
-        ofSetColor(255, 255, 255, 255);
-        tFont.drawString(ofToString(letter),
-                         *(dataHub->cols) / 2 - fontSize,
-                         *(dataHub->rows) / 2 + fontSize / 2);
-    curFBO->end();
-    curFBO->readToPixels(pixels);
+    if(letter == '1') {
+        renderImage(image1);
+    } else if(letter == '2') {
+        renderImage(image2);
+    } else if(letter == '3') {
+        renderImage(image3);
+    } else {
+
+        curFBO->begin();
+            ofClear(0, 0, 0, 0);
+            ofFill();
+            ofSetColor(255, 255, 255, 255);
+            tFont.drawString(ofToString(letter),
+                             *(dataHub->cols) / 2 - fontSize / 2,
+                             *(dataHub->rows) / 2 + fontSize / 2);
+        curFBO->end();
+        curFBO->readToPixels(pixels);
+
+    }
 
     maskFBO->begin();
-        ofClear(255, 255, 255, 60);
+        ofClear(255, 255, 255, 10);
         int w = curFBO->getWidth();
-        //int scaledFontWidth = FONT_W * (curFBO->getWidth() / (float)ofGetWidth());
-        //int scaledFontHeight = FONT_H * (curFBO->getHeight() / (float)ofGetHeight());
         for(int y = 0; y < curFBO->getHeight(); y++) {
             for(int x = 0; x < curFBO->getWidth(); x++) {
-                if(pixels[(x + y * w) * 4] > 0) {
-                    mFont.drawString("@", x * FONT_W, y * FONT_H);
-                    // ofCircle(x, y, 1);
+                int index = (x + y * w) * 4;
+                if(pixels[index] > 0) {
+                    ofSetColor(0, 0, 0, 255);
+                    ofRect(x * FONT_W, y * FONT_H,
+                           FONT_W, FONT_H);
+                    ofSetColor(pixels[index],
+                               pixels[index + 1],
+                               pixels[index + 2],
+                               255);
+                    mFont.drawString("@", x * FONT_W, y * FONT_H - 4);
                 }
             }
         }
@@ -56,14 +74,25 @@ void BigLetters::update()
 
 void BigLetters::draw()
 {
-    if(curFBO != NULL && impulse > 0) {
-        // cout << "draw big letter " << impulse << endl;
-        ofSetColor(255, 255, 255, impulse);
+    if(maskFBO != NULL && impulse > 0) {
+        ofSetColor(dataHub->bigLetterColor.r,
+                   dataHub->bigLetterColor.g,
+                   dataHub->bigLetterColor.b,
+                   impulse);
         maskFBO->draw(0, 0, ofGetWidth(), ofGetHeight());
-        // curFBO->draw(0, 0, ofGetWidth(), ofGetHeight());
     }
 }
 
+
+void BigLetters::renderImage(ofImage &i)
+{
+    curFBO->begin();
+        ofClear(0, 0, 0, 0);
+        ofSetColor(255, 255, 255, 255);
+        i.draw(0, 0);
+    curFBO->end();
+    curFBO->readToPixels(pixels);
+}
 
 void BigLetters::renderChar(string s, FBO * tex) {
 /*
