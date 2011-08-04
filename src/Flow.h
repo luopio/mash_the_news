@@ -16,6 +16,7 @@ class FlowingWord
         Word * word;
         float impulse;
         int pixelWidth;
+        int rowTotalLength;
 };
 
 class Flow

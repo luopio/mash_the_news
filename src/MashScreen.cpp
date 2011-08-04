@@ -71,7 +71,7 @@ void MashScreen::setup()
     dataHub->flowColor              = ofColor(255, 255, 25,  255);
     dataHub->pongColor              = ofColor(255, 0,   0,   0);
     dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
-    dataHub->CMVColor               = ofColor(78,  25,  255, 255);
+    dataHub->CMVColor               = ofColor(78,  25,  255, 0);
     dataHub->bigLetterColor         = ofColor(255, 255, 0,   255);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space

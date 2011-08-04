@@ -22,27 +22,41 @@ void Flow::setup()
 
     while(filledRows < *(dataHub->rows)) {
         for(int i = 0; i < dataHub->messages->size(); i++) {
-            int filledCols = 0;
             m = (*dataHub->messages)[i];
+            int totalLength = 0;
+            int messageRepeatsOnThisRow = 0;
+            // calculate a total length for the message, how many do we need per row?
+            if(m->length > (*dataHub->cols)) {
+                totalLength = m->length;
+                messageRepeatsOnThisRow = 1;
+            } else {
+                totalLength = m->length;
+                messageRepeatsOnThisRow = 1;
+                while(totalLength < (*dataHub->cols)) {
+                    totalLength += m->length + 4;
+                    messageRepeatsOnThisRow++;
+                }
+            }
+            cout << "calculcated total length of " << totalLength << endl;
+
+            int colCounter = 0;
             float speed = ofRandom(-2, 2);
-            while(filledCols < (*dataHub->cols)) {
+            while(messageRepeatsOnThisRow > 0) {
                 for(vector<Word *>::iterator wi = m->words.begin(); wi != m->words.end(); ++wi) {
                     FlowingWord * fw = new FlowingWord();
                     fw->msg = m;
                     fw->word = *wi;
-                    fw->col = filledCols;
-                    if(filledCols + fw->word->letters.size() > *(dataHub->cols)) {
-                        filledCols = *(dataHub->cols);
-                        break;
-                    }
+                    fw->col = colCounter;
                     fw->row = filledRows;
                     fw->speed = speed;
                     fw->impulse = 0;
-                    words.push_back(fw);
-                    filledCols += (*wi)->letters.size() + 1; // + space
                     fw->pixelWidth = (*wi)->letters.size() * FONT_W;
+                    fw->rowTotalLength = totalLength;
+                    words.push_back(fw);
+                    colCounter += (*wi)->letters.size()  + 1;
                 }
-                filledCols += 4;
+                messageRepeatsOnThisRow--;
+                colCounter += 4;
             }
         filledRows++;
         }
@@ -53,36 +67,52 @@ void Flow::addMessage(Message *m)
 {
     int desiredRandomRow = ofRandom(0, *(dataHub->rows));
 
+    vector<FlowingWord *> newWords;
     for(vector<FlowingWord *>::iterator i = words.begin(); i != words.end(); ++i)
     {
         FlowingWord * fw = *(i);
         if(fw->row == desiredRandomRow) {
-            words.erase(i);
+            // words.erase(i);
+        } else {
+            newWords.push_back(fw);
         }
     }
+    words = newWords;
 
-    int filledCols = 0;
+    int totalLength = 0;
+    int messageRepeatsOnThisRow = 0;
+    // calculate a total length for the message, how many do we need per row?
+    if(m->length > (*dataHub->cols)) {
+        totalLength = m->length;
+        messageRepeatsOnThisRow = 1;
+    } else {
+        totalLength = m->length;
+        messageRepeatsOnThisRow = 1;
+        while(totalLength < (*dataHub->cols)) {
+            totalLength += m->length + 4;
+            messageRepeatsOnThisRow++;
+        }
+    }
+    cout << "calculcated total length of " << totalLength << endl;
 
-    float speed = ofRandom(-1, 1);
-
-    while(filledCols < (*dataHub->cols)) {
-        for(vector<Word *>::iterator wi = m->words.begin();
-                wi != m->words.end(); ++wi) {
+    int colCounter = 0;
+    float speed = ofRandom(-2, 2);
+    while(messageRepeatsOnThisRow > 0) {
+        for(vector<Word *>::iterator wi = m->words.begin(); wi != m->words.end(); ++wi) {
             FlowingWord * fw = new FlowingWord();
             fw->msg = m;
             fw->word = *wi;
-            fw->col = filledCols;
-            if(fw->col + fw->word->letters.size() + 4 > *(dataHub->cols)) {
-                filledCols = *(dataHub->cols);
-                break;
-            }
+            fw->col = colCounter;
             fw->row = desiredRandomRow;
-            filledCols += (*wi)->letters.size() + 1; // + space
             fw->speed = speed;
-            fw->impulse = 255; // hilight on add
+            fw->impulse = 255;
+            fw->pixelWidth = (*wi)->letters.size() * FONT_W;
+            fw->rowTotalLength = totalLength;
             words.push_back(fw);
+            colCounter += (*wi)->letters.size()  + 1;
         }
-        filledCols += 4;
+        messageRepeatsOnThisRow--;
+        colCounter += 4;
     }
 }
 
@@ -115,11 +145,11 @@ void Flow::update()
         FlowingWord * fw = words[i];
         fw->col += fw->speed;
 
-        int letterAmount = -fw->word->letters.size();
-        if(fw->col > *(dataHub->cols)) {
-            fw->col = -letterAmount;
-        } else if(fw->col < -letterAmount) {
-            fw->col = *(dataHub->cols);
+        int letterAmount = fw->word->letters.size();
+        if(fw->speed > 0 && fw->col > *(dataHub->cols)) {
+            fw->col -= fw->rowTotalLength;
+        } else if(fw->speed < 0 && fw->col < -letterAmount) {
+            fw->col += fw->rowTotalLength;
         }
 
         if(fw->impulse > 0) fw->impulse -= 9;
