@@ -54,6 +54,7 @@ class MashScreen
         FBO box2dFbo;
         FBO pongFbo;
         FBO asciiBackgroundFbo;
+        FBO CMVFbo;
 
         vector<FBO *> freezes;
         vector<int> freezeOpacities;
