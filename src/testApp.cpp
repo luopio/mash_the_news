@@ -10,7 +10,8 @@ void testApp::setup(){
     int our_height = 240;
 
     #ifdef _USE_KINECT
-        kinect.init();
+        //kinect.init();
+        //kinect.init()
         kinect.setVerbose(true);
         kinect.open();
         cout << "kinect opened with resolution " << kinect.width << "," << kinect.height << endl;

@@ -16,6 +16,7 @@ OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
     screen = ms;
     sender = new ofxOscSender();
     receiver = new ofxOscReceiver();
+    bRGBTune1Pressed = bRGBTune2Pressed = bRGBTune3Pressed = bRGBTune4Pressed = bRGBTune5Pressed = false;
     try {
         if (sender!=NULL)
             sender->setup(ip, port);
@@ -236,18 +237,22 @@ void OscTunnel::update() {
                                     //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
                                     if(bRGBTune1Pressed) {
                                         dataHub->box2dColor.r = m.getArgAsInt32(3) * 2;
-                                    }
-                                    if(bRGBTune2Pressed) {
+                                        cout << "BOX2D r: " << endl;
+                                    } if(bRGBTune2Pressed) {
                                         dataHub->flowColor.r = m.getArgAsInt32(3) * 2;
+                                         cout << "FLOW r: " << endl;
                                     }
                                     if(bRGBTune3Pressed) {
                                         dataHub->pongColor.r = m.getArgAsInt32(3) * 2;
+                                         cout << "PONG r: " << endl;
                                     }
                                     if(bRGBTune4Pressed) {
                                         dataHub->asciiBackgroundColor.r = m.getArgAsInt32(3) * 2;
+                                         cout << "ASCII r: " << endl;
                                     }
                                     if(bRGBTune5Pressed) {
                                         dataHub->CMVColor.r = m.getArgAsInt32(3) * 2;
+                                         cout << "CMV r: " << endl;
                                     }
 
                                     break;
@@ -299,6 +304,7 @@ void OscTunnel::update() {
                                     //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
                                     if(bRGBTune1Pressed) {
                                         dataHub->box2dColor.a = m.getArgAsInt32(3) * 2;
+                                        //cout << "BOX2D: " <<
                                     }
                                     if(bRGBTune2Pressed) {
                                         dataHub->flowColor.a = m.getArgAsInt32(3) * 2;
