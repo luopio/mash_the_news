@@ -26,14 +26,14 @@ void MashScreen::setup()
     pango = new ofxPango();
     dataHub->font = new ofxPCPangoFontDescription();
     //dataHub->font->createFromString("Arial Unicode MS 11");
-    dataHub->font->createFromString("Courier 11");
-    //dataHub->font->createFromString("Monospace 11");
-    dataHub->font->setWeight(PANGO_WEIGHT_ULTRAHEAVY);
+    // dataHub->font->createFromString("Courier 11");
+    // dataHub->font->createFromString("Trebuchet MS 10");
+    // dataHub->font->createFromString("Bitstream Vera Sans Mono 11");
+    dataHub->font->createFromString("FixedsysTTF 11");
+    // dataHub->font->setWeight(PANGO_WEIGHT_ULTRAHEAVY);
 
     cairo_font_options_t * co = cairo_font_options_create ();
     cairo_font_options_set_antialias(co,CAIRO_ANTIALIAS_NONE);
-
-
 
     //dataHub->font->setStyle(PANGO_STYLE_ITALIC);
 
@@ -55,6 +55,8 @@ void MashScreen::setup()
     asciiBG.setOfxPango(pango);
     // asciiBG.setupFBO(context, layout);
     messages.push_back( new Message(string("100 DANCERS"), pango, dataHub->font));
+
+    bigLetters = new BigLetters(*dataHub);
 
     flow->setup();
 
@@ -116,6 +118,9 @@ void MashScreen::update()
         else if(freezeOpacities[i] < 0)
             freezeOpacities[i] = 0;
     }
+
+    bigLetters->update();
+
 }
 
 
@@ -173,7 +178,8 @@ void MashScreen::draw()
         CMVFbo.draw(0, 0);
     }
 
-      if(dataHub->pongColor.a) {
+
+    if(dataHub->pongColor.a) {
         pongFbo.begin();
             ofSetColor(255, 255, 255, 255);
             ofClear(0, 0, 0, 0);
@@ -183,8 +189,7 @@ void MashScreen::draw()
         pongFbo.draw(0, 0);
     }
 
-  //  dataHub->roCoImg->draw(0,0);
-
+    bigLetters->draw();
 }
 
 void MashScreen::randomBG() {
@@ -245,3 +250,13 @@ void MashScreen::freezeFrame()
     if(curFreezeFrame >= freezes.size())
         curFreezeFrame = 0;
 }
+
+
+void MashScreen::bigLetter(char c)
+{
+    bigLetters->hilight(c);
+}
+
+
+
+

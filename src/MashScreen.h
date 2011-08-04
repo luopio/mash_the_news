@@ -7,6 +7,7 @@
 #include "ofxPango.h"
 #include "CameraMaskViewer.h"
 #include "Pongalong.h"
+#include "BigLetters.h"
 
 #include "settings.h"
 
@@ -61,6 +62,9 @@ class MashScreen
         int curFreezeFrame;
         // ofShader shader;
         float lastUpdateTime;
+
+        BigLetters * bigLetters;
+        void bigLetter(char c);
 
     protected:
 

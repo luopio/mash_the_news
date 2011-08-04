@@ -12,7 +12,7 @@ Letter::Letter(string let)
     letter = let;
     col = 0;
     row = 0;
-    cout << let << ",";
+    //cout << let << ",";
 }
 
 

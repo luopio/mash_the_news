@@ -58,6 +58,12 @@ class OscTunnel
         void sendStartMessage();
         void sendStopMessage();
 
+        bool bRGBTune1Pressed;
+        bool bRGBTune2Pressed;
+        bool bRGBTune3Pressed;
+        bool bRGBTune4Pressed;
+        bool bRGBTune5Pressed;
+
 };
 
 #endif // OSCTUNNEL_H
