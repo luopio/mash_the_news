@@ -33,7 +33,6 @@ void MashScreen::setup()
     // dataHub->font->setWeight(PANGO_WEIGHT_ULTRAHEAVY);
 
     cairo_font_options_t * co = cairo_font_options_create ();
-
     cairo_font_options_set_antialias(co,CAIRO_ANTIALIAS_NONE);
 
     //dataHub->font->setStyle(PANGO_STYLE_ITALIC);

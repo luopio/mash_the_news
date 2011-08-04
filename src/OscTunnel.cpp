@@ -12,6 +12,7 @@ OscTunnel::OscTunnel()
 }
 
 OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
+    muteOn = false;
     screen = ms;
     sender = new ofxOscSender();
     receiver = new ofxOscReceiver();
@@ -54,6 +55,9 @@ void OscTunnel::update() {
             // get the next message
             ofxOscMessage m;
             receiver->getNextMessage( &m );
+
+            if (muteOn)
+                continue;
 
             // check for mouse moved message
             if ( m.getAddress() == "/testmessage" )
@@ -414,4 +418,10 @@ void OscTunnel::updateBgString(char c) {
 
 void OscTunnel::addDataHub(DataHub * d) {
     dataHub = d;
+}
+
+void OscTunnel::toggleMute() {
+    muteOn = !muteOn;
+    if (muteOn) cout << "OSC traffic is sent to /dev/null!" << endl;
+    else cout << "OSC traffic is back online!" << endl;
 }
