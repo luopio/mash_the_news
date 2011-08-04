@@ -189,9 +189,9 @@ void OscTunnel::update() {
                                    // dataHub->   screen->currentEngine->minDis = m.getArgAsInt32(3) * 10.0;
                   //                  cout << screen->currentEngine->minDis << " is new minimum distance!" << endl;
                                     break;
-                                case 5:
-                                    updateBgString(m.getArgAsInt32(3)+33);
-                                    //cout << kFarThreshold << " is new far threshold value" << endl;
+                                case 7:
+                                    dataHub->zoom = m.getArgAsInt32(3)/127.0;
+                                    cout << "Zoomed to " << dataHub->zoom << endl;
                                     break;
                                 case 8:
                                     dataHub->pongSpeed = m.getArgAsInt32(3)/10;

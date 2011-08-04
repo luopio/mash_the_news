@@ -26,6 +26,8 @@ struct DataHub
 
     float pongSpeed;
 
+    float zoom;
+
     ofxPCPangoFontDescription* font;
 
     ofColor box2dColor;

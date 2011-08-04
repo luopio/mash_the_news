@@ -93,13 +93,11 @@ void Pongalong::draw() {
     }
 
      if(now - lastAnimationUpdateTime > 0.4) {
-         cout << ofGetWidth() << endl;
+        //cout << ofGetWidth() << endl;
         lastAnimationUpdateTime = now;
         animationCounter++;
         if (animationCounter > frames.size()-1) animationCounter = 0;
     }
-
-   // bool cd = false;
 
     if (x>ofGetWidth()-FONT_W*8) dx = abs(dx)*-1;
     if (x < 0) dx = abs(dx);
@@ -148,7 +146,6 @@ void Pongalong::draw() {
 
     frames.at(animationCounter)->draw((((int)x)/FONT_W)*FONT_W,(((int)y/(FONT_H))*FONT_H));
 
-//tex->d
 }
 
 void Pongalong::reset() {

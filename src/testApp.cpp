@@ -11,7 +11,7 @@ void testApp::setup(){
 
     #ifdef _USE_KINECT
         //kinect.init();
-        //kinect.init()
+        kinect.init(false,false,false);
         kinect.setVerbose(true);
         kinect.open();
         cout << "kinect opened with resolution " << kinect.width << "," << kinect.height << endl;
@@ -27,6 +27,9 @@ void testApp::setup(){
 
         threshold = 13;
     #endif
+
+    dataHub.zoom = 1.0f;
+
     bLearnBakground = true;
 
     // These images are for webcam capture, resolution is webcams/kinects reso!
@@ -38,6 +41,8 @@ void testApp::setup(){
     grayThreshFar.allocate(our_width, our_height);
 
     scaleImage.allocate(our_width,our_height);
+
+    //testCameraImage.allocate(kinect.width,kinect.height);
 
     dataHub.grayDiff = &grayDiff;
     dataHub.mouseX = &mouseX;
@@ -65,6 +70,7 @@ void testApp::update(){
         if(kinect.isFrameNew())
         {
             grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
+            //testCameraImage.setFromPixels(kinect.getPixels(), kinect.width,kinect.height);
             #ifdef _MIRROR_VIDEO_IMAGE
                 grayImage.mirror(false,true);
             #endif
@@ -85,6 +91,12 @@ void testApp::update(){
             //roCoImg = grayImage.scale()
 
             //grayImage.flagImageChanged();
+
+            if (dataHub.zoom < 1.0) { // we have to zoom!
+              //  dataHub.roCoImg->crop(12,12,12,12);
+
+            }
+
             dataHub.roCoImg->scaleIntoMe(grayDiff);
 
             unsigned char *pixels = dataHub.roCoImg->getPixels();
@@ -145,6 +157,8 @@ void testApp::draw()
         debug += "FPS:  "+ofToString(ofGetFrameRate());
         ofDrawBitmapString(debug, 10, ofGetHeight() - 90);
     }
+
+    //testCameraImage.draw(0,0);
 }
 
 //--------------------------------------------------------------

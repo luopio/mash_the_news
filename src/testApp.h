@@ -36,6 +36,10 @@ class testApp : public ofBaseApp{
         ofxCvGrayscaleImage 	grayThreshFar;
         ofxCvGrayscaleImage     scaleImage;
 
+        //ofxCvColorImage         testCameraImage;
+
+        float                   videoZoom;
+
         int 				    threshold;
 
         #ifdef _USE_KINECT
