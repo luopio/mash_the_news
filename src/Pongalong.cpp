@@ -28,7 +28,7 @@ void Pongalong::addFrame(string s) {
      if (pango==NULL || dataHub==NULL) return;
 
     ofxPCContext* context = pango->createContextWithSurface(FONT_W*8, FONT_W*8);
-    context->color4f(1.0f, 1.0f, 1.0f, 1.0f);
+    context->color4f(1.0f, 1.0f, 1.0f, 0.0f);
 
     cout << "fontsize" << FONT_SIZE << endl;
 
@@ -38,11 +38,11 @@ void Pongalong::addFrame(string s) {
 
 
     layout->fill(0.0f,0.0f,0.0f,1.0f);
-    layout->setTextColor(1.0f,1.0,1.0f,1.0f);
+    layout->setTextColor(1.0f,1.0f,1.0f,1.0f);
     layout->setText(s);
     layout->setFontDescription(*(dataHub->font));
 
-    layout->setWidth(ofGetWidth());
+    //layout->setWidth(ofGetWidth());
 
     layout->show();
 
@@ -53,8 +53,7 @@ void Pongalong::addFrame(string s) {
     tex = new ofxFBOTexture();
     tex->allocate(text_image.width, text_image.height);
     tex->begin();
-
-    text_image.draw(0,0);
+        text_image.draw(0,0);
     tex->end();
     //tex->setupScreenForMe();
 
@@ -80,7 +79,7 @@ void Pongalong::draw() {
     }
 
    ofColor c;
-        c.r = 255; c.g = 255; c.b = 0;
+        c.r = 255; c.g = 255; c.b = 255;
    ofSetColor(c);
 
 

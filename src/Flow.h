@@ -16,6 +16,7 @@ class FlowingWord
         Word * word;
         float impulse;
         int pixelWidth;
+        int rowTotalLength;
 };
 
 class Flow
@@ -35,6 +36,7 @@ class Flow
 
         float lastUpdateTime;
         bool bDebug;
+        float fadeSpeed;
 
     protected:
     private:

@@ -36,13 +36,6 @@ void MashScreen::setup()
     cairo_font_options_t * co = cairo_font_options_create ();
     cairo_font_options_set_antialias(co,CAIRO_ANTIALIAS_NONE);
 
-    //dataHub->font->setStyle(PANGO_STYLE_ITALIC);
-
-    //messages.push_back( new Message(string("100 DANCERS"), &font));
-    //messages.push_back( new Message(string("BE AWARE"), &font));
-    //messages.push_back( new Message(string("no huh,huh"), pango, dataHub->font));
-    //messages.push_back( new Message(string("Tervetuloa Göteborgiin. Meillä on viiniä!"), pango, dataHub->font));
-
     box2d = new Box2dMashEngine(*dataHub);
     flow = new Flow(*dataHub);
     // box2d->setup();
@@ -56,7 +49,21 @@ void MashScreen::setup()
     asciiBG.setOfxPango(pango);
     // asciiBG.setupFBO(context, layout);
     messages.push_back( new Message(string("100 DANCERS"), pango, dataHub->font));
-
+    messages.push_back( new Message(string("Be aware!"), pango, dataHub->font));
+    messages.push_back( new Message(string("Be present!"), pango, dataHub->font));
+    messages.push_back( new Message(string("one hundred dancers united"), pango, dataHub->font));
+    messages.push_back( new Message(string("100 dancers are magical beings"), pango, dataHub->font));
+    messages.push_back( new Message(string("100 dancers is a powerful force"), pango, dataHub->font));
+    messages.push_back( new Message(string("How would you describe a tomato?"), pango, dataHub->font));
+/*    messages.push_back( new Message(string("Have you seen a dancing tree? I have."), pango, dataHub->font));
+    messages.push_back( new Message(string("Zebra on the fast lane. Coughing up purple haze."), pango, dataHub->font));
+    messages.push_back( new Message(string("We are the children of the sun."), pango, dataHub->font));
+    messages.push_back( new Message(string("The rose smelled like raspberries."), pango, dataHub->font));
+    messages.push_back( new Message(string("Tomatoes in the sky with purple haze."), pango, dataHub->font));
+    messages.push_back( new Message(string("The dancers went biking. What happened?"), pango, dataHub->font));
+    messages.push_back( new Message(string("Sing us a song and we will sing you a hundred."), pango, dataHub->font));
+    messages.push_back( new Message(string("Please return the blankets, we need them on our tour."), pango, dataHub->font));
+*/
     flow->setup();
 
     randomBG();
@@ -69,9 +76,9 @@ void MashScreen::setup()
 
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
     dataHub->flowColor              = ofColor(255, 255, 25,  255);
-    dataHub->pongColor              = ofColor(255, 0,   0,   0);
+    dataHub->pongColor              = ofColor(0, 0,   255,   0);
     dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
-    dataHub->CMVColor               = ofColor(78,  25,  255, 255);
+    dataHub->CMVColor               = ofColor(78,  25,  255, 0);
     dataHub->bigLetterColor         = ofColor(255, 255, 0,   255);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
@@ -140,16 +147,6 @@ void MashScreen::draw()
         asciiBackgroundFbo.draw(0, 0);
     }
 
-    if(dataHub->flowColor.a) {
-        flowFbo.begin();
-            ofSetColor(255, 255, 255, 255);
-            ofClear(0, 0, 0, 0);
-            flow->draw();
-        flowFbo.end();
-        ofSetColor(dataHub->flowColor);
-        flowFbo.draw(0, 0);
-    }
-
     if(dataHub->box2dColor.a) {
         box2dFbo.begin();
             ofSetColor(255, 255, 255, 255);
@@ -160,7 +157,15 @@ void MashScreen::draw()
         box2dFbo.draw(0, 0);
     }
 
-
+    if(dataHub->flowColor.a) {
+        flowFbo.begin();
+            ofSetColor(255, 255, 255, 255);
+            ofClear(0, 0, 0, 0);
+            flow->draw();
+        flowFbo.end();
+        ofSetColor(dataHub->flowColor);
+        flowFbo.draw(0, 0);
+    }
 
     for(int i = 0; i < freezeOpacities.size(); ++i) {
         if(freezeOpacities[i]) {
@@ -179,7 +184,6 @@ void MashScreen::draw()
         ofSetColor(dataHub->CMVColor);
         CMVFbo.draw(0, 0);
     }
-
 
     if(dataHub->pongColor.a) {
         pongFbo.begin();

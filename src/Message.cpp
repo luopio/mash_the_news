@@ -4,10 +4,13 @@ Message::Message(string message, ofxPango * p, ofxPCPangoFontDescription* f)
 {
     StringTokenizer t(message, ", ", StringTokenizer::TOK_TRIM);
     StringTokenizer::Iterator ti = t.begin();
+    length = 0;
     for(; ti != t.end(); ++ti) {
         Word *w = new Word((string)(*ti));
         words.push_back(w);
+        length += w->letters.size() + 1; // +1 for space
     }
+    length -= 1; // take away last space
     prerender(p, f);
     setPosition(13, 13);
 }

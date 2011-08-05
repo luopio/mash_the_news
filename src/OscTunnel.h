@@ -63,6 +63,10 @@ class OscTunnel
         bool bRGBTune3Pressed;
         bool bRGBTune4Pressed;
         bool bRGBTune5Pressed;
+        bool bRGBTune6Pressed;
+        bool bRGBTune7Pressed;
+        bool bRGBTune8Pressed;
+
 
 };
 

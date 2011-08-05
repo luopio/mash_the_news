@@ -10,7 +10,6 @@ void testApp::setup(){
     int our_height = 240;
 
     #ifdef _USE_KINECT
-        //kinect.init();
         kinect.init(false,false,false);
         kinect.setVerbose(true);
         kinect.open();
@@ -94,6 +93,7 @@ void testApp::update(){
 
             if (dataHub.zoom < 1.0) { // we have to zoom!
               //  dataHub.roCoImg->crop(12,12,12,12);
+                //grayDiff.translate(-100,-100);
 
             }
 
@@ -131,6 +131,8 @@ void testApp::update(){
 
             grayThresh = grayDiff;
 
+            grayDiff.translate(-100,-100);
+
             // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
             // also, find holes is set to true so we will get interior contours as well....
             //contourFinder.findContours(grayDiff, 20, (340*240)/3, 10, true);	// find holes
@@ -164,6 +166,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 
+    cout << "PRESSED " << key << endl;
     switch (key)
     {
         case ' ':

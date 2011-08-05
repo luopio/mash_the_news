@@ -20,7 +20,7 @@ void CameraMaskViewer::setSign (string s, FBO * tex) {
     ofxPCPangoLayout * layout = context->createPangoLayout();
 
     layout->fill(0.0f,0.0f,0.0f,1.0f);
-    layout->setTextColor(1.0f,1.0,1.0f,1.0f);
+    layout->setTextColor(1.0f,1.0f,1.0f,1.0f);
     layout->setFontDescription(*(dataHub->font));
     layout->setText(s);
 

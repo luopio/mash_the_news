@@ -789,6 +789,12 @@
 		<Unit filename="src/AsciiBackground.h">
 			<Option virtualFolder="src" />
 		</Unit>
+		<Unit filename="src/BigLetters.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/BigLetters.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/Box2dMashEngine.cpp">
 			<Option virtualFolder="src" />
 		</Unit>

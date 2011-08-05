@@ -8,7 +8,7 @@ OscTunnel::OscTunnel()
     receiver = new ofxOscReceiver();
     sender->setup( DEFAULT_HOST, DEFAULT_PORT );
     sendStartMessage();
-    bRGBTune1Pressed = bRGBTune2Pressed = bRGBTune3Pressed = bRGBTune4Pressed = bRGBTune5Pressed = false;
+    bRGBTune1Pressed = bRGBTune2Pressed = bRGBTune3Pressed = bRGBTune4Pressed = bRGBTune5Pressed = bRGBTune6Pressed = bRGBTune7Pressed = bRGBTune8Pressed = false;
 }
 
 OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
@@ -16,7 +16,7 @@ OscTunnel::OscTunnel(char * ip, int port, MashScreen * ms) {
     screen = ms;
     sender = new ofxOscSender();
     receiver = new ofxOscReceiver();
-    bRGBTune1Pressed = bRGBTune2Pressed = bRGBTune3Pressed = bRGBTune4Pressed = bRGBTune5Pressed = false;
+    bRGBTune1Pressed = bRGBTune2Pressed = bRGBTune3Pressed = bRGBTune4Pressed = bRGBTune5Pressed = bRGBTune6Pressed = false;
     try {
         if (sender!=NULL)
             sender->setup(ip, port);
@@ -83,6 +83,13 @@ void OscTunnel::update() {
                 //screen->messages.push_back( new Message(m.getArgAsString(0)));
 
             }
+            else if ( m.getAddress() == "/letter" )  {
+                cout << "letter: " << m.getArgAsString(1) << endl;
+                screen->bigLetter(m.getArgAsString(0)[0]);
+
+                //screen->messages.push_back( new Message(m.getArgAsString(0)));
+
+            }
             else if ( m.getAddress() == "/oscmidi" ) {
 
                 if (m.getArgAsString(0)== "noteoff") {
@@ -106,6 +113,15 @@ void OscTunnel::update() {
                                     break;
                                 case 60:
                                     bRGBTune5Pressed = false;
+                                    break;
+                                case 62:
+                                    bRGBTune6Pressed = false;
+                                    break;
+                                case 64:
+                                    bRGBTune7Pressed = false;
+                                    break;
+                                case 65:
+                                    bRGBTune8Pressed = false;
                                     break;
                             }
                             break;
@@ -142,6 +158,15 @@ void OscTunnel::update() {
                                 case 60:
                                     bRGBTune5Pressed = true;
                                     break;
+                                case 62:
+                                    bRGBTune6Pressed = true;
+                                    break;
+                                case 64:
+                                    bRGBTune7Pressed = true;
+                                    break;
+                                case 65:
+                                    bRGBTune8Pressed = true;
+                                    break;
                             }
                             break;
                         case 3:
@@ -165,10 +190,11 @@ void OscTunnel::update() {
                             break;
                     }
 
-
-
-
                 }
+                // IDEA:
+                // FADE GOES UP NOW AND THEN
+                // MONITOR FOR DANCERS
+                // FADE SPEED
                 else if (m.getArgAsString(0)== "cc") {
                     int newAlpha = 0;
                     /* Which channel from 0 - 3 */
@@ -254,6 +280,18 @@ void OscTunnel::update() {
                                         dataHub->CMVColor.r = m.getArgAsInt32(3) * 2;
                                          cout << "CMV r: " << endl;
                                     }
+                                    if(bRGBTune6Pressed) {
+                                        dataHub->bigLetterColor.r = m.getArgAsInt32(3) * 2;
+                                         cout << "Big Letter r: " << endl;
+                                    }
+                                    if(bRGBTune7Pressed) {
+                                        dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
+                                         cout << "Freeze r: " << endl;
+                                    }
+                                    if(bRGBTune8Pressed) {
+                                        //dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
+                                        cout << "??? r: " << endl;
+                                    }
 
                                     break;
 
@@ -268,6 +306,7 @@ void OscTunnel::update() {
                                     }
                                     if(bRGBTune3Pressed) {
                                         dataHub->pongColor.g = m.getArgAsInt32(3) * 2;
+                                         cout << "PONG g: " << endl;
                                     }
                                     if(bRGBTune4Pressed) {
                                         dataHub->asciiBackgroundColor.g = m.getArgAsInt32(3) * 2;
@@ -289,6 +328,7 @@ void OscTunnel::update() {
                                     }
                                     if(bRGBTune3Pressed) {
                                         dataHub->pongColor.b = m.getArgAsInt32(3) * 2;
+                                         cout << "PONG b: " << dataHub->pongColor.b << endl;
                                     }
                                     if(bRGBTune4Pressed) {
                                         dataHub->asciiBackgroundColor.b = m.getArgAsInt32(3) * 2;
@@ -320,6 +360,10 @@ void OscTunnel::update() {
                                     }
 
                                     break;
+
+                                case 5:
+                                    dataHub->flowFadeSpeed = m.getArgAsInt32(3) / 1.4;
+
                             }
                             break;
 
@@ -332,7 +376,7 @@ void OscTunnel::update() {
                                 case 6:
                                     if (kinect != NULL) {
                                         kinect->setCameraTiltAngle((m.getArgAsInt32(3)/(127 / 60.0)) -30);
-                                        cout << (m.getArgAsInt32(3)/(127 / 60.0)) -30 << " is new near threshold value" << endl;
+                                        cout << (m.getArgAsInt32(3)/(127 / 60.0)) -30 << "new kinect coord" << endl;
                                     }
                                     break;
 
