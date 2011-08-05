@@ -132,9 +132,6 @@ void BigLetters::draw()
         maskFBO->draw(0, 0, ofGetWidth(), ofGetHeight());
     }
     ofSetColor(255);
-    ofDrawBitmapString("drawOffset: " + ofToString(drawOffset) + " startAgain: " + ofToString(startAgain),
-                           ofGetWidth() - 300, ofGetHeight() - 20);
-
 }
 
 
