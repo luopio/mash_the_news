@@ -23,11 +23,14 @@ class BigLetters
         map<char, FBO *> letters;
         FBO * curFBO;
         FBO * maskFBO;
+        FBO * maskPingPongFBO;
         ofPixels pixels;
         //ofxPango pango;
         //ofxPCPangoFontDescription font;
         ofTrueTypeFont tFont;
         ofTrueTypeFont mFont;
+        bool startAgain;
+        int drawOffset;
 
         ofImage image1;
         ofImage image2;

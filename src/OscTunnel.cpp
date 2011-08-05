@@ -128,18 +128,25 @@ void OscTunnel::update() {
                     }
                 }
                 else if (m.getArgAsString(0)== "noteon") {
-                    //cout << "oscmidi noteon:  ch: " << m.getArgAsInt32(1) << " note: " << m.getArgAsInt32(2) << " velocity: " << m.getArgAsInt32(3) << endl;
+                    cout << "oscmidi noteon:  ch: " << m.getArgAsInt32(1) << " note: " << m.getArgAsInt32(2) << " velocity: " << m.getArgAsInt32(3) << endl;
                     // corresponds to the midi channel (0-3)
                     switch (m.getArgAsInt32(1)) {
                         case 0:
-                            break;
+
                         case 1:
                             switch (m.getArgAsInt32(2)) {
-                                case 37: // first button
-                                    screen->hilightWordAt(ofRandom(0, 3));
+                                case 35: // first button
+                                    //cout << "FREEZE!" << endl;
+                                    dataHub->learnBackground = true;
+                                    dataHub->freezeFadeSpeed = m.getArgAsInt32(3);
+                                    screen->freezeFrame();
+                                    break;
+                                case 36: // first button
+                                    //cout << "FREEZE!" << endl;
+                                    dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
+                                    screen->freezeFrame(true);
                                     break;
                             }
-
                             break;
                         case 2:
                             switch (m.getArgAsInt32(2)) {
@@ -191,10 +198,6 @@ void OscTunnel::update() {
                     }
 
                 }
-                // IDEA:
-                // FADE GOES UP NOW AND THEN
-                // MONITOR FOR DANCERS
-                // FADE SPEED
                 else if (m.getArgAsString(0)== "cc") {
                     int newAlpha = 0;
                     /* Which channel from 0 - 3 */
@@ -263,30 +266,30 @@ void OscTunnel::update() {
                                     //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
                                     if(bRGBTune1Pressed) {
                                         dataHub->box2dColor.r = m.getArgAsInt32(3) * 2;
-                                        cout << "BOX2D r: " << endl;
+                                        //cout << "BOX2D r: " << endl;
                                     } if(bRGBTune2Pressed) {
                                         dataHub->flowColor.r = m.getArgAsInt32(3) * 2;
-                                         cout << "FLOW r: " << endl;
+                                        //cout << "FLOW r: " << endl;
                                     }
                                     if(bRGBTune3Pressed) {
                                         dataHub->pongColor.r = m.getArgAsInt32(3) * 2;
-                                         cout << "PONG r: " << endl;
+                                        //cout << "PONG r: " << endl;
                                     }
                                     if(bRGBTune4Pressed) {
                                         dataHub->asciiBackgroundColor.r = m.getArgAsInt32(3) * 2;
-                                         cout << "ASCII r: " << endl;
+                                        //cout << "ASCII r: " << endl;
                                     }
                                     if(bRGBTune5Pressed) {
                                         dataHub->CMVColor.r = m.getArgAsInt32(3) * 2;
-                                         cout << "CMV r: " << endl;
+                                        //cout << "CMV r: " << endl;
                                     }
                                     if(bRGBTune6Pressed) {
                                         dataHub->bigLetterColor.r = m.getArgAsInt32(3) * 2;
-                                         cout << "Big Letter r: " << endl;
+                                        //cout << "Big Letter r: " << endl;
                                     }
                                     if(bRGBTune7Pressed) {
-                                        dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
-                                         cout << "Freeze r: " << endl;
+                                        dataHub->freezeColor.r = m.getArgAsInt32(3) * 2;
+                                        //cout << "Freeze r: " << endl;
                                     }
                                     if(bRGBTune8Pressed) {
                                         //dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
@@ -314,7 +317,18 @@ void OscTunnel::update() {
                                     if(bRGBTune5Pressed) {
                                         dataHub->CMVColor.g = m.getArgAsInt32(3) * 2;
                                     }
-
+                                    if(bRGBTune6Pressed) {
+                                        dataHub->bigLetterColor.g = m.getArgAsInt32(3) * 2;
+                                        //cout << "Big Letter r: " << endl;
+                                    }
+                                    if(bRGBTune7Pressed) {
+                                        dataHub->freezeColor.g = m.getArgAsInt32(3) * 2;
+                                        //cout << "Freeze r: " << endl;
+                                    }
+                                    if(bRGBTune8Pressed) {
+                                        //dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
+                                        cout << "??? r: " << endl;
+                                    }
                                     break;
 
                                 case 3:
@@ -336,7 +350,18 @@ void OscTunnel::update() {
                                     if(bRGBTune5Pressed) {
                                         dataHub->CMVColor.b = m.getArgAsInt32(3) * 2;
                                     }
-
+                                    if(bRGBTune6Pressed) {
+                                        dataHub->bigLetterColor.b = m.getArgAsInt32(3) * 2;
+                                        //cout << "Big Letter r: " << endl;
+                                    }
+                                    if(bRGBTune7Pressed) {
+                                        dataHub->freezeColor.b = m.getArgAsInt32(3) * 2;
+                                        //cout << "Freeze r: " << endl;
+                                    }
+                                    if(bRGBTune8Pressed) {
+                                        //dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
+                                        cout << "??? r: " << endl;
+                                    }
                                     break;
 
                                 case 4:
@@ -358,11 +383,31 @@ void OscTunnel::update() {
                                     if(bRGBTune5Pressed) {
                                         dataHub->CMVColor.a = m.getArgAsInt32(3) * 2;
                                     }
-
+                                    if(bRGBTune6Pressed) {
+                                        dataHub->bigLetterColor.a = m.getArgAsInt32(3) * 2;
+                                        //cout << "Big Letter r: " << endl;
+                                    }
+                                    if(bRGBTune7Pressed) {
+                                        dataHub->freezeColor.a = m.getArgAsInt32(3) * 2;
+                                        //cout << "Freeze r: " << endl;
+                                    }
+                                    if(bRGBTune8Pressed) {
+                                        //dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
+                                        cout << "??? r: " << endl;
+                                    }
                                     break;
 
                                 case 5:
                                     dataHub->flowFadeSpeed = m.getArgAsInt32(3) / 1.4;
+                                    break;
+                                case 6:
+                                    dataHub->freezeFadeSpeed = m.getArgAsInt32(3);
+                                    cout << dataHub->freezeFadeSpeed << "FF" << endl;
+                                    break;
+                                 case 7:
+                                    dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
+                                    break;
+
 
                             }
                             break;

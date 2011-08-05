@@ -46,7 +46,7 @@ void testApp::setup(){
     dataHub.grayDiff = &grayDiff;
     dataHub.mouseX = &mouseX;
     dataHub.mouseY = &mouseY;
-    dataHub.bDebug = true;
+    dataHub.bDebug = false;
 
     screen = new MashScreen(dataHub);
     screen->setup();
@@ -119,10 +119,10 @@ void testApp::update(){
             colorImg.setFromPixels(vidGrabber.getPixels(), 320, 240);
 
             grayImage = colorImg;
-            if (bLearnBakground == true)
+            if (dataHub.learnBackground == true)
             {
                 grayBg = grayImage;		// the = sign copys the pixels from grayImage into grayBg (operator overloading)
-                bLearnBakground = false;
+                dataHub.learnBackground = false;
             }
 
             // take the abs value of the difference between background and incoming and then threshold:
@@ -169,47 +169,29 @@ void testApp::keyPressed(int key){
     cout << "PRESSED " << key << endl;
     switch (key)
     {
-        case ' ':
-            bLearnBakground = true;
+        case OF_KEY_RETURN:
             screen->freezeFrame();
             break;
 
-        case OF_KEY_RIGHT:
-            dataHub.kFarThreshold = MIN(dataHub.kFarThreshold + 1, 254);
+        case OF_KEY_BACKSPACE: // sends same as F3?
             break;
-        case OF_KEY_LEFT:
-            dataHub.kFarThreshold = MAX(dataHub.kFarThreshold - 1, 0);
-            break;
+
         case OF_KEY_UP:
-            dataHub.kThreshold = MIN(dataHub.kThreshold + 1, 254);
-            break;
-        case OF_KEY_DOWN:
-            dataHub.kThreshold = MAX(dataHub.kThreshold - 1, 0);
+            screen->freezeFrame(true);
             break;
 
-        case 'd':
-            dataHub.bDebug = !dataHub.bDebug; break;
 
-        case '+':
-            dataHub.strength += 0.1; break;
-        case '-':
-            dataHub.strength -= 0.1; break;
-        case '.':
-            dataHub.damping += 0.1; break;
-        case ',':
-            dataHub.damping -= 0.1; break;
+        case OF_KEY_END:
+            oscTunnel->toggleMute();
+            break;
 
+        case OF_KEY_HOME:
+            screen->pong->reset();
+            break;
 
-        case 'o':
-            oscTunnel->toggleMute(); break;
-        case 'b':
-            screen->randomBG(); break;
-        case 'p':
-            screen->pong->reset(); break;
-
+        default:
+            screen->bigLetter(key);
     }
-
-    screen->bigLetter(key);
 }
 
 //--------------------------------------------------------------
