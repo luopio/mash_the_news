@@ -5,8 +5,8 @@ BigLetters::BigLetters(DataHub &dh)
     dataHub = &dh;
     curFBO = NULL;
     fontSize = *(dataHub->rows) / 5 * 4;
-    tFont.loadFont("DroidSansMono.ttf", fontSize, true, true);
-    mFont.loadFont("Fixedsys500c.ttf", 11, true, true);
+    tFont.loadFont("DroidSansMono.ttf", fontSize, false, true);
+    mFont.loadFont("Fixedsys500c.ttf", 11, false, true);
 
     image1.loadImage("images/arcane1.png");
     image2.loadImage("images/bee.png");

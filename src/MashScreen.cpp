@@ -80,6 +80,7 @@ void MashScreen::setup()
     dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
     dataHub->CMVColor               = ofColor(78,  25,  255, 0);
     dataHub->bigLetterColor         = ofColor(100, 255, 100, 255);
+    dataHub->freezeColor            = ofColor(205, 205, 255, 255);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
@@ -124,9 +125,9 @@ void MashScreen::update()
 
     for(int i = 0; i < freezeOpacities.size(); ++i) {
         if(freezeOpacities[i] > 0)
-            freezeOpacities[i] -= 15;
+            freezeOpacities[i] -= dataHub->freezeFadeSpeed;
         if(freezeFlyOffsets[i] != 0)
-            freezeFlyOffsets[i] -= 20;
+            freezeFlyOffsets[i] -= dataHub->freezeSmokeSpeed;
 
         //else if(freezeOpacities[i] < 0)
         //    freezeOpacities[i] = 0;
@@ -173,7 +174,10 @@ void MashScreen::draw()
 
     for(int i = 0; i < freezeOpacities.size(); ++i) {
         if(freezeOpacities[i]) {
-            ofSetColor(255, 255, 255, freezeOpacities[i]);
+            ofSetColor(dataHub->freezeColor.r,
+                       dataHub->freezeColor.g,
+                       dataHub->freezeColor.b,
+                       freezeOpacities[i]);
             freezes[i]->draw(0, freezeFlyOffsets[i]);
         }
     }
@@ -198,6 +202,7 @@ void MashScreen::draw()
         pongFbo.draw(0, 0);
     }
 
+    ofSetColor(dataHub->bigLetterColor.r, dataHub->bigLetterColor.g, dataHub->bigLetterColor.b);
     bigLetters->draw();
 }
 

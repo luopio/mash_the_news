@@ -35,4 +35,10 @@ struct DataHub
     ofColor asciiBackgroundColor;
     ofColor CMVColor;
     ofColor bigLetterColor;
+
+    // new ones
+    ofColor freezeColor;
+    float freezeFadeSpeed;
+    float freezeSmokeSpeed;
+
 };
