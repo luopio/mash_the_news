@@ -170,7 +170,7 @@ void Flow::draw()
         //if(!(int)fw->impulse)
         //    continue;
         fw->word->draw(fw->col * FONT_W, fw->row * FONT_H,
-                       (int)fw->impulse + 40, (int)fw->impulse + 40, (int)fw->impulse + 40);
+                       (int)fw->impulse + dataHub->flowBGbrightness, (int)fw->impulse + dataHub->flowBGbrightness, (int)fw->impulse + dataHub->flowBGbrightness);
     }
 
     if(dataHub->bDebug) {

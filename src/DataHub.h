@@ -43,6 +43,10 @@ struct DataHub
     float freezeFadeSpeed;
     float freezeSmokeSpeed;
 
+    float flowBGbrightness;
+
     bool learnBackground;
+
+    string backGroundString;
 
 };

@@ -76,11 +76,11 @@ void OscTunnel::update() {
             else if ( m.getAddress() == "/ascii" )  {
                 cout << "ascii: " << m.getArgAsString( 1 ) << endl;
                 if (m.getArgAsInt32(0)) {
-                    bgString = m.getArgAsString(1);
+                    dataHub->backGroundString = m.getArgAsString(1);
                 } else {
-                    bgString += m.getArgAsString(1);
+                    dataHub->backGroundString += m.getArgAsString(1);
                 }
-                //screen->messages.push_back( new Message(m.getArgAsString(0)));
+                screen->asciiBG.setBackground(dataHub->backGroundString);
 
             }
             else if ( m.getAddress() == "/letter" )  {
@@ -146,7 +146,16 @@ void OscTunnel::update() {
                                     dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
                                     screen->freezeFrame(true);
                                     break;
-                            }
+                                case 42: // first button
+                                    //cout << "FREEZE!" << endl;
+                                    //dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
+                                    screen->freezeFrame();
+                                    break;
+                                case 39: // first button
+                                    //cout << "FREEZE!" << endl;
+                                    //dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
+                                    screen->freezeFrame(true);
+                                    break;                            }
                             break;
                         case 2:
                             switch (m.getArgAsInt32(2)) {
@@ -249,7 +258,6 @@ void OscTunnel::update() {
                                     dataHub->asciiBackgroundColor.a = newAlpha;
                                     cout << (int)dataHub->asciiBackgroundColor.a << " asciibg alpha" << endl;
                                     break;
-
                                 case 5:
                                     dataHub->CMVColor.a = newAlpha;
                                     cout << (int)dataHub->CMVColor.a << " asciibg alpha" << endl;
@@ -407,8 +415,8 @@ void OscTunnel::update() {
                                  case 7:
                                     dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
                                     break;
-
-
+                                case 8:
+                                    dataHub->flowBGbrightness = m.getArgAsInt32(3)/2;
                             }
                             break;
 
