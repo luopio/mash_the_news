@@ -75,12 +75,12 @@ void MashScreen::setup()
     pong = new Pongalong(dataHub,pango);
 
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
-    dataHub->flowColor              = ofColor(255, 25,  25,  255);
+    dataHub->flowColor              = ofColor(255, 25,  25,  0);
     dataHub->pongColor              = ofColor(255, 0,   0,   0);
     dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
     dataHub->CMVColor               = ofColor(78,  25,  255, 0);
-    dataHub->bigLetterColor         = ofColor(100, 255, 100, 255);
-    dataHub->freezeColor            = ofColor(205, 205, 255, 255);
+    dataHub->bigLetterColor         = ofColor(100, 255, 100, 0);
+    dataHub->freezeColor            = ofColor(205, 205, 255, 0);
 
     dataHub->freezeFadeSpeed        = 15;
     dataHub->freezeSmokeSpeed       = 23;
