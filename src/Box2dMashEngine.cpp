@@ -30,35 +30,24 @@ void Box2dMashEngine::setup()
 
     Message *m = NULL;
     int circle_index = 0;
-
-    for(int i = 0; i < dataHub->messages->size(); i++) {
-        m = (*dataHub->messages)[i];
-        for(vector<Word *>::iterator wi = m->words.begin(); wi != m->words.end(); ++wi) {
-            int letter_index = 0;
-            for(vector<Letter *>::iterator li = (*wi)->letters.begin(); li != (*wi)->letters.end(); ++li)
-            {
-                LetterCircle circle;
-                // mass, bounce, friction
-                circle.setPhysics(.9f, 0.03f, 0.2f);
-                circle.setup(box2d.getWorld(),
-                             letter_index * FONT_SIZE + 100,
-                             i * FONT_SIZE * 2 +100,
-                             FONT_SIZE, FONT_SIZE);
-                circle.letterInWordIndex = letter_index;
-                circle.letter = (*li);
-                circles.push_back(circle);
-                if(letter_index > 0) {
-                    ofxBox2dJoint* j = new ofxBox2dJoint();
-                    j->setup(box2d.getWorld(),
-                             circles[circle_index - 1].body,
-                             circles[circle_index].body,
-                             2.0, 0.7);
-                    joints.push_back(j);
-                }
-                circle_index++;
-                letter_index++;
-            }
-        }
+    for(int i = 0; i < 10; i++) {
+        LetterCircle circle;
+        // mass, bounce, friction
+        circle.setPhysics(.9f, 0.03f, 0.2f);
+        circle.setup(box2d.getWorld(),
+                     circle_index * FONT_SIZE + 100,
+                     i * FONT_SIZE * 2 +100,
+                     FONT_SIZE, FONT_SIZE);
+        circles.push_back(circle);
+        /*if(letter_index > 0) {
+            ofxBox2dJoint* j = new ofxBox2dJoint();
+            j->setup(box2d.getWorld(),
+                     circles[circle_index - 1].body,
+                     circles[circle_index].body,
+                     2.0, 0.7);
+            joints.push_back(j);
+        }*/
+        circle_index++;
     }
 }
 

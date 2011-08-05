@@ -67,7 +67,7 @@ void BigLetters::hilight(char letter)
             ofFill();
             ofSetColor(255, 255, 255, 255);
             tFont.drawString(ofToString(letter),
-                             *(dataHub->cols) - fontSize * 1.1,
+                             *(dataHub->cols) - fontSize * 0.8,
                              *(dataHub->rows) / 2 + fontSize / 2);
         curFBO->end();
         curFBO->readToPixels(pixels);
@@ -75,7 +75,7 @@ void BigLetters::hilight(char letter)
     }
 
     if(!startAgain) {
-        drawOffset = -185;
+        drawOffset = -195;
         maskPingPongFBO->begin();
             ofClear(0, 0, 0, 0);
             maskFBO->draw(drawOffset, 0);
@@ -132,9 +132,6 @@ void BigLetters::draw()
         maskFBO->draw(0, 0, ofGetWidth(), ofGetHeight());
     }
     ofSetColor(255);
-    ofDrawBitmapString("drawOffset: " + ofToString(drawOffset) + " startAgain: " + ofToString(startAgain),
-                           ofGetWidth() - 300, ofGetHeight() - 20);
-
 }
 
 
