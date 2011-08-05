@@ -32,7 +32,7 @@ class Flow
         void addMessage(Message *m);
 
         DataHub* dataHub;
-        vector<FlowingWord *> words;
+        vector<FlowingWord *> * words;
 
         float lastUpdateTime;
         bool bDebug;

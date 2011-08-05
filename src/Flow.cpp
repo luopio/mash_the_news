@@ -14,7 +14,8 @@ Flow::~Flow()
 
 void Flow::setup()
 {
-    words.clear();
+    words = new vector<FlowingWord *>();
+    words->clear();
     Message *m = NULL;
     int filledRows = 0;
 
@@ -53,7 +54,7 @@ void Flow::setup()
                     fw->impulse = 0;
                     fw->pixelWidth = (*wi)->letters.size() * FONT_W;
                     fw->rowTotalLength = totalLength;
-                    words.push_back(fw);
+                    words->push_back(fw);
                     colCounter += (*wi)->letters.size()  + 1;
                 }
                 messageRepeatsOnThisRow--;
@@ -68,17 +69,19 @@ void Flow::addMessage(Message *m)
 {
     int desiredRandomRow = ofRandom(0, *(dataHub->rows));
 
-    vector<FlowingWord *> newWords;
-    for(vector<FlowingWord *>::iterator i = words.begin(); i != words.end(); ++i)
+    vector<FlowingWord *> *newWords = new vector<FlowingWord *>();
+    for(vector<FlowingWord *>::iterator i = words->begin(); i != words->end(); ++i)
     {
         FlowingWord * fw = *(i);
         if(fw->row == desiredRandomRow) {
             // words.erase(i);
         } else {
-            newWords.push_back(fw);
+            newWords->push_back(fw);
         }
     }
+    vector<FlowingWord *> *temp = words;
     words = newWords;
+    delete(temp);
 
     int totalLength = 0;
     int messageRepeatsOnThisRow = 0;
@@ -106,10 +109,10 @@ void Flow::addMessage(Message *m)
             fw->col = colCounter;
             fw->row = desiredRandomRow;
             fw->speed = speed;
-            fw->impulse = 255;
+            fw->impulse = 355;
             fw->pixelWidth = (*wi)->letters.size() * FONT_W;
             fw->rowTotalLength = totalLength;
-            words.push_back(fw);
+            words->push_back(fw);
             colCounter += (*wi)->letters.size()  + 1;
         }
         messageRepeatsOnThisRow--;
@@ -119,8 +122,8 @@ void Flow::addMessage(Message *m)
 
 void Flow::update()
 {
-    for(int i = 0; i < words.size(); i++) {
-        FlowingWord * fw = words[i];
+    for(int i = 0; i < words->size(); i++) {
+        FlowingWord * fw = (*words)[i];
         int centerPixelX = fw->col * FONT_W + fw->pixelWidth / 2;
         int centerPixelY = fw->row * FONT_H + FONT_H / 2;
 
@@ -141,9 +144,9 @@ void Flow::update()
     }
     lastUpdateTime = now;
 
-    for(int i = 0; i < words.size(); i++)
+    for(int i = 0; i < words->size(); i++)
     {
-        FlowingWord * fw = words[i];
+        FlowingWord * fw = (*words)[i];
         fw->col += fw->speed;
 
         int letterAmount = fw->word->letters.size();
@@ -161,9 +164,9 @@ void Flow::update()
 
 void Flow::draw()
 {
-    for(int i = 0; i < words.size(); i++)
+    for(int i = 0; i < words->size(); i++)
     {
-        FlowingWord * fw = words[i];
+        FlowingWord * fw = (*words)[i];
         //if(!(int)fw->impulse)
         //    continue;
         fw->word->draw(fw->col * FONT_W, fw->row * FONT_H,
@@ -178,8 +181,8 @@ void Flow::draw()
 
 void Flow::hilightFirstWord(Word *w)
 {
-    for(int i = 0; i < words.size(); i++) {
-        FlowingWord * fw = words[i];
+    for(int i = 0; i < words->size(); i++) {
+        FlowingWord * fw = (*words)[i];
         if(fw->word == w) {
             fw->impulse = 255;
             return;
