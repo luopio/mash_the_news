@@ -24,7 +24,13 @@ BigLetters::BigLetters(DataHub &dh)
     curFBO->allocate(*(dataHub->cols), *(dataHub->rows));
     maskFBO = new FBO();
     maskFBO->allocate(ofGetWidth(), ofGetHeight());
+    maskPingPongFBO = new FBO();
+    maskPingPongFBO->allocate(ofGetWidth(), ofGetHeight());
     pixels.allocate(*(dataHub->cols), *(dataHub->rows), OF_IMAGE_COLOR_ALPHA);
+
+    // support for multiple letters at the same time
+    startAgain = true;
+    drawOffset = 0;
 }
 
 
@@ -61,15 +67,31 @@ void BigLetters::hilight(char letter)
             ofFill();
             ofSetColor(255, 255, 255, 255);
             tFont.drawString(ofToString(letter),
-                             *(dataHub->cols) / 2 - (fontSize * 0.4),
+                             *(dataHub->cols) - fontSize * 1.1,
                              *(dataHub->rows) / 2 + fontSize / 2);
         curFBO->end();
         curFBO->readToPixels(pixels);
 
     }
 
+    if(!startAgain) {
+        drawOffset = -185;
+        maskPingPongFBO->begin();
+            ofClear(0, 0, 0, 0);
+            maskFBO->draw(drawOffset, 0);
+        maskPingPongFBO->end();
+        maskFBO->begin();
+            ofClear(0, 0, 0, 0);
+            maskPingPongFBO->draw(0, 0);
+        maskFBO->end();
+    }
+
     maskFBO->begin();
-        ofClear(255, 255, 255, 10);
+        if(startAgain) {
+            ofClear(255, 255, 255, 10);
+            startAgain = false;
+            // drawOffset = 0;
+        }
         int w = curFBO->getWidth();
         for(int y = 0; y < curFBO->getHeight(); y++) {
             for(int x = 0; x < curFBO->getWidth(); x++) {
@@ -82,7 +104,9 @@ void BigLetters::hilight(char letter)
                                pixels[index + 1],
                                pixels[index + 2],
                                255);
-                    mFont.drawString("@", x * FONT_W, y * FONT_H - 4);
+                    mFont.drawString("@",
+                                     x * FONT_W,
+                                     y * FONT_H - 4);
                 }
             }
         }
@@ -94,6 +118,8 @@ void BigLetters::update()
 {
     if(impulse > 0)
         impulse -= 20;
+    else
+        startAgain = true;
 }
 
 void BigLetters::draw()
@@ -105,6 +131,10 @@ void BigLetters::draw()
                    impulse);
         maskFBO->draw(0, 0, ofGetWidth(), ofGetHeight());
     }
+    ofSetColor(255);
+    ofDrawBitmapString("drawOffset: " + ofToString(drawOffset) + " startAgain: " + ofToString(startAgain),
+                           ofGetWidth() - 300, ofGetHeight() - 20);
+
 }
 
 

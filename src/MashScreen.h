@@ -38,7 +38,7 @@ class MashScreen
 
         void hilightWordAt(int wordIndex);
         void addMessage(string msg);
-        void freezeFrame();
+        void freezeFrame(bool flyUp = false);
         void randomBG();
 
         AsciiBackground asciiBG;
@@ -59,6 +59,7 @@ class MashScreen
 
         vector<FBO *> freezes;
         vector<int> freezeOpacities;
+        vector<int> freezeFlyOffsets;
         int curFreezeFrame;
         // ofShader shader;
         float lastUpdateTime;

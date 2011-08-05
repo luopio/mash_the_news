@@ -75,11 +75,11 @@ void MashScreen::setup()
     pong = new Pongalong(dataHub,pango);
 
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
-    dataHub->flowColor              = ofColor(255, 255, 25,  255);
+    dataHub->flowColor              = ofColor(255, 25,  25,  255);
     dataHub->pongColor              = ofColor(255, 0,   0,   0);
     dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
     dataHub->CMVColor               = ofColor(78,  25,  255, 0);
-    dataHub->bigLetterColor         = ofColor(255, 255, 0,   255);
+    dataHub->bigLetterColor         = ofColor(100, 255, 100, 255);
 
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
@@ -91,10 +91,11 @@ void MashScreen::setup()
     CMVFbo.allocate(ofGetWidth(), ofGetHeight());
 
     curFreezeFrame = 0;
-    for(int i = 0; i < 4; ++i) {
+    for(int i = 0; i < 5; ++i) {
         FBO *f = new FBO();
         f->allocate(ofGetWidth(), ofGetHeight());
         freezeOpacities.push_back(0);
+        freezeFlyOffsets.push_back(0);
         freezes.push_back(f);
     }
 
@@ -124,6 +125,9 @@ void MashScreen::update()
     for(int i = 0; i < freezeOpacities.size(); ++i) {
         if(freezeOpacities[i] > 0)
             freezeOpacities[i] -= 15;
+        if(freezeFlyOffsets[i] != 0)
+            freezeFlyOffsets[i] -= 20;
+
         //else if(freezeOpacities[i] < 0)
         //    freezeOpacities[i] = 0;
     }
@@ -170,10 +174,9 @@ void MashScreen::draw()
     for(int i = 0; i < freezeOpacities.size(); ++i) {
         if(freezeOpacities[i]) {
             ofSetColor(255, 255, 255, freezeOpacities[i]);
-            freezes[i]->draw(0, 0);
+            freezes[i]->draw(0, freezeFlyOffsets[i]);
         }
     }
-
 
     if(dataHub->CMVColor.a) {
         CMVFbo.begin();
@@ -244,14 +247,20 @@ void MashScreen::addMessage(string msg)
     flow->addMessage(m);
 }
 
-void MashScreen::freezeFrame()
+void MashScreen::freezeFrame(bool flyUp)
 {
+    /* slightly fade out the others so that the new one shines a bit */
     for(int i = 0; i < freezeOpacities.size(); ++i) {
         if(freezeOpacities[i]) {
-            freezeOpacities[i] -= 20;
+            freezeOpacities[i] -= 12;
         }
     }
     freezeOpacities[curFreezeFrame] = 255;
+    if(flyUp)
+        freezeFlyOffsets[curFreezeFrame] = -1;
+    else
+        freezeFlyOffsets[curFreezeFrame] = 0;
+
     FBO *f = freezes[curFreezeFrame++];
     f->begin();
         ofClear(0, 0, 0, 0);

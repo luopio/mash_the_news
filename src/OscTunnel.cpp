@@ -173,10 +173,6 @@ void OscTunnel::update() {
                     }
 
                 }
-                // IDEA:
-                // FADE GOES UP NOW AND THEN
-                // MONITOR FOR DANCERS
-                // FADE SPEED
                 else if (m.getArgAsString(0)== "cc") {
                     int newAlpha = 0;
                     /* Which channel from 0 - 3 */
