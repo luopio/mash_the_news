@@ -85,6 +85,8 @@ void MashScreen::setup()
     dataHub->freezeFadeSpeed        = 15;
     dataHub->freezeSmokeSpeed       = 23;
 
+    dataHub->flowBGbrightness       = 40;
+
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
 
