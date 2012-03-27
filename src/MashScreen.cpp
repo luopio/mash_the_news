@@ -49,21 +49,21 @@ void MashScreen::setup()
     asciiBG.setOfxPango(pango);
     // asciiBG.setupFBO(context, layout);
     messages.push_back( new Message(string("100 DANCERS"), pango, dataHub->font));
-    messages.push_back( new Message(string("Be aware!"), pango, dataHub->font));
-    messages.push_back( new Message(string("Be present!"), pango, dataHub->font));
-    messages.push_back( new Message(string("one hundred dancers united"), pango, dataHub->font));
-    messages.push_back( new Message(string("100 dancers are magical beings"), pango, dataHub->font));
-    messages.push_back( new Message(string("100 dancers is a powerful force"), pango, dataHub->font));
-    messages.push_back( new Message(string("How would you describe a tomato?"), pango, dataHub->font));
-/*    messages.push_back( new Message(string("Have you seen a dancing tree? I have."), pango, dataHub->font));
+    messages.push_back( new Message(string("Stars, darkness, light,"), pango, dataHub->font));
+    messages.push_back( new Message(string("a phantom,a dew drop,a bubble"), pango, dataHub->font));
+    messages.push_back( new Message(string("a dream, lightning flash, a cloud"), pango, dataHub->font));
+    messages.push_back( new Message(string("This is how all compound things should be seen."), pango, dataHub->font));
+    messages.push_back( new Message(string("100 % pure magic power"), pango, dataHub->font));
+    messages.push_back( new Message(string("Falling, spiraling, transformation, surfing the skin"), pango, dataHub->font));
+    messages.push_back( new Message(string("Have you seen a dancing tree?"), pango, dataHub->font));
     messages.push_back( new Message(string("Zebra on the fast lane. Coughing up purple haze."), pango, dataHub->font));
-    messages.push_back( new Message(string("We are the children of the sun."), pango, dataHub->font));
+    messages.push_back( new Message(string("We are the children of the sun, project of love and surrender"), pango, dataHub->font));
     messages.push_back( new Message(string("The rose smelled like raspberries."), pango, dataHub->font));
-    messages.push_back( new Message(string("Tomatoes in the sky with purple haze."), pango, dataHub->font));
-    messages.push_back( new Message(string("The dancers went biking. What happened?"), pango, dataHub->font));
-    messages.push_back( new Message(string("Sing us a song and we will sing you a hundred."), pango, dataHub->font));
-    messages.push_back( new Message(string("Please return the blankets, we need them on our tour."), pango, dataHub->font));
-*/
+    messages.push_back( new Message(string("Invisible dance and fire ball."), pango, dataHub->font));
+    messages.push_back( new Message(string("Who are we together, where, whatś happening..?"), pango, dataHub->font));
+    messages.push_back( new Message(string("Mind is a muscle, grass in the wind"), pango, dataHub->font));
+    messages.push_back( new Message(string("Just visiting planet Earth"), pango, dataHub->font));
+
     flow->setup();
 
     randomBG();
@@ -75,12 +75,12 @@ void MashScreen::setup()
     pong = new Pongalong(dataHub,pango);
 
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
-    dataHub->flowColor              = ofColor(255, 25,  25,  0);
+    dataHub->flowColor              = ofColor(255, 25,  98,  200);
     dataHub->pongColor              = ofColor(255, 0,   0,   0);
     dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
-    dataHub->CMVColor               = ofColor(78,  25,  255, 0);
-    dataHub->bigLetterColor         = ofColor(100, 255, 100, 0);
-    dataHub->freezeColor            = ofColor(205, 205, 255, 0);
+    dataHub->CMVColor               = ofColor(255,  0,  178, 255);
+    dataHub->bigLetterColor         = ofColor(100, 255, 100, 200);
+    dataHub->freezeColor            = ofColor(0, 255, 0, 200);
 
     dataHub->freezeFadeSpeed        = 15;
     dataHub->freezeSmokeSpeed       = 23;

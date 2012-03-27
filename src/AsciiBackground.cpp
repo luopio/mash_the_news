@@ -1,9 +1,5 @@
 #include "AsciiBackground.h"
 
-#include "settings.h"
-#ifdef _USE_OFFBO
-#define ofxFBOTexture ofFbo
-#endif
 
 AsciiBackground::AsciiBackground()
 {
@@ -85,7 +81,7 @@ void AsciiBackground::setBackground(string s) {
     }*/
     //ofBitmapFont franklin;
 
-    tex = new ofxFBOTexture();
+    tex = new FBO();
     tex->allocate(ofGetWidth(), ofGetHeight());
     tex->begin();
     ofFill();
@@ -93,7 +89,7 @@ void AsciiBackground::setBackground(string s) {
 
 //        franklin.drawString("Olá Mundo!", 10, 10);
         text_image.draw(0,0);
-        text_image.draw(10 * FONT_W, 10 * FONT_H);
+        // text_image.draw(10 * FONT_W, 10 * FONT_H);
     tex->end();
 
     test = &text_image;

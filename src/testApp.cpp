@@ -16,8 +16,8 @@ void testApp::setup(){
         cout << "kinect opened with resolution " << kinect.width << "," << kinect.height << endl;
         our_height = kinect.height;
         our_width = kinect.width;
-        dataHub.kFarThreshold = 0;
-        dataHub.kThreshold = 255;
+        dataHub.kFarThreshold = 240;
+        dataHub.kThreshold = 250;
 
     #else
         vidGrabber.setVerbose(true);
@@ -169,6 +169,14 @@ void testApp::keyPressed(int key){
     cout << "PRESSED " << key << endl;
     switch (key)
     {
+        case '+':
+            dataHub.flowFadeSpeed++;
+            break;
+
+        case '-':
+            dataHub.flowFadeSpeed--;
+            break;
+
         case OF_KEY_RETURN:
             screen->freezeFrame();
             break;

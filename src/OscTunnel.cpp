@@ -78,7 +78,7 @@ void OscTunnel::update() {
                 if (m.getArgAsInt32(0)) {
                     dataHub->backGroundString = m.getArgAsString(1);
                 } else {
-                    dataHub->backGroundString += m.getArgAsString(1);
+                    dataHub->backGroundString += "\n" + m.getArgAsString(1);
                 }
                 screen->asciiBG.setBackground(dataHub->backGroundString);
 

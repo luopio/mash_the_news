@@ -1,19 +1,17 @@
 #ifndef ASCIIBACKGROUND_H
 #define ASCIIBACKGROUND_H
 
+#include "settings.h"
 #include "DataHub.h"
-
-#ifndef _USE_OFFBO
-    #include "ofxFBOTexture.h"
-#endif
 
 #include "ofFbo.h"
 #include "ofxPango.h"
 
-#include "settings.h"
-
 #ifdef _USE_OFFBO
-#define ofxFBOTexture ofFbo
+    #define FBO ofFbo
+#else
+    #define FBO ofxFBOTexture
+    #include "ofxFBOTexture.h"
 #endif
 
 
@@ -36,10 +34,10 @@ class AsciiBackground
 
         string background;
 
-        ofxFBOTexture *tex;
+        FBO *tex;
         ofImage text_image;
 
-        vector<ofxFBOTexture*> frames;
+        vector<FBO *> frames;
 
         ofxPango * pango;
         ofxPCContext* context;

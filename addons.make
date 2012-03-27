@@ -5,4 +5,4 @@ ofxThread
 ofxVectorMath
 ofxPango
 ofxOsc
-ofxFBOTexture
+# ofxFBOTexture

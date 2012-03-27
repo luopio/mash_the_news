@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/ofxBox2d/src/.svn/;addons/ofxBox2d/src/.svn/text-base/;addons/ofxBox2d/src/lib/.svn/;addons/ofxBox2d/src/lib/Box2D/.svn/;addons/ofxBox2d/src/lib/Box2D/Include/.svn/;addons/ofxBox2d/src/lib/Box2D/Include/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Include/;addons/ofxBox2d/src/lib/Box2D/Source/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/Shapes/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/Shapes/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/Shapes/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/;addons/ofxBox2d/src/lib/Box2D/Source/Common/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Common/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Common/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Contacts/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Contacts/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Contacts/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Controllers/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Controllers/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Controllers/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Joints/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Joints/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Joints/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/;addons/ofxBox2d/src/;addons/ofxFBOTexture/src/;addons/ofxKinect/src/;addons/ofxOpenCv/src/;addons/ofxOsc/src/;build config/;addons/ofxFBOTexture/;" />
+		<Option virtualFolders="addons/;src/;addons/ofxBox2d/src/.svn/;addons/ofxBox2d/src/.svn/text-base/;addons/ofxBox2d/src/lib/.svn/;addons/ofxBox2d/src/lib/Box2D/.svn/;addons/ofxBox2d/src/lib/Box2D/Include/.svn/;addons/ofxBox2d/src/lib/Box2D/Include/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Include/;addons/ofxBox2d/src/lib/Box2D/Source/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/Shapes/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/Shapes/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/Shapes/;addons/ofxBox2d/src/lib/Box2D/Source/Collision/;addons/ofxBox2d/src/lib/Box2D/Source/Common/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Common/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Common/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Contacts/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Contacts/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Contacts/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Controllers/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Controllers/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Controllers/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Joints/.svn/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Joints/.svn/text-base/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/Joints/;addons/ofxBox2d/src/lib/Box2D/Source/Dynamics/;addons/ofxBox2d/src/;addons/ofxKinect/src/;addons/ofxOpenCv/src/;addons/ofxOsc/src/;build config/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />
@@ -663,12 +663,6 @@
 		<Unit filename="../../../addons/ofxBox2d/src/ofxBox2dUtils.h">
 			<Option virtualFolder="addons/ofxBox2d/src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxFBOTexture/src/ofxFBOTexture.cpp">
-			<Option virtualFolder="addons/ofxFBOTexture/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxFBOTexture/src/ofxFBOTexture.h">
-			<Option virtualFolder="addons/ofxFBOTexture/src" />
-		</Unit>
 		<Unit filename="../../../addons/ofxKinect/src/ofxBase3DVideo.h">
 			<Option virtualFolder="addons/ofxKinect/src" />
 		</Unit>
@@ -838,7 +832,7 @@
 			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src/OscTunnel.h">
-			<Option virtualFolder="addons/ofxFBOTexture/" />
+			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/Pongalong.cpp">
 			<Option virtualFolder="src/" />
