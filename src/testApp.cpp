@@ -177,15 +177,7 @@ void testApp::keyPressed(int key){
             dataHub.flowFadeSpeed--;
             break;
 
-        case OF_KEY_RETURN:
-            screen->freezeFrame();
-            break;
-
         case OF_KEY_BACKSPACE: // sends same as F3?
-            break;
-
-        case OF_KEY_UP:
-            screen->freezeFrame(true);
             break;
 
 
@@ -193,12 +185,6 @@ void testApp::keyPressed(int key){
             oscTunnel->toggleMute();
             break;
 
-        case OF_KEY_HOME:
-            screen->pong->reset();
-            break;
-
-        default:
-            screen->bigLetter(key);
     }
 }
 

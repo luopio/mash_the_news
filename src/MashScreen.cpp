@@ -36,7 +36,6 @@ void MashScreen::setup()
     cairo_font_options_t * co = cairo_font_options_create ();
     cairo_font_options_set_antialias(co,CAIRO_ANTIALIAS_NONE);
 
-    box2d = new Box2dMashEngine(*dataHub);
     flow = new Flow(*dataHub);
     // box2d->setup();
 
@@ -72,18 +71,11 @@ void MashScreen::setup()
     // cout << "binding tex0 to " << asciiBG.tex->getTextureReference().texData.textureID << endl;
     // shader.setUniform1i("tex0", fbo.getTextureReference().texData.textureID); //send which texture to the shader
     // shader.setUniformTexture("tex0", fbo, fbo.getTextureReference().texData.textureID); //send which texture to the shader
-    pong = new Pongalong(dataHub,pango);
 
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
     dataHub->flowColor              = ofColor(255, 25,  98,  200);
-    dataHub->pongColor              = ofColor(255, 0,   0,   0);
     dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
     dataHub->CMVColor               = ofColor(255,  0,  178, 255);
-    dataHub->bigLetterColor         = ofColor(100, 255, 100, 200);
-    dataHub->freezeColor            = ofColor(0, 255, 0, 200);
-
-    dataHub->freezeFadeSpeed        = 15;
-    dataHub->freezeSmokeSpeed       = 23;
 
     dataHub->flowBGbrightness       = 40;
 
@@ -91,22 +83,10 @@ void MashScreen::setup()
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
 
     flowFbo.allocate(ofGetWidth(), ofGetHeight());
-    box2dFbo.allocate(ofGetWidth(), ofGetHeight());
-    pongFbo.allocate(ofGetWidth(), ofGetHeight());
     asciiBackgroundFbo.allocate(ofGetWidth(), ofGetHeight());
     CMVFbo.allocate(ofGetWidth(), ofGetHeight());
 
-    curFreezeFrame = 0;
-    for(int i = 0; i < 5; ++i) {
-        FBO *f = new FBO();
-        f->allocate(ofGetWidth(), ofGetHeight());
-        freezeOpacities.push_back(0);
-        freezeFlyOffsets.push_back(0);
-        freezes.push_back(f);
-    }
-
     ofEnableAlphaBlending();
-    bigLetters = new BigLetters(*dataHub);
 
 }
 
@@ -117,29 +97,12 @@ void MashScreen::update()
         flow->update();
     }
 
-    if(dataHub->box2dColor.a) {
-        // box2d->update();
-    }
-
     // control refresh rate for the rest
     float now = ofGetElapsedTimef();
     if(now - lastUpdateTime < 0.15) {
         return;
     }
     lastUpdateTime = now;
-
-    for(int i = 0; i < freezeOpacities.size(); ++i) {
-        if(freezeOpacities[i] > 0)
-            freezeOpacities[i] -= dataHub->freezeFadeSpeed;
-        if(freezeFlyOffsets[i] != 0)
-            freezeFlyOffsets[i] -= dataHub->freezeSmokeSpeed;
-
-        //else if(freezeOpacities[i] < 0)
-        //    freezeOpacities[i] = 0;
-    }
-
-    bigLetters->update();
-
 }
 
 
@@ -157,16 +120,6 @@ void MashScreen::draw()
         asciiBackgroundFbo.draw(0, 0);
     }
 
-    if(dataHub->box2dColor.a) {
-        box2dFbo.begin();
-            ofSetColor(255, 255, 255, 255);
-            ofClear(0, 0, 0, 0);
-            box2d->draw();
-        box2dFbo.end();
-        ofSetColor(dataHub->box2dColor);
-        box2dFbo.draw(0, 0);
-    }
-
     if(dataHub->flowColor.a) {
         flowFbo.begin();
             ofSetColor(255, 255, 255, 255);
@@ -175,16 +128,6 @@ void MashScreen::draw()
         flowFbo.end();
         ofSetColor(dataHub->flowColor);
         flowFbo.draw(0, 0);
-    }
-
-    for(int i = 0; i < freezeOpacities.size(); ++i) {
-        if(freezeOpacities[i]) {
-            ofSetColor(dataHub->freezeColor.r,
-                       dataHub->freezeColor.g,
-                       dataHub->freezeColor.b,
-                       freezeOpacities[i]);
-            freezes[i]->draw(0, freezeFlyOffsets[i]);
-        }
     }
 
     if(dataHub->CMVColor.a) {
@@ -197,18 +140,6 @@ void MashScreen::draw()
         CMVFbo.draw(0, 0);
     }
 
-    if(dataHub->pongColor.a) {
-        pongFbo.begin();
-            ofSetColor(255, 255, 255, 255);
-            ofClear(0, 0, 0, 0);
-            pong->draw();
-        pongFbo.end();
-        ofSetColor(dataHub->pongColor);
-        pongFbo.draw(0, 0);
-    }
-
-    ofSetColor(dataHub->bigLetterColor.r, dataHub->bigLetterColor.g, dataHub->bigLetterColor.b);
-    bigLetters->draw();
 }
 
 void MashScreen::randomBG() {
@@ -256,37 +187,3 @@ void MashScreen::addMessage(string msg)
     messages.push_back(m);
     flow->addMessage(m);
 }
-
-void MashScreen::freezeFrame(bool flyUp)
-{
-    /* slightly fade out the others so that the new one shines a bit */
-    for(int i = 0; i < freezeOpacities.size(); ++i) {
-        if(freezeOpacities[i]) {
-            freezeOpacities[i] -= 12;
-        }
-    }
-    freezeOpacities[curFreezeFrame] = 255;
-    if(flyUp)
-        freezeFlyOffsets[curFreezeFrame] = -1;
-    else
-        freezeFlyOffsets[curFreezeFrame] = 0;
-
-    FBO *f = freezes[curFreezeFrame++];
-    f->begin();
-        ofClear(0, 0, 0, 0);
-        ofSetColor(255, 255, 255, 255);
-        cmv->draw();
-    f->end();
-    if(curFreezeFrame >= freezes.size())
-        curFreezeFrame = 0;
-}
-
-
-void MashScreen::bigLetter(char c)
-{
-    bigLetters->hilight(c);
-}
-
-
-
-

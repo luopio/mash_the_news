@@ -83,13 +83,6 @@ void OscTunnel::update() {
                 screen->asciiBG.setBackground(dataHub->backGroundString);
 
             }
-            else if ( m.getAddress() == "/letter" )  {
-                cout << "letter: " << m.getArgAsString(1) << endl;
-                screen->bigLetter(m.getArgAsString(0)[0]);
-
-                //screen->messages.push_back( new Message(m.getArgAsString(0)));
-
-            }
             else if ( m.getAddress() == "/oscmidi" ) {
 
                 if (m.getArgAsString(0)== "noteoff") {
@@ -135,27 +128,6 @@ void OscTunnel::update() {
 
                         case 1:
                             switch (m.getArgAsInt32(2)) {
-                                case 35: // first button
-                                    //cout << "FREEZE!" << endl;
-                                    dataHub->learnBackground = true;
-                                    dataHub->freezeFadeSpeed = m.getArgAsInt32(3);
-                                    screen->freezeFrame();
-                                    break;
-                                case 36: // first button
-                                    //cout << "FREEZE!" << endl;
-                                    dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
-                                    screen->freezeFrame(true);
-                                    break;
-                                case 42: // first button
-                                    //cout << "FREEZE!" << endl;
-                                    //dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
-                                    screen->freezeFrame();
-                                    break;
-                                case 39: // first button
-                                    //cout << "FREEZE!" << endl;
-                                    //dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
-                                    screen->freezeFrame(true);
-                                    break;                            }
                             break;
                         case 2:
                             switch (m.getArgAsInt32(2)) {
@@ -204,6 +176,7 @@ void OscTunnel::update() {
                                     break;
                             }
                             break;
+                        }
                     }
 
                 }
@@ -231,10 +204,6 @@ void OscTunnel::update() {
                                     dataHub->zoom = m.getArgAsInt32(3)/127.0;
                                     cout << "Zoomed to " << dataHub->zoom << endl;
                                     break;
-                                case 8:
-                                    dataHub->pongSpeed = m.getArgAsInt32(3)/10;
-                                    cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
-                                    break;
                             }
                             break;
 
@@ -242,17 +211,9 @@ void OscTunnel::update() {
                         case 1:
                             newAlpha = m.getArgAsInt32(3) * 2;
                             switch (m.getArgAsInt32(2)) {
-                                case 1:
-                                    dataHub->box2dColor.a = newAlpha;
-                                    cout << (int)dataHub->box2dColor.a << " box2d alpha" << endl;
-                                    break;
                                 case 2:
                                     dataHub->flowColor.a = newAlpha;
                                     cout << (int)dataHub->flowColor.a << " flow alpha" << endl;
-                                    break;
-                                case 3:
-                                    dataHub->pongColor.a = newAlpha;
-                                    cout << (int)(dataHub->pongColor.a) << " pong alpha" << endl;
                                     break;
                                 case 4:
                                     dataHub->asciiBackgroundColor.a = newAlpha;
@@ -272,16 +233,9 @@ void OscTunnel::update() {
                                 case 1:
                                     //dataHub->pongSpeed = m.getArgAsInt32(3)/20;
                                     //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
-                                    if(bRGBTune1Pressed) {
-                                        dataHub->box2dColor.r = m.getArgAsInt32(3) * 2;
-                                        //cout << "BOX2D r: " << endl;
-                                    } if(bRGBTune2Pressed) {
+                                    if(bRGBTune2Pressed) {
                                         dataHub->flowColor.r = m.getArgAsInt32(3) * 2;
                                         //cout << "FLOW r: " << endl;
-                                    }
-                                    if(bRGBTune3Pressed) {
-                                        dataHub->pongColor.r = m.getArgAsInt32(3) * 2;
-                                        //cout << "PONG r: " << endl;
                                     }
                                     if(bRGBTune4Pressed) {
                                         dataHub->asciiBackgroundColor.r = m.getArgAsInt32(3) * 2;
@@ -290,14 +244,6 @@ void OscTunnel::update() {
                                     if(bRGBTune5Pressed) {
                                         dataHub->CMVColor.r = m.getArgAsInt32(3) * 2;
                                         //cout << "CMV r: " << endl;
-                                    }
-                                    if(bRGBTune6Pressed) {
-                                        dataHub->bigLetterColor.r = m.getArgAsInt32(3) * 2;
-                                        //cout << "Big Letter r: " << endl;
-                                    }
-                                    if(bRGBTune7Pressed) {
-                                        dataHub->freezeColor.r = m.getArgAsInt32(3) * 2;
-                                        //cout << "Freeze r: " << endl;
                                     }
                                     if(bRGBTune8Pressed) {
                                         //dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
@@ -309,29 +255,14 @@ void OscTunnel::update() {
                                 case 2:
                                     //dataHub->pongSpeed = m.getArgAsInt32(3)/20;
                                     //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
-                                    if(bRGBTune1Pressed) {
-                                        dataHub->box2dColor.g = m.getArgAsInt32(3) * 2;
-                                    }
                                     if(bRGBTune2Pressed) {
                                         dataHub->flowColor.g = m.getArgAsInt32(3) * 2;
-                                    }
-                                    if(bRGBTune3Pressed) {
-                                        dataHub->pongColor.g = m.getArgAsInt32(3) * 2;
-                                         cout << "PONG g: " << endl;
                                     }
                                     if(bRGBTune4Pressed) {
                                         dataHub->asciiBackgroundColor.g = m.getArgAsInt32(3) * 2;
                                     }
                                     if(bRGBTune5Pressed) {
                                         dataHub->CMVColor.g = m.getArgAsInt32(3) * 2;
-                                    }
-                                    if(bRGBTune6Pressed) {
-                                        dataHub->bigLetterColor.g = m.getArgAsInt32(3) * 2;
-                                        //cout << "Big Letter r: " << endl;
-                                    }
-                                    if(bRGBTune7Pressed) {
-                                        dataHub->freezeColor.g = m.getArgAsInt32(3) * 2;
-                                        //cout << "Freeze r: " << endl;
                                     }
                                     if(bRGBTune8Pressed) {
                                         //dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
@@ -342,15 +273,8 @@ void OscTunnel::update() {
                                 case 3:
                                     //dataHub->pongSpeed = m.getArgAsInt32(3)/20;
                                     //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
-                                    if(bRGBTune1Pressed) {
-                                        dataHub->box2dColor.b = m.getArgAsInt32(3) * 2;
-                                    }
                                     if(bRGBTune2Pressed) {
                                         dataHub->flowColor.b = m.getArgAsInt32(3) * 2;
-                                    }
-                                    if(bRGBTune3Pressed) {
-                                        dataHub->pongColor.b = m.getArgAsInt32(3) * 2;
-                                         cout << "PONG b: " << dataHub->pongColor.b << endl;
                                     }
                                     if(bRGBTune4Pressed) {
                                         dataHub->asciiBackgroundColor.b = m.getArgAsInt32(3) * 2;
@@ -358,32 +282,13 @@ void OscTunnel::update() {
                                     if(bRGBTune5Pressed) {
                                         dataHub->CMVColor.b = m.getArgAsInt32(3) * 2;
                                     }
-                                    if(bRGBTune6Pressed) {
-                                        dataHub->bigLetterColor.b = m.getArgAsInt32(3) * 2;
-                                        //cout << "Big Letter r: " << endl;
-                                    }
-                                    if(bRGBTune7Pressed) {
-                                        dataHub->freezeColor.b = m.getArgAsInt32(3) * 2;
-                                        //cout << "Freeze r: " << endl;
-                                    }
-                                    if(bRGBTune8Pressed) {
-                                        //dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
-                                        cout << "??? r: " << endl;
-                                    }
                                     break;
 
                                 case 4:
                                     //dataHub->pongSpeed = m.getArgAsInt32(3)/20;
                                     //cout << "pong speed is now " << (dataHub->pongSpeed) << endl;
-                                    if(bRGBTune1Pressed) {
-                                        dataHub->box2dColor.a = m.getArgAsInt32(3) * 2;
-                                        //cout << "BOX2D: " <<
-                                    }
                                     if(bRGBTune2Pressed) {
                                         dataHub->flowColor.a = m.getArgAsInt32(3) * 2;
-                                    }
-                                    if(bRGBTune3Pressed) {
-                                        dataHub->pongColor.a = m.getArgAsInt32(3) * 2;
                                     }
                                     if(bRGBTune4Pressed) {
                                         dataHub->asciiBackgroundColor.a = m.getArgAsInt32(3) * 2;
@@ -391,32 +296,13 @@ void OscTunnel::update() {
                                     if(bRGBTune5Pressed) {
                                         dataHub->CMVColor.a = m.getArgAsInt32(3) * 2;
                                     }
-                                    if(bRGBTune6Pressed) {
-                                        dataHub->bigLetterColor.a = m.getArgAsInt32(3) * 2;
-                                        //cout << "Big Letter r: " << endl;
-                                    }
-                                    if(bRGBTune7Pressed) {
-                                        dataHub->freezeColor.a = m.getArgAsInt32(3) * 2;
-                                        //cout << "Freeze r: " << endl;
-                                    }
-                                    if(bRGBTune8Pressed) {
-                                        //dataHub->BLColor.r = m.getArgAsInt32(3) * 2;
-                                        cout << "??? r: " << endl;
-                                    }
                                     break;
 
                                 case 5:
                                     dataHub->flowFadeSpeed = m.getArgAsInt32(3) / 1.4;
                                     break;
                                 case 6:
-                                    dataHub->freezeFadeSpeed = m.getArgAsInt32(3);
-                                    cout << dataHub->freezeFadeSpeed << "FF" << endl;
                                     break;
-                                 case 7:
-                                    dataHub->freezeSmokeSpeed = m.getArgAsInt32(3);
-                                    break;
-                                case 8:
-                                    dataHub->flowBGbrightness = m.getArgAsInt32(3)/2;
                             }
                             break;
 

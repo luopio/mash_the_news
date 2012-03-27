@@ -122,7 +122,8 @@ void Flow::addMessage(Message *m)
 
 void Flow::update()
 {
-    for(int i = 0; i < words->size(); i++) {
+    for(int i = 0; i < words->size(); i++)
+    {
         FlowingWord * fw = (*words)[i];
         int centerPixelX = fw->col * FONT_W + fw->pixelWidth / 2;
         int centerPixelY = fw->row * FONT_H + FONT_H / 2;
