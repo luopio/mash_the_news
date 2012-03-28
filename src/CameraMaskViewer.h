@@ -6,8 +6,9 @@
 #include "settings.h"
 
 #ifdef _USE_OFFBO
-    #define FBO ofFbo
+    #define FBO ofxFbo
 #else
+    #include "ofxFBOTexture.h"
     #define FBO ofxFBOTexture
 #endif
 

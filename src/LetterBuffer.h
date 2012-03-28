@@ -5,10 +5,13 @@
 #define FONT_W 8
 #define FONT_H 17
 
-#ifndef _USE_OFFBO
-    #include "ofxFBOTexture.h"
+#ifdef _USE_OFFBO
     #define ofxFBOTexture ofFbo
+#else
+    #include "ofxFBOTexture.h"
 #endif
+
+
 
 #include "ofMain.h"
 #include "ofxPango.h"
