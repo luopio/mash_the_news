@@ -9,7 +9,7 @@
 class FlowingWord
 {
     public:
-        ofFbo fbo;
+        // ofFbo fbo;
         float col, row;
         float speed;
         Message * msg;

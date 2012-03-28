@@ -9,7 +9,6 @@
 #define FONT_W 8
 #define FONT_H 17
 
-
 #include "ofMain.h"
 #include "Poco/StringTokenizer.h"
 
@@ -29,6 +28,8 @@
 #include "Poco/UTF8Encoding.h"
 #include "Poco/TextIterator.h"
 
+#include "LetterBuffer.h"
+
 using Poco::StringTokenizer;
 
 class Letter
@@ -39,6 +40,7 @@ class Letter
 
         void prerender(ofxPango * p, ofxPCPangoFontDescription* font);
         void prerender(ofTrueTypeFont *font);
+        void prerender(LetterBuffer * buf);
         void draw();
         void draw(int x, int y);
 

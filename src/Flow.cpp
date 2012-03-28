@@ -26,20 +26,18 @@ void Flow::setup()
         for(int i = 0; i < dataHub->messages->size(); i++) {
             m = (*dataHub->messages)[i];
             int totalLength = 0;
-            int messageRepeatsOnThisRow = 0;
+            int messageRepeatsOnThisRow = 1;
             // calculate a total length for the message, how many do we need per row?
             if(m->length > (*dataHub->cols)) {
                 totalLength = m->length;
-                messageRepeatsOnThisRow = 1;
             } else {
                 totalLength = m->length;
-                messageRepeatsOnThisRow = 1;
                 while(totalLength < (*dataHub->cols)) {
                     totalLength += m->length + 4;
                     messageRepeatsOnThisRow++;
                 }
             }
-            cout << "calculcated total length of " << totalLength << endl;
+            cout << "Flow:setup() calculated total length of " << totalLength << endl;
 
             int colCounter = 0;
             float speed = ofRandom(-2, 2);
@@ -97,7 +95,7 @@ void Flow::addMessage(Message *m)
             messageRepeatsOnThisRow++;
         }
     }
-    cout << "calculcated total length of " << totalLength << endl;
+    cout << "calculated total length of " << totalLength << endl;
 
     int colCounter = 0;
     float speed = ofRandom(-2, 2);

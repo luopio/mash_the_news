@@ -36,6 +36,7 @@ void MashScreen::setup()
     cairo_font_options_t * co = cairo_font_options_create ();
     cairo_font_options_set_antialias(co,CAIRO_ANTIALIAS_NONE);
 
+    letterBuffer = new LetterBuffer(pango, dataHub->font);
     flow = new Flow(*dataHub);
     // box2d->setup();
 
@@ -47,6 +48,8 @@ void MashScreen::setup()
 
     asciiBG.setOfxPango(pango);
     // asciiBG.setupFBO(context, layout);
+
+    /*
     messages.push_back( new Message(string("100 DANCERS"), pango, dataHub->font));
     messages.push_back( new Message(string("Stars, darkness, light,"), pango, dataHub->font));
     messages.push_back( new Message(string("a phantom,a dew drop,a bubble"), pango, dataHub->font));
@@ -62,6 +65,17 @@ void MashScreen::setup()
     messages.push_back( new Message(string("Who are we together, where, whatś happening..?"), pango, dataHub->font));
     messages.push_back( new Message(string("Mind is a muscle, grass in the wind"), pango, dataHub->font));
     messages.push_back( new Message(string("Just visiting planet Earth"), pango, dataHub->font));
+    */
+
+    messages.push_back( new Message(string("100 DANCERS"), letterBuffer));
+    messages.push_back( new Message(string("Stars, darkness, light,"), letterBuffer));
+    messages.push_back( new Message(string("a phantom,a dew drop,a bubble"), letterBuffer));
+    messages.push_back( new Message(string("a dream, lightning flash, a cloud"), letterBuffer));
+    messages.push_back( new Message(string("This is how all compound things should be seen."), letterBuffer));
+    messages.push_back( new Message(string("100 % pure magic power"), letterBuffer));
+    messages.push_back( new Message(string("Falling, spiraling, transformation, surfing the skin"), letterBuffer));
+    messages.push_back( new Message(string("Have you seen a dancing tree?"), letterBuffer));
+    messages.push_back( new Message(string("Zebra on the fast lane. Coughing up purple haze."), letterBuffer));
 
     flow->setup();
 
@@ -73,9 +87,9 @@ void MashScreen::setup()
     // shader.setUniformTexture("tex0", fbo, fbo.getTextureReference().texData.textureID); //send which texture to the shader
 
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
-    dataHub->flowColor              = ofColor(255, 25,  98,  200);
+    dataHub->flowColor              = ofColor(255, 25,  98,  255);
     dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
-    dataHub->CMVColor               = ofColor(255,  0,  178, 255);
+    dataHub->CMVColor               = ofColor(255,  0,  178, 0);
 
     dataHub->flowBGbrightness       = 40;
 
@@ -183,7 +197,7 @@ void MashScreen::hilightWordAt(int wordIndex)
 
 void MashScreen::addMessage(string msg)
 {
-    Message *m = new Message(msg, pango, dataHub->font);
+    Message *m = new Message(msg, letterBuffer);
     messages.push_back(m);
     flow->addMessage(m);
 }

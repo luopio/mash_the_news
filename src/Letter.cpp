@@ -18,6 +18,7 @@ Letter::Letter(string let)
 
 void Letter::prerender(ofxPango *p, ofxPCPangoFontDescription* font)
 {
+    cout << "prerender via pango" << endl;
     ofSetColor(255, 255, 255, 255);
     ofxPCContext * context = p->createContextWithSurface(FONT_W, FONT_H);
 
@@ -46,11 +47,18 @@ void Letter::prerender(ofxPango *p, ofxPCPangoFontDescription* font)
 
 void Letter::prerender(ofTrueTypeFont * font)
 {
+    cout << "prerender with font" << endl;
     tex = new ofxFBOTexture();
     tex->allocate(FONT_W, FONT_H);
     tex->begin();
         font->drawString(letter, 0,0);
     tex->end();
+}
+
+void Letter::prerender(LetterBuffer * buf)
+{
+    tex = buf->getFbo(letter);
+    cout << "prerender with getFBO!" << tex << endl;
 }
 
 Letter::~Letter()

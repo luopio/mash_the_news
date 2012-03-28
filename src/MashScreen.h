@@ -5,6 +5,7 @@
 #include "AsciiBackground.h"
 #include "ofxPango.h"
 #include "CameraMaskViewer.h"
+#include "LetterBuffer.h"
 
 #include "settings.h"
 
@@ -24,6 +25,7 @@ class MashScreen
         ofTrueTypeFont font;
 
         Flow *flow;
+        LetterBuffer *letterBuffer;
 
         DataHub *dataHub;
         unsigned int rows, cols;
