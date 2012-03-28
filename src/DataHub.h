@@ -14,8 +14,8 @@ struct DataHub
 
     ofxCvGrayscaleImage* grayDiff;
     ofxCvGrayscaleImage* roCoImg;
-    ofImage * colorMap;
     unsigned int currentSlideIndex;
+    ofImage * colorMap; // Kinect koordinaateissa...
     float colorMapWeight;
     float colorMapImageWeight;
 

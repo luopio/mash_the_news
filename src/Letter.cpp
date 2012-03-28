@@ -2,7 +2,9 @@
 
 #include "settings.h"
 #ifdef _USE_OFFBO
-#define ofxFBOTexture ofFbo
+    #define ofxFBOTexture ofFbo
+#else
+    #include "ofxFBOTexture.h"
 #endif
 
 using namespace Poco;
