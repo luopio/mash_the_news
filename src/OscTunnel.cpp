@@ -70,7 +70,7 @@ void OscTunnel::update() {
             else if ( m.getAddress() == "/sms" )
             {
                 cout << "SMS: " << m.getArgAsString( 0 ) << endl;
-                screen->addMessage(m.getArgAsString(0));
+                // screen->addMessage(m.getArgAsString(0));
 
             }
             else if ( m.getAddress() == "/ascii" )  {
@@ -160,7 +160,7 @@ void OscTunnel::update() {
                         case 3:
                             switch (m.getArgAsInt32(2)) {
                                 case 36:
-                                    screen->messages.push_back( new Message(string("no huh,huh"), screen->pango, dataHub->font));
+                                    // screen->messages.push_back( new Message(string("no huh,huh"), screen->pango, dataHub->font));
                                     break;
                                 case 40:
                                     // redoing...

@@ -15,13 +15,24 @@
     #define FBO ofxFBOTexture
 #endif
 
+class SlideShowImage
+{
+    public:
+        SlideShowImage(vector<string> messages, string imagePath, LetterBuffer * letterb, DataHub * dh);
+        vector<Message *> messages;
+        ofImage * colorMap;
+        ofImage * image;
+        bool loaded;
+};
+
 class MashScreen
 {
     public:
         MashScreen(DataHub &h);
         virtual ~MashScreen();
 
-        vector<Message *> messages;
+
+        vector<SlideShowImage *> slideshow;
         ofTrueTypeFont font;
 
         Flow *flow;
@@ -35,7 +46,6 @@ class MashScreen
         void draw();
 
         void hilightWordAt(int wordIndex);
-        void addMessage(string msg);
         void randomBG();
 
         AsciiBackground asciiBG;

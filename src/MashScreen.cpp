@@ -3,7 +3,7 @@
 MashScreen::MashScreen(DataHub &h)
 {
     dataHub = &h;
-    dataHub->messages = &messages;
+    // dataHub->messages = &messages;
 }
 
 MashScreen::~MashScreen()
@@ -22,6 +22,7 @@ void MashScreen::setup()
     dataHub->colorMapWeight = 0.0;
     dataHub->colorMapImageWeight = 0.0;
 
+    dataHub->currentSlideIndex = 0;
     dataHub->rows = &rows;
     dataHub->cols = &cols;
     cout << "cols&rows" << cols << "," << rows << "w&h " << ofGetWidth() << "," << ofGetHeight() << endl;
@@ -45,39 +46,16 @@ void MashScreen::setup()
 
     ofBackground(0, 0, 0);
 
-    //asciiBG.addDatahub(dataHub);
-    //cmv = new CameraMaskViewer(dataHub, pango);
-    //asciiBG.setOfxPango(pango);
 
-    // asciiBG.setupFBO(context, layout);
-
-    /*
-    messages.push_back( new Message(string("100 DANCERS"), pango, dataHub->font));
-    messages.push_back( new Message(string("Stars, darkness, light,"), pango, dataHub->font));
-    messages.push_back( new Message(string("a phantom,a dew drop,a bubble"), pango, dataHub->font));
-    messages.push_back( new Message(string("a dream, lightning flash, a cloud"), pango, dataHub->font));
-    messages.push_back( new Message(string("This is how all compound things should be seen."), pango, dataHub->font));
-    messages.push_back( new Message(string("100 % pure magic power"), pango, dataHub->font));
-    messages.push_back( new Message(string("Falling, spiraling, transformation, surfing the skin"), pango, dataHub->font));
-    messages.push_back( new Message(string("Have you seen a dancing tree?"), pango, dataHub->font));
-    messages.push_back( new Message(string("Zebra on the fast lane. Coughing up purple haze."), pango, dataHub->font));
-    messages.push_back( new Message(string("We are the children of the sun, project of love and surrender"), pango, dataHub->font));
-    messages.push_back( new Message(string("The rose smelled like raspberries."), pango, dataHub->font));
-    messages.push_back( new Message(string("Invisible dance and fire ball."), pango, dataHub->font));
-    messages.push_back( new Message(string("Who are we together, where, whatś happening..?"), pango, dataHub->font));
-    messages.push_back( new Message(string("Mind is a muscle, grass in the wind"), pango, dataHub->font));
-    messages.push_back( new Message(string("Just visiting planet Earth"), pango, dataHub->font));
-    */
-
-    messages.push_back( new Message(string("100 DANCERS"), letterBuffer));
-    messages.push_back( new Message(string("Stars, darkness, light,"), letterBuffer));
-    messages.push_back( new Message(string("a phantom,a dew drop,a bubble"), letterBuffer));
-    messages.push_back( new Message(string("a dream, lightning flash, a cloud"), letterBuffer));
-    messages.push_back( new Message(string("This is how all compound things should be seen."), letterBuffer));
-    messages.push_back( new Message(string("100 % pure magic power"), letterBuffer));
-    messages.push_back( new Message(string("Falling, spiraling, transformation, surfing the skin"), letterBuffer));
-    messages.push_back( new Message(string("Have you seen a dancing tree?"), letterBuffer));
-    messages.push_back( new Message(string("Zebra on the fast lane. Coughing up purple haze."), letterBuffer));
+    // Initialize the slideshow images
+    vector<string> msgs;
+    msgs.push_back("Stars, darkness, light");
+    msgs.push_back("Yeah, you would think?");
+    msgs.push_back("This is how fuckit");
+    msgs.push_back("a phantom, a dew drop, a bubble");
+    SlideShowImage * s = new SlideShowImage(msgs, "secondimage.jpg", letterBuffer, dataHub);
+    slideshow.push_back(s);
+    dataHub->messages = &(s->messages);
 
     flow->setup();
 
@@ -98,9 +76,7 @@ void MashScreen::setup()
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
 
-    dataHub->colorMap = new ofImage();
-    dataHub->colorMap->loadImage("secondimage.jpg");
-    dataHub->colorMap->resize(*dataHub->cols, *dataHub->rows);
+    dataHub->colorMap = slideshow[0]->colorMap;
     cout << "colorMap size" << dataHub->colorMap->getWidth() << "," << dataHub->colorMap->getHeight() << endl;
 
     flowFbo.allocate(ofGetWidth(), ofGetHeight());
@@ -210,9 +186,17 @@ void MashScreen::hilightWordAt(int wordIndex)
     }
 }
 
-void MashScreen::addMessage(string msg)
+
+SlideShowImage::SlideShowImage(vector<string> msgs, string imagePath, LetterBuffer * letterBuffer, DataHub * dataHub)
 {
-    Message *m = new Message(msg, letterBuffer);
-    messages.push_back(m);
-    flow->addMessage(m);
+    string m;
+    for(int i = 0; i < msgs.size(); i++) {
+        m = msgs[i];
+        messages.push_back( new Message(m, letterBuffer) );
+    }
+    image = new ofImage();
+    image->loadImage(imagePath);
+    colorMap = new ofImage();
+    colorMap->loadImage(imagePath);
+    colorMap->resize(*dataHub->cols, *dataHub->rows);
 }

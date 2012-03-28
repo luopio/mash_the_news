@@ -15,6 +15,7 @@ struct DataHub
     ofxCvGrayscaleImage* grayDiff;
     ofxCvGrayscaleImage* roCoImg;
     ofImage * colorMap;
+    unsigned int currentSlideIndex;
     float colorMapWeight;
     float colorMapImageWeight;
 
