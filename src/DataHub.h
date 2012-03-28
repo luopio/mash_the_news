@@ -14,6 +14,9 @@ struct DataHub
 
     ofxCvGrayscaleImage* grayDiff;
     ofxCvGrayscaleImage* roCoImg;
+    ofImage * colorMap;
+    float colorMapWeight;
+    float colorMapImageWeight;
 
     vector<Message *> * messages;
 

@@ -53,6 +53,8 @@ class MashScreen
 
         float lastUpdateTime;
 
+        bool bShowImage;
+
     protected:
 
     private:

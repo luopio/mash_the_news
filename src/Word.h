@@ -18,4 +18,6 @@ class Word
         void draw();
         void draw(int x, int y);
         void draw(int x, int y, int r, int g, int b);
+        void drawww(int x, int y, ofImage * colorMap);
+        void drawww(int x, int y, int r, int g, int b, ofImage * colorMap, float weight);
 };

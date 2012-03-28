@@ -72,3 +72,36 @@ void Word::draw(int x, int y, int r, int g, int b)
     }
     ofSetColor(255);
 }
+
+
+void Word::drawww(int col, int row, ofImage * colorMap)
+{
+    int letterCounter = 0;
+    unsigned char r = 255; unsigned char g = 255; unsigned char b = 255;
+    for(vector<Letter *>::iterator ii = letters.begin();
+        ii != letters.end(); ++ii) {
+        int colIndex = col + letterCounter;
+        ofColor c = colorMap->getColor(colIndex, row);
+
+        (*ii)->draw((colIndex) * FONT_W, row * FONT_H, c.r, c.g, c.b);
+        letterCounter++;
+    }
+}
+
+void Word::drawww(int col, int row, int r, int g, int b, ofImage * colorMap, float weight)
+{
+    int letterCounter = 0;
+    unsigned char wr, wb, wg;
+    for(vector<Letter *>::iterator ii = letters.begin();
+        ii != letters.end(); ++ii) {
+        int colIndex = col + letterCounter;
+        ofColor c = colorMap->getColor(colIndex, row);
+
+        wr = (unsigned char)(c.r * weight + r * (1.0 - weight));
+        wb = (unsigned char)(c.b * weight + b * (1.0 - weight));
+        wg = (unsigned char)(c.g * weight + g * (1.0 - weight));
+
+        (*ii)->draw((colIndex) * FONT_W, row * FONT_H, wr, wg, wb);
+        letterCounter++;
+    }
+}
