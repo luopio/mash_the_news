@@ -193,6 +193,11 @@ void testApp::keyPressed(int key){
             screen->bShowImage = !screen->bShowImage;
             break;
 
+        case 'n':
+            screen->nextSlide();
+            break;
+
+
         case OF_KEY_END:
             oscTunnel->toggleMute();
             break;

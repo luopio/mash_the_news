@@ -31,7 +31,6 @@ class MashScreen
         MashScreen(DataHub &h);
         virtual ~MashScreen();
 
-
         vector<SlideShowImage *> slideshow;
         ofTrueTypeFont font;
 
@@ -44,6 +43,7 @@ class MashScreen
         void setup();
         void update();
         void draw();
+        void nextSlide();
 
         void hilightWordAt(int wordIndex);
         void randomBG();

@@ -55,6 +55,12 @@ void MashScreen::setup()
     msgs.push_back("a phantom, a dew drop, a bubble");
     SlideShowImage * s = new SlideShowImage(msgs, "secondimage.jpg", letterBuffer, dataHub);
     slideshow.push_back(s);
+
+    vector<string> msgs2;
+    msgs2.push_back("DORKY WORKY");
+    msgs2.push_back("HUMBLE DUUD");
+    s = new SlideShowImage(msgs, "firstimage.jpg", letterBuffer, dataHub);
+    slideshow.push_back(s);
     dataHub->messages = &(s->messages);
 
     flow->setup();
@@ -106,6 +112,7 @@ void MashScreen::draw()
 {
 
     ofSetColor(255, 255, 255, 255);
+
     /*
     if(dataHub->asciiBackgroundColor.a) {
         asciiBackgroundFbo.begin();
@@ -186,6 +193,16 @@ void MashScreen::hilightWordAt(int wordIndex)
     }
 }
 
+
+void MashScreen::nextSlide()
+{
+    dataHub->currentSlideIndex++;
+    if(dataHub->currentSlideIndex > slideshow.size() - 1) {
+        dataHub->currentSlideIndex = 0;
+    }
+    cout << "moved to slide " << dataHub->currentSlideIndex << endl;
+    dataHub->messages = &(slideshow[dataHub->currentSlideIndex]->messages);
+}
 
 SlideShowImage::SlideShowImage(vector<string> msgs, string imagePath, LetterBuffer * letterBuffer, DataHub * dataHub)
 {
