@@ -43,6 +43,7 @@ class Letter
         void prerender(LetterBuffer * buf);
         void draw();
         void draw(int x, int y);
+        void draw(int x, int y, unsigned char r, unsigned char g, unsigned char b);
 
         string letter;
 

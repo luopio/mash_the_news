@@ -168,15 +168,22 @@ void Flow::draw()
         FlowingWord * fw = (*words)[i];
         //if(!(int)fw->impulse)
         //    continue;
-        fw->word->draw(fw->col * FONT_W, fw->row * FONT_H,
-                       (int)fw->impulse + dataHub->flowBGbrightness,
-                       (int)fw->impulse + dataHub->flowBGbrightness,
-                       (int)fw->impulse + dataHub->flowBGbrightness);
+        fw->word->drawww(fw->col,
+                         fw->row,
+                        (int)fw->impulse + dataHub->flowBGbrightness,
+                        (int)fw->impulse + dataHub->flowBGbrightness,
+                        (int)fw->impulse + dataHub->flowBGbrightness,
+                       //dataHub->colorMap->getPixels(),
+                       //dataHub->colorMap->getWidth(),
+                       //dataHub->colorMap->getHeight()
+                         dataHub->colorMap,
+                         dataHub->colorMapWeight
+                         );
     }
 
-    if(dataHub->bDebug) {
-        dataHub->roCoImg->draw(ofGetWidth() - 325, 5);
-    }
+    //if(dataHub->bDebug) {
+    //    dataHub->roCoImg->draw(ofGetWidth() - 325, 5);
+    //}
 
 }
 

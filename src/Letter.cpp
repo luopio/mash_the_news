@@ -75,3 +75,11 @@ void Letter::draw(int x, int y)
 {
     tex->draw(x, y);
 }
+
+void Letter::draw(int x, int y, unsigned char r, unsigned char g, unsigned char b)
+{
+    ofSetColor(r, g, b);
+    // cout << "draw at " << x << ", " << y << " with " << r << ","<< g << "," << b << endl;
+    tex->draw(x, y);
+    ofSetColor(255, 255, 255);
+}

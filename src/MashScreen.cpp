@@ -18,6 +18,9 @@ void MashScreen::setup()
 
     cols = ofGetWidth()  / FONT_W;
     rows = ofGetHeight() / FONT_H;
+    bShowImage = false;
+    dataHub->colorMapWeight = 0.0;
+    dataHub->colorMapImageWeight = 0.0;
 
     dataHub->rows = &rows;
     dataHub->cols = &cols;
@@ -42,11 +45,10 @@ void MashScreen::setup()
 
     ofBackground(0, 0, 0);
 
-    asciiBG.addDatahub(dataHub);
+    //asciiBG.addDatahub(dataHub);
+    //cmv = new CameraMaskViewer(dataHub, pango);
+    //asciiBG.setOfxPango(pango);
 
-    cmv = new CameraMaskViewer(dataHub, pango);
-
-    asciiBG.setOfxPango(pango);
     // asciiBG.setupFBO(context, layout);
 
     /*
@@ -96,12 +98,16 @@ void MashScreen::setup()
     dataHub->roCoImg = new ofxCvGrayscaleImage(); // This is kinect image scaled to row/col-space
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
 
+    dataHub->colorMap = new ofImage();
+    dataHub->colorMap->loadImage("secondimage.jpg");
+    dataHub->colorMap->resize(*dataHub->cols, *dataHub->rows);
+    cout << "colorMap size" << dataHub->colorMap->getWidth() << "," << dataHub->colorMap->getHeight() << endl;
+
     flowFbo.allocate(ofGetWidth(), ofGetHeight());
     asciiBackgroundFbo.allocate(ofGetWidth(), ofGetHeight());
     CMVFbo.allocate(ofGetWidth(), ofGetHeight());
 
     ofEnableAlphaBlending();
-
 }
 
 
@@ -124,7 +130,7 @@ void MashScreen::draw()
 {
 
     ofSetColor(255, 255, 255, 255);
-
+    /*
     if(dataHub->asciiBackgroundColor.a) {
         asciiBackgroundFbo.begin();
             ofClear(0, 0, 0, 0);
@@ -133,6 +139,7 @@ void MashScreen::draw()
         ofSetColor(dataHub->asciiBackgroundColor);
         asciiBackgroundFbo.draw(0, 0);
     }
+    */
 
     if(dataHub->flowColor.a) {
         flowFbo.begin();
@@ -140,10 +147,10 @@ void MashScreen::draw()
             ofClear(0, 0, 0, 0);
             flow->draw();
         flowFbo.end();
-        ofSetColor(dataHub->flowColor);
+        //ofSetColor(dataHub->flowColor);
         flowFbo.draw(0, 0);
     }
-
+    /*
     if(dataHub->CMVColor.a) {
         CMVFbo.begin();
             ofSetColor(255, 255, 255, 255);
@@ -153,7 +160,15 @@ void MashScreen::draw()
         ofSetColor(dataHub->CMVColor);
         CMVFbo.draw(0, 0);
     }
-
+    */
+    if(dataHub->colorMapImageWeight > 0.01) {
+        ofSetColor(255, 255, 255, 255 * dataHub->colorMapImageWeight);
+        dataHub->colorMap->draw(0, 0, ofGetWidth(), ofGetHeight());
+        ofSetColor(255);
+    }
+    if(bShowImage) {
+        dataHub->colorMap->draw(0, 0, ofGetWidth(), ofGetHeight());
+    }
 }
 
 void MashScreen::randomBG() {
@@ -171,7 +186,7 @@ void MashScreen::randomBG() {
 
     tmps += "ÖÄöÖÄÖÄÄÄÖ***************";
 
-    asciiBG.setBackground(tmps);
+    // asciiBG.setBackground(tmps);
 
 }
 

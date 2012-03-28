@@ -10,8 +10,8 @@ void testApp::setup(){
     int our_height = 240;
 
     #ifdef _USE_KINECT
-        kinect.init(false,false,false);
         kinect.setVerbose(true);
+        kinect.init(false,false,false);
         kinect.open();
         cout << "kinect opened with resolution " << kinect.width << "," << kinect.height << endl;
         our_height = kinect.height;
@@ -23,7 +23,6 @@ void testApp::setup(){
         vidGrabber.setVerbose(true);
         vidGrabber.initGrabber(320,240);
         cout << "webcam opened with resolution " << endl;
-
         threshold = 13;
     #endif
 
@@ -170,16 +169,29 @@ void testApp::keyPressed(int key){
     switch (key)
     {
         case '+':
-            dataHub.flowFadeSpeed++;
+            if(dataHub.colorMapWeight < 1.0)
+                dataHub.colorMapWeight += 0.1;
             break;
 
         case '-':
-            dataHub.flowFadeSpeed--;
+            if(dataHub.colorMapWeight > 0.0)
+                dataHub.colorMapWeight -= 0.1;
+            break;
+
+        case '.':
+            dataHub.colorMapImageWeight += 0.1;
+            break;
+
+        case ',':
+            dataHub.colorMapImageWeight -= 0.1;
             break;
 
         case OF_KEY_BACKSPACE: // sends same as F3?
             break;
 
+        case 'i':
+            screen->bShowImage = !screen->bShowImage;
+            break;
 
         case OF_KEY_END:
             oscTunnel->toggleMute();
