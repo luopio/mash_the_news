@@ -46,7 +46,7 @@ void MashScreen::setup()
     ofBackground(0, 0, 0);
 
     //asciiBG.addDatahub(dataHub);
-    //cmv = new CameraMaskViewer(dataHub, pango);
+    cmv = new CameraMaskViewer(dataHub, letterBuffer);
     //asciiBG.setOfxPango(pango);
 
     // asciiBG.setupFBO(context, layout);
@@ -91,7 +91,7 @@ void MashScreen::setup()
     dataHub->box2dColor             = ofColor(255, 255, 255, 0);
     dataHub->flowColor              = ofColor(255, 25,  98,  255);
     dataHub->asciiBackgroundColor   = ofColor(25,  25,  205, 0);
-    dataHub->CMVColor               = ofColor(255,  0,  178, 0);
+    dataHub->CMVColor               = ofColor(255,  0,  178, 255);
 
     dataHub->flowBGbrightness       = 40;
 
@@ -150,17 +150,9 @@ void MashScreen::draw()
         //ofSetColor(dataHub->flowColor);
         flowFbo.draw(0, 0);
     }
-    /*
-    if(dataHub->CMVColor.a) {
-        CMVFbo.begin();
-            ofSetColor(255, 255, 255, 255);
-            ofClear(0, 0, 0, 0);
-            cmv->draw();
-        CMVFbo.end();
-        ofSetColor(dataHub->CMVColor);
-        CMVFbo.draw(0, 0);
-    }
-    */
+
+
+
     if(dataHub->colorMapImageWeight > 0.01) {
         ofSetColor(255, 255, 255, 255 * dataHub->colorMapImageWeight);
         dataHub->colorMap->draw(0, 0, ofGetWidth(), ofGetHeight());
@@ -168,6 +160,16 @@ void MashScreen::draw()
     }
     if(bShowImage) {
         dataHub->colorMap->draw(0, 0, ofGetWidth(), ofGetHeight());
+    }
+
+    if(dataHub->CMVColor.a) {
+        CMVFbo.begin();
+        ofSetColor(255, 255, 255, 255);
+        ofClear(0, 0, 0, 0);
+        cmv->draw();
+        CMVFbo.end();
+        ofSetColor(dataHub->CMVColor);
+        CMVFbo.draw(0, 0);
     }
 }
 

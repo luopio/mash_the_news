@@ -1,15 +1,28 @@
 #include "CameraMaskViewer.h"
 
-CameraMaskViewer::CameraMaskViewer(DataHub * h, ofxPango * p)
+CameraMaskViewer::CameraMaskViewer(DataHub * h, LetterBuffer * p)
 {
-    dataHub = h;
-    pango = p;
-    tex1 = new FBO();
-    tex2 = new FBO();
-    tex3 = new FBO();
-    setSign("@", tex1);
-    setSign("*", tex2);
-    setSign(".", tex3);
+   dataHub = h;
+//    pango = p;
+
+    string ascii_art[] = {"#","$","O","k","=","+","|","-","^","."};
+
+    cout << sizeof(ascii_art) << "!!!!!" << endl;
+
+    letters = new Letter * [sizeof(ascii_art)/4];
+
+   cout  << "ofxFBOTexture" << sizeof(letters) << endl;
+
+
+    for (int i = 0; i < sizeof(ascii_art)/4; i++) {
+        letters[i] = new Letter(ascii_art[i]);
+        letters[i]->prerender(p);
+    }
+
+
+
+    //letters[0] = new FBO();
+    //setSign("@", letters[0]);
 }
 
 void CameraMaskViewer::setSign (string s, FBO * tex) {
@@ -64,13 +77,15 @@ void CameraMaskViewer::draw() {
 //            if (y == 0)
 //                tex->draw(x * FONT_SIZE, y * FONT_SIZE * 2);
             unsigned int val = pixels[x + y * dataHub->roCoImg->width];
-            if(val > 220) {
-                tex1->draw(x * FONT_W, y * FONT_H);
-            } else if(val > 150) {
-                tex3->draw(x * FONT_W, y * FONT_H);
-            } else if(val > 10){
-                tex2->draw(x * FONT_W, y * FONT_H);
+            int res = 0;
+            while ( res < 255/(sizeof(letters))) {
+                if (val > 255 - (255 / (sizeof(letters))*(res+1))) {
+                    break;
+                }
+                res++;
             }
+            if (res < sizeof(letters))
+                letters[res]->draw(x * FONT_W, y * FONT_H);
         }
 
     }

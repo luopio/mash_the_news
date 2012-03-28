@@ -5,6 +5,8 @@
 
 #include "settings.h"
 
+#include "Letter.h"
+
 #ifdef _USE_OFFBO
     #define FBO ofxFbo
 #else
@@ -15,7 +17,7 @@
 class CameraMaskViewer
 {
     public:
-        CameraMaskViewer(DataHub * h, ofxPango * p);
+        CameraMaskViewer(DataHub * h, LetterBuffer * p);
         virtual ~CameraMaskViewer();
 
         void draw();
@@ -23,12 +25,10 @@ class CameraMaskViewer
         DataHub * dataHub;
         ofxPango * pango;
 
-        FBO *tex1;
-        FBO *tex2;
-        FBO *tex3;
+        Letter ** letters;
 
     protected:
-        void setSign(string s, FBO * tex);
+        void setSign(string s, ofxFBOTexture * tex);
     private:
 };
 
