@@ -26,6 +26,7 @@ class CameraMaskViewer
         ofxPango * pango;
 
         Letter ** letters;
+        int letterSize;
 
     protected:
         void setSign(string s, ofxFBOTexture * tex);

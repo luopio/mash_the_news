@@ -10,18 +10,16 @@ CameraMaskViewer::CameraMaskViewer(DataHub * h, LetterBuffer * p)
     string ascii_art[] = {"#","$","O","k","=","+","|","-","^","."};
 
     cout << sizeof(ascii_art) << "!!!!!" << endl;
+    letterSize = sizeof(ascii_art)/4;
 
-    letters = new Letter * [sizeof(ascii_art)/4];
+    letters = new Letter * [letterSize];
 
-   cout  << "ofxFBOTexture" << sizeof(letters) << endl;
-
-
-    for (int i = 0; i < sizeof(ascii_art)/4; i++) {
+    for (int i = 0; i < letterSize; i++) {
         letters[i] = new Letter(ascii_art[i]);
         letters[i]->prerender(p);
     }
 
-
+ //cout  << "ofxFBOTexture" << sizeof(letters) << endl;
 
     //letters[0] = new FBO();
     //setSign("@", letters[0]);
@@ -72,7 +70,7 @@ void CameraMaskViewer::setSign (string s, FBO * tex) {
 void CameraMaskViewer::draw() {
 
     unsigned char *pixels = dataHub->roCoImg->getPixels();
-    ofSetColor(255, 255, 255, 255);
+    //ofSetColor(255, 255, 255, 255);
 
     for (int x = 0; x < dataHub->roCoImg->width; ++x) {
         for(int y = 0; y < dataHub->roCoImg->height; ++y) {
@@ -86,8 +84,15 @@ void CameraMaskViewer::draw() {
                 }
                 res++;
             }
-            if (res < sizeof(letters))
-                letters[res]->draw(x * FONT_W, y * FONT_H);
+            if (res < sizeof(letters)) {
+                ofColor c = dataHub->colorMap->getColor(x, y);
+                int g = (c.r + c.g + c.b)/3;
+                g = g/(255/(letterSize-1));
+                //cout << "GGGG " << g << " " << sizeof(letters) << " " << (int)c.r << " " << (int)c.g << " " << (int)c.b << endl;
+                //letters[g]->draw(x * FONT_W, y * FONT_H, 255,255,255);//, c.r, c.g, c.b);
+                letters[g]->draw(x * FONT_W, y * FONT_H, c.r, c.g, c.b);
+            }
+                //letters[res]->draw(x * FONT_W, y * FONT_H,dataHub->colorMap->getPixels()[x*y+y],0,0);
         }
 
     }
