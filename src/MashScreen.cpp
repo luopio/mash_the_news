@@ -46,12 +46,9 @@ void MashScreen::setup()
 
     ofBackground(0, 0, 0);
 
-<<<<<<< HEAD
-=======
     //asciiBG.addDatahub(dataHub);
     cmv = new CameraMaskViewer(dataHub, letterBuffer);
     //asciiBG.setOfxPango(pango);
->>>>>>> 8e923bc797c03ecc45ab4555657be20edd251d01
 
     // Initialize the slideshow images
     vector<string> msgs;
@@ -65,8 +62,8 @@ void MashScreen::setup()
     vector<string> msgs2;
     msgs2.push_back("DORKY WORKY");
     msgs2.push_back("HUMBLE DUUD");
-    s = new SlideShowImage(msgs, "firstimage.jpg", letterBuffer, dataHub);
-    slideshow.push_back(s);
+    //s = new SlideShowImage(msgs2, "firstimage.jpg", letterBuffer, dataHub);
+    //slideshow.push_back(s);
     dataHub->messages = &(s->messages);
 
     flow->setup();
@@ -151,6 +148,7 @@ void MashScreen::draw()
         dataHub->colorMap->draw(0, 0, ofGetWidth(), ofGetHeight());
     }
 
+/*
     if(dataHub->CMVColor.a) {
         CMVFbo.begin();
         ofSetColor(255, 255, 255, 255);
@@ -160,6 +158,7 @@ void MashScreen::draw()
         ofSetColor(dataHub->CMVColor);
         CMVFbo.draw(0, 0);
     }
+    */
 }
 
 void MashScreen::randomBG() {
@@ -212,6 +211,7 @@ void MashScreen::nextSlide()
     dataHub->messages = &(slideshow[dataHub->currentSlideIndex]->messages);
 }
 
+
 SlideShowImage::SlideShowImage(vector<string> msgs, string imagePath, LetterBuffer * letterBuffer, DataHub * dataHub)
 {
     string m;
@@ -223,5 +223,5 @@ SlideShowImage::SlideShowImage(vector<string> msgs, string imagePath, LetterBuff
     image->loadImage(imagePath);
     colorMap = new ofImage();
     colorMap->loadImage(imagePath);
-    colorMap->resize(*dataHub->cols, *dataHub->rows);
+    colorMap->resize(*(dataHub->cols), *(dataHub->rows));
 }

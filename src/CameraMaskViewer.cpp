@@ -1,5 +1,7 @@
 #include "CameraMaskViewer.h"
 
+
+
 CameraMaskViewer::CameraMaskViewer(DataHub * h, LetterBuffer * p)
 {
    dataHub = h;

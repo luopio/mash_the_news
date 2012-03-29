@@ -8,7 +8,7 @@
 #include "Letter.h"
 
 #ifdef _USE_OFFBO
-    #define FBO ofxFbo
+    #define FBO ofFbo
 #else
     #include "ofxFBOTexture.h"
     #define FBO ofxFBOTexture

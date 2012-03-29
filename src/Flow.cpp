@@ -173,11 +173,12 @@ void Flow::draw()
                         (int)fw->impulse + dataHub->flowBGbrightness,
                         (int)fw->impulse + dataHub->flowBGbrightness,
                         (int)fw->impulse + dataHub->flowBGbrightness,
-                       //dataHub->colorMap->getPixels(),
-                       //dataHub->colorMap->getWidth(),
-                       //dataHub->colorMap->getHeight()
+                         //dataHub->colorMap->getPixels(),
+                         //dataHub->colorMap->getWidth(),
+                         //dataHub->colorMap->getHeight()
                          dataHub->colorMap,
-                         dataHub->colorMapWeight
+                         // dataHub->colorMapWeight
+                         fw->impulse / 255
                          );
     }
 
