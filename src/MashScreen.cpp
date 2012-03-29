@@ -46,26 +46,25 @@ void MashScreen::setup()
 
     ofBackground(0, 0, 0);
 
-<<<<<<< HEAD
-=======
+
     //asciiBG.addDatahub(dataHub);
     cmv = new CameraMaskViewer(dataHub, letterBuffer);
     //asciiBG.setOfxPango(pango);
->>>>>>> 8e923bc797c03ecc45ab4555657be20edd251d01
 
     // Initialize the slideshow images
     vector<string> msgs;
-    msgs.push_back("Stars, darkness, light");
+    msgs.push_back("What was not seen can not be unseen.");
     msgs.push_back("Yeah, you would think?");
     msgs.push_back("This is how fuckit");
     msgs.push_back("a phantom, a dew drop, a bubble");
-    SlideShowImage * s = new SlideShowImage(msgs, "secondimage.jpg", letterBuffer, dataHub);
+    //SlideShowImage * s = new SlideShowImage(msgs, "secondimage.jpg", letterBuffer, dataHub);
+    SlideShowImage * s = new SlideShowImage(msgs, "lulu.jpg", letterBuffer, dataHub);
     slideshow.push_back(s);
 
     vector<string> msgs2;
     msgs2.push_back("DORKY WORKY");
     msgs2.push_back("HUMBLE DUUD");
-    s = new SlideShowImage(msgs, "firstimage.jpg", letterBuffer, dataHub);
+    s = new SlideShowImage(msgs, "lulu.jpg", letterBuffer, dataHub);
     slideshow.push_back(s);
     dataHub->messages = &(s->messages);
 
@@ -153,11 +152,11 @@ void MashScreen::draw()
 
     if(dataHub->CMVColor.a) {
         CMVFbo.begin();
-        ofSetColor(255, 255, 255, 255);
-        ofClear(0, 0, 0, 0);
-        cmv->draw();
+            ofSetColor(255, 255, 255, 255);
+            ofClear(0, 0, 0, 0);
+            cmv->draw();
         CMVFbo.end();
-        ofSetColor(dataHub->CMVColor);
+        //ofSetColor(dataHub->CMVColor);
         CMVFbo.draw(0, 0);
     }
 }
