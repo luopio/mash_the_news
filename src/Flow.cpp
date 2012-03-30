@@ -3,6 +3,7 @@
 Flow::Flow(DataHub &h)
 {
     dataHub = &h;
+    words = new vector<FlowingWord *>();
     bDebug = true;
     dataHub->flowFadeSpeed = 23;
 }
@@ -14,8 +15,10 @@ Flow::~Flow()
 
 void Flow::setup()
 {
-    words = new vector<FlowingWord *>();
-    words->clear();
+    if(words->size() > 0)
+        words->clear();
+    vector<FlowingWord *> * newWords = new vector<FlowingWord *>();
+    // newWords->clear();
     Message *m = NULL;
     int filledRows = 0;
 
@@ -52,7 +55,7 @@ void Flow::setup()
                     fw->impulse = 0;
                     fw->pixelWidth = (*wi)->letters.size() * FONT_W;
                     fw->rowTotalLength = totalLength;
-                    words->push_back(fw);
+                    newWords->push_back(fw);
                     colCounter += (*wi)->letters.size()  + 1;
                 }
                 messageRepeatsOnThisRow--;
@@ -61,6 +64,8 @@ void Flow::setup()
         filledRows++;
         }
     }
+
+    words = newWords;
 }
 
 void Flow::addMessage(Message *m)
