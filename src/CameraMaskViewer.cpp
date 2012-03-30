@@ -15,8 +15,9 @@ CameraMaskViewer::CameraMaskViewer(DataHub * h, LetterBuffer * p)
     letters = new Letter * [letterSize];
 
     for (int i = 0; i < letterSize; i++) {
-        letters[i] = new Letter(ascii_art[i]);
-        letters[i]->prerender(p);
+    //    letters[i] = new Letter(ascii_art[i]);
+//        letters[i]->prerender(p);
+//        dataHub->asciiArts.push_back(letters[i]);
     }
 
  //cout  << "ofxFBOTexture" << sizeof(letters) << endl;
@@ -86,11 +87,12 @@ void CameraMaskViewer::draw() {
             }
             if (res < sizeof(letters)) {
                 ofColor c = dataHub->colorMap->getColor(x, y);
-                int g = (c.r + c.g + c.b)/3;
-                g = g/(255/(letterSize-1));
+                int g = pixels[x + y * dataHub->roCoImg->width]; //(c.r + c.g + c.b)/3;
+                g = g/(255/(dataHub->asciiGrayScales->size()-1));
                 //cout << "GGGG " << g << " " << sizeof(letters) << " " << (int)c.r << " " << (int)c.g << " " << (int)c.b << endl;
                 //letters[g]->draw(x * FONT_W, y * FONT_H, 255,255,255);//, c.r, c.g, c.b);
-                letters[g]->draw(x * FONT_W, y * FONT_H, c.r, c.g, c.b);
+                //letters[g]->draw(x * FONT_W, y * FONT_H, c.r, c.g, c.b);
+                dataHub->asciiGrayScales->at(g)->draw(x * FONT_W, y * FONT_H, c.r, c.g, c.b);
             }
                 //letters[res]->draw(x * FONT_W, y * FONT_H,dataHub->colorMap->getPixels()[x*y+y],0,0);
         }

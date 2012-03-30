@@ -178,7 +178,8 @@ void Flow::draw()
                          //dataHub->colorMap->getHeight()
                          dataHub->colorMap,
                          // dataHub->colorMapWeight
-                         fw->impulse / 255
+                         fw->impulse / 255,
+                         dataHub->asciiGrayScales
                          );
     }
 

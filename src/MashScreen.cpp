@@ -46,6 +46,25 @@ void MashScreen::setup()
 
     ofBackground(0, 0, 0);
 
+    string ascii_art[] = {"#","$","O","k","=","+","|","-","^","."};
+//
+    cout << sizeof(ascii_art) << "!!!!!" << endl;
+    int letterSize = sizeof(ascii_art)/4;
+//
+    vector<Letter*> * asciiArtGS = new vector<Letter*>();
+
+    for (int i = 0; i < letterSize; i++) {
+        asciiArtGS->push_back(new Letter(ascii_art[i]));
+        //tmp->prerender(letterBuffer);
+        //asciiArtGS.push_back(tmp);
+//        //dataHub->asciiArts.push_back(letters[i]);
+    }
+    for (int i = 0; i < asciiArtGS->size(); i++) {
+        asciiArtGS->at(i)->prerender(letterBuffer);
+    }
+    dataHub->asciiGrayScales = asciiArtGS;
+    cout << dataHub->asciiGrayScales->size() << "askdjlaskdjaslkdj" << endl;
+
     //asciiBG.addDatahub(dataHub);
     cmv = new CameraMaskViewer(dataHub, letterBuffer);
     //asciiBG.setOfxPango(pango);
@@ -152,7 +171,7 @@ void MashScreen::draw()
         dataHub->colorMap->draw(0, 0, ofGetWidth(), ofGetHeight());
     }
 
-/*
+
     if(dataHub->CMVColor.a) {
         CMVFbo.begin();
             ofSetColor(255, 255, 255, 255);
@@ -162,7 +181,7 @@ void MashScreen::draw()
         //ofSetColor(dataHub->CMVColor);
         CMVFbo.draw(0, 0);
     }
-    */
+
 }
 
 void MashScreen::randomBG() {

@@ -105,3 +105,28 @@ void Word::drawww(int col, int row, int r, int g, int b, ofImage * colorMap, flo
         letterCounter++;
     }
 }
+
+void Word::drawww(int col, int row, int r, int g, int b, ofImage * colorMap, float weight, vector <Letter*> * asciiArt)
+{
+    int letterCounter = 0;
+    unsigned char wr, wb, wg;
+    for(vector<Letter *>::iterator ii = letters.begin();
+        ii != letters.end(); ++ii) {
+        int colIndex = col + letterCounter;
+        ofColor c = colorMap->getColor(colIndex, row);
+
+        wr = (unsigned char)(c.r * weight + r * (1.0 - weight));
+        wb = (unsigned char)(c.b * weight + b * (1.0 - weight));
+        wg = (unsigned char)(c.g * weight + g * (1.0 - weight));
+
+        if (weight>0.1) {
+            int g = (c.r + c.g + c.b)/3;
+            g = g/(255/(asciiArt->size()-1));
+            asciiArt->at(g)->draw((colIndex) * FONT_W, row * FONT_H, wr, wg, wb);
+        } else {
+            (*ii)->draw((colIndex) * FONT_W, row * FONT_H, wr, wg, wb);
+        }
+
+        letterCounter++;
+    }
+}

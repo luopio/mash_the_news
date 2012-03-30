@@ -53,4 +53,6 @@ struct DataHub
 
     string backGroundString;
 
+    vector<Letter*> * asciiGrayScales;
+
 };

@@ -6,6 +6,8 @@
 #include "Poco/TextIterator.h"
 
 #include "Letter.h"
+
+
 using Poco::StringTokenizer;
 using namespace Poco;
 
@@ -20,4 +22,6 @@ class Word
         void draw(int x, int y, int r, int g, int b);
         void drawww(int x, int y, ofImage * colorMap);
         void drawww(int x, int y, int r, int g, int b, ofImage * colorMap, float weight);
+        void drawww(int x, int y, int r, int g, int b, ofImage * colorMap, float weight, vector <Letter*> * asciiArt);
+
 };
