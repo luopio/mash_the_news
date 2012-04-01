@@ -81,7 +81,10 @@ void Letter::draw(int x, int y)
 void Letter::draw(int x, int y, unsigned char r, unsigned char g, unsigned char b)
 {
     ofSetColor(r, g, b);
+    //ofFill();
+    //ofRect(x, y, FONT_W, FONT_H);
     // cout << "draw at " << x << ", " << y << " with " << r << ","<< g << "," << b << endl;
+    //ofSetColor(0, 0, 0);
     tex->draw(x, y);
     ofSetColor(255, 255, 255);
 }

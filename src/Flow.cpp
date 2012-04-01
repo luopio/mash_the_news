@@ -5,7 +5,7 @@ Flow::Flow(DataHub &h)
     dataHub = &h;
     words = new vector<FlowingWord *>();
     bDebug = true;
-    dataHub->flowFadeSpeed = 23;
+    dataHub->flowFadeSpeed = 3;
 }
 
 Flow::~Flow()

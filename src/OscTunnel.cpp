@@ -125,6 +125,11 @@ void OscTunnel::update() {
                     // corresponds to the midi channel (0-3)
                     switch (m.getArgAsInt32(1)) {
                         case 0:
+                            switch (m.getArgAsInt32(2)) {
+                                case 48:
+                                    screen->nextSlide();
+                                    break;
+                            }
 
                         case 1:
                             switch (m.getArgAsInt32(2)) {
@@ -192,18 +197,36 @@ void OscTunnel::update() {
                                     dataHub->damping = m.getArgAsInt32(3) / 25.0;
                                     cout << dataHub->damping << " is new damping!" << endl;
                                     break;
-                                case 2:
-                                    dataHub->strength = m.getArgAsInt32(3) / 25.0;
-                                    cout << dataHub->strength << " is new strength!" << endl;
-                                    break;
                                 case 3:
-                                   // dataHub->   screen->currentEngine->minDis = m.getArgAsInt32(3) * 10.0;
-                  //                  cout << screen->currentEngine->minDis << " is new minimum distance!" << endl;
+                                    dataHub->colorMapImageWeight = m.getArgAsInt32(3) / 127.0;
+                                    cout << dataHub->colorMapImageWeight << " is new cmweight!" << endl;
                                     break;
+                                case 4:
+                                    dataHub->CMVColor.a = m.getArgAsInt32(3) * 2.0;
+                                    cout << (int)dataHub->CMVColor.a << " cmv alpha" << endl;
+                                    break;
+                                case 5:
+                                    dataHub->flowFadeSpeed = m.getArgAsInt32(3) / 1.4;
+                                    break;
+                                case 6:
+                                    if (kinect != NULL) {
+                                        kinect->setCameraTiltAngle((m.getArgAsInt32(3)/(127 / 60.0)) -30);
+                                        cout << (m.getArgAsInt32(3)/(127 / 60.0)) -30 << "new kinect coord" << endl;
+                                    }
+                                    break;
+
                                 case 7:
-                                    dataHub->zoom = m.getArgAsInt32(3)/127.0;
-                                    cout << "Zoomed to " << dataHub->zoom << endl;
+                                    if (kinect != NULL) {
+                                        dataHub->kThreshold = 254 - (m.getArgAsInt32(3) * 2);
+                                        cout << dataHub->kThreshold << " is new near threshold value" << endl;
+                                    }
                                     break;
+                                case 8:
+                                    if (kinect != NULL) {
+                                        dataHub->kFarThreshold = 254 - (m.getArgAsInt32(3) * 2);
+                                        cout << dataHub->kFarThreshold << " is new far threshold value" << endl;
+                                    }
+                                break;
                             }
                             break;
 

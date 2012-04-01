@@ -189,6 +189,7 @@ void MashScreen::setup()
     dataHub->roCoImg->allocate(*(dataHub->cols), *(dataHub->rows));
 
     dataHub->colorMap = slideshow[0]->colorMap;
+    dataHub->image = slideshow[0]->image;
     cout << "colorMap size" << dataHub->colorMap->getWidth() << "," << dataHub->colorMap->getHeight() << endl;
 
     flowFbo.allocate(ofGetWidth(), ofGetHeight());
@@ -244,7 +245,7 @@ void MashScreen::draw()
 
     if(dataHub->colorMapImageWeight > 0.01) {
         ofSetColor(255, 255, 255, 255 * dataHub->colorMapImageWeight);
-        dataHub->colorMap->draw(0, 0, ofGetWidth(), ofGetHeight());
+        dataHub->image->draw(0, 0, ofGetWidth(), ofGetHeight());
         ofSetColor(255);
     }
     if(bShowImage) {
@@ -259,6 +260,7 @@ void MashScreen::draw()
             cmv->draw();
         CMVFbo.end();
         //ofSetColor(dataHub->CMVColor);
+        ofSetColor(255, 255, 255, dataHub->CMVColor.a);
         CMVFbo.draw(0, 0);
     }
 
@@ -318,6 +320,7 @@ void MashScreen::nextSlide()
     } else {
         cout << "moved to next image " << dataHub->currentSlideIndex << endl;
         dataHub->colorMap = slideshow[dataHub->currentSlideIndex]->colorMap;
+        dataHub->image = slideshow[dataHub->currentSlideIndex]->image;
         bChangeText = true;
     }
 }

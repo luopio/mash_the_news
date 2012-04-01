@@ -87,6 +87,12 @@ void CameraMaskViewer::draw() {
             }
             if (res < sizeof(letters)) {
                 ofColor c = dataHub->colorMap->getColor(x, y);
+//                if (c.r > c.g && c.r > c.b)
+//                    c.r = 255;
+//                else if (c.g > c.r && c.g > c.b)
+//                    c.g = 255;
+//                else if (c.b > c.g && c.b > c.r)
+//                    c.b = 255;
                 int g = pixels[x + y * dataHub->roCoImg->width]; //(c.r + c.g + c.b)/3;
                 g = g/(255/(dataHub->asciiGrayScales->size()-1));
                 //cout << "GGGG " << g << " " << sizeof(letters) << " " << (int)c.r << " " << (int)c.g << " " << (int)c.b << endl;

@@ -119,13 +119,16 @@ void Word::drawww(int col, int row, int r, int g, int b, ofImage * colorMap, flo
         wb = (unsigned char)(c.b * weight + b * (1.0 - weight));
         wg = (unsigned char)(c.g * weight + g * (1.0 - weight));
 
-        if (weight>0.1) {
-            int g = (c.r + c.g + c.b)/3;
-            g = g/(255/(asciiArt->size()-1));
-            asciiArt->at(g)->draw((colIndex) * FONT_W, row * FONT_H, wr, wg, wb);
-        } else {
+       // if (weight>0.1) {
+        //    int g = (c.r + c.g + c.b)/3;
+        //    g = g/(255/(asciiArt->size()-1));
+        //    asciiArt->at(g)->draw((colIndex) * FONT_W, row * FONT_H, wr, wg, wb);
+       // } else {
+        //    ofSetColor(wr, wg, wb);
+        //    ofRect((colIndex) * FONT_W, row * FONT_H, FONT_W, FONT_H);
+         //   (*ii)->draw((colIndex) * FONT_W, row * FONT_H, 0, 0, 0);
             (*ii)->draw((colIndex) * FONT_W, row * FONT_H, wr, wg, wb);
-        }
+        //}
 
         letterCounter++;
     }
